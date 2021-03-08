@@ -33,7 +33,7 @@ func _input(event):
 			self.add_child(building)
 			building.stream = load("building.wav")
 			building.play()
-		else:
+		elif event.button_index == 2:
 			var building_destroy = AudioStreamPlayer.new()
 			self.add_child(building_destroy)
 			building_destroy.stream = load("building_destroy.wav")
