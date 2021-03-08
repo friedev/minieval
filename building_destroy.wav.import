@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/building_destroy.wav-ee3796ae53a48e139f0a243947378450.sample"
+
+[deps]
+
+source_file="res://building_destroy.wav"
+dest_files=[ "res://.import/building_destroy.wav-ee3796ae53a48e139f0a243947378450.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
