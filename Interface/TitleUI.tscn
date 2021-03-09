@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Interface/HeadlinerNo45-59y8.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Interface/TitleUIScript.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 46
+extra_spacing_char = 3
+font_data = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 100
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -5.45844
+margin_top = -3.97141
+margin_right = -5.45844
+margin_bottom = -3.97144
+color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Panel" parent="Control"]
+margin_left = 255.58
+margin_top = 150.0
+margin_right = 767.58
+margin_bottom = 450.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitGameButton" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -38.5
+margin_top = 226.93
+margin_right = 38.5
+margin_bottom = 246.93
+text = "Exit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -19.0
+margin_top = 186.21
+margin_right = 19.0
+margin_bottom = 206.21
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTitle" type="Label" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -93.5
+margin_top = 54.0609
+margin_right = 93.5
+margin_bottom = 101.061
+custom_fonts/font = SubResource( 1 )
+text = "City Builder"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
+[connection signal="pressed" from="Control/Menu/PlayButton" to="Control" method="_on_PlayButton_pressed"]
