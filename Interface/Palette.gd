@@ -9,3 +9,4 @@ func _input(event):
 		var id = self.get_cellv(cellv)
 		if id != INVALID_CELL:
 			emit_signal("palette_selection", id)
+	
