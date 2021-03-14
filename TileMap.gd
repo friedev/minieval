@@ -34,15 +34,9 @@ func _unhandled_input(event):
 		
 		# Initialize and play the sound for building a building.
 		if event.button_index == 1:
-			var building = AudioStreamPlayer.new()
-			self.add_child(building)
-			building.stream = load("building.wav")
-			building.play()
+			$BuildingPlaceSound.play()
 		elif event.button_index == 2:
-			var building_destroy = AudioStreamPlayer.new()
-			self.add_child(building_destroy)
-			building_destroy.stream = load("building_destroy.wav")
-			building_destroy.play()
+			$BuildingDestroySound.play()
 
 
 func _select_building(id):
