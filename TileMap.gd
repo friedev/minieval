@@ -24,10 +24,13 @@ func _unhandled_input(event):
 			new_id = self.selected_building
 		elif event.button_index == 2:
 			new_id = 0
-		self.set_cellv(cellv, new_id)
+		else:
+			return
 		
 		if id == new_id:
 			return
+		
+		self.set_cellv(cellv, new_id)
 		
 		# Initialize and play the sound for building a building.
 		if event.button_index == 1:
@@ -43,4 +46,4 @@ func _unhandled_input(event):
 
 
 func _select_building(id):
-	self.selected_building = id
+	self.selected_building = id	
