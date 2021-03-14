@@ -26,6 +26,9 @@ func _unhandled_input(event):
 			new_id = 0
 		self.set_cellv(cellv, new_id)
 		
+		if id == new_id:
+			return
+		
 		# Initialize and play the sound for building a building.
 		if event.button_index == 1:
 			var building = AudioStreamPlayer.new()
@@ -41,4 +44,3 @@ func _unhandled_input(event):
 
 func _select_building(id):
 	self.selected_building = id
-	print(self.selected_building)
