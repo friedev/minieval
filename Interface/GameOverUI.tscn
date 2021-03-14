@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Interface/HeadlinerNo45-59y8.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Interface/TitleUIScript.gd" type="Script" id=2]
+[ext_resource path="res://Interface/GameOverUIScript.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 46
@@ -23,16 +23,18 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.41418
+margin_right = 1.41406
 color = Color( 0, 0, 0, 0.352941 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Menu" type="Panel" parent="Control"]
-margin_left = 255.58
-margin_top = 150.0
-margin_right = 767.58
-margin_bottom = 450.0
+margin_left = 257.167
+margin_top = 149.206
+margin_right = 769.167
+margin_bottom = 449.206
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,22 +43,22 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -38.5
-margin_top = 226.93
+margin_top = 247.112
 margin_right = 38.5
-margin_bottom = 246.93
+margin_bottom = 267.112
 text = "Exit Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="Control/Menu"]
+[node name="NewGameButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -19.0
-margin_top = 186.21
-margin_right = 19.0
-margin_bottom = 206.21
-text = "Play"
+margin_left = -41.0
+margin_top = 168.179
+margin_right = 41.0
+margin_bottom = 188.179
+text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,14 +66,27 @@ __meta__ = {
 [node name="MenuTitle" type="Label" parent="Control/Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -93.5
-margin_top = 54.0609
-margin_right = 93.5
-margin_bottom = 101.061
+margin_left = -79.5
+margin_top = 58.7338
+margin_right = 79.5
+margin_bottom = 105.734
 custom_fonts/font = SubResource( 1 )
-text = "City Builder"
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleScreenButton" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -43.5
+margin_top = 207.475
+margin_right = 43.5
+margin_bottom = 227.475
+text = "Title Screen"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
-[connection signal="pressed" from="Control/Menu/PlayButton" to="Control" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Control/Menu/NewGameButton" to="Control" method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Control/Menu/TitleScreenButton" to="Control" method="_on_TitleScreenButton_pressed"]

@@ -24,10 +24,6 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -3.18079
-margin_top = -0.552554
-margin_right = -3.18079
-margin_bottom = -0.552551
 color = Color( 0, 0, 0, 0.352941 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -70,9 +66,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -43.5
-margin_top = 186.816
+margin_top = 184.816
 margin_right = 43.5
-margin_bottom = 206.816
+margin_bottom = 204.816
 text = "Title Screen"
 __meta__ = {
 "_edit_use_anchors_": false

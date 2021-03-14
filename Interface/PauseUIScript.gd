@@ -15,7 +15,6 @@ func _on_ResumeButton_pressed():
 func _on_ExitGameButton_pressed():
 	get_tree().quit()
 
-
 func _on_ReturnToTitleButton_pressed():
 	var new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
