@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Interface/Palette.gd" type="Script" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 100
+
+[node name="Menu" type="Panel" parent="."]
+margin_left = 248.0
+margin_top = 500.0
+margin_right = 776.0
+margin_bottom = 580.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="Menu"]
+position = Vector2( 8, 8 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 2, 0, 2, 3, 0, 3, 4, 0, 4, 5, 0, 5, 6, 0, 6, 8, 0, 7, 9, 0 )
+script = ExtResource( 2 )
