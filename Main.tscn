@@ -4,7 +4,7 @@
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Interface/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Interface/Palette.tscn" type="PackedScene" id=4]
-[ext_resource path="res://background_music.ogg" type="AudioStream" id=5]
+[ext_resource path="res://new_background_music.ogg" type="AudioStream" id=5]
 
 [node name="Root" type="Node2D"]
 
