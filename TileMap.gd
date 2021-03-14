@@ -27,7 +27,8 @@ func _unhandled_input(event):
 		else:
 			return
 		
-		if id == new_id:
+		# Don't destroy empty tiles, and don't overwrite buildings
+		if (id == 0) == (new_id == 0):
 			return
 		
 		self.set_cellv(cellv, new_id)
