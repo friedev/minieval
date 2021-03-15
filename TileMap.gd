@@ -7,8 +7,8 @@ var selected_building = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
-	for x in range(0, 64):
-		for y in range(0, 32):
+	for x in range(0, 128):
+		for y in range(0, 128):
 			self.set_cell(x, y, 0)
 
 
