@@ -40,7 +40,7 @@ autoplay = true
 bus = "Background music"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 128, 75 )
+position = Vector2( 128.624, 75.92 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
 
