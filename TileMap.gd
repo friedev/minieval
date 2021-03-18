@@ -77,7 +77,7 @@ var selected_building = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
-	get_node(@"/root/Root/CurrencyLabel").text = "Currency: %d" % currency
+	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = "Currency: %d" % currency
 	for x in range(0, 128):
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
@@ -85,7 +85,7 @@ func _ready():
 func _unhandled_input(event):
 	# Handle mouse clicks (and not unclicks)
 	if event is InputEventMouseButton and event.pressed:
-		var cellv = (event.position / 32).floor()
+		var cellv = (event.position / 32 + get_node(@"/root/Root/Camera2D").position / 8).floor()
 		var id = self.get_cellv(cellv)
 		
 		# Increment cell ID on LMB, otherwise clear cell
@@ -115,7 +115,7 @@ func _unhandled_input(event):
 					var currency_change = building.interactions.get(neighbor_id, 0)
 					currency += currency_change
 
-			get_node(@"/root/Root/CurrencyLabel").text = "Currency: %d" % currency
+			get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = "Currency: %d" % currency
 
 			$BuildingPlaceSound.play()
 		else:
