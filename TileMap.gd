@@ -3,21 +3,70 @@ extends TileMap
 
 class Building:
 	var cost
+	var radius
+	var interactions
 	
-	func _init(cost):
+	func _init(cost, radius, interactions):
 		self.cost = cost
+		self.radius = radius
+		self.interactions = interactions
 
 
 var buildings = [
 	null,
-	Building.new(1), # Wooden hut
-	Building.new(2), # Wooden house
-	Building.new(3), # Stone hut
-	Building.new(4), # Stone house
-	Building.new(10), # Castle
-	Building.new(5), # Tower
-	Building.new(5), # Fountain
-	Building.new(5), # Well
+	Building.new(1, 1, { # 1: Wooden hut
+		1: 1,  # Wooden hut
+		2: 2,  # Wooden house
+		3: -1, # Stone hut
+		4: -2, # Stone house
+		5: 1,  # Castle
+	}),
+	Building.new(2, 1, {  # 2: Wooden house
+		1: 2,  # Wooden hut
+		2: 4,  # Wooden house
+		3: -2, # Stone hut
+		4: -4, # Stone house
+		5: 1,  # Castle
+	}),
+	Building.new(3, 2, {  # 3: Stone hut
+		1: -1, # Wooden hut
+		2: -2, # Wooden house
+		3: 1,  # Stone hut
+		4: 2,  # Stone house
+		5: 2,  # Castle
+	}),
+	Building.new(4, 2, { # 4: Stone house
+		1: -2, # Wooden hut
+		2: -4, # Wooden house
+		3: 2,  # Stone hut
+		4: 4,  # Stone house
+		5: 2,  # Castle
+	}),
+	Building.new(10, 10, {  # 5: Castle
+		1: 1,   # Wooden hut
+		2: 1,   # Wooden house
+		3: 2,   # Stone hut
+		4: 2,   # Stone house
+		5: -10, # Castle
+		6: 5,   # Tower
+	}),
+	Building.new(5, 5, {  # 6: Tower
+		5: 5,  # Castle
+		6: -5, # Tower
+	}),
+	null, # 7: Wall
+	Building.new(5, 5, {  # 8: Fountain
+		1: 1, # Wooden hut
+		2: 1, # Wooden house
+		3: 1, # Stone hut
+		4: 1, # Stone house
+	}),
+	Building.new(5, 5, {  # 9: Well
+		1: 2,  # Wooden hut
+		2: 2,  # Wooden house
+		3: -2, # Stone hut
+		4: -2, # Stone house
+	}),
 ]
 
 
@@ -57,18 +106,23 @@ func _unhandled_input(event):
 			var building = buildings[new_id]
 			if currency >= building.cost:
 				currency -= building.cost
-				get_node(@"/root/Root/CurrencyLabel").text = "Currency: %d" % currency
 			else:
 				return # Play error sound
+
+			# Give currency based on nearby buildings
+			for x in range(max(0, cellv.x - building.radius), min(127, cellv.x + building.radius + 1)):
+				for y in range(max(0, cellv.y - building.radius), min(127, cellv.y + building.radius + 1)):
+					var neighbor_id = self.get_cell(x, y)
+					var currency_change = building.interactions.get(neighbor_id, 0)
+					currency += currency_change
+
+			get_node(@"/root/Root/CurrencyLabel").text = "Currency: %d" % currency
+
+			$BuildingPlaceSound.play()
+		else:
+			$BuildingDestroySound.play()
 		
 		self.set_cellv(cellv, new_id)
-		
-		# Initialize and play the sound for building a building.
-		if event.button_index == 1:
-			$BuildingPlaceSound.play()
-		elif event.button_index == 2:
-			$BuildingDestroySound.play()
-
 
 func _select_building(id):
 	self.selected_building = id
