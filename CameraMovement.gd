@@ -4,8 +4,10 @@ export var speed = 10.0
 export var zoomspeed = 10.0
 export var zoommargin = 0.1
 
+
 var zoompos = Vector2()
 var zoomfactor = 1.0
+var zooming = false
 
 func _ready():
 	pass
@@ -23,7 +25,9 @@ func _process(delta):
 	# Zoom function
 	zoom.x = lerp(zoom.x, zoom.x * zoomfactor, zoomspeed * delta)
 	zoom.y = lerp(zoom.y, zoom.y * zoomfactor, zoomspeed * delta)
-	pass
+	
+	if not zooming:
+		zoomfactor = 1.0
 
 func _input(event):
 	if abs(zoompos.x - get_global_mouse_position().x) > zoommargin:
@@ -32,9 +36,12 @@ func _input(event):
 		zoomfactor = 1.0
 	if event is InputEventMouseButton:
 		if event.is_pressed():
+			zooming = true
 			if event.button_index == BUTTON_WHEEL_UP:
-				zoomfactor -= 0.01
+				zoomfactor -= 0.01 * zoomspeed
 				zoompos = get_global_mouse_position()
 			if event.button_index == BUTTON_WHEEL_DOWN:
-				zoomfactor += 0.01
+				zoomfactor += 0.01 * zoomspeed
 				zoompos = get_global_mouse_position()
+		else:
+			zooming = false
