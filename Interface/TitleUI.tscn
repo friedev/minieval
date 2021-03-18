@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Interface/HeadlinerNo45-59y8.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Interface/Themes/theme_title.tres" type="Theme" id=1]
 [ext_resource path="res://Interface/TitleUIScript.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 46
-extra_spacing_char = 3
-font_data = ExtResource( 1 )
+[ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=3]
+[ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=4]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=5]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -23,27 +23,36 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.352941 )
+color = Color( 0, 0, 0, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Menu" type="Panel" parent="Control"]
 margin_left = 255.58
-margin_top = 150.0
+margin_top = 149.0
 margin_right = 767.58
-margin_bottom = 450.0
+margin_bottom = 449.0
+custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ExitGameButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -38.5
-margin_top = 226.93
-margin_right = 38.5
-margin_bottom = 246.93
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = 83.0
+margin_right = 56.0
+margin_bottom = 109.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
 text = "Exit Game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -51,11 +60,19 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -19.0
-margin_top = 186.21
-margin_right = 19.0
-margin_bottom = 206.21
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = 35.0
+margin_right = 25.0
+margin_bottom = 61.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -63,12 +80,14 @@ __meta__ = {
 
 [node name="MenuTitle" type="Label" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -93.5
-margin_top = 54.0609
-margin_right = 93.5
-margin_bottom = 101.061
-custom_fonts/font = SubResource( 1 )
+anchor_bottom = 0.5
+margin_left = -172.0
+margin_top = -96.0
+margin_right = 172.0
+margin_bottom = -32.0
+theme = ExtResource( 1 )
 text = "City Builder"
 __meta__ = {
 "_edit_use_anchors_": false

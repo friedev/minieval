@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Art/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Interface/Palette.gd" type="Script" id=2]
+[ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=3]
+
+
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -11,6 +14,7 @@ margin_left = 248.0
 margin_top = 500.0
 margin_right = 776.0
 margin_bottom = 580.0
+custom_styles/panel = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

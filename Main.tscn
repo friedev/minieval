@@ -1,21 +1,18 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
-[ext_resource path="res://tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Interface/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Interface/Palette.tscn" type="PackedScene" id=4]
-[ext_resource path="res://new_background_music.ogg" type="AudioStream" id=5]
-[ext_resource path="res://building_destroy.wav" type="AudioStream" id=6]
-[ext_resource path="res://building.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/Music/background_music.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Audio/Sounds/building_destroy.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/Sounds/building.wav" type="AudioStream" id=7]
 [ext_resource path="res://CameraMovement.gd" type="Script" id=8]
+[ext_resource path="res://Interface/Fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=9]
 
-[sub_resource type="DynamicFontData" id=1]
-antialiased = false
-font_path = "res://Interface/FSEX302.ttf"
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = SubResource( 1 )
+font_data = ExtResource( 9 )
 
 [node name="Root" type="Node2D"]
 
@@ -58,10 +55,11 @@ zoomspeed = 20.0
 [node name="CurrencyLayer" type="CanvasLayer" parent="."]
 
 [node name="CurrencyLabel" type="Label" parent="CurrencyLayer"]
-margin_left = 1.57491
-margin_right = 50.5749
-margin_bottom = 14.0
-custom_fonts/font = SubResource( 2 )
+margin_left = 9.57491
+margin_top = 8.0
+margin_right = 221.575
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
 text = "Currency: "
 __meta__ = {
 "_edit_use_anchors_": false
