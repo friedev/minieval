@@ -85,7 +85,8 @@ func _ready():
 func _unhandled_input(event):
 	# Handle mouse clicks (and not unclicks)
 	if event is InputEventMouseButton and event.pressed:
-		var cellv = (event.position / 32 + get_node(@"/root/Root/Camera2D").position / 8).floor()
+		var camera = get_node(@"/root/Root/Camera2D")
+		var cellv = ((event.position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
 		var id = self.get_cellv(cellv)
 		
 		# Increment cell ID on LMB, otherwise clear cell
