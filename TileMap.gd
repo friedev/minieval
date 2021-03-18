@@ -82,7 +82,6 @@ func _ready():
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
 
-
 func _unhandled_input(event):
 	# Handle mouse clicks (and not unclicks)
 	if event is InputEventMouseButton and event.pressed:

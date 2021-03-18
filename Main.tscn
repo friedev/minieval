@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://new_background_music.ogg" type="AudioStream" id=5]
 [ext_resource path="res://building_destroy.wav" type="AudioStream" id=6]
 [ext_resource path="res://building.wav" type="AudioStream" id=7]
+[ext_resource path="res://Main.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 antialiased = false
@@ -17,6 +18,7 @@ size = 9
 font_data = SubResource( 1 )
 
 [node name="Root" type="Node2D"]
+script = ExtResource( 8 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -43,6 +45,11 @@ bus = "Background music"
 position = Vector2( 128.624, 75.92 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
+smoothing_enabled = true
+drag_margin_left = 1.0
+drag_margin_top = 1.0
+drag_margin_right = 1.0
+drag_margin_bottom = 1.0
 
 [node name="Palette" parent="." instance=ExtResource( 4 )]
 
