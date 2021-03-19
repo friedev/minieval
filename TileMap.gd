@@ -90,11 +90,26 @@ var buildings = [
 ]
 
 
+class Placement:
+	var id
+	var cellv
+	var placed # True if building was placed, false if it was destroyed
+	
+	func _init(id, cellv, placed):
+		self.id = id
+		self.cellv = cellv
+		self.placed = placed
+
+
 var currency = 10
 var vp = 0
 var selected_building = 1
 
 var label_format = "Currency: %d\nVictory Points: %d"
+
+var history = []
+var future = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,6 +118,7 @@ func _ready():
 	for x in range(0, 128):
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
+
 
 func _unhandled_input(event):
 	# Handle mouse clicks (and not unclicks)
@@ -144,6 +160,9 @@ func _unhandled_input(event):
 			building.cost += building.cost_increment
 			building.vp += building.vp_increment
 			
+			history.append(Placement.new(new_id, cellv, true))
+			future.clear()
+			
 			get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
 			
 			$BuildingPlaceSound.play()
@@ -152,9 +171,32 @@ func _unhandled_input(event):
 			building.cost -= building.cost_increment
 			building.vp -= building.vp_increment
 			
+			history.append(Placement.new(id, cellv, false))
+			future.clear()
+			
 			$BuildingDestroySound.play()
 		
 		self.set_cellv(cellv, new_id)
+	elif event is InputEventKey and event.pressed:
+		# TODO generalize to place_building and destroy_building methods
+		# TODO currency, vp, and building increment changes
+		if event.scancode == KEY_U or event.scancode == KEY_Z:
+			var prev_placement = history.pop_back()
+			if prev_placement:
+				if prev_placement.placed:
+					self.set_cellv(prev_placement.cellv, 0)
+				else:
+					self.set_cellv(prev_placement.cellv, prev_placement.id)
+				future.append(prev_placement)
+		elif event.scancode == KEY_R or event.scancode == KEY_Y:
+			var next_placement = future.pop_back()
+			if next_placement:
+				if next_placement.placed:
+					self.set_cellv(next_placement.cellv, next_placement.id)
+				else:
+					self.set_cellv(next_placement.cellv, 0)
+				history.append(next_placement)
+
 
 func _select_building(id):
 	self.selected_building = id
