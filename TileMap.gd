@@ -94,11 +94,15 @@ class Placement:
 	var id
 	var cellv
 	var placed # True if building was placed, false if it was destroyed
+	var currency_change
+	var vp_change
 	
-	func _init(id, cellv, placed):
+	func _init(id, cellv, placed, currency_change, vp_change):
 		self.id = id
 		self.cellv = cellv
 		self.placed = placed
+		self.currency_change = currency_change
+		self.vp_change = vp_change
 
 
 var currency = 10
@@ -114,7 +118,7 @@ var future = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
-	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
+	self._update_label()
 	for x in range(0, 128):
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
@@ -125,78 +129,98 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		var camera = get_node(@"/root/Root/Camera2D")
 		var cellv = ((event.position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
-		var id = self.get_cellv(cellv)
 		
 		# Increment cell ID on LMB, otherwise clear cell
-		var new_id
+		var placement
 		if event.button_index == 1:
-			new_id = self.selected_building
+			placement = self.place_building(cellv, self.selected_building)
 		elif event.button_index == 2:
-			new_id = 0
+			placement = self.destroy_building(cellv)
 		else:
 			return
 		
-		# Don't destroy empty tiles, and don't overwrite buildings
-		if (id == 0) == (new_id == 0):
-			return
-		
-		if new_id != 0:
-			var building = buildings[new_id]
-			if currency >= floor(building.cost):
-				currency -= floor(building.cost)
-			else:
-				return # Play error sound
-			
-			vp += floor(building.vp)
-			
-			# Give currency based on nearby buildings
-			# TODO prevent currency from going negative if net currency change is negative
-			for x in range(max(0, cellv.x - building.radius), min(127, cellv.x + building.radius + 1)):
-				for y in range(max(0, cellv.y - building.radius), min(127, cellv.y + building.radius + 1)):
-					var neighbor_id = self.get_cell(x, y)
-					currency += building.currency_interactions.get(neighbor_id, 0)
-					vp += building.vp_interactions.get(neighbor_id, 0)
-			
-			building.cost += building.cost_increment
-			building.vp += building.vp_increment
-			
-			history.append(Placement.new(new_id, cellv, true))
+		if placement:
+			currency += placement.currency_change
+			vp += placement.vp_change
+			history.append(placement)
 			future.clear()
-			
-			get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
-			
-			$BuildingPlaceSound.play()
+			self._update_label()
 		else:
-			var building = buildings[id]
-			building.cost -= building.cost_increment
-			building.vp -= building.vp_increment
-			
-			history.append(Placement.new(id, cellv, false))
-			future.clear()
-			
-			$BuildingDestroySound.play()
-		
-		self.set_cellv(cellv, new_id)
+			pass # Play error sound
 	elif event is InputEventKey and event.pressed:
-		# TODO generalize to place_building and destroy_building methods
-		# TODO currency, vp, and building increment changes
-		if event.scancode == KEY_U or event.scancode == KEY_Z:
+		if event.scancode == KEY_U or event.scancode == KEY_Z: # Undo
 			var prev_placement = history.pop_back()
 			if prev_placement:
 				if prev_placement.placed:
-					self.set_cellv(prev_placement.cellv, 0)
+					self.destroy_building(prev_placement.cellv)
 				else:
-					self.set_cellv(prev_placement.cellv, prev_placement.id)
+					self.place_building(prev_placement.cellv, prev_placement.id)
+				currency -= prev_placement.currency_change
+				vp -= prev_placement.vp_change
 				future.append(prev_placement)
-		elif event.scancode == KEY_R or event.scancode == KEY_Y:
+				self._update_label()
+		elif event.scancode == KEY_R or event.scancode == KEY_Y: # Redo
 			var next_placement = future.pop_back()
 			if next_placement:
 				if next_placement.placed:
-					self.set_cellv(next_placement.cellv, next_placement.id)
+					self.place_building(next_placement.cellv, next_placement.id)
 				else:
-					self.set_cellv(next_placement.cellv, 0)
+					self.destroy_building(next_placement.cellv)
+				currency += next_placement.currency_change
+				vp += next_placement.vp_change
 				history.append(next_placement)
+				self._update_label()
 
 
 func _select_building(id):
 	self.selected_building = id
+
+
+func _update_label():
+	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
+
+
+func place_building(cellv, id):
+	if self.get_cellv(cellv) != 0:
+		return null
+	
+	var building = buildings[id]
+	var currency_change = -floor(building.cost)
+	var vp_change = floor(building.vp)
+	# Check if building can be built in the first place
+	if currency + currency_change < 0:
+		return null
+	
+	# Give currency based on nearby buildings
+	# TODO prevent currency from going negative if net currency change is negative
+	for x in range(max(0, cellv.x - building.radius), min(127, cellv.x + building.radius + 1)):
+		for y in range(max(0, cellv.y - building.radius), min(127, cellv.y + building.radius + 1)):
+			var neighbor_id = self.get_cell(x, y)
+			currency_change += building.currency_interactions.get(neighbor_id, 0)
+			vp_change += building.vp_interactions.get(neighbor_id, 0)
+	
+	# Check if the additional cost from interactions would lead to negative currency
+	if currency + currency_change < 0:
+		return null
+	
+	building.cost += building.cost_increment
+	building.vp += building.vp_increment
+	
+	$BuildingPlaceSound.play()
+	
+	self.set_cellv(cellv, id)
+	return Placement.new(id, cellv, true, currency_change, vp_change)
+
+func destroy_building(cellv):
+	var id = self.get_cellv(cellv)
+	if id == 0:
+		return null
+	
+	var building = buildings[id]
+	building.cost -= building.cost_increment
+	building.vp -= building.vp_increment
+	
+	$BuildingDestroySound.play()
+	
+	self.set_cellv(cellv, 0)
+	return Placement.new(id, cellv, false, 0, 0)
