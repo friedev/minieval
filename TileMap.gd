@@ -113,11 +113,14 @@ var label_format = "Currency: %d\nVictory Points: %d"
 
 var history = []
 var future = []
+var mouse_cellv = null
+var preview_cellv = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
+	mouse_cellv = position_to_cellv(get_viewport().get_mouse_position())
 	self._update_label()
 	for x in range(0, 128):
 		for y in range(0, 128):
@@ -125,17 +128,17 @@ func _ready():
 
 
 func _unhandled_input(event):
-	# Handle mouse clicks (and not unclicks)
-	if event is InputEventMouseButton and event.pressed:
-		var camera = get_node(@"/root/Root/Camera2D")
-		var cellv = ((event.position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
+	if event is InputEventMouseMotion:
+		mouse_cellv = self.position_to_cellv(event.position)
+	elif event is InputEventMouseButton and event.pressed:
+		self._clear_preview()
 		
 		# Increment cell ID on LMB, otherwise clear cell
 		var placement
 		if event.button_index == 1:
-			placement = self.place_building(cellv, self.selected_building)
+			placement = self.place_building(mouse_cellv, self.selected_building)
 		elif event.button_index == 2:
-			placement = self.destroy_building(cellv)
+			placement = self.destroy_building(mouse_cellv)
 		else:
 			return
 		
@@ -170,14 +173,37 @@ func _unhandled_input(event):
 				vp += next_placement.vp_change
 				history.append(next_placement)
 				self._update_label()
+	
+	self._update_preview()
 
 
+# Event handler for the palette
 func _select_building(id):
 	self.selected_building = id
 
 
 func _update_label():
 	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
+
+
+func _clear_preview():
+	if preview_cellv != null:
+		self.set_cellv(preview_cellv, 0)
+		$Preview.set_cellv(preview_cellv, INVALID_CELL)
+		preview_cellv = null
+
+
+func _update_preview():
+	self._clear_preview()
+	var id = self.get_cellv(mouse_cellv)
+	if id == 0:
+		preview_cellv = mouse_cellv
+		self.set_cellv(preview_cellv, INVALID_CELL)
+		$Preview.set_cellv(preview_cellv, self.selected_building)
+
+func position_to_cellv(position):
+	var camera = get_node(@"/root/Root/Camera2D")
+	return ((position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
 
 
 func place_building(cellv, id):
@@ -210,6 +236,7 @@ func place_building(cellv, id):
 	
 	self.set_cellv(cellv, id)
 	return Placement.new(id, cellv, true, currency_change, vp_change)
+
 
 func destroy_building(cellv):
 	var id = self.get_cellv(cellv)
