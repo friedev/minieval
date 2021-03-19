@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Interface/HeadlinerNo45-59y8.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=1]
 [ext_resource path="res://Interface/GameOverUIScript.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 46
-extra_spacing_char = 3
-font_data = ExtResource( 1 )
+[ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=3]
+[ext_resource path="res://Interface/Themes/theme_title.tres" type="Theme" id=4]
+[ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=5]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -35,17 +35,26 @@ margin_left = 257.167
 margin_top = 149.206
 margin_right = 769.167
 margin_bottom = 449.206
+custom_styles/panel = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ExitGameButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -38.5
-margin_top = 247.112
-margin_right = 38.5
-margin_bottom = 267.112
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = 99.0
+margin_right = 56.0
+margin_bottom = 125.0
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 1 )
 text = "Exit Game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,11 +62,19 @@ __meta__ = {
 
 [node name="NewGameButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -41.0
-margin_top = 168.179
-margin_right = 41.0
-margin_bottom = 188.179
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = 3.0
+margin_right = 58.0
+margin_bottom = 29.0
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 1 )
 text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,12 +82,14 @@ __meta__ = {
 
 [node name="MenuTitle" type="Label" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -79.5
-margin_top = 58.7338
-margin_right = 79.5
-margin_bottom = 105.734
-custom_fonts/font = SubResource( 1 )
+anchor_bottom = 0.5
+margin_left = -152.0
+margin_top = -96.0
+margin_right = 152.0
+margin_bottom = -32.0
+theme = ExtResource( 4 )
 text = "Game Over"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,11 +97,19 @@ __meta__ = {
 
 [node name="TitleScreenButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -43.5
-margin_top = 207.475
-margin_right = 43.5
-margin_bottom = 227.475
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = 51.0
+margin_right = 64.0
+margin_bottom = 77.0
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 1 )
 text = "Title Screen"
 __meta__ = {
 "_edit_use_anchors_": false
