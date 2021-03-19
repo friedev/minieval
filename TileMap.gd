@@ -2,47 +2,51 @@ extends TileMap
 
 
 class Building:
+	var base_cost
 	var cost
+	var cost_increment
 	var radius
 	var interactions
 	
-	func _init(cost, radius, interactions):
-		self.cost = cost
+	func _init(base_cost, cost_increment, radius, interactions):
+		self.base_cost = base_cost
+		self.cost = base_cost
+		self.cost_increment = cost_increment
 		self.radius = radius
 		self.interactions = interactions
 
 
 var buildings = [
 	null,
-	Building.new(1, 1, { # 1: Wooden hut
+	Building.new(1, 0.25, 1, { # 1: Wooden hut
 		1: 1,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -1, # Stone hut
 		4: -2, # Stone house
 		5: 1,  # Castle
 	}),
-	Building.new(2, 1, {  # 2: Wooden house
+	Building.new(2, 0.5, 1, {  # 2: Wooden house
 		1: 2,  # Wooden hut
 		2: 4,  # Wooden house
 		3: -2, # Stone hut
 		4: -4, # Stone house
 		5: 1,  # Castle
 	}),
-	Building.new(3, 2, {  # 3: Stone hut
+	Building.new(3, 0.25, 2, {  # 3: Stone hut
 		1: -1, # Wooden hut
 		2: -2, # Wooden house
 		3: 1,  # Stone hut
 		4: 2,  # Stone house
 		5: 2,  # Castle
 	}),
-	Building.new(4, 2, { # 4: Stone house
+	Building.new(4, 0.5, 2, { # 4: Stone house
 		1: -2, # Wooden hut
 		2: -4, # Wooden house
 		3: 2,  # Stone hut
 		4: 4,  # Stone house
 		5: 2,  # Castle
 	}),
-	Building.new(10, 10, {  # 5: Castle
+	Building.new(10, 10, 10, {  # 5: Castle
 		1: 1,   # Wooden hut
 		2: 1,   # Wooden house
 		3: 2,   # Stone hut
@@ -50,18 +54,18 @@ var buildings = [
 		5: -10, # Castle
 		6: 5,   # Tower
 	}),
-	Building.new(5, 5, {  # 6: Tower
+	Building.new(5, 5, 5, {  # 6: Tower
 		5: 5,  # Castle
 		6: -5, # Tower
 	}),
 	null, # 7: Wall
-	Building.new(5, 5, {  # 8: Fountain
+	Building.new(5, 2.5, 5, {  # 8: Fountain
 		1: 1, # Wooden hut
 		2: 1, # Wooden house
 		3: 1, # Stone hut
 		4: 1, # Stone house
 	}),
-	Building.new(5, 5, {  # 9: Well
+	Building.new(5, 2.5, 5, {  # 9: Well
 		1: 2,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -2, # Stone hut
@@ -104,12 +108,15 @@ func _unhandled_input(event):
 		
 		if new_id != 0:
 			var building = buildings[new_id]
-			if currency >= building.cost:
-				currency -= building.cost
+			if currency >= floor(building.cost):
+				currency -= floor(building.cost)
 			else:
 				return # Play error sound
 
+			building.cost += building.cost_increment
+
 			# Give currency based on nearby buildings
+			# TODO prevent currency from going negative if net currency change is negative
 			for x in range(max(0, cellv.x - building.radius), min(127, cellv.x + building.radius + 1)):
 				for y in range(max(0, cellv.y - building.radius), min(127, cellv.y + building.radius + 1)):
 					var neighbor_id = self.get_cell(x, y)
@@ -120,6 +127,9 @@ func _unhandled_input(event):
 
 			$BuildingPlaceSound.play()
 		else:
+			var building = buildings[id]
+			building.cost -= building.cost_increment
+			
 			$BuildingDestroySound.play()
 		
 		self.set_cellv(cellv, new_id)
