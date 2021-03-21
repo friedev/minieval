@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Audio/Sounds/building.wav" type="AudioStream" id=7]
 [ext_resource path="res://CameraMovement.gd" type="Script" id=8]
 [ext_resource path="res://Interface/Fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Audio/Sounds/building_place_error.wav" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -23,6 +24,9 @@ cell_quadrant_size = 8
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 format = 1
 script = ExtResource( 1 )
+
+[node name="BuildingPlaceErrorSound" type="AudioStreamPlayer" parent="TileMap"]
+stream = ExtResource( 10 )
 
 [node name="BuildingPlaceSound" type="AudioStreamPlayer" parent="TileMap"]
 stream = ExtResource( 7 )
