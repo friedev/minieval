@@ -4,16 +4,18 @@
 [ext_resource path="res://Interface/Palette.gd" type="Script" id=2]
 [ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=3]
 
-
-
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
 
 [node name="Menu" type="Panel" parent="."]
-margin_left = 248.0
-margin_top = 500.0
-margin_right = 776.0
-margin_bottom = 580.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -264.0
+margin_top = -112.0
+margin_right = 264.0
+margin_bottom = -32.0
 custom_styles/panel = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
