@@ -150,7 +150,7 @@ func _unhandled_input(event):
 			future.clear()
 			self._update_label()
 		else:
-			pass # Play error sound
+			$BuildingPlaceErrorSound.play()
 	elif event is InputEventKey and event.pressed:
 		if event.scancode == KEY_U or event.scancode == KEY_Z: # Undo
 			var prev_placement = history.pop_back()
@@ -210,7 +210,6 @@ func position_to_cellv(position):
 
 func place_building(cellv, id):
 	if self.get_cellv(cellv) != 0:
-		$BuildingPlaceErrorSound.play()
 		return null
 	
 	var building = buildings[id]
@@ -218,7 +217,6 @@ func place_building(cellv, id):
 	var vp_change = floor(building.vp)
 	# Check if building can be built in the first place
 	if currency + currency_change < 0:
-		$BuildingPlaceErrorSound.play()
 		return null
 	
 	# Give currency based on nearby buildings
@@ -248,7 +246,6 @@ func place_building(cellv, id):
 func destroy_building(cellv):
 	var id = self.get_cellv(cellv)
 	if id <= 0:
-		$BuildingPlaceErrorSound.play()
 		return null
 	
 	var building = buildings[id]
