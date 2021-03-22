@@ -80,30 +80,3 @@ __meta__ = {
 }
 
 [node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
-
-[node name="BuildingsPlacedLabel" type="Label" parent="StatsOverlay"]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-text = "1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CurrencyLabel" type="Label" parent="StatsOverlay"]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-text = "1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VPLabel" type="Label" parent="StatsOverlay"]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-text = "1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
