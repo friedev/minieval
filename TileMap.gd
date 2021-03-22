@@ -247,7 +247,7 @@ func place_building(cellv, id):
 
 func destroy_building(cellv):
 	var id = self.get_cellv(cellv)
-	if id == 0:
+	if id <= 0:
 		$BuildingPlaceErrorSound.play()
 		return null
 	
