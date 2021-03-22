@@ -108,6 +108,7 @@ class Placement:
 var currency = 10
 var vp = 0
 var selected_building = 1
+var buildingsPlaced = 0
 
 var label_format = "Currency: %d\nVictory Points: %d"
 
@@ -184,6 +185,10 @@ func _select_building(id):
 
 func _update_label():
 	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
+	#Set label text to currency and vp for global access - Kalen
+	get_node(@"/root/Root/StatsOverlay/CurrencyLabel").text = str(currency)
+	get_node(@"/root/Root/StatsOverlay/VPLabel").text = str(vp)
+	get_node(@"/root/Root/StatsOverlay/BuildingsPlacedLabel").text = str(buildingsPlaced)
 
 
 func _clear_preview():
@@ -235,6 +240,8 @@ func place_building(cellv, id):
 	building.vp += building.vp_increment
 	
 	$BuildingPlaceSound.play()
+	
+	buildingsPlaced += 1
 	
 	self.set_cellv(cellv, id)
 	return Placement.new(id, cellv, true, currency_change, vp_change)
