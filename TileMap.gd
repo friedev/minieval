@@ -200,6 +200,7 @@ func _update_preview():
 		preview_cellv = mouse_cellv
 		self.set_cellv(preview_cellv, INVALID_CELL)
 		$Preview.set_cellv(preview_cellv, self.selected_building)
+		
 
 func position_to_cellv(position):
 	var camera = get_node(@"/root/Root/Camera2D")
