@@ -107,7 +107,7 @@ class Placement:
 var currency = 10
 var vp = 0
 var selected_building = 1
-var buildings_placed = 0
+var buildings_placed = 0 # TODO fix undo behavior
 
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
 const currency_format = "Currency: %d\nVictory Points: %d"
@@ -159,6 +159,8 @@ func _unhandled_input(event):
 			history.append(placement)
 			future.clear()
 			self._update_labels()
+			if get_turns_remaining() == 0:
+				pass # TODO show score recap scene
 		else:
 			$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
@@ -195,9 +197,17 @@ func _select_building(id):
 	self.selected_building = id
 
 
+func get_turn():
+	return len(history)
+
+
+func get_turns_remaining():
+	return game_length - get_turn()
+
+
 func _update_labels():
 	currency_label.text = currency_format % [currency, vp]
-	turn_label.text = turn_format % (game_length - len(history))
+	turn_label.text = turn_format % get_turns_remaining()
 
 
 func _update_mouse_cellv():
