@@ -110,10 +110,13 @@ var vp = 0
 var selected_building = 1
 var buildings_placed = 0
 
+onready var currency_label = get_node(@"/root/Root/CurrencyLayer/CurrencyLabel")
 var label_format = "Currency: %d\nVictory Points: %d"
 
 var history = []
 var future = []
+
+onready var camera = get_node(@"/root/Root/Camera2D")
 var mouse_cellv = null
 var preview_cellv = null
 
@@ -184,7 +187,7 @@ func _select_building(id):
 
 
 func _update_label():
-	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
+	currency_label.text = label_format % [currency, vp]
 
 
 func _update_mouse_cellv():
@@ -209,7 +212,6 @@ func _update_preview():
 		
 
 func position_to_cellv(position):
-	var camera = get_node(@"/root/Root/Camera2D")
 	return ((position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
 
 
