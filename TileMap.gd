@@ -157,29 +157,28 @@ func _unhandled_input(event):
 			self._update_label()
 		else:
 			$BuildingPlaceErrorSound.play()
-	elif event is InputEventKey and event.pressed:
-		if event.scancode == KEY_U or event.scancode == KEY_Z: # Undo
-			var prev_placement = history.pop_back()
-			if prev_placement:
-				if prev_placement.placed:
-					self.destroy_building(prev_placement.cellv)
-				else:
-					self.place_building(prev_placement.cellv, prev_placement.id)
-				currency -= prev_placement.currency_change
-				vp -= prev_placement.vp_change
-				future.append(prev_placement)
-				self._update_label()
-		elif event.scancode == KEY_R or event.scancode == KEY_Y: # Redo
-			var next_placement = future.pop_back()
-			if next_placement:
-				if next_placement.placed:
-					self.place_building(next_placement.cellv, next_placement.id)
-				else:
-					self.destroy_building(next_placement.cellv)
-				currency += next_placement.currency_change
-				vp += next_placement.vp_change
-				history.append(next_placement)
-				self._update_label()
+	elif event.is_action_pressed("undo"):
+		var prev_placement = history.pop_back()
+		if prev_placement:
+			if prev_placement.placed:
+				self.destroy_building(prev_placement.cellv)
+			else:
+				self.place_building(prev_placement.cellv, prev_placement.id)
+			currency -= prev_placement.currency_change
+			vp -= prev_placement.vp_change
+			future.append(prev_placement)
+			self._update_label()
+	elif event.is_action_pressed("redo"):
+		var next_placement = future.pop_back()
+		if next_placement:
+			if next_placement.placed:
+				self.place_building(next_placement.cellv, next_placement.id)
+			else:
+				self.destroy_building(next_placement.cellv)
+			currency += next_placement.currency_change
+			vp += next_placement.vp_change
+			history.append(next_placement)
+			self._update_label()
 
 
 # Event handler for the palette
