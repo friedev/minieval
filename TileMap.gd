@@ -197,8 +197,8 @@ func _update_mouse_cellv():
 func _clear_preview():
 	if preview_cellv != null:
 		self.set_cellv(preview_cellv, 0)
-		$Preview.set_cellv(preview_cellv, INVALID_CELL)
 		preview_cellv = null
+		$Preview.clear()
 
 
 func _update_preview():
@@ -208,8 +208,13 @@ func _update_preview():
 	if id == 0:
 		preview_cellv = mouse_cellv
 		self.set_cellv(preview_cellv, INVALID_CELL)
-		$Preview.set_cellv(preview_cellv, self.selected_building)
-		
+	# For loops finds radius of currently hovered building and displays it with a 50% opacity white square
+		for x in range(max(0, preview_cellv.x - buildings[selected_building].radius), min(127, preview_cellv.x + buildings[selected_building].radius + 1)):
+			for y in range(max(0, preview_cellv.y - buildings[selected_building].radius), min(127, preview_cellv.y + buildings[selected_building].radius + 1)):
+				var neighbor_id = Vector2(x, y)
+				$Preview.set_cellv(neighbor_id,7)
+		$Preview.set_cellv(preview_cellv, 7)
+		self.set_cellv(preview_cellv, self.selected_building)
 
 func position_to_cellv(position):
 	return ((position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
