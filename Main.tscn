@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Interface/Fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Audio/Sounds/building_place_error.wav" type="AudioStream" id=10]
 [ext_resource path="res://Interface/StatsOverlayUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Interface/RecapUI.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -80,3 +81,5 @@ __meta__ = {
 }
 
 [node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
+
+[node name="RecapUI" parent="." instance=ExtResource( 12 )]
