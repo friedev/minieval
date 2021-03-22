@@ -7,14 +7,13 @@ export var zoommargin = 0.1
 var default_zoom = Vector2(0.25, 0.25)
 var default_offset = Vector2(128, 75)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
-	# This section controls the camera with directional inputs
 	var input_x = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
 	var input_y = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
+	var input = Vector2(input_x, input_y)
 
-	position.x = lerp(position.x, position.x + input_x * speed, speed * delta)
-	position.y = lerp(position.y, position.y + input_y * speed, speed * delta)
+	position = lerp(position, position + input * speed, speed * delta)
 
 
 func reset_zoom():
