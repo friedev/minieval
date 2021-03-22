@@ -44,10 +44,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -44.0
-margin_top = -13.0
-margin_right = 44.0
-margin_bottom = 13.0
+margin_left = -47.58
+margin_top = -60.0
+margin_right = 40.42
+margin_bottom = -34.0
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -64,10 +64,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -56.0
-margin_top = 83.0
-margin_right = 56.0
-margin_bottom = 109.0
+margin_left = -55.58
+margin_top = 84.0
+margin_right = 56.42
+margin_bottom = 110.0
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -79,15 +79,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleButton" type="Button" parent="Pause/Menu"]
+[node name="Button" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+margin_left = -55.58
+margin_top = 36.0
+margin_right = 56.42
+margin_bottom = 62.0
+theme = ExtResource( 7 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleButton" type="Button" parent="Pause/Menu"]
+anchor_left = 0.5
+anchor_top = 0.497
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 35.0
+margin_top = -11.1
 margin_right = 64.0
-margin_bottom = 61.0
+margin_bottom = 14.0
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -104,10 +124,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -96.0
-margin_top = -96.0
-margin_right = 96.0
-margin_bottom = -32.0
+margin_left = -87.58
+margin_top = -132.0
+margin_right = 104.42
+margin_bottom = -68.0
 theme = ExtResource( 6 )
 text = "Paused"
 __meta__ = {
