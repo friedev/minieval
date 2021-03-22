@@ -18,6 +18,6 @@ func _input(event):
 #update currency
 func update_currency():
 	var tilemap = get_node(@"/root/Root/TileMap")
-	get_node("Stats/CurrencyCountLabel").text = "%d" % tilemap.currency
-	get_node("Stats/VPCountLabel").text = "%d" % tilemap.vp
-	get_node("Stats/BuildingsPlacedCountLabel").text = "%d" % tilemap.buildings_placed
+	get_node("Stats/CurrencyCountLabel").text = str(tilemap.currency)
+	get_node("Stats/VPCountLabel").text = str(tilemap.vp)
+	get_node("Stats/BuildingsPlacedCountLabel").text = str(tilemap.buildings_placed)
