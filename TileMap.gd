@@ -121,17 +121,19 @@ var preview_cellv = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
-	mouse_cellv = position_to_cellv(get_viewport().get_mouse_position())
+	self._update_mouse_cellv()
 	self._update_label()
 	for x in range(0, 128):
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
 
 
+func _process(delta):
+	self._update_preview()
+
+
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		mouse_cellv = self.position_to_cellv(event.position)
-	elif event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed:
 		self._clear_preview()
 		
 		# Increment cell ID on LMB, otherwise clear cell
@@ -174,8 +176,6 @@ func _unhandled_input(event):
 				vp += next_placement.vp_change
 				history.append(next_placement)
 				self._update_label()
-	
-	self._update_preview()
 
 
 # Event handler for the palette
@@ -187,6 +187,10 @@ func _update_label():
 	get_node(@"/root/Root/CurrencyLayer/CurrencyLabel").text = label_format % [currency, vp]
 
 
+func _update_mouse_cellv():
+	mouse_cellv = position_to_cellv(get_viewport().get_mouse_position())
+
+
 func _clear_preview():
 	if preview_cellv != null:
 		self.set_cellv(preview_cellv, 0)
@@ -195,6 +199,7 @@ func _clear_preview():
 
 
 func _update_preview():
+	self._update_mouse_cellv()
 	self._clear_preview()
 	var id = self.get_cellv(mouse_cellv)
 	if id == 0:
