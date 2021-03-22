@@ -4,8 +4,8 @@ export var speed = 10.0
 export var zoomspeed = 10.0
 export var zoommargin = 0.1
 
-var default_zoom = Vector2(0.25, 0.25)
-var default_offset = Vector2(128, 75)
+onready var default_zoom = zoom
+onready var default_offset = offset
 
 
 func _process(delta):

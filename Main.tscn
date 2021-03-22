@@ -67,9 +67,9 @@ zoomspeed = 20.0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
-[node name="CurrencyLayer" type="CanvasLayer" parent="."]
+[node name="UITextLayer" type="CanvasLayer" parent="."]
 
-[node name="CurrencyLabel" type="Label" parent="CurrencyLayer"]
+[node name="CurrencyLabel" type="Label" parent="UITextLayer"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 308.0
@@ -77,6 +77,20 @@ margin_bottom = 91.0
 custom_fonts/font = SubResource( 1 )
 text = "Currency:
 Victory Points:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLabel" type="Label" parent="UITextLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -308.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 91.0
+custom_fonts/font = SubResource( 1 )
+text = "Turns Left"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

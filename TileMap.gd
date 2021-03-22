@@ -104,15 +104,17 @@ class Placement:
 		self.currency_change = currency_change
 		self.vp_change = vp_change
 
-
 var currency = 10
 var vp = 0
 var selected_building = 1
 var buildings_placed = 0
 
-onready var currency_label = get_node(@"/root/Root/CurrencyLayer/CurrencyLabel")
-var label_format = "Currency: %d\nVictory Points: %d"
+onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
+const currency_format = "Currency: %d\nVictory Points: %d"
+onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
+const turn_format = "%d Turns Left"
 
+const game_length = 50
 var history = []
 var future = []
 
@@ -120,20 +122,22 @@ onready var camera = get_node(@"/root/Root/Camera2D")
 onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewLabel")
 var mouse_cellv = null
 var preview_cellv = null
+var show_preview = true
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
 	self._update_mouse_cellv()
-	self._update_label()
+	self._update_labels()
 	for x in range(0, 128):
 		for y in range(0, 128):
 			self.set_cell(x, y, 0)
 
 
 func _process(delta):
-	self._update_preview()
+	if show_preview:
+		self._update_preview()
 
 
 func _unhandled_input(event):
@@ -154,7 +158,7 @@ func _unhandled_input(event):
 			vp += placement.vp_change
 			history.append(placement)
 			future.clear()
-			self._update_label()
+			self._update_labels()
 		else:
 			$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
@@ -167,7 +171,7 @@ func _unhandled_input(event):
 			currency -= prev_placement.currency_change
 			vp -= prev_placement.vp_change
 			future.append(prev_placement)
-			self._update_label()
+			self._update_labels()
 	elif event.is_action_pressed("redo"):
 		var next_placement = future.pop_back()
 		if next_placement:
@@ -178,7 +182,12 @@ func _unhandled_input(event):
 			currency += next_placement.currency_change
 			vp += next_placement.vp_change
 			history.append(next_placement)
-			self._update_label()
+			self._update_labels()
+	elif event.is_action_pressed("score_report"):
+		show_preview = false
+		self._clear_preview()
+	elif event.is_action_released("score_report"):
+		show_preview = true
 
 
 # Event handler for the palette
@@ -186,8 +195,9 @@ func _select_building(id):
 	self.selected_building = id
 
 
-func _update_label():
-	currency_label.text = label_format % [currency, vp]
+func _update_labels():
+	currency_label.text = currency_format % [currency, vp]
+	turn_label.text = turn_format % (game_length - len(history))
 
 
 func _update_mouse_cellv():
