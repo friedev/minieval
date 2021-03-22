@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Audio/Sounds/building_place_error.wav" type="AudioStream" id=10]
 [ext_resource path="res://Interface/StatsOverlayUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Interface/RecapUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -76,6 +77,16 @@ margin_bottom = 44.0
 custom_fonts/font = SubResource( 1 )
 text = "Currency:
 Victory Points:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewLayer" type="CanvasLayer" parent="."]
+
+[node name="PreviewLabel" type="Label" parent="PreviewLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -117,6 +117,7 @@ var history = []
 var future = []
 
 onready var camera = get_node(@"/root/Root/Camera2D")
+onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewLabel")
 var mouse_cellv = null
 var preview_cellv = null
 
@@ -199,25 +200,66 @@ func _clear_preview():
 		self.set_cellv(preview_cellv, 0)
 		preview_cellv = null
 		$Preview.clear()
+		preview_label.text = ''
 
 
 func _update_preview():
+	# Only update the preview if the mouse has moved to a different cell
+	var old_mouse_cellv = mouse_cellv
 	self._update_mouse_cellv()
+	if mouse_cellv == old_mouse_cellv:
+		return
+	
 	self._clear_preview()
+	
+	# Only show a preview if a building is not already present
 	var id = self.get_cellv(mouse_cellv)
-	if id == 0:
-		preview_cellv = mouse_cellv
-		self.set_cellv(preview_cellv, INVALID_CELL)
-	# For loops finds radius of currently hovered building and displays it with a 50% opacity white square
-		for x in range(max(0, preview_cellv.x - buildings[selected_building].radius), min(127, preview_cellv.x + buildings[selected_building].radius + 1)):
-			for y in range(max(0, preview_cellv.y - buildings[selected_building].radius), min(127, preview_cellv.y + buildings[selected_building].radius + 1)):
-				var neighbor_id = Vector2(x, y)
-				$Preview.set_cellv(neighbor_id,7)
-		$Preview.set_cellv(preview_cellv, 7)
-		self.set_cellv(preview_cellv, self.selected_building)
+	if id != 0:
+		return
+	
+	preview_cellv = mouse_cellv
+	
+	# For loops show radius of current building with a 50% opacity white square
+	var radius = buildings[selected_building].radius
+	for x in range(max(0, preview_cellv.x - radius), min(127, preview_cellv.x + radius + 1)):
+		for y in range(max(0, preview_cellv.y - radius), min(127, preview_cellv.y + radius + 1)):
+			var neighbor_id = Vector2(x, y)
+			$Preview.set_cellv(neighbor_id,7)
+	
+	# Preview selected building using the actual tilemap
+	self.set_cellv(preview_cellv, self.selected_building)
+	
+	# Update preview label with expected building value
+	var value = get_building_value(preview_cellv, self.selected_building)
+	preview_label.text = "%d, %d" % value
+	preview_label.rect_position = cellv_to_position(preview_cellv) + \
+			Vector2(4, -2) / camera.zoom - preview_label.rect_size / 2
+
 
 func position_to_cellv(position):
 	return ((position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
+
+
+func cellv_to_position(cellv):
+	return (8 * cellv - camera.position) / camera.zoom # 8 = tile size
+
+
+# Gets the total value that would result from placing the building with the
+# given ID at the given cellv, returned in the form [currency, vp]
+# Includes the building's flat cost and VP, as well as interactions
+func get_building_value(cellv, id):
+	var building = buildings[id]
+	var radius = building.radius
+	var currency_value = -floor(building.cost)
+	var vp_value = floor(building.vp)
+	for x in range(max(0, cellv.x - radius), min(127, cellv.x + radius + 1)):
+		for y in range(max(0, cellv.y - radius), min(127, cellv.y + radius + 1)):
+			# Ignore the exact cell where the building is being placed
+			if not (x == cellv.x and y == cellv.y):
+				var neighbor_id = self.get_cell(x, y)
+				currency_value += building.currency_interactions.get(neighbor_id, 0)
+				vp_value += building.vp_interactions.get(neighbor_id, 0)
+	return [currency_value, vp_value]
 
 
 func place_building(cellv, id):
@@ -225,19 +267,15 @@ func place_building(cellv, id):
 		return null
 	
 	var building = buildings[id]
-	var currency_change = -floor(building.cost)
-	var vp_change = floor(building.vp)
+	
 	# Check if building can be built in the first place
-	if currency + currency_change < 0:
+	if currency - floor(building.cost) < 0:
 		return null
 	
 	# Give currency based on nearby buildings
-	# TODO prevent currency from going negative if net currency change is negative
-	for x in range(max(0, cellv.x - building.radius), min(127, cellv.x + building.radius + 1)):
-		for y in range(max(0, cellv.y - building.radius), min(127, cellv.y + building.radius + 1)):
-			var neighbor_id = self.get_cell(x, y)
-			currency_change += building.currency_interactions.get(neighbor_id, 0)
-			vp_change += building.vp_interactions.get(neighbor_id, 0)
+	var building_value = get_building_value(cellv, id)
+	var currency_change = building_value[0]
+	var vp_change = building_value[1]
 	
 	# Check if the additional cost from interactions would lead to negative currency
 	if currency + currency_change < 0:
