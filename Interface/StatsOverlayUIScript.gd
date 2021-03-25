@@ -5,7 +5,8 @@ func _input(event):
 	var tilemap = get_node(@"/root/Root/TileMap")
 	var palette = get_node(@"/root/Root/Palette/Menu")
 	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
-	if event.is_action_pressed("score_report"):
+	var Recap = get_node(@"/root/Root/RecapUI/Control")
+	if event.is_action_pressed("score_report") && Recap.game_over == false:
 		tilemap._clear_preview()
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
@@ -14,7 +15,7 @@ func _input(event):
 			child.visible = false
 		update_currency()
 		visible = true
-	elif event.is_action_released("score_report"):
+	elif event.is_action_released("score_report") && Recap.game_over == false:
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		palette.visible = true

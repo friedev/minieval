@@ -2,10 +2,11 @@ extends Control
 
 var tilemap
 var game_over = false
+var freeplay = false
 
 func _input(event):
 	tilemap = get_node(@"/root/Root/TileMap")
-	if tilemap.get_turn() == 50 && game_over == false:
+	if tilemap.get_turn() == 50 && freeplay == false && game_over == false:
 		end_game()
 
 func end_game():
@@ -21,7 +22,6 @@ func end_game():
 		child.visible = false
 
 func update_labels():
-	var tilemap = get_node(@"/root/Root/TileMap")
 	var currencyCount = str(tilemap.currency)
 	if(currencyCount == "69"):
 		currencyCount = "69 (nice.)"
@@ -37,6 +37,8 @@ func update_labels():
 
 
 func _on_FreeplayButton_pressed():
+	freeplay = true
+	game_over = false
 	get_tree().paused = false
 	var palette = get_node(@"/root/Root/Palette/Menu")
 	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
@@ -62,6 +64,7 @@ func _on_UndoButton_pressed():
 
 
 func _on_TitleScreenButton_pressed():
+	game_over = false
 	get_tree().paused = false
 	get_tree().change_scene("res://Interface/Title.tscn")
 

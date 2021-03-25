@@ -2,7 +2,8 @@ extends Control
 
 #Make pause menu appear when user presses pause (Escape)
 func _input(event):
-	if event.is_action_pressed("pause"):
+	var Recap = get_node(@"/root/Root/RecapUI/Control")
+	if event.is_action_pressed("pause") && Recap.game_over == false:
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
