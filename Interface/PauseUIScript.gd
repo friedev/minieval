@@ -19,3 +19,8 @@ func _on_ReturnToTitleButton_pressed():
 	var new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
 	get_tree().change_scene("res://Interface/Title.tscn")
+
+func _on_OptionsButton_pressed():
+	var new_pause_state = not get_tree().paused
+	visible = true
+	get_tree().change_scene("res://Interface/OptionsMenu.tscn")

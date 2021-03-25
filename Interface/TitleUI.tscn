@@ -122,3 +122,4 @@ __meta__ = {
 }
 [connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
 [connection signal="pressed" from="Control/Menu/PlayButton" to="Control" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Control/Menu/OptionsButton" to="Control" method="_on_OptionsButton_pressed"]

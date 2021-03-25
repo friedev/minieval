@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=1]
+[ext_resource path="res://Interface/Options.gd" type="Script" id=2]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+
+[node name="Options" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Options"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Options"]
+margin_left = 384.0
+margin_top = 184.0
+margin_right = 896.0
+margin_bottom = 544.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Options"]
+margin_left = 432.0
+margin_top = 272.0
+margin_right = 523.0
+margin_bottom = 286.0
+text = "Camera Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraSpeed" type="HSlider" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -88.0
+margin_right = -16.0
+margin_bottom = -72.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
