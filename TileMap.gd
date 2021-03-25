@@ -323,5 +323,7 @@ func destroy_building(cellv):
 	
 	$BuildingDestroySound.play()
 	
+	buildings_placed -= 1
+	
 	self.set_cellv(cellv, 0)
 	return Placement.new(id, cellv, false, 0, 0)
