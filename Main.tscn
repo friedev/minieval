@@ -38,6 +38,8 @@ stream = ExtResource( 7 )
 [node name="BuildingDestroySound" type="AudioStreamPlayer" parent="TileMap"]
 stream = ExtResource( 6 )
 
+[node name="Buildings" type="Node2D" parent="TileMap"]
+
 [node name="Preview" type="TileMap" parent="TileMap"]
 modulate = Color( 1, 1, 1, 0.501961 )
 tile_set = ExtResource( 2 )

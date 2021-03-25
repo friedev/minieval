@@ -1,18 +1,28 @@
 extends TileMap
 
-
 class Building:
-	var base_cost
-	var cost
-	var cost_increment
-	var base_vp
-	var vp
-	var vp_increment
-	var radius
-	var currency_interactions
-	var vp_interactions
+	var is_tile: bool
+	var base_cost: int
+	var cost: float
+	var cost_increment: float
+	var base_vp: int
+	var vp: float
+	var vp_increment: float
+	var radius: int
+	var texture: Texture
+	var currency_interactions: Dictionary
+	var vp_interactions: Dictionary
 	
-	func _init(base_cost, cost_increment, base_vp, vp_increment, radius, currency_interactions, vp_interactions):
+	func _init(is_tile: bool,
+			base_cost: int,
+			cost_increment: float,
+			base_vp: int,
+			vp_increment: float,
+			radius: int,
+			texture: Texture,
+			currency_interactions: Dictionary,
+			vp_interactions: Dictionary):
+		self.is_tile = is_tile
 		self.base_cost = base_cost
 		self.cost = base_cost
 		self.cost_increment = cost_increment
@@ -20,13 +30,15 @@ class Building:
 		self.vp = base_vp
 		self.vp_increment = vp_increment
 		self.radius = radius
+		self.texture = texture
 		self.currency_interactions = currency_interactions
 		self.vp_interactions = vp_interactions
 
 
-var buildings = [
+var BUILDINGS = [
 	null,
-	Building.new(1, 0.25, 1, 0, 1, { # 1: Wooden hut
+	# 1: Wooden hut
+	Building.new(false, 1, 0.25, 1, 0, 1, preload("res://Art/house.png"), {
 		1: 1,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -1, # Stone hut
@@ -34,7 +46,8 @@ var buildings = [
 		5: 1,  # Castle
 	}, {
 	}),
-	Building.new(2, 0.5, 1, 0, 1, {  # 2: Wooden house
+	# 2: Wooden house
+	Building.new(false, 2, 0.5, 1, 0, 1, preload("res://Art/house.png"), {
 		1: 2,  # Wooden hut
 		2: 4,  # Wooden house
 		3: -2, # Stone hut
@@ -42,7 +55,8 @@ var buildings = [
 		5: 1,  # Castle
 	}, {
 	}),
-	Building.new(3, 0.25, 2, 0, 2, {  # 3: Stone hut
+	# 3: Stone hut
+	Building.new(false, 3, 0.25, 2, 0, 2, preload("res://Art/house.png"), {
 		1: -1, # Wooden hut
 		2: -2, # Wooden house
 		3: 1,  # Stone hut
@@ -50,7 +64,8 @@ var buildings = [
 		5: 2,  # Castle
 	}, {
 	}),
-	Building.new(4, 0.5, 2, 0, 2, { # 4: Stone house
+	# 4: Stone house
+	Building.new(false, 4, 0.5, 2, 0, 2, preload("res://Art/house.png"), {
 		1: -2, # Wooden hut
 		2: -4, # Wooden house
 		3: 2,  # Stone hut
@@ -58,7 +73,8 @@ var buildings = [
 		5: 2,  # Castle
 	}, {
 	}),
-	Building.new(10, 10, 10, 0, 10, {  # 5: Castle
+	# 5: Castle
+	Building.new(false, 10, 10, 10, 0, 10, preload("res://Art/house.png"), {
 		1: 1,   # Wooden hut
 		2: 1,   # Wooden house
 		3: 2,   # Stone hut
@@ -67,20 +83,22 @@ var buildings = [
 		6: 5,   # Tower
 	}, {
 	}),
-	Building.new(5, 5, 5, 0, 5, {  # 6: Tower
+	# 6: Tower
+	Building.new(false, 5, 5, 5, 0, 5, preload("res://Art/house.png"), {
 		5: 5,  # Castle
 		6: -5, # Tower
 	}, {
 	}),
-	null, # 7: Wall
-	Building.new(5, 2.5, 2, 0, 5, {  # 8: Fountain
+	# 7: Fountain
+	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), {
 		1: 1, # Wooden hut
 		2: 1, # Wooden house
 		3: 1, # Stone hut
 		4: 1, # Stone house
 	}, {
 	}),
-	Building.new(5, 2.5, 2, 0, 5, {  # 9: Well
+	# 8: Well
+	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), {
 		1: 2,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -2, # Stone hut
@@ -103,6 +121,16 @@ class Placement:
 		self.placed = placed
 		self.currency_change = currency_change
 		self.vp_change = vp_change
+
+
+const TILE_SIZE = 8
+const BASE_BUILDING_INDEX = 1 # First non-special index: -1 = INVALID, 0 = EMPTY
+
+var world_map = []
+var building_types = []
+var building_index = BASE_BUILDING_INDEX
+
+var building_scene = preload("res://Building.tscn")
 
 var currency = 10
 var vp = 0
@@ -131,8 +159,12 @@ func _ready():
 	self._update_mouse_cellv()
 	self._update_labels()
 	for x in range(0, 128):
+		world_map.append([])
 		for y in range(0, 128):
-			self.set_cell(x, y, 0)
+			world_map[x].append(0)
+			.set_cell(x, y, 0)
+	for i in range(BASE_BUILDING_INDEX):
+		building_types.append(null)
 
 
 func _process(delta):
@@ -190,6 +222,49 @@ func _unhandled_input(event):
 		self._clear_preview()
 	elif event.is_action_released("score_report"):
 		show_preview = true
+	elif event is InputEventKey and event.scancode == KEY_B:
+		breakpoint
+
+
+func get_cell(x: int, y: int):
+	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
+		return INVALID_CELL
+	var cell = world_map[x][y]
+	return cell
+
+
+func get_cellv(position: Vector2):
+	return get_cell(position.x, position.y)
+
+
+func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
+		flip_y: bool = false, transpose: bool = false,
+		autotile_coord: Vector2 = Vector2( 0, 0 )):
+	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
+		push_error('Tried to set a cell out of bounds')
+	if tile < 0 and tile >= len(BUILDINGS) and tile != INVALID_CELL:
+		push_error('Tried to place an invalid building type')
+	var building = BUILDINGS[tile]
+	if building and not building.is_tile:
+		world_map[x][y] = building_index
+		building_types.append(tile)
+		building_index += 1
+	else:
+		world_map[x][y] = tile
+		.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+
+
+func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
+		flip_y: bool = false, transpose: bool = false,
+		autotile_coord: Vector2 = Vector2( 0, 0 )):
+	set_cell(position.x, position.y, tile, flip_x, flip_y, transpose,
+			autotile_coord)
+
+
+func get_type(id):
+	if id <= BASE_BUILDING_INDEX:
+		return id
+	return building_types[id]
 
 
 # Event handler for the palette
@@ -216,7 +291,7 @@ func _update_mouse_cellv():
 
 func _clear_preview():
 	if preview_cellv != null:
-		self.set_cellv(preview_cellv, 0)
+		#self.set_cellv(preview_cellv, 0)
 		preview_cellv = null
 		$Preview.clear()
 		preview_label.text = ''
@@ -239,35 +314,39 @@ func _update_preview():
 	preview_cellv = mouse_cellv
 	
 	# For loops show radius of current building with a 50% opacity white square
-	var radius = buildings[selected_building].radius
+	var radius = BUILDINGS[selected_building].radius
 	for x in range(max(0, preview_cellv.x - radius), min(127, preview_cellv.x + radius + 1)):
 		for y in range(max(0, preview_cellv.y - radius), min(127, preview_cellv.y + radius + 1)):
 			var neighbor_id = Vector2(x, y)
 			$Preview.set_cellv(neighbor_id,7)
 	
 	# Preview selected building using the actual tilemap
-	self.set_cellv(preview_cellv, self.selected_building)
+	#self.set_cellv(preview_cellv, self.selected_building)
 	
 	# Update preview label with expected building value
 	var value = get_building_value(preview_cellv, self.selected_building)
 	preview_label.text = "%d, %d" % value
-	preview_label.rect_position = cellv_to_position(preview_cellv) + \
+	preview_label.rect_position = cellv_to_screen_position(preview_cellv) + \
 			Vector2(4, -2) / camera.zoom - preview_label.rect_size / 2
 
 
 func position_to_cellv(position):
-	return ((position * camera.zoom + camera.position) / 8).floor() # 8 = tile size
+	return ((position * camera.zoom + camera.position) / TILE_SIZE).floor()
 
 
-func cellv_to_position(cellv):
-	return (8 * cellv - camera.position) / camera.zoom # 8 = tile size
+func cellv_to_world_position(cellv):
+	return cellv * TILE_SIZE
+
+
+func cellv_to_screen_position(cellv):
+	return (cellv_to_world_position(cellv) - camera.position) / camera.zoom
 
 
 # Gets the total value that would result from placing the building with the
 # given ID at the given cellv, returned in the form [currency, vp]
 # Includes the building's flat cost and VP, as well as interactions
 func get_building_value(cellv, id):
-	var building = buildings[id]
+	var building = BUILDINGS[id]
 	var radius = building.radius
 	var currency_value = -floor(building.cost)
 	var vp_value = floor(building.vp)
@@ -275,17 +354,17 @@ func get_building_value(cellv, id):
 		for y in range(max(0, cellv.y - radius), min(127, cellv.y + radius + 1)):
 			# Ignore the exact cell where the building is being placed
 			if not (x == cellv.x and y == cellv.y):
-				var neighbor_id = self.get_cell(x, y)
+				var neighbor_id = get_type(self.get_cell(x, y))
 				currency_value += building.currency_interactions.get(neighbor_id, 0)
 				vp_value += building.vp_interactions.get(neighbor_id, 0)
 	return [currency_value, vp_value]
 
 
 func place_building(cellv, id):
-	if self.get_cellv(cellv) != 0:
+	if get_type(self.get_cellv(cellv)) != 0:
 		return null
 	
-	var building = buildings[id]
+	var building = BUILDINGS[id]
 	
 	# Check if building can be built in the first place
 	if currency - floor(building.cost) < 0:
@@ -308,16 +387,27 @@ func place_building(cellv, id):
 	# TODO Prevent buildings placed from going to infinity if you place, undo, re-place etc.
 	buildings_placed += 1
 	
+	var instance = building_scene.instance()
+	instance.position = cellv_to_world_position(cellv)
+	instance.texture = building.texture
+	instance.set_name("building_%d" % building_index)
+	$Buildings.add_child(instance)
 	self.set_cellv(cellv, id)
 	return Placement.new(id, cellv, true, currency_change, vp_change)
 
 
 func destroy_building(cellv):
 	var id = self.get_cellv(cellv)
-	if id <= 0:
+	if get_type(id) <= 0:
 		return null
 	
-	var building = buildings[id]
+	var type = id
+	if id >= BASE_BUILDING_INDEX:
+		var instance = get_node(NodePath("Buildings/building_%d" % id))
+		if instance and not instance.is_queued_for_deletion():
+			instance.free()
+		type = building_types[id]
+	var building = BUILDINGS[type]
 	building.cost -= building.cost_increment
 	building.vp -= building.vp_increment
 	
