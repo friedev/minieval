@@ -24,6 +24,15 @@ func _input(event):
 
 func update_currency():
 	var tilemap = get_node(@"/root/Root/TileMap")
-	get_node("Stats/CurrencyCountLabel").text = str(tilemap.currency)
-	get_node("Stats/VPCountLabel").text = str(tilemap.vp)
-	get_node("Stats/BuildingsPlacedCountLabel").text = str(tilemap.buildings_placed)
+	var currencyCount = str(tilemap.currency)
+	if(currencyCount == "69"):
+		currencyCount = "69 (nice.)"
+	get_node("Stats/CurrencyCountLabel").text = currencyCount
+	var VPCount = str(tilemap.vp)
+	if(VPCount == "69"):
+		VPCount = "69 (nice.)"
+	get_node("Stats/VPCountLabel").text = VPCount
+	var BuildingCount = str(tilemap.buildings_placed)
+	if(BuildingCount == "69"):
+		BuildingCount = "69 (nice.)"
+	get_node("Stats/BuildingsPlacedCountLabel").text = BuildingCount
