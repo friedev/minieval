@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Interface/RecapUIScript.gd" type="Script" id=1]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=3]
 [ext_resource path="res://Interface/Themes/theme_title.tres" type="Theme" id=4]
 [ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=5]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
 
 [node name="RecapUI" type="CanvasLayer"]
 layer = 100
@@ -24,10 +27,10 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.41418
-margin_top = -1.12247
-margin_right = 1.41406
-margin_bottom = -1.12244
+margin_left = 2.53662
+margin_top = 1.12246
+margin_right = 2.5365
+margin_bottom = 1.1225
 color = Color( 0, 0, 0, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -112,6 +115,78 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FreeplayButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -59.0562
+margin_top = 481.358
+margin_right = 60.9438
+margin_bottom = 507.358
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 3 )
+text = "Freeplay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UndoButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -81.0562
+margin_top = 527.434
+margin_right = 82.9438
+margin_bottom = 553.434
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 3 )
+text = "Undo last move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleScreenButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -63.0562
+margin_top = 572.488
+margin_right = 64.9438
+margin_bottom = 598.488
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 3 )
+text = "Title Screen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitGameButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -59.0562
+margin_top = 619.615
+margin_right = 60.9438
+margin_bottom = 645.615
+theme = ExtResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 3 )
+text = "Exit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MenuTitle" type="Label" parent="Control"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -124,18 +199,7 @@ text = "Recap"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="paletteCover" type="ColorRect" parent="Control"]
-visible = false
-margin_left = 248.0
-margin_top = 500.0
-margin_right = 778.0
-margin_bottom = 582.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NewGameButton" type="Button" parent="Control"]
-margin_right = 12.0
-margin_bottom = 20.0
+[connection signal="pressed" from="Control/FreeplayButton" to="Control" method="_on_FreeplayButton_pressed"]
+[connection signal="pressed" from="Control/UndoButton" to="Control" method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="Control/TitleScreenButton" to="Control" method="_on_TitleScreenButton_pressed"]
+[connection signal="pressed" from="Control/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
