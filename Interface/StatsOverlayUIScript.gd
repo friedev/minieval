@@ -1,5 +1,7 @@
 extends Control
 
+var isPaused = false
+
 # Make score report overlay appear when user holds shift
 func _input(event):
 	var tilemap = get_node(@"/root/Root/TileMap")
@@ -8,16 +10,20 @@ func _input(event):
 	var Recap = get_node(@"/root/Root/RecapUI/Control")
 	if event.is_action_pressed("score_report") && Recap.game_over == false:
 		tilemap._clear_preview()
-		var new_pause_state = not get_tree().paused
-		get_tree().paused = new_pause_state
+		isPaused = true
+		get_tree().paused = isPaused
+		#var new_pause_state = not get_tree().paused
+		#get_tree().paused = new_pause_state
 		palette.visible = false
 		for child in ui_text_layer.get_children():
 			child.visible = false
 		update_currency()
 		visible = true
 	elif event.is_action_released("score_report") && Recap.game_over == false:
-		var new_pause_state = not get_tree().paused
-		get_tree().paused = new_pause_state
+		isPaused = false
+		get_tree().paused = isPaused
+		#var new_pause_state = not get_tree().paused
+		#get_tree().paused = new_pause_state
 		palette.visible = true
 		for child in ui_text_layer.get_children():
 			child.visible = true

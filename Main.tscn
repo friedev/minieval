@@ -66,6 +66,7 @@ zoomspeed = 20.0
 [node name="Palette" parent="." instance=ExtResource( 4 )]
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+layer = 99
 
 [node name="UITextLayer" type="CanvasLayer" parent="."]
 
@@ -106,5 +107,6 @@ __meta__ = {
 }
 
 [node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
+layer = 97
 
 [node name="RecapUI" parent="." instance=ExtResource( 12 )]
