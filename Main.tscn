@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Interface/StatsOverlayUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Interface/RecapUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=13]
+[ext_resource path="res://Art/VictoryPointIcon.png" type="Texture" id=14]
+[ext_resource path="res://Art/CurrencyIcon.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -79,17 +81,16 @@ zoomspeed = 20.0
 [node name="Palette" parent="." instance=ExtResource( 4 )]
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+layer = 99
 
 [node name="UITextLayer" type="CanvasLayer" parent="."]
 
 [node name="CurrencyLabel" type="Label" parent="UITextLayer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 308.0
-margin_bottom = 91.0
+margin_left = 59.5879
+margin_top = 13.7703
+margin_right = 210.588
+margin_bottom = 88.7703
 custom_fonts/font = SubResource( 1 )
-text = "Currency:
-Victory Points:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,16 +109,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CurrencyIcon" type="Sprite" parent="UITextLayer"]
+position = Vector2( 29, 32 )
+scale = Vector2( 2.2, 2.2 )
+texture = ExtResource( 15 )
+
+[node name="VictoryPointIcon" type="Sprite" parent="UITextLayer"]
+position = Vector2( 28, 67 )
+scale = Vector2( 2.2, 2.2 )
+texture = ExtResource( 14 )
+
 [node name="PreviewLayer" type="CanvasLayer" parent="."]
 
-[node name="PreviewLabel" type="Label" parent="PreviewLayer"]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="PreviewNode" type="Control" parent="PreviewLayer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewLabel" type="Label" parent="PreviewLayer/PreviewNode"]
+margin_left = -20.0
+margin_top = -9.0
+margin_right = 20.0
+margin_bottom = 9.0
 theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CurrencyPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
+position = Vector2( -10, -5 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 15 )
+
 [node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
+layer = 97
 
 [node name="RecapUI" parent="." instance=ExtResource( 12 )]

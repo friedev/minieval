@@ -192,7 +192,7 @@ var selected_building = 1
 var buildings_placed = 0 # TODO fix undo behavior
 
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
-const currency_format = "Currency: %d\nVictory Points: %d"
+const currency_format = "%d\n%d"
 onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format = "%d Turns Left"
 
@@ -201,7 +201,7 @@ var history = []
 var future = []
 
 onready var camera = get_node(@"/root/Root/Camera2D")
-onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewLabel")
+onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewNode/PreviewLabel")
 onready var preview_building = get_node(@"/root/Root/TileMap/PreviewBuilding")
 var mouse_cellv = null
 var preview_cellv = null
@@ -497,6 +497,8 @@ func destroy_building(cellv):
 	building.vp -= building.vp_increment
 	
 	$BuildingDestroySound.play()
+
+	buildings_placed -= 1
 	
 	var root = cellv
 	if id >= BASE_BUILDING_INDEX:
