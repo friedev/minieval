@@ -9,9 +9,9 @@ class Building:
 	var base_vp: int
 	var vp: float
 	var vp_increment: float
-	var radius: int
+	var area: Vector2
 	var texture: Texture
-	var tiles: Array
+	var cells: Array
 	var currency_interactions: Dictionary
 	var vp_interactions: Dictionary
 	
@@ -20,9 +20,9 @@ class Building:
 			cost_increment: float,
 			base_vp: int,
 			vp_increment: float,
-			radius: int,
+			area: Vector2,
 			texture: Texture,
-			tiles: Array,
+			cells: Array,
 			currency_interactions: Dictionary,
 			vp_interactions: Dictionary):
 		self.is_tile = is_tile
@@ -32,99 +32,137 @@ class Building:
 		self.base_vp = base_vp
 		self.vp = base_vp
 		self.vp_increment = vp_increment
-		self.radius = radius
+		self.area = area
 		self.texture = texture
+		self.cells = cells
 		self.currency_interactions = currency_interactions
 		self.vp_interactions = vp_interactions
+	
+	func get_size():
+		return Vector2(get_width(), get_height())
+	
+	func get_width():
+		return len(self.cells[0])
+	
+	func get_height():
+		return len(self.cells)
+	
+	func get_cells(cellv = Vector2(0, 0)):
+		var cells = []
+		for x in range(0, len(self.cells)):
+			for y in range(0, len(self.cells[x])):
+				if self.cells[x][y]:
+					cells.append(Vector2(x, y) + cellv)
+					# TODO prevent placing buildings partially out of bounds
+		return cells
+	
+	func get_area_cells(cellv = Vector2(0, 0)):
+		var area_cells = []
+		var offset = (get_size() / 2).floor()
+		var radius = (area / 2)
+		for x in range(max(0, cellv.x - floor(radius.x) + offset.x),
+				min(128, cellv.x + ceil(radius.x) + offset.x)):
+			for y in range(max(0, cellv.y - floor(radius.y) + offset.y),
+					min(128, cellv.y + ceil(radius.y) + offset.y)):
+						area_cells.append(Vector2(x, y))
+		return area_cells
 
 
 var BUILDINGS = [
 	null,
 	# 1: Wooden hut
-	Building.new(false, 1, 0.25, 1, 0, 1, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: 1,  # Wooden hut
-		2: 2,  # Wooden house
-		3: -1, # Stone hut
-		4: -2, # Stone house
-		5: 1,  # Castle
-	}, {
-	}),
+	Building.new(false, 1, 0.25, 1, 0, Vector2(3, 3),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: 1,  # Wooden hut
+				2: 2,  # Wooden house
+				3: -1, # Stone hut
+				4: -2, # Stone house
+				5: 1,  # Castle
+			}, {
+			}),
 	# 2: Wooden house
-	Building.new(false, 2, 0.5, 1, 0, 2, preload("res://Art/big_house.png"), [
-		[1, 1],
-		[1, 0]
-	], {
-		1: 2,  # Wooden hut
-		2: 4,  # Wooden house
-		3: -2, # Stone hut
-		4: -4, # Stone house
-		5: 1,  # Castle
-	}, {
-	}),
+	Building.new(false, 2, 0.5, 1, 0, Vector2(4, 4),
+			preload("res://Art/big_house.png"), [
+				[1, 1],
+				[1, 0]
+			], {
+				1: 2,  # Wooden hut
+				2: 4,  # Wooden house
+				3: -2, # Stone hut
+				4: -4, # Stone house
+				5: 1,  # Castle
+			}, {
+			}),
 	# 3: Stone hut
-	Building.new(false, 3, 0.25, 2, 0, 2, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: -1, # Wooden hut
-		2: -2, # Wooden house
-		3: 1,  # Stone hut
-		4: 2,  # Stone house
-		5: 2,  # Castle
-	}, {
-	}),
+	Building.new(false, 3, 0.25, 2, 0, Vector2(5, 1),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: -1, # Wooden hut
+				2: -2, # Wooden house
+				3: 1,  # Stone hut
+				4: 2,  # Stone house
+				5: 2,  # Castle
+			}, {
+			}),
 	# 4: Stone house
-	Building.new(false, 4, 0.5, 2, 0, 2, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: -2, # Wooden hut
-		2: -4, # Wooden house
-		3: 2,  # Stone hut
-		4: 4,  # Stone house
-		5: 2,  # Castle
-	}, {
-	}),
+	Building.new(false, 4, 0.5, 2, 0, Vector2(2, 4),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: -2, # Wooden hut
+				2: -4, # Wooden house
+				3: 2,  # Stone hut
+				4: 4,  # Stone house
+				5: 2,  # Castle
+			}, {
+			}),
 	# 5: Castle
-	Building.new(false, 10, 10, 10, 0, 10, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: 1,   # Wooden hut
-		2: 1,   # Wooden house
-		3: 2,   # Stone hut
-		4: 2,   # Stone house
-		5: -10, # Castle
-		6: 5,   # Tower
-	}, {
-	}),
+	Building.new(false, 10, 10, 10, 0, Vector2(5, 5),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: 1,   # Wooden hut
+				2: 1,   # Wooden house
+				3: 2,   # Stone hut
+				4: 2,   # Stone house
+				5: -10, # Castle
+				6: 5,   # Tower
+			}, {
+			}),
 	# 6: Tower
-	Building.new(false, 5, 5, 5, 0, 5, preload("res://Art/house.png"), [
-		[1]
-	], {
-		5: 5,  # Castle
-		6: -5, # Tower
-	}, {
-	}),
+	Building.new(false, 5, 5, 5, 0, Vector2(5, 5),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				5: 5,  # Castle
+				6: -5, # Tower
+			}, {
+			}),
 	# 7: Fountain
-	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: 1, # Wooden hut
-		2: 1, # Wooden house
-		3: 1, # Stone hut
-		4: 1, # Stone house
-	}, {
-	}),
+	Building.new(false, 5, 2.5, 2, 0, Vector2(5, 5),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: 1, # Wooden hut
+				2: 1, # Wooden house
+				3: 1, # Stone hut
+				4: 1, # Stone house
+			}, {
+			}),
 	# 8: Well
-	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), [
-		[1]
-	], {
-		1: 2,  # Wooden hut
-		2: 2,  # Wooden house
-		3: -2, # Stone hut
-		4: -2, # Stone house
-	}, {
-	}),
+	Building.new(false, 5, 2.5, 2, 0, Vector2(5, 5),
+			preload("res://Art/house.png"), [
+				[1]
+			], {
+				1: 2,  # Wooden hut
+				2: 2,  # Wooden house
+				3: -2, # Stone hut
+				4: -2, # Stone house
+			}, {
+			}),
 ]
 
 
@@ -148,6 +186,7 @@ const BASE_BUILDING_INDEX = 1 # First non-special index: -1 = INVALID, 0 = EMPTY
 
 var world_map = []
 var building_types = []
+var building_roots = []
 var building_index = BASE_BUILDING_INDEX
 
 var building_scene = preload("res://Building.tscn")
@@ -187,6 +226,7 @@ func _ready():
 			.set_cell(x, y, 0)
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
+		building_roots.append(null)
 	_select_building(1)
 
 
@@ -268,10 +308,14 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		push_error('Tried to set a cell out of bounds')
 	if tile < 0 and tile >= len(BUILDINGS) and tile != INVALID_CELL:
 		push_error('Tried to place an invalid building type')
+	var cellv = Vector2(x, y)
 	var building = BUILDINGS[tile]
 	if building and not building.is_tile:
-		world_map[x][y] = building_index
+		# TODO move to place_building or other helper method
+		for building_cellv in building.get_cells(cellv):
+			world_map[building_cellv.x][building_cellv.y] = building_index
 		building_types.append(tile)
+		building_roots.append(cellv)
 		building_index += 1
 	else:
 		world_map[x][y] = tile
@@ -332,27 +376,22 @@ func _update_preview():
 		return
 	
 	self._clear_preview()
-	
-	# Only show a preview if a building is not already present
-	var id = self.get_cellv(mouse_cellv)
-	if id != 0:
-		return
-	
 	preview_cellv = mouse_cellv
+	var building = BUILDINGS[selected_building]
 	
-	# For loops show radius of current building with a 50% opacity white square
-	var radius = BUILDINGS[selected_building].radius
-	for x in range(max(0, preview_cellv.x - radius),
-			min(127, preview_cellv.x + radius + 1)):
-		for y in range(max(0, preview_cellv.y - radius),
-				min(127, preview_cellv.y + radius + 1)):
-			var neighbor_id = Vector2(x, y)
-			$Preview.set_cellv(neighbor_id,7)
-	
-	# Preview selected building using the actual tilemap
+	# Move the preview building sprite
 	$PreviewBuilding.position = cellv_to_world_position(preview_cellv)
 	$PreviewBuilding.visible = true
-	#self.set_cellv(preview_cellv, self.selected_building)
+	
+	# Shade preview building in red if the placement is blocked
+	$PreviewBuilding.modulate = Color.white
+	for cellv in building.get_cells(preview_cellv):
+		if self.get_cellv(cellv) != 0:
+			$PreviewBuilding.modulate = Color.red
+	
+	# Show area of current building with a 50% opacity white square
+	for cellv in building.get_area_cells(preview_cellv):
+		$Preview.set_cellv(cellv, 7)
 	
 	# Update preview label with expected building value
 	var value = get_building_value(preview_cellv, self.selected_building)
@@ -378,24 +417,33 @@ func cellv_to_screen_position(cellv):
 # Includes the building's flat cost and VP, as well as interactions
 func get_building_value(cellv, id):
 	var building = BUILDINGS[id]
-	var radius = building.radius
 	var currency_value = -floor(building.cost)
 	var vp_value = floor(building.vp)
-	for x in range(max(0, cellv.x - radius), min(127, cellv.x + radius + 1)):
-		for y in range(max(0, cellv.y - radius), min(127, cellv.y + radius + 1)):
-			# Ignore the exact cell where the building is being placed
-			if not (x == cellv.x and y == cellv.y):
-				var neighbor_id = get_type(self.get_cell(x, y))
-				currency_value += building.currency_interactions.get(neighbor_id, 0)
-				vp_value += building.vp_interactions.get(neighbor_id, 0)
+	var counted_ids = []
+	var occupied_cells = building.get_cells(cellv)
+	for area_cellv in building.get_area_cells(cellv):
+		# Ignore the exact cells where the building is being placed
+		if occupied_cells.has(area_cellv):
+			continue
+		
+		var neighbor_id = self.get_cellv(area_cellv)
+		if counted_ids.has(neighbor_id):
+			continue
+		counted_ids.append(neighbor_id)
+		
+		var neighbor_type = get_type(neighbor_id)
+		currency_value += building.currency_interactions.get(neighbor_type, 0)
+		vp_value += building.vp_interactions.get(neighbor_type, 0)
 	return [currency_value, vp_value]
 
 
 func place_building(cellv, id):
-	if get_type(self.get_cellv(cellv)) != 0:
-		return null
-	
 	var building = BUILDINGS[id]
+	
+	# Prevent placement f building overlaps any existing buildings
+	for building_cellv in building.get_cells(cellv):
+		if get_type(self.get_cellv(building_cellv)) != 0:
+			return null
 	
 	# Check if building can be built in the first place
 	if currency - floor(building.cost) < 0:
@@ -444,5 +492,11 @@ func destroy_building(cellv):
 	
 	$BuildingDestroySound.play()
 	
-	self.set_cellv(cellv, 0)
-	return Placement.new(id, cellv, false, 0, 0)
+	var root = cellv
+	if id >= BASE_BUILDING_INDEX:
+		root = building_roots[id]
+		for building_cellv in building.get_cells(root):
+			self.set_cellv(building_cellv, 0)
+	else:
+		self.set_cellv(cellv, 0)
+	return Placement.new(type, root, false, 0, 0)
