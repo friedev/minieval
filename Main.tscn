@@ -48,6 +48,14 @@ cell_quadrant_size = 8
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 format = 1
 
+[node name="PreviewTile" type="TileMap" parent="TileMap"]
+modulate = Color( 1, 1, 1, 0.501961 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 8
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+format = 1
+
 [node name="PreviewBuilding" type="Sprite" parent="TileMap"]
 centered = false
 

@@ -96,8 +96,7 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 3: Stone hut
-	Building.new(false, 3, 0.25, 2, 0, Vector2(5, 1),
-			preload("res://Art/house.png"), [
+	Building.new(true, 3, 0.25, 2, 0, Vector2(5, 1), null, [
 				[1]
 			], {
 				1: -1, # Wooden hut
@@ -108,8 +107,7 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 4: Stone house
-	Building.new(false, 4, 0.5, 2, 0, Vector2(2, 4),
-			preload("res://Art/house.png"), [
+	Building.new(true, 4, 0.5, 2, 0, Vector2(2, 4), null, [
 				[1]
 			], {
 				1: -2, # Wooden hut
@@ -120,8 +118,7 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 5: Castle
-	Building.new(false, 10, 10, 10, 0, Vector2(5, 5),
-			preload("res://Art/house.png"), [
+	Building.new(true, 10, 10, 10, 0, Vector2(5, 5), null, [
 				[1]
 			], {
 				1: 1,   # Wooden hut
@@ -133,17 +130,16 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 6: Tower
-	Building.new(false, 5, 5, 5, 0, Vector2(5, 5),
-			preload("res://Art/house.png"), [
+	Building.new(true, 5, 5, 5, 0, Vector2(5, 5), null, [
 				[1]
 			], {
 				5: 5,  # Castle
 				6: -5, # Tower
 			}, {
 			}),
-	# 7: Fountain
-	Building.new(false, 5, 2.5, 2, 0, Vector2(5, 5),
-			preload("res://Art/house.png"), [
+	null, # 7: White square
+	# 8: Fountain
+	Building.new(true, 5, 2.5, 2, 0, Vector2(5, 5), null, [
 				[1]
 			], {
 				1: 1, # Wooden hut
@@ -152,9 +148,8 @@ var BUILDINGS = [
 				4: 1, # Stone house
 			}, {
 			}),
-	# 8: Well
-	Building.new(false, 5, 2.5, 2, 0, Vector2(5, 5),
-			preload("res://Art/house.png"), [
+	# 9: Well
+	Building.new(true, 5, 2.5, 2, 0, Vector2(5, 5), null, [
 				[1]
 			], {
 				1: 2,  # Wooden hut
@@ -182,7 +177,7 @@ class Placement:
 
 
 const TILE_SIZE = 8
-const BASE_BUILDING_INDEX = 1 # First non-special index: -1 = INVALID, 0 = EMPTY
+const BASE_BUILDING_INDEX = 9 # First non-special index: -1 = INVALID, 0 = EMPTY
 
 var world_map = []
 var building_types = []
@@ -330,7 +325,7 @@ func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
 
 
 func get_type(id):
-	if id <= BASE_BUILDING_INDEX:
+	if id < BASE_BUILDING_INDEX:
 		return id
 	return building_types[id]
 
@@ -338,7 +333,9 @@ func get_type(id):
 # Event handler for the palette
 func _select_building(id):
 	self.selected_building = id
-	$PreviewBuilding.texture = BUILDINGS[id].texture
+	var building = BUILDINGS[id]
+	if not building.is_tile:
+		$PreviewBuilding.texture = building.texture
 	_clear_preview()
 	_update_preview()
 
@@ -365,6 +362,7 @@ func _clear_preview():
 		#self.set_cellv(preview_cellv, 0)
 		preview_cellv = null
 		$Preview.clear()
+		$PreviewTile.clear()
 		$PreviewBuilding.visible = false
 		preview_label.text = ''
 
@@ -379,15 +377,23 @@ func _update_preview():
 	preview_cellv = mouse_cellv
 	var building = BUILDINGS[selected_building]
 	
-	# Move the preview building sprite
-	$PreviewBuilding.position = cellv_to_world_position(preview_cellv)
-	$PreviewBuilding.visible = true
+	# Move the building preview
+	if building.is_tile:
+		$PreviewTile.set_cellv(preview_cellv, selected_building)
+	else:
+		$PreviewBuilding.position = cellv_to_world_position(preview_cellv)
+		$PreviewBuilding.visible = true
 	
 	# Shade preview building in red if the placement is blocked
-	$PreviewBuilding.modulate = Color.white
-	for cellv in building.get_cells(preview_cellv):
-		if self.get_cellv(cellv) != 0:
-			$PreviewBuilding.modulate = Color.red
+	if building.is_tile:
+		$PreviewTile.modulate = Color.white
+		if self.get_cellv(preview_cellv) != 0:
+			$PreviewTile.modulate = Color.red
+	else:
+		$PreviewBuilding.modulate = Color.white
+		for cellv in building.get_cells(preview_cellv):
+			if self.get_cellv(cellv) != 0:
+				$PreviewBuilding.modulate = Color.red
 	
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(preview_cellv):
