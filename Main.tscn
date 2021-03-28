@@ -48,6 +48,9 @@ cell_quadrant_size = 8
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 format = 1
 
+[node name="PreviewBuilding" type="Sprite" parent="TileMap"]
+centered = false
+
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )

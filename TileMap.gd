@@ -1,5 +1,6 @@
 extends TileMap
 
+
 class Building:
 	var is_tile: bool
 	var base_cost: int
@@ -10,6 +11,7 @@ class Building:
 	var vp_increment: float
 	var radius: int
 	var texture: Texture
+	var tiles: Array
 	var currency_interactions: Dictionary
 	var vp_interactions: Dictionary
 	
@@ -20,6 +22,7 @@ class Building:
 			vp_increment: float,
 			radius: int,
 			texture: Texture,
+			tiles: Array,
 			currency_interactions: Dictionary,
 			vp_interactions: Dictionary):
 		self.is_tile = is_tile
@@ -38,7 +41,9 @@ class Building:
 var BUILDINGS = [
 	null,
 	# 1: Wooden hut
-	Building.new(false, 1, 0.25, 1, 0, 1, preload("res://Art/house.png"), {
+	Building.new(false, 1, 0.25, 1, 0, 1, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: 1,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -1, # Stone hut
@@ -47,7 +52,10 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 2: Wooden house
-	Building.new(false, 2, 0.5, 1, 0, 1, preload("res://Art/house.png"), {
+	Building.new(false, 2, 0.5, 1, 0, 2, preload("res://Art/big_house.png"), [
+		[1, 1],
+		[1, 0]
+	], {
 		1: 2,  # Wooden hut
 		2: 4,  # Wooden house
 		3: -2, # Stone hut
@@ -56,7 +64,9 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 3: Stone hut
-	Building.new(false, 3, 0.25, 2, 0, 2, preload("res://Art/house.png"), {
+	Building.new(false, 3, 0.25, 2, 0, 2, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: -1, # Wooden hut
 		2: -2, # Wooden house
 		3: 1,  # Stone hut
@@ -65,7 +75,9 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 4: Stone house
-	Building.new(false, 4, 0.5, 2, 0, 2, preload("res://Art/house.png"), {
+	Building.new(false, 4, 0.5, 2, 0, 2, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: -2, # Wooden hut
 		2: -4, # Wooden house
 		3: 2,  # Stone hut
@@ -74,7 +86,9 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 5: Castle
-	Building.new(false, 10, 10, 10, 0, 10, preload("res://Art/house.png"), {
+	Building.new(false, 10, 10, 10, 0, 10, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: 1,   # Wooden hut
 		2: 1,   # Wooden house
 		3: 2,   # Stone hut
@@ -84,13 +98,17 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 6: Tower
-	Building.new(false, 5, 5, 5, 0, 5, preload("res://Art/house.png"), {
+	Building.new(false, 5, 5, 5, 0, 5, preload("res://Art/house.png"), [
+		[1]
+	], {
 		5: 5,  # Castle
 		6: -5, # Tower
 	}, {
 	}),
 	# 7: Fountain
-	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), {
+	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: 1, # Wooden hut
 		2: 1, # Wooden house
 		3: 1, # Stone hut
@@ -98,7 +116,9 @@ var BUILDINGS = [
 	}, {
 	}),
 	# 8: Well
-	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), {
+	Building.new(false, 5, 2.5, 2, 0, 5, preload("res://Art/house.png"), [
+		[1]
+	], {
 		1: 2,  # Wooden hut
 		2: 2,  # Wooden house
 		3: -2, # Stone hut
@@ -148,6 +168,7 @@ var future = []
 
 onready var camera = get_node(@"/root/Root/Camera2D")
 onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewLabel")
+onready var preview_building = get_node(@"/root/Root/TileMap/PreviewBuilding")
 var mouse_cellv = null
 var preview_cellv = null
 var show_preview = true
@@ -155,7 +176,8 @@ var show_preview = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection", self, "_select_building")
+	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
+			self, "_select_building")
 	self._update_mouse_cellv()
 	self._update_labels()
 	for x in range(0, 128):
@@ -165,6 +187,7 @@ func _ready():
 			.set_cell(x, y, 0)
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
+	_select_building(1)
 
 
 func _process(delta):
@@ -223,6 +246,7 @@ func _unhandled_input(event):
 	elif event.is_action_released("score_report"):
 		show_preview = true
 	elif event is InputEventKey and event.scancode == KEY_B:
+		# Manually break for debugging
 		breakpoint
 
 
@@ -270,6 +294,9 @@ func get_type(id):
 # Event handler for the palette
 func _select_building(id):
 	self.selected_building = id
+	$PreviewBuilding.texture = BUILDINGS[id].texture
+	_clear_preview()
+	_update_preview()
 
 
 func get_turn():
@@ -294,14 +321,14 @@ func _clear_preview():
 		#self.set_cellv(preview_cellv, 0)
 		preview_cellv = null
 		$Preview.clear()
+		$PreviewBuilding.visible = false
 		preview_label.text = ''
 
 
 func _update_preview():
 	# Only update the preview if the mouse has moved to a different cell
-	var old_mouse_cellv = mouse_cellv
 	self._update_mouse_cellv()
-	if mouse_cellv == old_mouse_cellv:
+	if mouse_cellv == preview_cellv:
 		return
 	
 	self._clear_preview()
@@ -315,12 +342,16 @@ func _update_preview():
 	
 	# For loops show radius of current building with a 50% opacity white square
 	var radius = BUILDINGS[selected_building].radius
-	for x in range(max(0, preview_cellv.x - radius), min(127, preview_cellv.x + radius + 1)):
-		for y in range(max(0, preview_cellv.y - radius), min(127, preview_cellv.y + radius + 1)):
+	for x in range(max(0, preview_cellv.x - radius),
+			min(127, preview_cellv.x + radius + 1)):
+		for y in range(max(0, preview_cellv.y - radius),
+				min(127, preview_cellv.y + radius + 1)):
 			var neighbor_id = Vector2(x, y)
 			$Preview.set_cellv(neighbor_id,7)
 	
 	# Preview selected building using the actual tilemap
+	$PreviewBuilding.position = cellv_to_world_position(preview_cellv)
+	$PreviewBuilding.visible = true
 	#self.set_cellv(preview_cellv, self.selected_building)
 	
 	# Update preview label with expected building value
