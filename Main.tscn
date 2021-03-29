@@ -43,7 +43,7 @@ stream = ExtResource( 6 )
 [node name="Buildings" type="Node2D" parent="TileMap"]
 
 [node name="Preview" type="TileMap" parent="TileMap"]
-modulate = Color( 1, 1, 1, 0.501961 )
+modulate = Color( 1, 1, 1, 0.25098 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 8
@@ -127,19 +127,24 @@ __meta__ = {
 }
 
 [node name="PreviewLabel" type="Label" parent="PreviewLayer/PreviewNode"]
-margin_left = -20.0
-margin_top = -9.0
-margin_right = 20.0
-margin_bottom = 9.0
+margin_left = -11.0231
+margin_top = -8.37004
+margin_right = 48.9769
+margin_bottom = 9.62996
 theme = ExtResource( 13 )
+text = "1  -1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CurrencyPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
-position = Vector2( -10, -5 )
-scale = Vector2( 0.3, 0.3 )
+position = Vector2( -22, 0.25 )
 texture = ExtResource( 15 )
+
+[node name="VictoryPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
+position = Vector2( -22, 20.5 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 14 )
 
 [node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
 layer = 97
