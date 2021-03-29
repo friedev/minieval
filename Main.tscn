@@ -111,12 +111,12 @@ __meta__ = {
 
 [node name="CurrencyIcon" type="Sprite" parent="UITextLayer"]
 position = Vector2( 29, 32 )
-scale = Vector2( 2.2, 2.2 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 15 )
 
 [node name="VictoryPointIcon" type="Sprite" parent="UITextLayer"]
 position = Vector2( 28, 67 )
-scale = Vector2( 2.2, 2.2 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 14 )
 
 [node name="PreviewLayer" type="CanvasLayer" parent="."]

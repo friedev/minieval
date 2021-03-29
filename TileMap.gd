@@ -69,63 +69,78 @@ class Building:
 
 
 var BUILDINGS = [
-	null,
-	# 1: House
+	null, # 0: Empty
+	null, # 1: Selection box
+	# 2: Road
+	Building.new(true, 1, 0, 0, 0, Vector2(0, 0), null, [
+				[1],
+			], {
+			}, {
+			}),
+	null, # 3: Unused
+	null, # 4: Unused
+	null, # 5: Unused
+	null, # 6: Unused
+	null, # 7: Unused
+	null, # 8: Unused
+	null, # 9: Unused
+	null, # 10: Unused
+	# 11: House
 	Building.new(false, 1, 0.1, 1, 0, Vector2(3, 3),
 			preload("res://Art/house.png"), [
 				[1],
 			], {
-				2: 2, # Shop
-				5: 2, # Field
+				12: 2, # Shop
+				15: 2, # Field
 			}, {
 			}),
-	# 2: Shop
+	# 12: Shop
 	Building.new(false, 4, 0.2, 1, 0, Vector2(6, 5),
 			preload("res://Art/shop.png"), [
 				[1, 1],
 			], {
-				1: 2,  # House
-				2: -4, # Shop
-				3: 2,  # Big house
-				4: 2,  # Forge
-				6: -4, # Cathedral
+				11: 2,  # House
+				12: -4, # Shop
+				13: 2,  # Big house
+				14: 2,  # Forge
+				16: -4, # Cathedral
 			}, {
 			}),
-	# 3: Big house
+	# 13: Big house
 	Building.new(false, 6, 0.2, 2, 0, Vector2(4, 4),
 			preload("res://Art/big_house.png"), [
 				[1, 1],
 				[1, 0],
 			], {
-				2: 4, # Shop
+				12: 4, # Shop
 			}, {
-				6: -5, # Cathedral
+				16: -5, # Cathedral
 			}),
-	# 4: Forge
+	# 14: Forge
 	Building.new(false, 8, 0.5, 2, 0, Vector2(6, 6),
 			preload("res://Art/forge.png"), [
 				[1, 1],
 				[1, 1],
 			], {
-				2: 2,   # Shop
-				4: -10, # Forge
-				7: 5,   # Keep
+				12: 2,   # Shop
+				14: -10, # Forge
+				17: 5,   # Keep
 			}, {
-				6: -5, # Cathedral
+				16: -5, # Cathedral
 			}),
-	# 5: Field
+	# 15: Field
 	Building.new(false, 4, 1, 0, 0, Vector2(7, 7),
 			preload("res://Art/field.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 			], {
-				1: 2, # House
-				5: 2, # Field
+				11: 2, # House
+				15: 2, # Field
 			}, {
-				6: -1, # Cathedral
+				16: -1, # Cathedral
 			}),
-	# 6: Cathedral
+	# 16: Cathedral
 	Building.new(false, 20, 5, 20, 10, Vector2(6, 5),
 			preload("res://Art/cathedral.png"), [
 				[0, 1, 0, 0],
@@ -133,16 +148,16 @@ var BUILDINGS = [
 				[0, 1, 0, 0],
 			], {
 			}, {
-				1: 2,   # House
-				2: -5,  # Shop
-				3: 2,   # Big house
-				4: -5,  # Forge
-				5: -1,  # Field
-				6: -10, # Cathedral
-				7: 10,  # Keep
-				9: 20,  # Pyramid
+				11: 2,   # House
+				12: -5,  # Shop
+				13: 2,   # Big house
+				14: -5,  # Forge
+				15: -1,  # Field
+				16: -10, # Cathedral
+				17: 10,  # Keep
+				19: 20,  # Pyramid
 			}),
-	# 7: Keep
+	# 17: Keep
 	Building.new(false, 40, 10, 20, 5, Vector2(8, 7),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
@@ -150,30 +165,30 @@ var BUILDINGS = [
 				[1, 1, 1],
 				[1, 1, 1],
 			], {
-				4: 10, # Forge
+				14: 10, # Forge
 			}, {
-				1: 1,   # House
-				3: 1,   # Big house
-				5: -1,  # Field
-				6: 5,   # Cathedral
-				7: -20, # Keep
-				8: 10,  # Tower
+				11: 1,   # House
+				13: 1,   # Big house
+				15: -1,  # Field
+				16: 5,   # Cathedral
+				17: -20, # Keep
+				18: 10,  # Tower
 			}),
-	# 8: Tower
+	# 18: Tower
 	Building.new(false, 20, 5, 0, 0, Vector2(7, 5),
 			preload("res://Art/tower.png"), [
 				[1],
 				[1],
 				[1],
 			], {
-				4: 10, # Forge
+				14: 10, # Forge
 			}, {
-				5: -1, # Field
-				7: 10, # Keep
-				8: -5, # Tower
-				9: 10, # Pyramid
+				15: -1, # Field
+				17: 10, # Keep
+				18: -5, # Tower
+				19: 10, # Pyramid
 			}),
-	# 9: Pyramid
+	# 19: Pyramid
 	Building.new(false, 100, 100, 100, 100, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
@@ -181,16 +196,16 @@ var BUILDINGS = [
 				[0, 1, 1, 1, 1, 1, 1, 0],
 				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
-				4: 25, # Forge
+				14: 25, # Forge
 			}, {
-				1: -1, # House
-				2: -5, # Shop
-				3: -2, # Big house
-				5: -1, # Field
-				6: 10, # Cathedral
-				7: 10, # Keep
-				8: 10, # Tower
-				9: -100, # Pyramid
+				11: -1, # House
+				12: -5, # Shop
+				13: -2, # Big house
+				15: -1, # Field
+				16: 10, # Cathedral
+				17: 10, # Keep
+				18: 10, # Tower
+				19: -100, # Pyramid
 			}),
 ]
 
@@ -211,7 +226,8 @@ class Placement:
 
 
 const TILE_SIZE = 8
-const BASE_BUILDING_INDEX = 9 # First non-special index: -1 = INVALID, 0 = EMPTY
+const BASE_BUILDING_INDEX = 3 # First non-special index: -1 = INVALID, 0 = EMPTY
+const DEFAULT_BUILDING = 2
 
 var world_map = []
 var building_types = []
@@ -257,7 +273,7 @@ func _ready():
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
 		building_roots.append(null)
-	_select_building(1)
+	_select_building(2)
 
 
 func _process(delta):
@@ -350,6 +366,7 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 	else:
 		world_map[x][y] = tile
 		.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+		update_bitmask_area(cellv)
 
 
 func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
@@ -367,8 +384,10 @@ func get_type(id):
 
 # Event handler for the palette
 func _select_building(id):
-	self.selected_building = id
 	var building = BUILDINGS[id]
+	if not building:
+		return
+	self.selected_building = id
 	if not building.is_tile:
 		$PreviewBuilding.texture = building.texture
 	_clear_preview()
@@ -432,7 +451,7 @@ func _update_preview():
 	
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(preview_cellv):
-		$Preview.set_cellv(cellv, 7)
+		$Preview.set_cellv(cellv, 1)
 	
 	# Update preview label with expected building value
 	var value = get_building_value(preview_cellv, self.selected_building)
