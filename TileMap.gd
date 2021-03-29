@@ -41,6 +41,12 @@ class Building:
 	func get_size():
 		return Vector2(get_width(), get_height())
 	
+	func get_cell_offset():
+		return (get_size() / 2).ceil() - Vector2(1, 1)
+	
+	func get_area_offset():
+		return (get_size() / 2).floor()
+	
 	func get_width():
 		return len(self.cells[0])
 	
@@ -58,7 +64,7 @@ class Building:
 	
 	func get_area_cells(cellv = Vector2(0, 0)):
 		var area_cells = []
-		var offset = (get_size() / 2).floor()
+		var offset = get_area_offset()
 		var radius = (area / 2)
 		for x in range(max(0, cellv.x - floor(radius.x) + offset.x),
 				min(128, cellv.x + ceil(radius.x) + offset.x)):
@@ -226,7 +232,7 @@ class Placement:
 
 
 const TILE_SIZE = 8
-const BASE_BUILDING_INDEX = 3 # First non-special index: -1 = INVALID, 0 = EMPTY
+const BASE_BUILDING_INDEX = 20 # First unused index
 const DEFAULT_BUILDING = 2
 
 var world_map = []
@@ -285,10 +291,11 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		self._clear_preview()
 		
-		# Increment cell ID on LMB, otherwise clear cell
+		var building = BUILDINGS[self.selected_building]
 		var placement
 		if event.button_index == 1:
-			placement = self.place_building(mouse_cellv, self.selected_building)
+			placement = self.place_building(mouse_cellv -
+					building.get_cell_offset(), self.selected_building)
 		elif event.button_index == 2:
 			placement = self.destroy_building(mouse_cellv)
 		else:
@@ -308,9 +315,9 @@ func _unhandled_input(event):
 		var prev_placement = history.pop_back()
 		if prev_placement:
 			if prev_placement.placed:
-				self.destroy_building(prev_placement.cellv)
+				self.destroy_building(prev_placement.cellv, prev_placement.id)
 			else:
-				self.place_building(prev_placement.cellv, prev_placement.id)
+				self.place_building(prev_placement.cellv, prev_placement.id, true)
 			currency -= prev_placement.currency_change
 			vp -= prev_placement.vp_change
 			future.append(prev_placement)
@@ -319,9 +326,9 @@ func _unhandled_input(event):
 		var next_placement = future.pop_back()
 		if next_placement:
 			if next_placement.placed:
-				self.place_building(next_placement.cellv, next_placement.id)
+				self.place_building(next_placement.cellv, next_placement.id, true)
 			else:
-				self.destroy_building(next_placement.cellv)
+				self.destroy_building(next_placement.cellv, next_placement.id)
 			currency += next_placement.currency_change
 			vp += next_placement.vp_change
 			history.append(next_placement)
@@ -430,33 +437,35 @@ func _update_preview():
 	self._clear_preview()
 	preview_cellv = mouse_cellv
 	var building = BUILDINGS[selected_building]
+	var building_cellv = preview_cellv - building.get_cell_offset()
 	
 	# Move the building preview
 	if building.is_tile:
-		$PreviewTile.set_cellv(preview_cellv, selected_building)
+		$PreviewTile.set_cellv(building_cellv, selected_building)
 	else:
-		$PreviewBuilding.position = cellv_to_world_position(preview_cellv)
+		$PreviewBuilding.position = cellv_to_world_position(building_cellv)
 		$PreviewBuilding.visible = true
 	
 	# Shade preview building in red if the placement is blocked
 	if building.is_tile:
 		$PreviewTile.modulate = Color.white
-		if self.get_cellv(preview_cellv) != 0:
+		if self.get_cellv(building_cellv) != 0:
 			$PreviewTile.modulate = Color.red
 	else:
 		$PreviewBuilding.modulate = Color.white
-		for cellv in building.get_cells(preview_cellv):
+		for cellv in building.get_cells(building_cellv):
 			if self.get_cellv(cellv) != 0:
 				$PreviewBuilding.modulate = Color.red
+				break
 	
 	# Show area of current building with a 50% opacity white square
-	for cellv in building.get_area_cells(preview_cellv):
+	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
 	
 	# Update preview label with expected building value
-	var value = get_building_value(preview_cellv, self.selected_building)
+	var value = get_building_value(building_cellv, self.selected_building)
 	preview_label.text = "%d\n%d" % value
-	preview_node.rect_position = cellv_to_screen_position(preview_cellv) + \
+	preview_node.rect_position = cellv_to_screen_position(building_cellv) + \
 			Vector2(7, -8) / camera.zoom #- preview_label.rect_size / 2
 
 
@@ -497,10 +506,11 @@ func get_building_value(cellv, id):
 	return [currency_value, vp_value]
 
 
-func place_building(cellv, id):
+func place_building(cellv, id, force = false):
+	print(cellv)
 	var building = BUILDINGS[id]
 	
-	# Prevent placement f building overlaps any existing buildings
+	# Prevent placement if building overlaps any existing buildings
 	for building_cellv in building.get_cells(cellv):
 		if get_type(self.get_cellv(building_cellv)) != 0:
 			return null
@@ -515,7 +525,7 @@ func place_building(cellv, id):
 	var vp_change = building_value[1]
 	
 	# Check if the additional cost from interactions would lead to negative currency
-	if currency + currency_change < 0:
+	if currency + currency_change < 0 and not force:
 		return null
 	
 	building.cost += building.cost_increment
@@ -535,9 +545,12 @@ func place_building(cellv, id):
 	return Placement.new(id, cellv, true, currency_change, vp_change)
 
 
-func destroy_building(cellv):
-	var id = self.get_cellv(cellv)
-	if get_type(id) <= 0:
+func destroy_building(cellv, id = null):
+	if id:
+		cellv += BUILDINGS[get_type(id)].get_cell_offset()
+	id = self.get_cellv(cellv)
+	print(cellv)
+	if id <= 0:
 		return null
 	
 	var type = id
