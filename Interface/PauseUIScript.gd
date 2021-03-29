@@ -13,7 +13,6 @@ func _input(event):
 #pauses input for a given node
 func _node_input_pause(node):
 	var nodeInput = node.is_processing_input()
-	print(nodeInput)
 	node.set_process_input(!nodeInput)
 
 func _on_ResumeButton_pressed():

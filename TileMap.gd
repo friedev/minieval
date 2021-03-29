@@ -73,7 +73,7 @@ var BUILDINGS = [
 	# 1: Wooden hut
 	Building.new(false, 1, 0.25, 1, 0, Vector2(3, 3),
 			preload("res://Art/house.png"), [
-				[1]
+				[1],
 			], {
 				1: 1,  # Wooden hut
 				2: 2,  # Wooden house
@@ -83,10 +83,9 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 2: Wooden house
-	Building.new(false, 2, 0.5, 1, 0, Vector2(4, 4),
-			preload("res://Art/big_house.png"), [
+	Building.new(false, 2, 0.5, 1, 0, Vector2(4, 3),
+			preload("res://Art/shop.png"), [
 				[1, 1],
-				[1, 0]
 			], {
 				1: 2,  # Wooden hut
 				2: 4,  # Wooden house
@@ -96,8 +95,10 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 3: Stone hut
-	Building.new(true, 3, 0.25, 2, 0, Vector2(5, 1), null, [
-				[1]
+	Building.new(false, 3, 0.25, 2, 0, Vector2(4, 4),
+			preload("res://Art/big_house.png"), [
+				[1, 1],
+				[1, 0],
 			], {
 				1: -1, # Wooden hut
 				2: -2, # Wooden house
@@ -107,8 +108,10 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 4: Stone house
-	Building.new(true, 4, 0.5, 2, 0, Vector2(2, 4), null, [
-				[1]
+	Building.new(false, 4, 0.5, 2, 0, Vector2(4, 4),
+			preload("res://Art/forge.png"), [
+				[1, 1],
+				[1, 1],
 			], {
 				1: -2, # Wooden hut
 				2: -4, # Wooden house
@@ -118,8 +121,11 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 5: Castle
-	Building.new(true, 10, 10, 10, 0, Vector2(5, 5), null, [
-				[1]
+	Building.new(false, 10, 10, 10, 0, Vector2(5, 5),
+			preload("res://Art/field.png"), [
+				[1, 1, 1],
+				[1, 1, 1],
+				[1, 1, 1],
 			], {
 				1: 1,   # Wooden hut
 				2: 1,   # Wooden house
@@ -130,17 +136,34 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 6: Tower
-	Building.new(true, 5, 5, 5, 0, Vector2(5, 5), null, [
-				[1]
+	Building.new(false, 5, 5, 5, 0, Vector2(6, 5),
+			preload("res://Art/cathedral.png"), [
+				[0, 1, 0, 0],
+				[1, 1, 1, 1],
+				[0, 1, 0, 0],
 			], {
 				5: 5,  # Castle
 				6: -5, # Tower
 			}, {
 			}),
-	null, # 7: White square
+	# 7: White square
+	Building.new(false, 5, 5, 5, 0, Vector2(8, 7),
+			preload("res://Art/keep.png"), [
+				[1, 1, 1],
+				[1, 1, 1],
+				[1, 1, 1],
+				[1, 1, 1],
+			], {
+				5: 5,  # Castle
+				6: -5, # Tower
+			}, {
+			}),
 	# 8: Fountain
-	Building.new(true, 5, 2.5, 2, 0, Vector2(5, 5), null, [
-				[1]
+	Building.new(false, 5, 2.5, 2, 0, Vector2(7, 5),
+			preload("res://Art/tower.png"), [
+				[1],
+				[1],
+				[1],
 			], {
 				1: 1, # Wooden hut
 				2: 1, # Wooden house
@@ -149,8 +172,12 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 9: Well
-	Building.new(true, 5, 2.5, 2, 0, Vector2(5, 5), null, [
-				[1]
+	Building.new(false, 5, 2.5, 2, 0, Vector2(16, 12),
+			preload("res://Art/pyramid.png"), [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 1, 1, 1, 1, 0, 0],
+				[0, 1, 1, 1, 1, 1, 1, 0],
+				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
 				1: 2,  # Wooden hut
 				2: 2,  # Wooden house
