@@ -1,12 +1,32 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Interface/Themes/theme_title.tres" type="Theme" id=1]
-[ext_resource path="res://Interface/TitleUIScript.gd" type="Script" id=2]
 [ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=3]
 [ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=4]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=5]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=7]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+func _on_TurnBasedButton_pressed():
+	get_tree().change_scene(\"res://Interface/TurnBasedMenuUI.tscn\")
+
+
+func _on_TimeBasedButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_FreeplayButton_pressed():
+	pass # Replace with function body.
+
+
+func _on_BackButton_pressed():
+	get_tree().change_scene(\"res://Interface/Title.tscn\")
+
+"
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -15,7 +35,7 @@ layer = 100
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="Panel" parent="Control"]
+[node name="ChooseModeMenu" type="Panel" parent="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -46,78 +66,91 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitGameButton" type="Button" parent="Control/Menu"]
+[node name="BackButton" type="Button" parent="Control/ChooseModeMenu"]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -56.0
-margin_top = 115.0
-margin_right = 56.0
-margin_bottom = 141.0
+margin_left = -29.0
+margin_top = 305.015
+margin_right = 29.0
+margin_bottom = 331.015
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
-text = "Exit Game"
+text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NewGameButton" type="Button" parent="Control/Menu"]
+[node name="TimeBasedButton" type="Button" parent="Control/ChooseModeMenu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -58.0
-margin_top = 199.776
-margin_right = 58.0
-margin_bottom = 225.776
+margin_left = -62.0
+margin_top = 215.992
+margin_right = 62.0
+margin_bottom = 241.992
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
+text = "Time Based"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnBasedButton" type="Button" parent="Control/ChooseModeMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -61.0
+margin_top = 170.53
+margin_right = 61.0
+margin_bottom = 196.53
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "Turn Based"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FreeplayButton" type="Button" parent="Control/ChooseModeMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 260.681
+margin_right = 48.0
+margin_bottom = 286.681
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "Freeplay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTitle" type="Label" parent="Control/ChooseModeMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -144.0
+margin_top = 55.1543
+margin_right = 144.0
+margin_bottom = 119.154
+theme = ExtResource( 1 )
 text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="OptionsButton" type="Button" parent="Control/Menu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = 67.0
-margin_right = 40.0
-margin_bottom = 93.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 7 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
-text = "Options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenuTitle" type="Label" parent="Control/Menu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -172.0
-margin_top = -128.0
-margin_right = 172.0
-margin_bottom = -64.0
-theme = ExtResource( 1 )
-text = "City Builder"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
-[connection signal="pressed" from="Control/Menu/NewGameButton" to="Control" method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="Control/Menu/OptionsButton" to="Control" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Control/ChooseModeMenu/BackButton" to="Control" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Control/ChooseModeMenu/TimeBasedButton" to="Control" method="_on_TimeBasedButton_pressed"]
+[connection signal="pressed" from="Control/ChooseModeMenu/TurnBasedButton" to="Control" method="_on_TurnBasedButton_pressed"]
+[connection signal="pressed" from="Control/ChooseModeMenu/FreeplayButton" to="Control" method="_on_FreeplayButton_pressed"]
