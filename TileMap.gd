@@ -236,6 +236,7 @@ var future = []
 
 onready var camera = get_node(@"/root/Root/Camera2D")
 onready var preview_label = get_node(@"/root/Root/PreviewLayer/PreviewNode/PreviewLabel")
+onready var preview_node = get_node(@"/root/Root/PreviewLayer/PreviewNode")
 onready var preview_building = get_node(@"/root/Root/TileMap/PreviewBuilding")
 var mouse_cellv = null
 var preview_cellv = null
@@ -435,9 +436,9 @@ func _update_preview():
 	
 	# Update preview label with expected building value
 	var value = get_building_value(preview_cellv, self.selected_building)
-	preview_label.text = "%d, %d" % value
-	preview_label.rect_position = cellv_to_screen_position(preview_cellv) + \
-			Vector2(4, -2) / camera.zoom - preview_label.rect_size / 2
+	preview_label.text = "%d\n%d" % value
+	preview_node.rect_position = cellv_to_screen_position(preview_cellv) + \
+			Vector2(7, -8) / camera.zoom #- preview_label.rect_size / 2
 
 
 func position_to_cellv(position):
