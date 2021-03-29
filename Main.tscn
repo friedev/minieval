@@ -43,7 +43,7 @@ stream = ExtResource( 6 )
 [node name="Buildings" type="Node2D" parent="TileMap"]
 
 [node name="Preview" type="TileMap" parent="TileMap"]
-modulate = Color( 1, 1, 1, 0.501961 )
+modulate = Color( 1, 1, 1, 0.25098 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 8

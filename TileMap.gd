@@ -49,9 +49,9 @@ class Building:
 	
 	func get_cells(cellv = Vector2(0, 0)):
 		var cells = []
-		for x in range(0, len(self.cells)):
-			for y in range(0, len(self.cells[x])):
-				if self.cells[x][y]:
+		for y in range(0, len(self.cells)):
+			for x in range(0, len(self.cells[y])):
+				if self.cells[y][x]:
 					cells.append(Vector2(x, y) + cellv)
 					# TODO prevent placing buildings partially out of bounds
 		return cells
@@ -70,120 +70,127 @@ class Building:
 
 var BUILDINGS = [
 	null,
-	# 1: Wooden hut
-	Building.new(false, 1, 0.25, 1, 0, Vector2(3, 3),
+	# 1: House
+	Building.new(false, 1, 0.1, 1, 0, Vector2(3, 3),
 			preload("res://Art/house.png"), [
 				[1],
 			], {
-				1: 1,  # Wooden hut
-				2: 2,  # Wooden house
-				3: -1, # Stone hut
-				4: -2, # Stone house
-				5: 1,  # Castle
+				2: 2, # Shop
+				5: 2, # Field
 			}, {
 			}),
-	# 2: Wooden house
-	Building.new(false, 2, 0.5, 1, 0, Vector2(4, 3),
+	# 2: Shop
+	Building.new(false, 4, 0.2, 1, 0, Vector2(6, 5),
 			preload("res://Art/shop.png"), [
 				[1, 1],
 			], {
-				1: 2,  # Wooden hut
-				2: 4,  # Wooden house
-				3: -2, # Stone hut
-				4: -4, # Stone house
-				5: 1,  # Castle
+				1: 2,  # House
+				2: -4, # Shop
+				3: 2,  # Big house
+				4: 2,  # Forge
+				6: -4, # Cathedral
 			}, {
 			}),
-	# 3: Stone hut
-	Building.new(false, 3, 0.25, 2, 0, Vector2(4, 4),
+	# 3: Big house
+	Building.new(false, 6, 0.2, 2, 0, Vector2(4, 4),
 			preload("res://Art/big_house.png"), [
 				[1, 1],
 				[1, 0],
 			], {
-				1: -1, # Wooden hut
-				2: -2, # Wooden house
-				3: 1,  # Stone hut
-				4: 2,  # Stone house
-				5: 2,  # Castle
+				2: 4, # Shop
 			}, {
+				6: -5, # Cathedral
 			}),
-	# 4: Stone house
-	Building.new(false, 4, 0.5, 2, 0, Vector2(4, 4),
+	# 4: Forge
+	Building.new(false, 8, 0.5, 2, 0, Vector2(6, 6),
 			preload("res://Art/forge.png"), [
 				[1, 1],
 				[1, 1],
 			], {
-				1: -2, # Wooden hut
-				2: -4, # Wooden house
-				3: 2,  # Stone hut
-				4: 4,  # Stone house
-				5: 2,  # Castle
+				2: 2,   # Shop
+				4: -10, # Forge
+				7: 5,   # Keep
 			}, {
+				6: -5, # Cathedral
 			}),
-	# 5: Castle
-	Building.new(false, 10, 10, 10, 0, Vector2(5, 5),
+	# 5: Field
+	Building.new(false, 4, 1, 0, 0, Vector2(7, 7),
 			preload("res://Art/field.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 			], {
-				1: 1,   # Wooden hut
-				2: 1,   # Wooden house
-				3: 2,   # Stone hut
-				4: 2,   # Stone house
-				5: -10, # Castle
-				6: 5,   # Tower
+				1: 2, # House
+				5: 2, # Field
 			}, {
+				6: -1, # Cathedral
 			}),
-	# 6: Tower
-	Building.new(false, 5, 5, 5, 0, Vector2(6, 5),
+	# 6: Cathedral
+	Building.new(false, 20, 5, 20, 10, Vector2(6, 5),
 			preload("res://Art/cathedral.png"), [
 				[0, 1, 0, 0],
 				[1, 1, 1, 1],
 				[0, 1, 0, 0],
 			], {
-				5: 5,  # Castle
-				6: -5, # Tower
 			}, {
+				1: 2,   # House
+				2: -5,  # Shop
+				3: 2,   # Big house
+				4: -5,  # Forge
+				5: -1,  # Field
+				6: -10, # Cathedral
+				7: 10,  # Keep
+				9: 20,  # Pyramid
 			}),
-	# 7: White square
-	Building.new(false, 5, 5, 5, 0, Vector2(8, 7),
+	# 7: Keep
+	Building.new(false, 40, 10, 20, 5, Vector2(8, 7),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 			], {
-				5: 5,  # Castle
-				6: -5, # Tower
+				4: 10, # Forge
 			}, {
+				1: 1,   # House
+				3: 1,   # Big house
+				5: -1,  # Field
+				6: 5,   # Cathedral
+				7: -20, # Keep
+				8: 10,  # Tower
 			}),
-	# 8: Fountain
-	Building.new(false, 5, 2.5, 2, 0, Vector2(7, 5),
+	# 8: Tower
+	Building.new(false, 20, 5, 0, 0, Vector2(7, 5),
 			preload("res://Art/tower.png"), [
 				[1],
 				[1],
 				[1],
 			], {
-				1: 1, # Wooden hut
-				2: 1, # Wooden house
-				3: 1, # Stone hut
-				4: 1, # Stone house
+				4: 10, # Forge
 			}, {
+				5: -1, # Field
+				7: 10, # Keep
+				8: -5, # Tower
+				9: 10, # Pyramid
 			}),
-	# 9: Well
-	Building.new(false, 5, 2.5, 2, 0, Vector2(16, 12),
+	# 9: Pyramid
+	Building.new(false, 100, 100, 100, 100, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
 				[0, 0, 1, 1, 1, 1, 0, 0],
 				[0, 1, 1, 1, 1, 1, 1, 0],
 				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
-				1: 2,  # Wooden hut
-				2: 2,  # Wooden house
-				3: -2, # Stone hut
-				4: -2, # Stone house
+				4: 25, # Forge
 			}, {
+				1: -1, # House
+				2: -5, # Shop
+				3: -2, # Big house
+				5: -1, # Field
+				6: 10, # Cathedral
+				7: 10, # Keep
+				8: 10, # Tower
+				9: -100, # Pyramid
 			}),
 ]
 
@@ -479,8 +486,8 @@ func place_building(cellv, id):
 			return null
 	
 	# Check if building can be built in the first place
-	if currency - floor(building.cost) < 0:
-		return null
+	#if currency - floor(building.cost) < 0:
+	#	return null
 	
 	# Give currency based on nearby buildings
 	var building_value = get_building_value(cellv, id)
