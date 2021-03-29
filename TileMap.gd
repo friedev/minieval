@@ -230,7 +230,7 @@ const currency_format = "%d\n%d"
 onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format = "%d Turns Left"
 
-const game_length = 50
+var game_length = Global.num_turns
 var history = []
 var future = []
 
@@ -249,9 +249,9 @@ func _ready():
 			self, "_select_building")
 	self._update_mouse_cellv()
 	self._update_labels()
-	for x in range(0, 128):
+	for x in range(0, Global.game_size):
 		world_map.append([])
-		for y in range(0, 128):
+		for y in range(0, Global.game_size):
 			world_map[x].append(0)
 			.set_cell(x, y, 0)
 	for i in range(BASE_BUILDING_INDEX):
