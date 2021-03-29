@@ -16,7 +16,7 @@ func _on_TurnBasedButton_pressed():
 
 
 func _on_TimeBasedButton_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene(\"res://Interface/TimeBasedMenuUI.tscn\")
 
 
 func _on_FreeplayButton_pressed():

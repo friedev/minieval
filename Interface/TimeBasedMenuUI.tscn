@@ -6,11 +6,11 @@
 [ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=4]
 [ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=5]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
-[ext_resource path="res://Interface/TurnBasedMenuUIScript.gd" type="Script" id=7]
+[ext_resource path="res://Interface/TimeBasedMenuUIScript.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[node name="TurnBasedMenu" type="Panel"]
+[node name="TimeBasedMenu" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -64,12 +64,12 @@ __meta__ = {
 [node name="MenuTitle" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -163.06
-margin_top = 56.1865
-margin_right = 160.94
-margin_bottom = 120.187
+margin_left = -160.0
+margin_top = 44.8985
+margin_right = 160.0
+margin_bottom = 108.898
 theme = ExtResource( 2 )
-text = "Turn Based"
+text = "Time Based"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -86,10 +86,10 @@ __meta__ = {
 
 [node name="NoOfTurnsLabel" type="Label" parent="SelectionContainer"]
 margin_top = 24.0
-margin_right = 317.0
+margin_right = 328.0
 margin_bottom = 42.0
 theme = ExtResource( 1 )
-text = "Number of turns:"
+text = "Time:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,12 +104,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="50TurnsButton" type="Button" parent="SelectionContainer"]
+[node name="1minButton" type="Button" parent="SelectionContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 31.0
+margin_left = -86.9999
 margin_top = 24.0
-margin_right = 67.0
+margin_right = -40.9999
 margin_bottom = 50.0
 rect_scale = Vector2( 0.65, 0.65 )
 theme = ExtResource( 1 )
@@ -119,17 +119,37 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
 toggle_mode = true
-text = "50"
+text = "1:00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="100TurnsButton" type="Button" parent="SelectionContainer"]
+[node name="5minButton" type="Button" parent="SelectionContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 70.0
+margin_left = -27.9999
 margin_top = 24.0
-margin_right = 112.0
+margin_right = 26.0001
+margin_bottom = 50.0
+rect_scale = Vector2( 0.65, 0.65 )
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+toggle_mode = true
+text = "5:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="10minButton" type="Button" parent="SelectionContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 35.0001
+margin_top = 24.0
+margin_right = 95.0001
 margin_bottom = 50.0
 rect_scale = Vector2( 0.65, 0.65 )
 theme = ExtResource( 1 )
@@ -139,17 +159,17 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
-text = "100"
+text = "10:00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="250TurnsButton" type="Button" parent="SelectionContainer"]
+[node name="30minButton" type="Button" parent="SelectionContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 112.0
+margin_left = 100.685
 margin_top = 24.0
-margin_right = 162.0
+margin_right = 168.685
 margin_bottom = 50.0
 rect_scale = Vector2( 0.65, 0.65 )
 theme = ExtResource( 1 )
@@ -159,7 +179,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
-text = "250"
+text = "30:00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -207,10 +227,10 @@ __meta__ = {
 [node name="128x128SizeButton" type="Button" parent="SelectionContainer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 87.5281
-margin_top = 69.9463
-margin_right = 175.528
-margin_bottom = 95.9463
+margin_left = 88.0001
+margin_top = 69.946
+margin_right = 176.0
+margin_bottom = 95.946
 rect_scale = Vector2( 0.65, 0.65 )
 theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
@@ -223,11 +243,17 @@ text = "128x128"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DefinitelyNotAButton" type="Button" parent="SelectionContainer"]
+visible = false
+margin_right = 12.0
+margin_bottom = 20.0
 [connection signal="pressed" from="BackToChooseModeButton" to="." method="_on_BackToChooseModeButton_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="SelectionContainer/50TurnsButton" to="." method="_on_50TurnsButton_pressed"]
-[connection signal="pressed" from="SelectionContainer/100TurnsButton" to="." method="_on_100TurnsButton_pressed"]
-[connection signal="pressed" from="SelectionContainer/250TurnsButton" to="." method="_on_250TurnsButton_pressed"]
+[connection signal="pressed" from="SelectionContainer/1minButton" to="." method="_on_1minButton_pressed"]
+[connection signal="pressed" from="SelectionContainer/5minButton" to="." method="_on_5minButton_pressed"]
+[connection signal="pressed" from="SelectionContainer/10minButton" to="." method="_on_10minButton_pressed"]
+[connection signal="pressed" from="SelectionContainer/30minButton" to="." method="_on_30minButton_pressed"]
 [connection signal="pressed" from="SelectionContainer/32x32SizeButton" to="." method="_on_32x32SizeButton_pressed"]
 [connection signal="pressed" from="SelectionContainer/64x64SizeButton" to="." method="_on_64x64SizeButton_pressed"]
 [connection signal="pressed" from="SelectionContainer/128x128SizeButton" to="." method="_on_128x128SizeButton_pressed"]
