@@ -234,21 +234,21 @@ var BUILDINGS = [
 class Placement:
 	var id: int
 	var cellv: Vector2
-	var placed: bool # True if building was placed, false if it was destroyed
 	var currency_change: int
 	var vp_change: int
+	var group_joins: Array
 	
 	
 	func _init(id: int,
 			cellv: Vector2,
-			placed: bool,
 			currency_change: int,
-			vp_change: int):
+			vp_change: int,
+			group_joins: Array):
 		self.id = id
 		self.cellv = cellv
-		self.placed = placed
 		self.currency_change = currency_change
 		self.vp_change = vp_change
+		self.group_joins = group_joins
 
 
 const TILE_SIZE = 8
@@ -270,7 +270,7 @@ var building_scene = preload("res://Building.tscn")
 var currency = 10
 var vp = 0
 var selected_building = 1
-var buildings_placed = 0 # TODO fix undo behavior
+var buildings_placed = 0
 
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
 const currency_format = "%d\n%d"
@@ -341,23 +341,21 @@ func _unhandled_input(event):
 		else:
 			$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
+		self._clear_preview()
 		var prev_placement = history.pop_back()
 		if prev_placement:
-			if prev_placement.placed:
-				self.destroy_building(prev_placement.cellv, prev_placement.id)
-			else:
-				self.place_building(prev_placement.cellv, prev_placement.id, true)
+			self.destroy_building(prev_placement.cellv, prev_placement.id)
 			currency -= prev_placement.currency_change
 			vp -= prev_placement.vp_change
+			for join in prev_placement.group_joins:
+				group_joins[join] = join
 			future.append(prev_placement)
 			self._update_labels()
 	elif event.is_action_pressed("redo"):
+		self._clear_preview()
 		var next_placement = future.pop_back()
 		if next_placement:
-			if next_placement.placed:
-				self.place_building(next_placement.cellv, next_placement.id, true)
-			else:
-				self.destroy_building(next_placement.cellv, next_placement.id)
+			self.place_building(next_placement.cellv, next_placement.id, true)
 			currency += next_placement.currency_change
 			vp += next_placement.vp_change
 			history.append(next_placement)
@@ -424,28 +422,6 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		building_index += 1
 	else:
 		world_map[x][y] = tile
-		if building and building.groupable:
-			var neighbor_groups = []
-			for neighbor in get_orthogonal(cellv):
-				var neighbor_type = get_type(get_cellv(neighbor))
-				if neighbor_type == tile:
-					neighbor_groups.append(get_base_group(groups[neighbor.x][neighbor.y]))
-			# If no neighboring groups exist, make a new group
-			if len(neighbor_groups) == 0:
-				groups[x][y] = group_index
-				group_joins.append(group_index)
-				group_index += 1
-			# If there's exactly one neighboring group, use that
-			elif len(neighbor_groups) == 1:
-				groups[x][y] = neighbor_groups[0]
-			# If this tile bridges more than one group, join them all
-			else:
-				var joined_group = neighbor_groups.min()
-				for group in neighbor_groups:
-					group_joins[group] = joined_group
-				groups[x][y] = joined_group
-		else:
-			groups[x][y] = 0
 		.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 		update_bitmask_area(cellv)
 
@@ -612,8 +588,31 @@ func place_building(cellv, id, force = false):
 	
 	$BuildingPlaceSound.play()
 	
-	# TODO Prevent buildings placed from going to infinity if you place, undo, re-place etc.
 	buildings_placed += 1
+	
+	var neighbor_groups = []
+	if building.groupable:
+		for neighbor in get_orthogonal(cellv):
+			var neighbor_type = get_type(get_cellv(neighbor))
+			if neighbor_type == id:
+				neighbor_groups.append(get_base_group(groups[neighbor.x][neighbor.y]))
+		var x = cellv.x
+		var y = cellv.y
+		# If no neighboring groups exist, make a new group
+		if len(neighbor_groups) == 0:
+			groups[x][y] = group_index
+			group_joins.append(group_index)
+			group_index += 1
+		# If there's exactly one neighboring group, use that
+		elif len(neighbor_groups) == 1:
+			groups[x][y] = neighbor_groups[0]
+		# If this tile bridges more than one group, join them all
+		else:
+			var joined_group = neighbor_groups.min()
+			for group in neighbor_groups:
+				group_joins[group] = joined_group
+			groups[x][y] = joined_group
+		print(groups[x][y])
 	
 	var instance = building_scene.instance()
 	instance.position = cellv_to_world_position(cellv)
@@ -621,7 +620,7 @@ func place_building(cellv, id, force = false):
 	instance.set_name("building_%d" % building_index)
 	$Buildings.add_child(instance)
 	self.set_cellv(cellv, id)
-	return Placement.new(id, cellv, true, currency_change, vp_change)
+	return Placement.new(id, cellv, currency_change, vp_change, neighbor_groups)
 
 
 func destroy_building(cellv, id = null):
@@ -650,6 +649,6 @@ func destroy_building(cellv, id = null):
 		root = building_roots[id]
 		for building_cellv in building.get_cells(root):
 			self.set_cellv(building_cellv, 0)
+			groups[building_cellv.x][building_cellv.y] = 0
 	else:
 		self.set_cellv(cellv, 0)
-	return Placement.new(type, root, false, 0, 0)
