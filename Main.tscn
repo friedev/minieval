@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=13]
 [ext_resource path="res://Art/VictoryPointIcon.png" type="Texture" id=14]
 [ext_resource path="res://Art/CurrencyIcon.png" type="Texture" id=15]
+[ext_resource path="res://Interface/OptionsMenu.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -150,3 +151,5 @@ texture = ExtResource( 14 )
 layer = 97
 
 [node name="RecapUI" parent="." instance=ExtResource( 12 )]
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 16 )]

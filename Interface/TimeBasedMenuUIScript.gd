@@ -14,7 +14,7 @@ func _on_BackToChooseModeButton_pressed():
 
 func _on_PlayButton_pressed():
 	get_tree().change_scene("res://Main.tscn")
-
+	Global.last_scene = "res://Interface/TimeBasedMenuUI.tscn"
 
 func _on_32x32SizeButton_pressed():
 	Global.game_size = 32
