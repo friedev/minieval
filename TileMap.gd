@@ -16,6 +16,7 @@ class Building:
 	var currency_interactions: Dictionary
 	var vp_interactions: Dictionary
 	
+	
 	func _init(is_tile: bool,
 			groupable: bool,
 			base_cost: int,
@@ -41,20 +42,26 @@ class Building:
 		self.currency_interactions = currency_interactions
 		self.vp_interactions = vp_interactions
 	
+	
 	func get_size():
 		return Vector2(get_width(), get_height())
+	
 	
 	func get_cell_offset():
 		return (get_size() / 2).ceil() - Vector2(1, 1)
 	
+	
 	func get_area_offset():
 		return (get_size() / 2).floor()
+	
 	
 	func get_width():
 		return len(self.cells[0])
 	
+	
 	func get_height():
 		return len(self.cells)
+	
 	
 	static func get_cells_in_radius(cellv, radius = Vector2(1.5, 1.5)):
 		if radius is int:
@@ -67,6 +74,7 @@ class Building:
 						cells.append(Vector2(x, y))
 		return cells
 	
+	
 	func get_cells(cellv = Vector2(0, 0)):
 		var cells = []
 		for y in range(0, len(self.cells)):
@@ -75,6 +83,7 @@ class Building:
 					cells.append(Vector2(x, y) + cellv)
 					# TODO prevent placing buildings partially out of bounds
 		return cells
+	
 	
 	func get_area_cells(cellv = Vector2(0, 0)):
 		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
@@ -223,13 +232,18 @@ var BUILDINGS = [
 
 
 class Placement:
-	var id
-	var cellv
-	var placed # True if building was placed, false if it was destroyed
-	var currency_change
-	var vp_change
+	var id: int
+	var cellv: Vector2
+	var placed: bool # True if building was placed, false if it was destroyed
+	var currency_change: int
+	var vp_change: int
 	
-	func _init(id, cellv, placed, currency_change, vp_change):
+	
+	func _init(id: int,
+			cellv: Vector2,
+			placed: bool,
+			currency_change: int,
+			vp_change: int):
 		self.id = id
 		self.cellv = cellv
 		self.placed = placed
@@ -264,6 +278,7 @@ onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format = "%d Turns Left"
 
 var game_length = Global.num_turns
+var game_over = false
 var history = []
 var future = []
 
@@ -323,8 +338,6 @@ func _unhandled_input(event):
 			history.append(placement)
 			future.clear()
 			self._update_labels()
-			if get_turns_remaining() == 0:
-				pass # TODO show score recap scene
 		else:
 			$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
@@ -472,7 +485,11 @@ func get_turns_remaining():
 
 func _update_labels():
 	currency_label.text = currency_format % [currency, vp]
-	turn_label.text = turn_format % get_turns_remaining()
+	var turns_remaining = get_turns_remaining()
+	if turns_remaining > 0:
+		turn_label.text = turn_format % turns_remaining
+	else:
+		turn_label.text = ""
 
 
 func _update_mouse_cellv():
@@ -487,6 +504,7 @@ func _clear_preview():
 		$PreviewTile.clear()
 		$PreviewBuilding.visible = false
 		preview_label.text = ''
+		preview_node.visible = false
 
 
 func _update_preview():
@@ -496,6 +514,7 @@ func _update_preview():
 		return
 	
 	self._clear_preview()
+	preview_node.visible = true
 	preview_cellv = mouse_cellv
 	var building = BUILDINGS[selected_building]
 	var building_cellv = preview_cellv - building.get_cell_offset()

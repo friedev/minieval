@@ -4,14 +4,15 @@ var tilemap
 var game_over = false
 var freeplay = false
 
-func _input(event):
+func _unhandled_input(event):
 	tilemap = get_node(@"/root/Root/TileMap")
-	if tilemap.get_turn() == 50 && freeplay == false && game_over == false:
+	if tilemap.get_turns_remaining() == 0 && freeplay == false && game_over == false:
 		end_game()
 
 func end_game():
 	game_over = true
 	tilemap._clear_preview()
+	tilemap._update_labels()
 	get_tree().paused = true
 	update_labels()
 	var palette = get_node(@"/root/Root/Palette/Menu")
@@ -42,10 +43,12 @@ func _on_FreeplayButton_pressed():
 	get_tree().paused = false
 	var palette = get_node(@"/root/Root/Palette/Menu")
 	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
+	var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 	visible = false
 	palette.visible = true
 	for child in ui_text_layer.get_children():
 		child.visible = true
+	turn_label.text = ""
 
 
 func _on_UndoButton_pressed():
