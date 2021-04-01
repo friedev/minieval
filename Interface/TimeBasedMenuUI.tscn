@@ -119,6 +119,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
 toggle_mode = true
+pressed = true
 text = "1:00"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -199,6 +200,7 @@ custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
 toggle_mode = true
+pressed = true
 text = "32x32"
 __meta__ = {
 "_edit_use_anchors_": false
