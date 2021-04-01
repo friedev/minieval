@@ -3,6 +3,7 @@ extends TileMap
 
 class Building:
 	var is_tile: bool
+	var groupable: bool
 	var base_cost: int
 	var cost: float
 	var cost_increment: float
@@ -16,6 +17,7 @@ class Building:
 	var vp_interactions: Dictionary
 	
 	func _init(is_tile: bool,
+			groupable: bool,
 			base_cost: int,
 			cost_increment: float,
 			base_vp: int,
@@ -26,6 +28,7 @@ class Building:
 			currency_interactions: Dictionary,
 			vp_interactions: Dictionary):
 		self.is_tile = is_tile
+		self.groupable = groupable
 		self.base_cost = base_cost
 		self.cost = base_cost
 		self.cost_increment = cost_increment
@@ -53,6 +56,17 @@ class Building:
 	func get_height():
 		return len(self.cells)
 	
+	static func get_cells_in_radius(cellv, radius = Vector2(1.5, 1.5)):
+		if radius is int:
+			radius = Vector2(radius, radius)
+		var cells = []
+		for x in range(max(0, cellv.x - floor(radius.x)),
+				min(Global.game_size, cellv.x + ceil(radius.x))):
+			for y in range(max(0, cellv.y - floor(radius.y)),
+					min(Global.game_size, cellv.y + ceil(radius.y))):
+						cells.append(Vector2(x, y))
+		return cells
+	
 	func get_cells(cellv = Vector2(0, 0)):
 		var cells = []
 		for y in range(0, len(self.cells)):
@@ -63,22 +77,14 @@ class Building:
 		return cells
 	
 	func get_area_cells(cellv = Vector2(0, 0)):
-		var area_cells = []
-		var offset = get_area_offset()
-		var radius = (area / 2)
-		for x in range(max(0, cellv.x - floor(radius.x) + offset.x),
-				min(128, cellv.x + ceil(radius.x) + offset.x)):
-			for y in range(max(0, cellv.y - floor(radius.y) + offset.y),
-					min(128, cellv.y + ceil(radius.y) + offset.y)):
-						area_cells.append(Vector2(x, y))
-		return area_cells
+		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
 
 
 var BUILDINGS = [
 	null, # 0: Empty
 	null, # 1: Selection box
 	# 2: Road
-	Building.new(true, 1, 0, 0, 0, Vector2(0, 0), null, [
+	Building.new(true, true, 1, 0, 0, 0, Vector2(0, 0), null, [
 				[1],
 			], {
 			}, {
@@ -92,7 +98,7 @@ var BUILDINGS = [
 	null, # 9: Unused
 	null, # 10: Unused
 	# 11: House
-	Building.new(false, 1, 0.1, 1, 0, Vector2(3, 3),
+	Building.new(false, false, 1, 0.1, 1, 0, Vector2(3, 3),
 			preload("res://Art/house.png"), [
 				[1],
 			], {
@@ -101,7 +107,7 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 12: Shop
-	Building.new(false, 4, 0.2, 1, 0, Vector2(6, 5),
+	Building.new(false, false, 4, 0.2, 1, 0, Vector2(6, 5),
 			preload("res://Art/shop.png"), [
 				[1, 1],
 			], {
@@ -113,7 +119,7 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 13: Big house
-	Building.new(false, 6, 0.2, 2, 0, Vector2(4, 4),
+	Building.new(false, false, 6, 0.2, 2, 0, Vector2(4, 4),
 			preload("res://Art/big_house.png"), [
 				[1, 1],
 				[1, 0],
@@ -123,7 +129,7 @@ var BUILDINGS = [
 				16: -5, # Cathedral
 			}),
 	# 14: Forge
-	Building.new(false, 8, 0.5, 2, 0, Vector2(6, 6),
+	Building.new(false, false, 8, 0.5, 2, 0, Vector2(6, 6),
 			preload("res://Art/forge.png"), [
 				[1, 1],
 				[1, 1],
@@ -135,7 +141,7 @@ var BUILDINGS = [
 				16: -5, # Cathedral
 			}),
 	# 15: Field
-	Building.new(false, 4, 1, 0, 0, Vector2(7, 7),
+	Building.new(false, false, 4, 1, 0, 0, Vector2(7, 7),
 			preload("res://Art/field.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
@@ -147,7 +153,7 @@ var BUILDINGS = [
 				16: -1, # Cathedral
 			}),
 	# 16: Cathedral
-	Building.new(false, 20, 5, 20, 10, Vector2(6, 5),
+	Building.new(false, false, 20, 5, 20, 10, Vector2(6, 5),
 			preload("res://Art/cathedral.png"), [
 				[0, 1, 0, 0],
 				[1, 1, 1, 1],
@@ -164,7 +170,7 @@ var BUILDINGS = [
 				19: 20,  # Pyramid
 			}),
 	# 17: Keep
-	Building.new(false, 40, 10, 20, 5, Vector2(8, 7),
+	Building.new(false, false, 40, 10, 20, 5, Vector2(8, 7),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
@@ -181,7 +187,7 @@ var BUILDINGS = [
 				18: 10,  # Tower
 			}),
 	# 18: Tower
-	Building.new(false, 20, 5, 0, 0, Vector2(7, 5),
+	Building.new(false, false, 20, 5, 0, 0, Vector2(7, 5),
 			preload("res://Art/tower.png"), [
 				[1],
 				[1],
@@ -195,7 +201,7 @@ var BUILDINGS = [
 				19: 10, # Pyramid
 			}),
 	# 19: Pyramid
-	Building.new(false, 100, 100, 100, 100, Vector2(16, 12),
+	Building.new(false, false, 100, 100, 100, 100, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
 				[0, 0, 1, 1, 1, 1, 0, 0],
@@ -233,12 +239,17 @@ class Placement:
 
 const TILE_SIZE = 8
 const BASE_BUILDING_INDEX = 20 # First unused index
+const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
+const ALLOW_DESTROYING = false
 
 var world_map = []
 var building_types = []
 var building_roots = []
+var groups = []
+var group_joins = []
 var building_index = BASE_BUILDING_INDEX
+var group_index = BASE_GROUP_INDEX
 
 var building_scene = preload("res://Building.tscn")
 
@@ -273,12 +284,17 @@ func _ready():
 	self._update_labels()
 	for x in range(0, Global.game_size):
 		world_map.append([])
+		groups.append([])
 		for y in range(0, Global.game_size):
 			world_map[x].append(0)
+			groups[x].append(0)
 			.set_cell(x, y, 0)
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
 		building_roots.append(null)
+	for i in range(BASE_GROUP_INDEX):
+		groups.append(null)
+		group_joins.append(null)
 	_select_building(2)
 
 
@@ -296,7 +312,7 @@ func _unhandled_input(event):
 		if event.button_index == 1:
 			placement = self.place_building(mouse_cellv -
 					building.get_cell_offset(), self.selected_building)
-		elif event.button_index == 2:
+		elif ALLOW_DESTROYING and event.button_index == 2:
 			placement = self.destroy_building(mouse_cellv)
 		else:
 			return
@@ -343,6 +359,29 @@ func _unhandled_input(event):
 		breakpoint
 
 
+func get_orthogonal(cellv):
+	var orthogonal = []
+	if cellv.x > 0:
+		orthogonal.append(Vector2(cellv.x - 1, cellv.y))
+	if cellv.x < Global.game_size:
+		orthogonal.append(Vector2(cellv.x + 1, cellv.y))
+	if cellv.y > 0:
+		orthogonal.append(Vector2(cellv.x, cellv.y - 1))
+	if cellv.y < Global.game_size:
+		orthogonal.append(Vector2(cellv.x, cellv.y + 1))
+	return orthogonal
+
+
+func get_base_group(group):
+	if group < BASE_GROUP_INDEX or group >= len(groups):
+		push_error('Invalid group: %d' % group)
+	var join = group_joins[group]
+	while join != group:
+		group = join
+		join = group_joins[group]
+	return group
+
+
 func get_cell(x: int, y: int):
 	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
 		return INVALID_CELL
@@ -372,6 +411,28 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		building_index += 1
 	else:
 		world_map[x][y] = tile
+		if building and building.groupable:
+			var neighbor_groups = []
+			for neighbor in get_orthogonal(cellv):
+				var neighbor_type = get_type(get_cellv(neighbor))
+				if neighbor_type == tile:
+					neighbor_groups.append(get_base_group(groups[neighbor.x][neighbor.y]))
+			# If no neighboring groups exist, make a new group
+			if len(neighbor_groups) == 0:
+				groups[x][y] = group_index
+				group_joins.append(group_index)
+				group_index += 1
+			# If there's exactly one neighboring group, use that
+			elif len(neighbor_groups) == 1:
+				groups[x][y] = neighbor_groups[0]
+			# If this tile bridges more than one group, join them all
+			else:
+				var joined_group = neighbor_groups.min()
+				for group in neighbor_groups:
+					group_joins[group] = joined_group
+				groups[x][y] = joined_group
+		else:
+			groups[x][y] = 0
 		.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 		update_bitmask_area(cellv)
 
@@ -507,7 +568,6 @@ func get_building_value(cellv, id):
 
 
 func place_building(cellv, id, force = false):
-	print(cellv)
 	var building = BUILDINGS[id]
 	
 	# Prevent placement if building overlaps any existing buildings
@@ -549,7 +609,6 @@ func destroy_building(cellv, id = null):
 	if id:
 		cellv += BUILDINGS[get_type(id)].get_cell_offset()
 	id = self.get_cellv(cellv)
-	print(cellv)
 	if id <= 0:
 		return null
 	
