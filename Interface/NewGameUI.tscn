@@ -12,15 +12,18 @@ script/source = "extends Control
 
 
 func _on_TurnBasedButton_pressed():
+	Global.game_mode = 0
 	get_tree().change_scene(\"res://Interface/TurnBasedMenuUI.tscn\")
 
 
 func _on_TimeBasedButton_pressed():
-	pass # Replace with function body.
+	Global.game_mode = 1
+	get_tree().change_scene(\"res://Interface/TimeBasedMenuUI.tscn\")
 
 
 func _on_FreeplayButton_pressed():
-	pass # Replace with function body.
+	Global.game_mode = 2
+	get_tree().change_scene(\"res://Interface/FreeplayMenuUI.tscn\")
 
 
 func _on_BackButton_pressed():

@@ -276,6 +276,7 @@ onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
 const currency_format = "%d\n%d"
 onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format = "%d Turns Left"
+onready var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 
 var game_length = Global.num_turns
 var game_over = false
@@ -293,6 +294,18 @@ var show_preview = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#enable turn based
+	if Global.game_mode == 0:
+		turn_label.visible = true
+		timer.visible = false
+	#enable time based
+	elif Global.game_mode == 1:
+		turn_label.visible = false
+		timer.visible = true
+	#enable freeplay
+	elif Global.game_mode == 2:
+		turn_label.visible = false
+		timer.visible = false
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
 			self, "_select_building")
 	self._update_mouse_cellv()

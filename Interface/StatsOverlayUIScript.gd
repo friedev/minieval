@@ -16,7 +16,8 @@ func _input(event):
 		#get_tree().paused = new_pause_state
 		palette.visible = false
 		for child in ui_text_layer.get_children():
-			child.visible = false
+			if child.name != "Timer":
+				child.visible = false
 		update_currency()
 		visible = true
 	elif event.is_action_released("score_report") && Recap.game_over == false:
@@ -26,7 +27,8 @@ func _input(event):
 		#get_tree().paused = new_pause_state
 		palette.visible = true
 		for child in ui_text_layer.get_children():
-			child.visible = true
+			if child.name != "Timer":
+				child.visible = true
 		visible = false
 
 func update_currency():
