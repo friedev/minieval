@@ -33,5 +33,5 @@ func _on_timer_timeout():
 	if minutes < 0:
 		minutes = 0
 		seconds = 0
-	print( minutes, " : ", str(seconds).pad_zeros(2) )
+	#print( minutes, " : ", str(seconds).pad_zeros(2) )
 	$timeLeftLabel.set_text(str(minutes, " : ", str(seconds).pad_zeros(2)))

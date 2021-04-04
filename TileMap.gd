@@ -255,7 +255,8 @@ const TILE_SIZE = 8
 const BASE_BUILDING_INDEX = 20 # First unused index
 const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
-const ALLOW_DESTROYING = false
+#changed to var to allow for creative mode to change - Kalen
+var ALLOW_DESTROYING = false
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map = []
@@ -324,6 +325,7 @@ func _ready():
 		timer.visible = false
 		currency_label.text = "inf\ninf"
 		currency = Global.game_size*1000*1000
+		ALLOW_DESTROYING = true
 	
 	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
