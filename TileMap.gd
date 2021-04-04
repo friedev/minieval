@@ -333,6 +333,13 @@ func _ready():
 			world_map[x].append(0)
 			groups[x].append(0)
 			.set_cell(x, y, 0)
+			
+	if Global.game_size == 32:
+		camera.position = cellv_to_screen_position(Vector2(-1, 1))
+	elif Global.game_size == 64:
+		camera.position = cellv_to_screen_position(Vector2(3, 5))
+	elif Global.game_size == 128:
+		camera.position = cellv_to_screen_position(Vector2(11, 13))
 	
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
