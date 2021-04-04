@@ -257,11 +257,26 @@ const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
 const ALLOW_DESTROYING = false
 
+# 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map = []
+# 1D array mapping a building ID (the index into this array) to its type (an
+# index in the BUILDINGS array)
+# Content starts at BASE_BUILDING_INDEX, everything before that is null
 var building_types = []
+# 1D array mapping a building ID (the index into this array) to its root
+# position (a cell vector)
 var building_roots = []
+# 2D array of group IDs; 0 is no group
 var groups = []
+# 1D array mapping a group (the index into this array) to the group it has been
+# merged into (another group)
+# A group that has not been merged will map to its own index
+# Recursively indexing into this array will get you to the "base group"
 var group_joins = []
+# 2D array mapping a group to a 1D array of building counts
+# The building counts map a building ID to the number of those buildings
+# adjacent to any tile in the group
+var adjacent_buildings = []
 var building_index = BASE_BUILDING_INDEX
 var group_index = BASE_GROUP_INDEX
 
@@ -269,7 +284,7 @@ var building_scene = preload("res://Building.tscn")
 
 var currency = 10
 var vp = 0
-var selected_building = 1
+var selected_building = DEFAULT_BUILDING
 var buildings_placed = 0
 
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
@@ -305,10 +320,14 @@ func _ready():
 	elif Global.game_mode == 2:
 		turn_label.visible = false
 		timer.visible = false
+	
+	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
 			self, "_select_building")
+	
 	self._update_mouse_cellv()
 	self._update_labels()
+	
 	for x in range(0, Global.game_size):
 		world_map.append([])
 		groups.append([])
@@ -316,13 +335,16 @@ func _ready():
 			world_map[x].append(0)
 			groups[x].append(0)
 			.set_cell(x, y, 0)
+	
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
 		building_roots.append(null)
+	
 	for i in range(BASE_GROUP_INDEX):
 		groups.append(null)
 		group_joins.append(null)
-	_select_building(2)
+	
+	_select_building(DEFAULT_BUILDING)
 
 
 func _process(delta):
@@ -382,6 +404,7 @@ func _unhandled_input(event):
 		breakpoint
 
 
+# Returns a list of all cell vectors orthogonally adjacent to the given cell
 func get_orthogonal(cellv):
 	var orthogonal = []
 	if cellv.x > 0:
@@ -395,6 +418,8 @@ func get_orthogonal(cellv):
 	return orthogonal
 
 
+# Gets the base group of the given group by recursively indexing into the
+# group_joins list until reaching a root
 func get_base_group(group):
 	if group < BASE_GROUP_INDEX or group >= len(groups):
 		push_error('Invalid group: %d' % group)
@@ -405,6 +430,8 @@ func get_base_group(group):
 	return group
 
 
+# Overridden from TileMap
+# Returns the building ID at the given position instead of the tile ID
 func get_cell(x: int, y: int):
 	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
 		return INVALID_CELL
@@ -412,10 +439,15 @@ func get_cell(x: int, y: int):
 	return cell
 
 
+# Overridden from TileMap
 func get_cellv(position: Vector2):
 	return get_cell(position.x, position.y)
 
 
+# Overridden from TileMap
+# Updates world map, building types, and building roots where applicable
+# Does NOT spawn a building sprite, update groups, or fully clean up destroyed
+# buildings
 func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		flip_y: bool = false, transpose: bool = false,
 		autotile_coord: Vector2 = Vector2( 0, 0 )):
@@ -438,6 +470,7 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		update_bitmask_area(cellv)
 
 
+# Overridden from TileMap
 func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
 		flip_y: bool = false, transpose: bool = false,
 		autotile_coord: Vector2 = Vector2( 0, 0 )):
@@ -445,6 +478,8 @@ func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
 			autotile_coord)
 
 
+# Helper function to get a building's type (an index into the BUILDINGS array)
+# from its ID
 func get_type(id):
 	if id < BASE_BUILDING_INDEX:
 		return id
@@ -471,6 +506,7 @@ func get_turns_remaining():
 	return game_length - get_turn()
 
 
+# Updates the currency label and turn label
 func _update_labels():
 	currency_label.text = currency_format % [currency, vp]
 	var turns_remaining = get_turns_remaining()
@@ -636,6 +672,12 @@ func place_building(cellv, id, force = false):
 
 
 func destroy_building(cellv, id = null):
+	# If an ID is given, use it to offset the cellv, ensuring that we won't
+	# select part of the building with empty space
+	# DON'T supply an ID if the cellv is already a tile the building occupies
+	# Use it deletion where you only know the root cellv
+	# There may be an edge case for a building with an empty center (e.g. a 3x3
+	# donut-shaped building)
 	if id:
 		cellv += BUILDINGS[get_type(id)].get_cell_offset()
 	id = self.get_cellv(cellv)
@@ -644,6 +686,7 @@ func destroy_building(cellv, id = null):
 	
 	var type = id
 	if id >= BASE_BUILDING_INDEX:
+		# If this isn't a tile building, free its sprite
 		var instance = get_node(NodePath("Buildings/building_%d" % id))
 		if instance and not instance.is_queued_for_deletion():
 			instance.free()
@@ -658,6 +701,8 @@ func destroy_building(cellv, id = null):
 	
 	var root = cellv
 	if id >= BASE_BUILDING_INDEX:
+		# Reset all cells (in the world map and groups) occupied by this building
+		# Does NOT modify the group_joins array; currently handled by the undo code
 		root = building_roots[id]
 		for building_cellv in building.get_cells(root):
 			self.set_cellv(building_cellv, 0)
