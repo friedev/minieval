@@ -279,7 +279,6 @@ const turn_format = "%d Turns Left"
 onready var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 
 var game_length = Global.num_turns
-var game_over = false
 var history = []
 var future = []
 

@@ -6,7 +6,7 @@ var freeplay = false
 
 func _unhandled_input(event):
 	tilemap = get_node(@"/root/Root/TileMap")
-	if tilemap.get_turns_remaining() == 0 && Global.game_mode == 0:
+	if tilemap.get_turns_remaining() == 0 && Global.game_mode == 0 && game_over == false:
 		end_game()
 	elif Global.timer_over == true && Global.game_mode == 1:
 		end_game()
@@ -22,10 +22,13 @@ func end_game():
 	update_labels()
 	var palette = get_node(@"/root/Root/Palette/Menu")
 	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
+	var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 	visible = true
 	palette.visible = false
+	timer.visible = false
 	for child in ui_text_layer.get_children():
-		child.visible = false
+		if child.name != "Timer":
+				child.visible = false
 
 func update_labels():
 	var currencyCount = str(tilemap.currency)
@@ -43,6 +46,7 @@ func update_labels():
 
 
 func _on_FreeplayButton_pressed():
+	game_over = false
 	Global.game_mode = 2
 	get_tree().paused = false
 	var palette = get_node(@"/root/Root/Palette/Menu")
@@ -51,12 +55,13 @@ func _on_FreeplayButton_pressed():
 	visible = false
 	palette.visible = true
 	for child in ui_text_layer.get_children():
-		child.visible = true
+		if child.name != "Timer":
+			child.visible = true
 	turn_label.visible = false
 
 
 func _on_UndoButton_pressed():
-	get_tree().paused = false
+	game_over = false
 	var undo = InputEventAction.new()
 	undo.action = "undo"
 	undo.pressed = true
@@ -66,7 +71,9 @@ func _on_UndoButton_pressed():
 	visible = false
 	palette.visible = true
 	for child in ui_text_layer.get_children():
-		child.visible = true
+		if child.name != "Timer":
+			child.visible = true
+	get_tree().paused = false
 
 
 func _on_TitleScreenButton_pressed():

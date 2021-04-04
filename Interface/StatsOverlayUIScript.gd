@@ -7,13 +7,12 @@ func _input(event):
 	var tilemap = get_node(@"/root/Root/TileMap")
 	var palette = get_node(@"/root/Root/Palette/Menu")
 	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
+	var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 	var Recap = get_node(@"/root/Root/RecapUI/Control")
 	if event.is_action_pressed("score_report") && Recap.game_over == false:
 		tilemap._clear_preview()
 		isPaused = true
 		get_tree().paused = isPaused
-		#var new_pause_state = not get_tree().paused
-		#get_tree().paused = new_pause_state
 		palette.visible = false
 		for child in ui_text_layer.get_children():
 			if child.name != "Timer":
@@ -23,12 +22,12 @@ func _input(event):
 	elif event.is_action_released("score_report") && Recap.game_over == false:
 		isPaused = false
 		get_tree().paused = isPaused
-		#var new_pause_state = not get_tree().paused
-		#get_tree().paused = new_pause_state
 		palette.visible = true
 		for child in ui_text_layer.get_children():
 			if child.name != "Timer":
 				child.visible = true
+		if Global.game_mode > 0:
+			turn_label.visible = false
 		visible = false
 
 func update_currency():
