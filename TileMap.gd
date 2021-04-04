@@ -409,32 +409,6 @@ func _unhandled_input(event):
 		breakpoint
 
 
-# Returns a list of all cell vectors orthogonally adjacent to the given cell
-func get_orthogonal(cellv):
-	var orthogonal = []
-	if cellv.x > 0:
-		orthogonal.append(Vector2(cellv.x - 1, cellv.y))
-	if cellv.x < Global.game_size:
-		orthogonal.append(Vector2(cellv.x + 1, cellv.y))
-	if cellv.y > 0:
-		orthogonal.append(Vector2(cellv.x, cellv.y - 1))
-	if cellv.y < Global.game_size:
-		orthogonal.append(Vector2(cellv.x, cellv.y + 1))
-	return orthogonal
-
-
-# Gets the base group of the given group by recursively indexing into the
-# group_joins list until reaching a root
-func get_base_group(group):
-	if group < BASE_GROUP_INDEX or group >= len(groups):
-		push_error('Invalid group: %d' % group)
-	var join = group_joins[group]
-	while join != group:
-		group = join
-		join = group_joins[group]
-	return group
-
-
 # Overridden from TileMap
 # Returns the building ID at the given position instead of the tile ID
 func get_cell(x: int, y: int):
@@ -491,6 +465,32 @@ func get_type(id):
 	return building_types[id]
 
 
+# Gets the base group of the given group by recursively indexing into the
+# group_joins list until reaching a root
+func get_base_group(group):
+	if group < BASE_GROUP_INDEX or group >= len(groups):
+		push_error('Invalid group: %d' % group)
+	var join = group_joins[group]
+	while join != group:
+		group = join
+		join = group_joins[group]
+	return group
+
+
+# Returns a list of all cell vectors orthogonally adjacent to the given cell
+func get_orthogonal(cellv):
+	var orthogonal = []
+	if cellv.x > 0:
+		orthogonal.append(Vector2(cellv.x - 1, cellv.y))
+	if cellv.x < Global.game_size:
+		orthogonal.append(Vector2(cellv.x + 1, cellv.y))
+	if cellv.y > 0:
+		orthogonal.append(Vector2(cellv.x, cellv.y - 1))
+	if cellv.y < Global.game_size:
+		orthogonal.append(Vector2(cellv.x, cellv.y + 1))
+	return orthogonal
+
+
 # Event handler for the palette
 func _select_building(id):
 	var building = BUILDINGS[id]
@@ -509,6 +509,19 @@ func get_turn():
 
 func get_turns_remaining():
 	return game_length - get_turn()
+
+
+# May be a redundant implementation of TileMap's world_to_map function
+func position_to_cellv(position):
+	return ((position * camera.zoom + camera.position) / TILE_SIZE).floor()
+
+
+func cellv_to_world_position(cellv):
+	return cellv * TILE_SIZE
+
+
+func cellv_to_screen_position(cellv):
+	return (cellv_to_world_position(cellv) - camera.position) / camera.zoom
 
 
 # Updates the currency label and turn label
@@ -576,18 +589,6 @@ func _update_preview():
 	preview_label.text = "%d\n%d" % value
 	preview_node.rect_position = cellv_to_screen_position(building_cellv) + \
 			Vector2(7, -8) / camera.zoom #- preview_label.rect_size / 2
-
-
-func position_to_cellv(position):
-	return ((position * camera.zoom + camera.position) / TILE_SIZE).floor()
-
-
-func cellv_to_world_position(cellv):
-	return cellv * TILE_SIZE
-
-
-func cellv_to_screen_position(cellv):
-	return (cellv_to_world_position(cellv) - camera.position) / camera.zoom
 
 
 # Gets the total value that would result from placing the building with the
