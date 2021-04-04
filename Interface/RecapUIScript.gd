@@ -61,7 +61,7 @@ func _on_FreeplayButton_pressed():
 
 
 func _on_UndoButton_pressed():
-	game_over = false
+	get_tree().paused = false
 	var undo = InputEventAction.new()
 	undo.action = "undo"
 	undo.pressed = true
@@ -73,7 +73,7 @@ func _on_UndoButton_pressed():
 	for child in ui_text_layer.get_children():
 		if child.name != "Timer":
 			child.visible = true
-	get_tree().paused = false
+	game_over = false
 
 
 func _on_TitleScreenButton_pressed():
