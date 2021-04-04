@@ -273,9 +273,7 @@ var groups = []
 # A group that has not been merged will map to its own index
 # Recursively indexing into this array will get you to the "base group"
 var group_joins = []
-# 2D array mapping a group to a 1D array of building counts
-# The building counts map a building ID to the number of those buildings
-# adjacent to any tile in the group
+# 2D array mapping a group to a 1D array of building IDs adjacent to the group
 var adjacent_buildings = []
 var building_index = BASE_BUILDING_INDEX
 var group_index = BASE_GROUP_INDEX
