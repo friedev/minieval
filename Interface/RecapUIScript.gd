@@ -3,6 +3,7 @@ extends Control
 var tilemap
 var game_over = false
 var freeplay = false
+onready var gameMusic = get_node(@"/root/Root/BackgroundMusic")
 
 func _unhandled_input(event):
 	tilemap = get_node(@"/root/Root/TileMap")
@@ -12,6 +13,8 @@ func _unhandled_input(event):
 		end_game()
 
 func end_game():
+	gameMusic.playing = false
+	$EndGameMusic.playing = true
 	if Global.game_mode == 1:
 		var undo_button = get_node("UndoButton")
 		undo_button.set_disabled(true)
@@ -46,6 +49,8 @@ func update_labels():
 
 
 func _on_FreeplayButton_pressed():
+	gameMusic.playing = true
+	$EndGameMusic.playing = false
 	game_over = false
 	Global.game_mode = 2
 	get_tree().paused = false
@@ -61,6 +66,8 @@ func _on_FreeplayButton_pressed():
 
 
 func _on_UndoButton_pressed():
+	gameMusic.playing = true
+	$EndGameMusic.playing = false
 	get_tree().paused = false
 	var undo = InputEventAction.new()
 	undo.action = "undo"

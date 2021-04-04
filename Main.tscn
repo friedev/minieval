@@ -63,7 +63,7 @@ format = 1
 [node name="PreviewBuilding" type="Sprite" parent="TileMap"]
 centered = false
 
-[node name="Background Music" type="AudioStreamPlayer" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )
 autoplay = true
