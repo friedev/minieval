@@ -25,6 +25,7 @@ default_bus_layout="res://Audio/default_bus_layout.tres"
 [autoload]
 
 Global="*res://global.gd"
+TitleMusic="*res://TitleMusic.gd"
 
 [display]
 

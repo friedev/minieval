@@ -306,6 +306,7 @@ var show_preview = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	TitleMusic.playing = false
 	#enable turn based
 	if Global.game_mode == 0:
 		turn_label.visible = true
