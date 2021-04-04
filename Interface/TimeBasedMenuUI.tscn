@@ -46,10 +46,10 @@ __meta__ = {
 [node name="PlayButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -25.5
-margin_top = 261.227
-margin_right = 24.5
-margin_bottom = 287.227
+margin_left = -25.0
+margin_top = 260.705
+margin_right = 25.0
+margin_bottom = 286.705
 theme = ExtResource( 1 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 3 )

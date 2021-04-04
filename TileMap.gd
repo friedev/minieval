@@ -286,7 +286,7 @@ var selected_building = DEFAULT_BUILDING
 var buildings_placed = 0
 
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
-const currency_format = "%d\n%d"
+var currency_format = "%d\n%d"
 onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format = "%d Turns Left"
 onready var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
@@ -319,6 +319,11 @@ func _ready():
 	elif Global.game_mode == 2:
 		turn_label.visible = false
 		timer.visible = false
+	elif Global.game_mode == 3:
+		turn_label.visible = false
+		timer.visible = false
+		currency_label.text = "inf\ninf"
+		currency = Global.game_size*1000*1000
 	
 	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
@@ -527,12 +532,14 @@ func cellv_to_screen_position(cellv):
 
 # Updates the currency label and turn label
 func _update_labels():
-	currency_label.text = currency_format % [currency, vp]
-	var turns_remaining = get_turns_remaining()
-	if turns_remaining > 0:
-		turn_label.text = turn_format % turns_remaining
-	else:
-		turn_label.text = ""
+	#don't update anything if in creative mode
+	if Global.game_mode != 3:
+		currency_label.text = currency_format % [currency, vp]
+		var turns_remaining = get_turns_remaining()
+		if turns_remaining > 0:
+			turn_label.text = turn_format % turns_remaining
+		else:
+			turn_label.text = ""
 
 
 func _update_mouse_cellv():

@@ -26,9 +26,13 @@ func _on_FreeplayButton_pressed():
 	get_tree().change_scene(\"res://Interface/FreeplayMenuUI.tscn\")
 
 
+func _on_CreativeButton_pressed():
+	Global.game_mode = 3
+	get_tree().change_scene(\"res://Interface/CreativeModeMenuUI.tscn\")
+
+
 func _on_BackButton_pressed():
 	get_tree().change_scene(\"res://Interface/Title.tscn\")
-
 "
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -46,9 +50,9 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.12244
+margin_left = -0.178592
 margin_top = 2.2449
-margin_right = -1.12244
+margin_right = -0.178589
 margin_bottom = 2.24487
 color = Color( 0, 0, 0, 0.501961 )
 __meta__ = {
@@ -126,9 +130,9 @@ __meta__ = {
 [node name="FreeplayButton" type="Button" parent="Control/ChooseModeMenu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -48.0
+margin_left = -105.232
 margin_top = 260.681
-margin_right = 48.0
+margin_right = -9.2323
 margin_bottom = 286.681
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
@@ -137,6 +141,24 @@ custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
 text = "Freeplay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreativeButton" type="Button" parent="Control/ChooseModeMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 10.0
+margin_top = 261.0
+margin_right = 102.0
+margin_bottom = 287.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "Creative"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,3 +179,4 @@ __meta__ = {
 [connection signal="pressed" from="Control/ChooseModeMenu/TimeBasedButton" to="Control" method="_on_TimeBasedButton_pressed"]
 [connection signal="pressed" from="Control/ChooseModeMenu/TurnBasedButton" to="Control" method="_on_TurnBasedButton_pressed"]
 [connection signal="pressed" from="Control/ChooseModeMenu/FreeplayButton" to="Control" method="_on_FreeplayButton_pressed"]
+[connection signal="pressed" from="Control/ChooseModeMenu/CreativeButton" to="Control" method="_on_CreativeButton_pressed"]
