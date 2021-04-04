@@ -4,6 +4,15 @@ onready var size32 = get_node(@"SelectionContainer/32x32SizeButton")
 onready var size64 = get_node(@"SelectionContainer/64x64SizeButton")
 onready var size128 = get_node(@"SelectionContainer/128x128SizeButton")
 
+func _ready():
+	if Global.game_size == 32:
+		size32.pressed = true
+	elif Global.game_size == 64:
+		size64.pressed = true
+	elif Global.game_size == 128:
+		size128.pressed = true
+
+
 func _on_BackToChooseModeButton_pressed():
 	get_tree().change_scene("res://Interface/NewGameUI.tscn")
 

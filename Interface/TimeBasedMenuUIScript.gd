@@ -8,6 +8,24 @@ onready var minute5 = get_node(@"SelectionContainer/5minButton")
 onready var minute10 = get_node(@"SelectionContainer/10minButton")
 onready var minute30 = get_node(@"SelectionContainer/30minButton")
 
+func _ready():
+	if Global.game_time == 60:
+		minute1.pressed = true
+	elif Global.game_time == 300:
+		minute5.pressed = true
+	elif Global.game_time == 600:
+		minute10.pressed = true
+	elif Global.game_time == 1800:
+		minute30.pressed = true
+	
+	if Global.game_size == 32:
+		size32.pressed = true
+	elif Global.game_size == 64:
+		size64.pressed = true
+	elif Global.game_size == 128:
+		size128.pressed = true
+
+
 func _on_BackToChooseModeButton_pressed():
 	get_tree().change_scene("res://Interface/NewGameUI.tscn")
 
@@ -16,11 +34,13 @@ func _on_PlayButton_pressed():
 	get_tree().change_scene("res://Main.tscn")
 	Global.last_scene = "res://Interface/TimeBasedMenuUI.tscn"
 
+
 func _on_32x32SizeButton_pressed():
 	Global.game_size = 32
 	size32.pressed = true
 	size64.pressed = false
 	size128.pressed = false
+
 
 func _on_64x64SizeButton_pressed():
 	Global.game_size = 64
@@ -66,5 +86,4 @@ func _on_30minButton_pressed():
 	minute5.pressed = false
 	minute10.pressed = false
 	minute30.pressed = true
-
 
