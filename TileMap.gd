@@ -356,6 +356,7 @@ func _ready():
 	for i in range(BASE_GROUP_INDEX):
 		groups.append(null)
 		group_joins.append(null)
+		adjacent_buildings.append(null)
 	
 	_select_building(DEFAULT_BUILDING)
 
@@ -422,8 +423,7 @@ func _unhandled_input(event):
 func get_cell(x: int, y: int):
 	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
 		return INVALID_CELL
-	var cell = world_map[x][y]
-	return cell
+	return world_map[x][y]
 
 
 # Overridden from TileMap
@@ -448,6 +448,8 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 		# TODO move to place_building or other helper method
 		for building_cellv in building.get_cells(cellv):
 			world_map[building_cellv.x][building_cellv.y] = building_index
+			# Hide the empty tiles behind the building by setting them to invalid
+			.set_cellv(building_cellv, INVALID_CELL)
 		building_types.append(tile)
 		building_roots.append(cellv)
 		building_index += 1
@@ -473,11 +475,17 @@ func get_type(id):
 	return building_types[id]
 
 
+func get_group(cellv):
+	if cellv.x < 0 or cellv.x >= len(world_map) or \
+			cellv.y < 0 or cellv.y >= len(world_map[cellv.x]):
+		return INVALID_CELL
+	return groups[cellv.x][cellv.y]
+
 # Gets the base group of the given group by recursively indexing into the
 # group_joins list until reaching a root
 func get_base_group(group):
 	if group < BASE_GROUP_INDEX or group >= len(groups):
-		push_error('Invalid group: %d' % group)
+		return INVALID_CELL
 	var join = group_joins[group]
 	while join != group:
 		group = join
@@ -499,7 +507,27 @@ func get_orthogonal(cellv):
 	return orthogonal
 
 
-# Event handler for the palette
+# Returns a list of all building IDs adjacent to a group, starting at given tile
+# Uses a recursive depth-first search
+func get_adjacent_buildings(cellv, adjacent = [], visited = []):
+	var group = get_base_group(get_group(cellv))
+	visited.append(cellv)
+	for adjacent_cellv in get_orthogonal(cellv):
+		var adjacent_group = get_base_group(get_group(adjacent_cellv))
+		if adjacent_group == group:
+			if not visited.has(adjacent_cellv):
+				adjacent = get_adjacent_buildings(adjacent_cellv, adjacent, visited)
+		else:
+			var adjacent_id = get_cellv(adjacent_cellv)
+			if adjacent_id >= BASE_BUILDING_INDEX:
+				var adjacent_building = BUILDINGS[get_type(adjacent_id)]
+				if not adjacent_building.is_tile and \
+						not adjacent.has(adjacent_id):
+					adjacent.append(adjacent_id)
+	return adjacent
+
+
+# Event handler for palette selections
 func _select_building(id):
 	var building = BUILDINGS[id]
 	if not building:
@@ -666,6 +694,7 @@ func place_building(cellv, id, force = false):
 		if len(neighbor_groups) == 0:
 			groups[x][y] = group_index
 			group_joins.append(group_index)
+			adjacent_buildings.append([])
 			group_index += 1
 		# If there's exactly one neighboring group, use that
 		elif len(neighbor_groups) == 1:
@@ -676,13 +705,18 @@ func place_building(cellv, id, force = false):
 			for group in neighbor_groups:
 				group_joins[group] = joined_group
 			groups[x][y] = joined_group
-		print(groups[x][y])
+		
+		# Update the list of buildings adjacent to the group
+		adjacent_buildings[groups[x][y]] = get_adjacent_buildings(cellv)
 	
-	var instance = building_scene.instance()
-	instance.position = cellv_to_world_position(cellv)
-	instance.texture = building.texture
-	instance.set_name("building_%d" % building_index)
-	$Buildings.add_child(instance)
+	# Instance a new sprite if this building is not a tile
+	if not building.is_tile:
+		var instance = building_scene.instance()
+		instance.position = cellv_to_world_position(cellv)
+		instance.texture = building.texture
+		instance.set_name("building_%d" % building_index)
+		$Buildings.add_child(instance)
+	
 	self.set_cellv(cellv, id)
 	return Placement.new(id, cellv, currency_change, vp_change, neighbor_groups)
 
