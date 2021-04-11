@@ -63,6 +63,21 @@ class Building:
 		return len(self.cells)
 	
 	
+	# Returns a list of all cell vectors orthogonally adjacent to the given cell
+	# Duplicated from outer scope
+	static func get_orthogonal(cellv):
+		var orthogonal = []
+		if cellv.x > 0:
+			orthogonal.append(Vector2(cellv.x - 1, cellv.y))
+		if cellv.x < Global.game_size:
+			orthogonal.append(Vector2(cellv.x + 1, cellv.y))
+		if cellv.y > 0:
+			orthogonal.append(Vector2(cellv.x, cellv.y - 1))
+		if cellv.y < Global.game_size:
+			orthogonal.append(Vector2(cellv.x, cellv.y + 1))
+		return orthogonal
+	
+	
 	static func get_cells_in_radius(cellv, radius = Vector2(1.5, 1.5)):
 		if radius is int:
 			radius = Vector2(radius, radius)
@@ -87,6 +102,25 @@ class Building:
 	
 	func get_area_cells(cellv = Vector2(0, 0)):
 		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
+	
+	
+	func get_adjacent_cells(cellv = Vector2(0, 0)):
+		var adjacent_cell_map = []
+		for y in range(0, len(self.cells) + 2):
+			adjacent_cell_map.append([])
+			for x in range(0, len(self.cells[0]) + 2):
+				adjacent_cell_map[y].append(0)
+		for building_cellv in get_cells(Vector2(1, 1)):
+			adjacent_cell_map[building_cellv.y][building_cellv.x] = 2
+			for adjacent_cellv in get_orthogonal(building_cellv):
+				adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x] = max(1,
+						adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x])
+		var adjacent_cells = []
+		for y in range(0, len(adjacent_cell_map)):
+			for x in range(0, len(adjacent_cell_map[y])):
+				if adjacent_cell_map[y][x] == 1:
+					adjacent_cells.append(Vector2(x - 1, y - 1) + cellv)
+		return adjacent_cells
 
 
 var BUILDINGS = [
@@ -342,6 +376,7 @@ func _ready():
 			groups[x].append(0)
 			.set_cell(x, y, 0)
 			
+	# TODO generalize to arbitrary game sizes
 	if Global.game_size == 32:
 		camera.position = cellv_to_screen_position(Vector2(-1, 1))
 	elif Global.game_size == 64:
@@ -511,6 +546,8 @@ func get_orthogonal(cellv):
 # Uses a recursive depth-first search
 func get_adjacent_buildings(cellv, adjacent = [], visited = []):
 	var group = get_base_group(get_group(cellv))
+	if group == INVALID_CELL:
+		return
 	visited.append(cellv)
 	for adjacent_cellv in get_orthogonal(cellv):
 		var adjacent_group = get_base_group(get_group(adjacent_cellv))
@@ -708,6 +745,14 @@ func place_building(cellv, id, force = false):
 		
 		# Update the list of buildings adjacent to the group
 		adjacent_buildings[groups[x][y]] = get_adjacent_buildings(cellv)
+	else:
+		# Update all adjacency lists to include this building
+		var adjacent_groups = []
+		for adjacent_cellv in building.get_adjacent_cells(cellv):
+			var group = get_base_group(get_group(adjacent_cellv))
+			if group >= BASE_GROUP_INDEX and not adjacent_groups.has(group):
+				adjacent_groups.append(group)
+				adjacent_buildings[group].append(building_index)
 	
 	# Instance a new sprite if this building is not a tile
 	if not building.is_tile:
@@ -734,8 +779,10 @@ func destroy_building(cellv, id = null):
 	if id <= 0:
 		return null
 	
+	var is_tile = id < BASE_BUILDING_INDEX
+	
 	var type = id
-	if id >= BASE_BUILDING_INDEX:
+	if not is_tile:
 		# If this isn't a tile building, free its sprite
 		var instance = get_node(NodePath("Buildings/building_%d" % id))
 		if instance and not instance.is_queued_for_deletion():
@@ -750,12 +797,25 @@ func destroy_building(cellv, id = null):
 	buildings_placed -= 1
 	
 	var root = cellv
-	if id >= BASE_BUILDING_INDEX:
+	if is_tile:
+		self.set_cellv(cellv, 0)
+		groups[cellv.x][cellv.y] = 0
+
+		var adjacent_groups = []
+		for adjacent_cellv in get_orthogonal(cellv):
+			var group = get_base_group(get_group(adjacent_cellv))
+			if group >= BASE_GROUP_INDEX and not adjacent_groups.has(group):
+				adjacent_buildings[group] = get_adjacent_buildings(adjacent_cellv)
+	else:
 		# Reset all cells (in the world map and groups) occupied by this building
 		# Does NOT modify the group_joins array; currently handled by the undo code
 		root = building_roots[id]
 		for building_cellv in building.get_cells(root):
 			self.set_cellv(building_cellv, 0)
 			groups[building_cellv.x][building_cellv.y] = 0
-	else:
-		self.set_cellv(cellv, 0)
+		
+		var adjacent_groups = []
+		for adjacent_cellv in building.get_adjacent_cells(root):
+			var group = get_base_group(get_group(adjacent_cellv))
+			if group >= BASE_GROUP_INDEX and not adjacent_groups.has(group):
+				adjacent_buildings[group].erase(id)
