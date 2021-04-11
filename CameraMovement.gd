@@ -1,8 +1,6 @@
 extends Camera2D
 
-export var speed = 10.0
-export var zoomspeed = 10.0
-export var zoommargin = 0.1
+
 
 onready var default_zoom = zoom
 onready var default_offset = offset
@@ -13,7 +11,7 @@ func _process(delta):
 	var input_y = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
 	var input = Vector2(input_x, input_y)
 
-	position = lerp(position, position + input * speed, speed * delta)
+	position = lerp(position, position + input * Global.speed, Global.speed * delta)
 
 
 func reset_zoom():

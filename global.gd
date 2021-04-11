@@ -7,4 +7,5 @@ var game_size = 32
 var game_time = 60
 var timer_over = false
 var last_scene = ""
-
+var speed = 10.0
+var volume = 10.0
