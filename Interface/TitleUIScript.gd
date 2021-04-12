@@ -1,7 +1,8 @@
 extends Control
 
 func _ready():
-	TitleMusic.playing = true
+	if(!TitleMusic.playing):
+		TitleMusic.playing = true
 
 func _on_NewGameButton_pressed():
 	get_tree().change_scene("res://Interface/NewGameUI.tscn")
