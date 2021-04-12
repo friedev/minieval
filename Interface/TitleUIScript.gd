@@ -12,5 +12,5 @@ func _on_ExitGameButton_pressed():
 func _on_OptionsButton_pressed():
 	var options_menu = get_node(@"/root/Control/OptionsMenu/Options")
 	options_menu.visible = true
-	get_tree().change_scene("res://Interface/OptionsMenu.tscn")
+	visible = false
 	Global.last_scene = "res://Interface/Title.tscn"
