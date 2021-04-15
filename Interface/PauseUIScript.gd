@@ -6,6 +6,8 @@ func _input(event):
 	if event.is_action_pressed("pause") && Recap.game_over == false:
 		var stats = get_node(@"/root/Root/StatsOverlay/Control")
 		_node_input_pause(stats)
+		var info = get_node(@"/root/Root/InfoOverlay/Control")
+		_node_input_pause(info)
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
@@ -18,6 +20,8 @@ func _node_input_pause(node):
 func _on_ResumeButton_pressed():
 	var stats = get_node(@"/root/Root/StatsOverlay/Control")
 	_node_input_pause(stats)
+	var info = get_node(@"/root/Root/InfoOverlay/Control")
+	_node_input_pause(info)
 	var new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
