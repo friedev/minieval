@@ -11,7 +11,6 @@
 [node name="OptionsMenu" type="CanvasLayer"]
 
 [node name="Options" type="Control" parent="."]
-visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 2 )
@@ -75,16 +74,37 @@ margin_top = 336.0
 margin_right = 584.0
 margin_bottom = 354.0
 theme = ExtResource( 3 )
-text = "Game Volume"
+text = "In-Game Music"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VolumeValue" type="Label" parent="Options"]
+[node name="SoundEffects" type="Label" parent="Options"]
+margin_left = 408.0
+margin_top = 384.0
+margin_right = 584.0
+margin_bottom = 402.0
+theme = ExtResource( 3 )
+text = "SFX Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicValue" type="Label" parent="Options"]
 margin_left = 712.0
 margin_top = 336.0
 margin_right = 888.0
 margin_bottom = 354.0
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXValue" type="Label" parent="Options"]
+margin_left = 712.0
+margin_top = 384.0
+margin_right = 888.0
+margin_bottom = 402.0
 theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,7 +121,7 @@ margin_right = 56.0
 margin_bottom = -56.0
 min_value = 1.0
 max_value = 25.0
-value = 1.0
+value = 10.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,6 +135,23 @@ margin_left = -24.0
 margin_top = -24.0
 margin_right = 56.0
 margin_bottom = -8.0
+max_value = 10.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXVolume" type="HSlider" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = 24.0
+margin_right = 56.0
+margin_bottom = 40.0
+max_value = 10.0
+value = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -137,4 +174,5 @@ __meta__ = {
 [connection signal="ready" from="Options" to="Options" method="_on_Options_ready"]
 [connection signal="value_changed" from="Options/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
 [connection signal="value_changed" from="Options/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
+[connection signal="value_changed" from="Options/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
 [connection signal="pressed" from="Options/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]
