@@ -148,7 +148,8 @@ var BUILDINGS = [
 				12: 3,   # Shop
 				14: -10, # Forge
 				17: 5,   # Keep
-				# Reduce cost of cathedral
+				19: 10, # Pyramid
+				16: 10, # Cathedral
 			}, {
 				16: -5, # Cathedral
 			}),
@@ -172,6 +173,7 @@ var BUILDINGS = [
 				[1, 1, 1, 1],
 				[0, 1, 0, 0],
 			], {
+				14: 10, # Forge
 			}, {
 				11: 2,   # House
 				12: -5,  # Shop
@@ -221,7 +223,7 @@ var BUILDINGS = [
 				[0, 1, 1, 1, 1, 1, 1, 0],
 				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
-				14: 20, # Forge
+				14: 10, # Forge
 			}, {
 				11: -1, # House
 				12: -5, # Shop
