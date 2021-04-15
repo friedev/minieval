@@ -1,0 +1,1610 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Interface/InfoOverlayUIScript.gd" type="Script" id=1]
+[ext_resource path="res://Art/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Art/CurrencyIcon.png" type="Texture" id=3]
+[ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=5]
+[ext_resource path="res://Art/VictoryPointIcon.png" type="Texture" id=6]
+
+[node name="InfoOverlayUI" type="CanvasLayer"]
+layer = 100
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.943848
+margin_top = -0.943878
+margin_right = -0.943848
+margin_bottom = -0.943848
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.34051
+margin_top = 5.46774
+margin_right = 1.34033
+margin_bottom = 5.46777
+color = Color( 0, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRowLabels" type="Control" parent="Control"]
+margin_left = -145.0
+margin_top = -208.0
+margin_right = -105.0
+margin_bottom = -168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Road" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RoadName" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 201.34
+margin_top = 311.531
+margin_right = 311.34
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Road"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadCost" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 229.67
+margin_top = 342.37
+margin_right = 235.67
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadCostIncrement" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 252.0
+margin_top = 342.163
+margin_right = 312.0
+margin_bottom = 360.163
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadVPIncrement" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 252.0
+margin_top = 373.531
+margin_right = 312.0
+margin_bottom = 391.531
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadVPGain" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 229.67
+margin_top = 373.624
+margin_right = 243.67
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 206.583, 348.872 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="RoadVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 206.583, 381.576 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="RoadInteractions" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 201.34
+margin_top = 404.37
+margin_right = 321.34
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadIntCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 175.954, 439.779 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="RoadIntVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 175.538, 502.819 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="House" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HouseName" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 456.618
+margin_top = 311.531
+margin_right = 566.618
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "House"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCost" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 484.948
+margin_top = 342.37
+margin_right = 490.948
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCostIncrement" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 505.0
+margin_top = 342.0
+margin_right = 577.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseVPIncrement" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 505.0
+margin_top = 374.036
+margin_right = 577.0
+margin_bottom = 392.036
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseVPGain" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 484.948
+margin_top = 373.624
+margin_right = 498.948
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 461.861, 348.872 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="HouseVP" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 461.861, 381.576 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="HouseInteractionsLabel" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 453.332
+margin_top = 404.37
+margin_right = 573.332
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseIntCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 430.954, 439.779 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="HouseIntVP" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 430.538, 502.819 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 449.694
+margin_top = 464.796
+margin_right = 475.694
+margin_bottom = 482.796
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldCurrInt" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 482.993
+margin_top = 464.579
+margin_right = 508.993
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shop" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ShopName" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 710.581
+margin_top = 316.431
+margin_right = 820.581
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Shop"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCost" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 738.911
+margin_top = 347.27
+margin_right = 744.911
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCostIncrement" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 759.0
+margin_top = 347.0
+margin_right = 840.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPIncrement" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 759.0
+margin_top = 377.701
+margin_right = 840.0
+margin_bottom = 395.701
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPGain" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 738.911
+margin_top = 378.524
+margin_right = 752.911
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 715.824, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="ShopVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 715.824, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ShopInteractions" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 710.938
+margin_top = 404.37
+margin_right = 830.938
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopIntCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 688.559, 439.779 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="ShopIntVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 688.143, 502.819 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="HouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 707.143
+margin_top = 464.796
+margin_right = 733.143
+margin_bottom = 482.796
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 740.442
+margin_top = 464.579
+margin_right = 766.442
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 768.685
+margin_top = 464.796
+margin_right = 794.685
+margin_bottom = 482.796
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 801.984
+margin_top = 464.579
+margin_right = 827.984
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 835.281
+margin_top = 464.579
+margin_right = 861.281
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouse" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BigHouseName" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 969.577
+margin_top = 316.431
+margin_right = 1079.58
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Big House"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCost" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 997.907
+margin_top = 347.27
+margin_right = 1003.91
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCostIncrement" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 1018.0
+margin_top = 347.0
+margin_right = 1101.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPIncrement" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 1018.0
+margin_top = 379.036
+margin_right = 1101.0
+margin_bottom = 397.036
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPGain" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 997.907
+margin_top = 378.524
+margin_right = 1011.91
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 974.82, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="BigHouseVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 974.82, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="BigHouseInteractions" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 970.788
+margin_top = 404.37
+margin_right = 1090.79
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseIntCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 940.551, 439.779 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="BigHouseIntVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 940.135, 502.819 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 962.942
+margin_top = 464.579
+margin_right = 988.942
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 962.942
+margin_top = 520.141
+margin_right = 988.942
+margin_bottom = 538.141
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Forge" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ForgeName" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1220.54
+margin_top = 316.431
+margin_right = 1330.54
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Forge"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCost" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1248.87
+margin_top = 347.27
+margin_right = 1254.87
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCostIncrement" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1269.0
+margin_top = 347.0
+margin_right = 1346.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPIncrement" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1269.0
+margin_top = 376.699
+margin_right = 1346.0
+margin_bottom = 394.699
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPGain" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1248.87
+margin_top = 378.524
+margin_right = 1262.87
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1225.79, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="ForgeVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1225.79, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ForgeInteractions" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1217.57
+margin_top = 404.37
+margin_right = 1337.57
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeIntCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1195.91, 439.779 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="ForgeIntVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1195.5, 502.819 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1219.84
+margin_top = 464.579
+margin_right = 1245.84
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1219.84
+margin_top = 520.138
+margin_right = 1245.84
+margin_bottom = 538.138
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1248.08
+margin_top = 464.796
+margin_right = 1274.08
+margin_bottom = 482.796
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1281.38
+margin_top = 464.579
+margin_right = 1307.38
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMapTopRow" type="TileMap" parent="Control/TopRowLabels"]
+position = Vector2( 97, 241 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 2, 2, 0, 6, 11, 0, 10, 12, 0, 14, 13, 0, 18, 14, 0 )
+
+[node name="TopRowInteractionsMap2" type="TileMap" parent="Control/TopRowLabels"]
+position = Vector2( 0, 40 )
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 786446, 12, 0, 786447, 15, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786458, 16, 0, 786462, 12, 0, 786470, 12, 0, 786471, 14, 0, 786472, 17, 0, 917534, 16, 0, 917542, 16, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
+
+[node name="BottomRowLabels" type="Control" parent="Control"]
+margin_left = -145.0
+margin_top = 98.0
+margin_right = -105.0
+margin_bottom = 138.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMapBottomRow" type="TileMap" parent="Control/BottomRowLabels"]
+position = Vector2( 97, -18 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 262146, 15, 0, 262150, 16, 0, 262154, 17, 0, 262158, 18, 0, 262162, 19, 0 )
+
+[node name="BottomRowInteractionsMap" type="TileMap" parent="Control/BottomRowLabels"]
+position = Vector2( 0, -281 )
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 1376274, 4, 0, 1441798, 11, 0, 1441799, 15, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441822, 14, 0, 1441830, 14, 0, 1572870, 16, 0, 1572878, 11, 0, 1572879, 12, 0, 1572880, 13, 0, 1572881, 14, 0, 1572882, 15, 0, 1572886, 11, 0, 1572887, 13, 0, 1572888, 15, 0, 1572889, 16, 0, 1572890, 17, 0, 1572894, 15, 0, 1572895, 17, 0, 1572896, 18, 0, 1572897, 19, 0, 1572902, 11, 0, 1572903, 12, 0, 1572904, 13, 0, 1572905, 15, 0, 1572906, 16, 0, 1703950, 16, 0, 1703951, 17, 0, 1703952, 19, 0, 1703958, 18, 0, 1703974, 17, 0, 1703975, 18, 0, 1703976, 19, 0 )
+
+[node name="Field" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldIntCoin" type="Sprite" parent="Control/BottomRowLabels/Field"]
+position = Vector2( 175.954, 438.341 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="FieldIntVP" type="Sprite" parent="Control/BottomRowLabels/Field"]
+position = Vector2( 175.538, 501.381 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="FieldName" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 201.34
+margin_top = 311.531
+margin_right = 311.34
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Field"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldCost" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 229.67
+margin_top = 342.37
+margin_right = 235.67
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldCostIncrement" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 252.0
+margin_top = 342.0
+margin_right = 324.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPIncrement" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 252.0
+margin_top = 370.541
+margin_right = 324.0
+margin_bottom = 388.541
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPGain" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 229.67
+margin_top = 373.624
+margin_right = 243.67
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldCoin" type="Sprite" parent="Control/BottomRowLabels/Field"]
+position = Vector2( 206.583, 348.872 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="FieldVP" type="Sprite" parent="Control/BottomRowLabels/Field"]
+position = Vector2( 206.583, 381.576 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="FieldInteractions" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 201.34
+margin_top = 401.598
+margin_right = 321.34
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCurrInt" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 193.904
+margin_top = 458.948
+margin_right = 219.904
+margin_bottom = 476.948
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 199.5
+margin_top = 520.0
+margin_right = 215.5
+margin_bottom = 538.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldCurrInt" type="Label" parent="Control/BottomRowLabels/Field"]
+margin_left = 227.203
+margin_top = 458.731
+margin_right = 253.203
+margin_bottom = 476.731
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cathedral" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralName" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 456.618
+margin_top = 311.531
+margin_right = 566.618
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Cathedral"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCost" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 484.948
+margin_top = 342.37
+margin_right = 490.948
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCostIncrement" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 505.0
+margin_top = 342.0
+margin_right = 567.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPIncrement" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 505.0
+margin_top = 372.919
+margin_right = 567.0
+margin_bottom = 390.919
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPGain" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 484.948
+margin_top = 373.624
+margin_right = 498.948
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 461.861, 348.872 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="CathedralVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 461.861, 381.576 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="CathedralInteractionsLabel2" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 453.332
+margin_top = 401.598
+margin_right = 573.332
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralIntCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 430.902, 438.341 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="CathedralIntVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 430.486, 501.381 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 450.948
+margin_top = 524.33
+margin_right = 476.948
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 484.247
+margin_top = 524.113
+margin_right = 510.247
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 513.502
+margin_top = 524.33
+margin_right = 539.502
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 443.945
+margin_top = 587.5
+margin_right = 473.945
+margin_bottom = 605.5
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 476.341
+margin_top = 587.532
+margin_right = 508.341
+margin_bottom = 605.532
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 510.68
+margin_top = 587.749
+margin_right = 550.68
+margin_bottom = 605.749
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 546.801
+margin_top = 524.113
+margin_right = 572.801
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 578.0
+margin_top = 524.0
+margin_right = 604.0
+margin_bottom = 542.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keep" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepName" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 710.581
+margin_top = 316.431
+margin_right = 820.581
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Keep"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCost" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 738.911
+margin_top = 347.27
+margin_right = 744.911
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCostIncrement" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 759.0
+margin_top = 347.0
+margin_right = 827.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPIncrement" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 759.0
+margin_top = 377.919
+margin_right = 827.0
+margin_bottom = 395.919
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPGain" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 738.911
+margin_top = 378.524
+margin_right = 752.911
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 715.824, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="KeepVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 715.824, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="KeepInteractions2" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 710.938
+margin_top = 401.598
+margin_right = 830.938
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepIntCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 691.606, 438.341 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="KeepIntVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 691.19, 501.381 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 701.656
+margin_top = 454.83
+margin_right = 733.656
+margin_bottom = 472.83
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 708.656
+margin_top = 524.33
+margin_right = 734.656
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 741.955
+margin_top = 524.113
+margin_right = 767.955
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 771.211
+margin_top = 524.33
+margin_right = 797.211
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 701.654
+margin_top = 587.5
+margin_right = 731.654
+margin_bottom = 605.5
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 804.51
+margin_top = 524.113
+margin_right = 830.51
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 835.709
+margin_top = 524.0
+margin_right = 861.709
+margin_bottom = 542.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tower" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TowerName" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 969.577
+margin_top = 316.431
+margin_right = 1079.58
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Tower"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerCost" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 997.907
+margin_top = 347.27
+margin_right = 1003.91
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerCostIncrement" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1018.0
+margin_top = 347.0
+margin_right = 1078.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPIncrement" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1018.0
+margin_top = 377.919
+margin_right = 1078.0
+margin_bottom = 395.919
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPGain" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 997.907
+margin_top = 378.524
+margin_right = 1011.91
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 974.82, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="TowerVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 974.82, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="TowerInteractions2" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 970.787
+margin_top = 401.598
+margin_right = 1090.79
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerIntCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 939.845, 438.341 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="TowerIntVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 939.429, 501.381 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 956.79
+margin_top = 454.83
+margin_right = 988.79
+margin_bottom = 472.83
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 963.79
+margin_top = 524.33
+margin_right = 989.79
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 991.089
+margin_top = 524.113
+margin_right = 1023.09
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1026.34
+margin_top = 524.33
+margin_right = 1052.34
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1055.64
+margin_top = 524.113
+margin_right = 1087.64
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pyramid" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PyramidName" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1220.54
+margin_top = 316.431
+margin_right = 1330.54
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Pyramid"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidCost" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1248.87
+margin_top = 347.27
+margin_right = 1254.87
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidCostIncrement" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1281.0
+margin_top = 347.0
+margin_right = 1362.0
+margin_bottom = 365.0
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPIncrement" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1281.0
+margin_top = 376.73
+margin_right = 1362.0
+margin_bottom = 394.73
+rect_pivot_offset = Vector2( -55.8164, 21.4049 )
+theme = ExtResource( 5 )
+text = "(+0.1)"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPGain" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1248.87
+margin_top = 378.524
+margin_right = 1262.87
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1225.79, 353.772 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="PyramidVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1225.79, 386.476 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="PyramidInteractions2" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1217.57
+margin_top = 401.598
+margin_right = 1337.57
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidIntCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1198.76, 438.341 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 3 )
+
+[node name="PyramidIntVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1198.34, 501.381 )
+scale = Vector2( 1.60083, 1.60083 )
+texture = ExtResource( 6 )
+
+[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1219.48
+margin_top = 524.33
+margin_right = 1245.48
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1250.67
+margin_top = 524.113
+margin_right = 1276.67
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1282.92
+margin_top = 524.33
+margin_right = 1308.92
+margin_bottom = 542.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1211.37
+margin_top = 587.5
+margin_right = 1243.37
+margin_bottom = 605.5
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1243.76
+margin_top = 587.532
+margin_right = 1275.76
+margin_bottom = 605.532
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1277.38
+margin_top = 588.469
+margin_right = 1321.38
+margin_bottom = 606.469
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1316.22
+margin_top = 524.113
+margin_right = 1342.22
+margin_bottom = 542.113
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1347.42
+margin_top = 524.0
+margin_right = 1373.42
+margin_bottom = 542.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1213.81
+margin_top = 454.83
+margin_right = 1245.81
+margin_bottom = 472.83
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
