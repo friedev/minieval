@@ -291,6 +291,8 @@ const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
 #changed to var to allow for creative mode to change - Kalen
 var ALLOW_DESTROYING = false
+# Currency yields are multiplied this amount for buildings connected by road
+var ROAD_MODIFIER = 0.5
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map = []
@@ -516,6 +518,7 @@ func get_group(cellv):
 		return INVALID_CELL
 	return groups[cellv.x][cellv.y]
 
+
 # Gets the base group of the given group by recursively indexing into the
 # group_joins list until reaching a root
 func get_base_group(group):
@@ -546,7 +549,7 @@ func get_orthogonal(cellv):
 # Uses a recursive depth-first search
 func get_adjacent_buildings(cellv, adjacent = [], visited = []):
 	var group = get_base_group(get_group(cellv))
-	if group == INVALID_CELL:
+	if group < BASE_GROUP_INDEX:
 		return
 	visited.append(cellv)
 	for adjacent_cellv in get_orthogonal(cellv):
@@ -675,6 +678,8 @@ func get_building_value(cellv, id):
 	var vp_value = floor(building.vp)
 	var counted_ids = []
 	var occupied_cells = building.get_cells(cellv)
+	
+	# Account for nearby buildings
 	for area_cellv in building.get_area_cells(cellv):
 		# Ignore the exact cells where the building is being placed
 		if occupied_cells.has(area_cellv):
@@ -688,7 +693,21 @@ func get_building_value(cellv, id):
 		var neighbor_type = get_type(neighbor_id)
 		currency_value += building.currency_interactions.get(neighbor_type, 0)
 		vp_value += building.vp_interactions.get(neighbor_type, 0)
-	return [currency_value, vp_value]
+	
+	# Account for buildings connected via road
+	var counted_groups = []
+	for adjacent_cellv in building.get_adjacent_cells(cellv):
+		var adjacent_group = get_group(adjacent_cellv)
+		if adjacent_group >= BASE_GROUP_INDEX and not counted_groups.has(adjacent_group):
+			counted_groups.append(adjacent_group)
+			for adjacent_building in adjacent_buildings[adjacent_group]:
+				if not counted_ids.has(adjacent_building):
+					# Only add currency value, modified by ROAD_MODIFIER
+					counted_ids.append(adjacent_building)
+					var adjacent_type = get_type(adjacent_building)
+					currency_value += building.currency_interactions.get(adjacent_type, 0) * ROAD_MODIFIER
+	
+	return [floor(currency_value), floor(vp_value)]
 
 
 func place_building(cellv, id, force = false):
@@ -724,7 +743,7 @@ func place_building(cellv, id, force = false):
 		for neighbor in get_orthogonal(cellv):
 			var neighbor_type = get_type(get_cellv(neighbor))
 			if neighbor_type == id:
-				neighbor_groups.append(get_base_group(groups[neighbor.x][neighbor.y]))
+				neighbor_groups.append(get_base_group(get_group(neighbor)))
 		var x = cellv.x
 		var y = cellv.y
 		# If no neighboring groups exist, make a new group
