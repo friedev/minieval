@@ -18,7 +18,7 @@ margin_top = 16.0
 margin_right = -16.0
 margin_bottom = 91.0
 custom_fonts/font = SubResource( 1 )
-text = "0 : 00"
+text = "0:00"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=1]
 [ext_resource path="res://Interface/Options.gd" type="Script" id=2]
@@ -7,6 +7,25 @@
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=5]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=7]
+[ext_resource path="res://Interface/Styleboxes/stylebox_grabber.tres" type="StyleBox" id=8]
+
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="ImageTexture" id=2]
+
+[sub_resource type="ImageTexture" id=3]
+
+[sub_resource type="ImageTexture" id=4]
+
+[sub_resource type="ImageTexture" id=5]
+
+[sub_resource type="ImageTexture" id=6]
+
+[sub_resource type="ImageTexture" id=7]
+
+[sub_resource type="ImageTexture" id=8]
+
+[sub_resource type="ImageTexture" id=9]
 
 [node name="OptionsMenu" type="CanvasLayer"]
 
@@ -28,20 +47,28 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="Options"]
-margin_left = 384.0
-margin_top = 184.0
-margin_right = 896.0
-margin_bottom = 544.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -182.0
+margin_right = 200.0
+margin_bottom = 138.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OptionsHeader" type="Label" parent="Options"]
-margin_left = 528.0
-margin_top = 200.0
-margin_right = 740.0
-margin_bottom = 264.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.0
+margin_top = -160.0
+margin_right = 106.0
+margin_bottom = -96.0
 theme = ExtResource( 4 )
 text = "Options"
 __meta__ = {
@@ -49,9 +76,9 @@ __meta__ = {
 }
 
 [node name="CameraOption" type="Label" parent="Options/OptionsHeader"]
-margin_left = -120.0
+margin_left = -64.0
 margin_top = 88.0
-margin_right = 56.0
+margin_right = 112.0
 margin_bottom = 106.0
 theme = ExtResource( 3 )
 text = "Camera Speed"
@@ -59,20 +86,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraSpeedValue" type="Label" parent="Options/OptionsHeader"]
-margin_left = 184.0
-margin_top = 88.0
-margin_right = 360.0
-margin_bottom = 106.0
-theme = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="VolumeOption" type="Label" parent="Options/OptionsHeader"]
-margin_left = -120.0
+margin_left = -64.0
 margin_top = 136.0
-margin_right = 56.0
+margin_right = 112.0
 margin_bottom = 154.0
 theme = ExtResource( 3 )
 text = "Music Volume"
@@ -81,32 +98,12 @@ __meta__ = {
 }
 
 [node name="SoundEffects" type="Label" parent="Options/OptionsHeader"]
-margin_left = -120.0
+margin_left = -64.0
 margin_top = 184.0
-margin_right = 56.0
+margin_right = 112.0
 margin_bottom = 202.0
 theme = ExtResource( 3 )
 text = "SFX Volume"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicValue" type="Label" parent="Options/OptionsHeader"]
-margin_left = 184.0
-margin_top = 136.0
-margin_right = 360.0
-margin_bottom = 154.0
-theme = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SFXValue" type="Label" parent="Options/OptionsHeader"]
-margin_left = 184.0
-margin_top = 184.0
-margin_right = 360.0
-margin_bottom = 202.0
-theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -116,12 +113,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -18.0
-margin_top = 56.0
-margin_right = 62.0
-margin_bottom = 72.0
+margin_left = -2.00001
+margin_top = 55.685
+margin_right = 178.0
+margin_bottom = 71.685
+custom_icons/grabber_disabled = SubResource( 1 )
+custom_icons/grabber_highlight = SubResource( 2 )
+custom_icons/grabber = SubResource( 3 )
+custom_styles/slider = ExtResource( 7 )
+custom_styles/grabber_area_highlight = ExtResource( 8 )
+custom_styles/grabber_area = ExtResource( 8 )
 min_value = 1.0
-max_value = 25.0
+max_value = 20.0
 value = 10.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,12 +135,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -18.0
+margin_left = -2.00001
 margin_top = 104.0
-margin_right = 62.0
+margin_right = 178.0
 margin_bottom = 120.0
+custom_icons/grabber_disabled = SubResource( 4 )
+custom_icons/grabber_highlight = SubResource( 5 )
+custom_icons/grabber = SubResource( 6 )
+custom_styles/slider = ExtResource( 7 )
+custom_styles/grabber_area_highlight = ExtResource( 8 )
+custom_styles/grabber_area = ExtResource( 8 )
 max_value = 10.0
-value = 1.0
+value = 5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,10 +156,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -18.0
+margin_left = -2.0
 margin_top = 152.0
-margin_right = 62.0
+margin_right = 178.0
 margin_bottom = 168.0
+custom_icons/grabber_disabled = SubResource( 7 )
+custom_icons/grabber_highlight = SubResource( 8 )
+custom_icons/grabber = SubResource( 9 )
+custom_styles/slider = ExtResource( 7 )
+custom_styles/grabber_area_highlight = ExtResource( 8 )
+custom_styles/grabber_area = ExtResource( 8 )
 max_value = 10.0
 value = 1.0
 __meta__ = {
@@ -158,16 +173,20 @@ __meta__ = {
 }
 
 [node name="ReturnToGame" type="Button" parent="Options/OptionsHeader"]
-margin_left = 16.0
-margin_top = 248.0
-margin_right = 184.0
-margin_bottom = 304.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = 203.0
+margin_right = 76.0
+margin_bottom = 229.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 7 )
 text = "Back to Game"
 __meta__ = {
 "_edit_use_anchors_": false

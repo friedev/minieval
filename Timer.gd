@@ -14,7 +14,7 @@ func _ready():
 			minutes = 10
 		elif Global.game_time == 1800:
 			minutes = 30
-		$timeLeftLabel.set_text(str(minutes, " : ", str(seconds).pad_zeros(2)))
+		$timeLeftLabel.set_text(str(minutes, ":", str(seconds).pad_zeros(2)))
 		timer = Timer.new()
 		timer.connect("timeout",self,"_on_timer_timeout") 
 		timer.set_wait_time(1)
@@ -33,5 +33,4 @@ func _on_timer_timeout():
 	if minutes < 0:
 		minutes = 0
 		seconds = 0
-	#print( minutes, " : ", str(seconds).pad_zeros(2) )
-	$timeLeftLabel.set_text(str(minutes, " : ", str(seconds).pad_zeros(2)))
+	$timeLeftLabel.set_text(str(minutes, ":", str(seconds).pad_zeros(2)))

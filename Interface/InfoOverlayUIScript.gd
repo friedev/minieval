@@ -16,56 +16,42 @@ func _input(event):
 		get_tree().paused = isPaused
 		palette.visible = false
 		#update road labels
-		get_node("TopRowLabels/Road/RoadCost").text = str(buildings[2].cost)
-		get_node("TopRowLabels/Road/RoadVPGain").text = str(buildings[2].vp)
-		get_node("TopRowLabels/Road/RoadCostIncrement").text = "(+" + str(buildings[2].cost_increment) + ")"
-		get_node("TopRowLabels/Road/RoadVPIncrement").text = "(+" + str(buildings[2].vp_increment) + ")"
+		$TopRowLabels/Road/RoadCost.text = str(buildings[2].cost)
+		$TopRowLabels/Road/RoadVPGain.text = str(buildings[2].vp)
 		#update house labels
-		get_node("TopRowLabels/House/HouseCost").text = str(buildings[11].cost)
-		get_node("TopRowLabels/House/HouseVPGain").text = str(buildings[11].vp)
-		get_node("TopRowLabels/House/HouseCostIncrement").text = "(+" + str(buildings[11].cost_increment) + ")"
-		get_node("TopRowLabels/House/HouseVPIncrement").text = "(+" + str(buildings[11].vp_increment) + ")"
+		$TopRowLabels/House/HouseCost.text = str(buildings[11].cost)
+		$TopRowLabels/House/HouseVPGain.text = str(buildings[11].vp)
 		_set_currency_interactions("Top", buildings, "House", 11, "Shop", 12)
 		_set_currency_interactions("Top", buildings, "House", 11, "Field", 15)
 		#update shop labels
-		get_node("TopRowLabels/Shop/ShopCost").text = str(buildings[12].cost)
-		get_node("TopRowLabels/Shop/ShopVPGain").text = str(buildings[12].vp)
-		get_node("TopRowLabels/Shop/ShopCostIncrement").text = "(+" + str(buildings[12].cost_increment) + ")"
-		get_node("TopRowLabels/Shop/ShopVPIncrement").text = "(+" + str(buildings[12].vp_increment) + ")"
+		$TopRowLabels/Shop/ShopCost.text = str(buildings[12].cost)
+		$TopRowLabels/Shop/ShopVPGain.text = str(buildings[12].vp)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "House", 11)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "Shop", 12)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "BigHouse", 13)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "Forge", 14)
 		_set_currency_interactions("Top",buildings, "Shop", 12, "Cathedral", 16)
 		#update big house labels
-		get_node("TopRowLabels/BigHouse/BigHouseCost").text = str(buildings[13].cost)
-		get_node("TopRowLabels/BigHouse/BigHouseVPGain").text = str(buildings[13].vp)
-		get_node("TopRowLabels/BigHouse/BigHouseCostIncrement").text = "(+" + str(buildings[13].cost_increment) + ")"
-		get_node("TopRowLabels/BigHouse/BigHouseVPIncrement").text = "(+" + str(buildings[13].vp_increment) + ")"
+		$TopRowLabels/BigHouse/BigHouseCost.text = str(buildings[13].cost)
+		$TopRowLabels/BigHouse/BigHouseVPGain.text = str(buildings[13].vp)
 		_set_currency_interactions("Top", buildings, "BigHouse", 13, "Shop", 12)
 		_set_vp_interactions("Top", buildings, "BigHouse", 13, "Cathedral", 16)
 		#update forge labels
-		get_node("TopRowLabels/Forge/ForgeCost").text = str(buildings[14].cost)
-		get_node("TopRowLabels/Forge/ForgeVPGain").text = str(buildings[14].vp)
-		get_node("TopRowLabels/Forge/ForgeCostIncrement").text = "(+" + str(buildings[14].cost_increment) + ")"
-		get_node("TopRowLabels/Forge/ForgeVPIncrement").text = "(+" + str(buildings[14].vp_increment) + ")"
+		$TopRowLabels/Forge/ForgeCost.text = str(buildings[14].cost)
+		$TopRowLabels/Forge/ForgeVPGain.text = str(buildings[14].vp)
 		_set_currency_interactions("Top", buildings, "Forge", 14, "Shop", 12)
 		_set_currency_interactions("Top", buildings, "Forge", 14, "Forge", 14)
 		_set_currency_interactions("Top", buildings, "Forge", 14, "Keep", 17)
 		_set_vp_interactions("Top", buildings, "Forge", 14, "Cathedral", 16)
 		#update field labels
-		get_node("BottomRowLabels/Field/FieldCost").text = str(buildings[15].cost)
-		get_node("BottomRowLabels/Field/FieldVPGain").text = str(buildings[15].vp)
-		get_node("BottomRowLabels/Field/FieldCostIncrement").text = "(+" + str(buildings[15].cost_increment) + ")"
-		get_node("BottomRowLabels/Field/FieldVPIncrement").text = "(+" + str(buildings[15].vp_increment) + ")"
+		$BottomRowLabels/Field/FieldCost.text = str(buildings[15].cost)
+		$BottomRowLabels/Field/FieldVPGain.text = str(buildings[15].vp)
 		_set_currency_interactions("Bottom", buildings, "Field", 15, "House", 11)
 		_set_currency_interactions("Bottom", buildings, "Field", 15, "Field", 15)
 		_set_vp_interactions("Bottom", buildings, "Field", 15, "Cathedral", 16)
 		#update cathedral labels
-		get_node("BottomRowLabels/Cathedral/CathedralCost").text = str(buildings[16].cost)
-		get_node("BottomRowLabels/Cathedral/CathedralVPGain").text = str(buildings[16].vp)
-		get_node("BottomRowLabels/Cathedral/CathedralCostIncrement").text = "(+" + str(buildings[16].cost_increment) + ")"
-		get_node("BottomRowLabels/Cathedral/CathedralVPIncrement").text = "(+" + str(buildings[16].vp_increment) + ")"
+		$BottomRowLabels/Cathedral/CathedralCost.text = str(buildings[16].cost)
+		$BottomRowLabels/Cathedral/CathedralVPGain.text = str(buildings[16].vp)
 		_set_vp_interactions("Bottom", buildings, "Cathedral", 16, "House", 11)
 		_set_vp_interactions("Bottom", buildings, "Cathedral", 16, "Shop", 12)
 		_set_vp_interactions("Bottom", buildings, "Cathedral", 16, "BigHouse", 13)
@@ -75,10 +61,8 @@ func _input(event):
 		_set_vp_interactions("Bottom", buildings, "Cathedral", 16, "Keep", 17)
 		_set_vp_interactions("Bottom", buildings, "Cathedral", 16, "Pyramid", 19)
 		#update keep labels
-		get_node("BottomRowLabels/Keep/KeepCost").text = str(buildings[17].cost)
-		get_node("BottomRowLabels/Keep/KeepVPGain").text = str(buildings[17].vp)
-		get_node("BottomRowLabels/Keep/KeepCostIncrement").text = "(+" + str(buildings[17].cost_increment) + ")"
-		get_node("BottomRowLabels/Keep/KeepVPIncrement").text = "(+" + str(buildings[17].vp_increment) + ")"
+		$BottomRowLabels/Keep/KeepCost.text = str(buildings[17].cost)
+		$BottomRowLabels/Keep/KeepVPGain.text = str(buildings[17].vp)
 		_set_currency_interactions("Bottom", buildings, "Keep", 17, "Forge", 14)
 		_set_vp_interactions("Bottom", buildings, "Keep", 17, "House", 11)
 		_set_vp_interactions("Bottom", buildings, "Keep", 17, "BigHouse", 13)
@@ -87,20 +71,16 @@ func _input(event):
 		_set_vp_interactions("Bottom", buildings, "Keep", 17, "Keep", 17)
 		_set_vp_interactions("Bottom", buildings, "Keep", 17, "Tower", 18)
 		#update tower labels
-		get_node("BottomRowLabels/Tower/TowerCost").text = str(buildings[18].cost)
-		get_node("BottomRowLabels/Tower/TowerVPGain").text = str(buildings[18].vp)
-		get_node("BottomRowLabels/Tower/TowerCostIncrement").text = "(+" + str(buildings[18].cost_increment) + ")"
-		get_node("BottomRowLabels/Tower/TowerVPIncrement").text = "(+" + str(buildings[18].vp_increment) + ")"
+		$BottomRowLabels/Tower/TowerCost.text = str(buildings[18].cost)
+		$BottomRowLabels/Tower/TowerVPGain.text = str(buildings[18].vp)
 		_set_currency_interactions("Bottom", buildings, "Tower", 18, "Forge", 14)
 		_set_vp_interactions("Bottom", buildings, "Tower", 18, "Field", 15)
 		_set_vp_interactions("Bottom", buildings, "Tower", 18, "Keep", 17)
 		_set_vp_interactions("Bottom", buildings, "Tower", 18, "Tower", 18)
 		_set_vp_interactions("Bottom", buildings, "Tower", 18, "Pyramid", 19)
 		#update pyramid labels
-		get_node("BottomRowLabels/Pyramid/PyramidCost").text = str(buildings[19].cost)
-		get_node("BottomRowLabels/Pyramid/PyramidVPGain").text = str(buildings[19].vp)
-		get_node("BottomRowLabels/Pyramid/PyramidCostIncrement").text = "(+" + str(buildings[19].cost_increment) + ")"
-		get_node("BottomRowLabels/Pyramid/PyramidVPIncrement").text = "(+" + str(buildings[19].vp_increment) + ")"
+		$BottomRowLabels/Pyramid/PyramidCost.text = str(buildings[19].cost)
+		$BottomRowLabels/Pyramid/PyramidVPGain.text = str(buildings[19].vp)
 		_set_currency_interactions("Bottom", buildings, "Pyramid", 18, "Forge", 14)
 		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "House", 11)
 		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Shop", 12)

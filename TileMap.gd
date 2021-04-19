@@ -197,8 +197,7 @@ var BUILDINGS = [
 				12: -5,  # Shop
 				13: 4,   # Big house
 				14: -5,  # Forge
-				16: -10, # Cathedral
-				17: 10,  # Keep
+				16: -20, # Cathedral
 				19: 20,  # Pyramid
 			}),
 	# 17: Keep
