@@ -1,45 +1,45 @@
 extends Control
 
+onready var tilemap = get_node(@"/root/Root/TileMap")
+onready var palette = get_node(@"/root/Root/Palette/Menu")
+onready var ui_text_layer = get_node(@"/root/Root/UITextLayer")
+onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
+onready var recap = get_node(@"/root/Root/RecapUI/Control")
+onready var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
+onready var info = get_node(@"/root/Root/InfoOverlay/Control")
+
 var isPaused = false
 
 # Make score report overlay appear when user holds shift
 func _input(event):
-	var tilemap = get_node(@"/root/Root/TileMap")
-	var palette = get_node(@"/root/Root/Palette/Menu")
-	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
-	var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
-	var Recap = get_node(@"/root/Root/RecapUI/Control")
-	if event.is_action_pressed("score_report") && Recap.game_over == false:
+	if event.is_action_pressed("score_report") && recap.game_over == false:
 		tilemap._clear_preview()
 		isPaused = true
 		get_tree().paused = isPaused
 		palette.visible = false
-		for child in ui_text_layer.get_children():
-			if child.name != "Timer":
-				child.visible = false
+		if Global.game_mode != 3:
+			for child in ui_text_layer.get_children():
+				if child.name != "Timer":
+					child.visible = false
 		update_currency()
-		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
 		_node_input_pause(pauseMenu)
-		var info = get_node(@"/root/Root/InfoOverlay/Control")
 		_node_input_pause(info)
 		visible = true
-	elif event.is_action_released("score_report") && Recap.game_over == false:
+	elif event.is_action_released("score_report") && recap.game_over == false:
 		isPaused = false
 		get_tree().paused = isPaused
 		palette.visible = true
-		for child in ui_text_layer.get_children():
-			if child.name != "Timer":
-				child.visible = true
+		if Global.game_mode != 3:
+			for child in ui_text_layer.get_children():
+				if child.name != "Timer":
+					child.visible = true
 		if Global.game_mode > 0:
 			turn_label.visible = false
-		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
 		_node_input_pause(pauseMenu)
-		var info = get_node(@"/root/Root/InfoOverlay/Control")
 		_node_input_pause(info)
 		visible = false
 
 func update_currency():
-	var tilemap = get_node(@"/root/Root/TileMap")
 	if Global.game_mode != 3:
 		var currencyCount = str(tilemap.currency)
 		if(currencyCount == "69"):
@@ -51,7 +51,7 @@ func update_currency():
 		$Stats/VPCountLabel.text = VPCount
 	else:
 		$Stats/CurrencyCountLabel.text = "inf"
-		get_node("Stats/VPCountLabel").text = "inf"
+		$Stats/VPCountLabel.text = "inf"
 	var BuildingCount = str(tilemap.buildings_placed)
 	if(BuildingCount == "69"):
 		BuildingCount = "69 (nice.)"

@@ -274,7 +274,7 @@ const TILE_SIZE = 8
 const BASE_BUILDING_INDEX = 20 # First unused index
 const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
-#changed to var to allow for creative mode to change - Kalen
+var CREATIVE_MODE = false
 var ALLOW_DESTROYING = false
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
@@ -305,6 +305,7 @@ var vp = 0
 var selected_building = DEFAULT_BUILDING
 var buildings_placed = 0
 
+onready var ui_text_layer = get_node(@"/root/Root/UITextLayer")
 onready var currency_label = get_node(@"/root/Root/UITextLayer/CurrencyLabel")
 var currency_format = "%d\n%d"
 onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
@@ -342,8 +343,7 @@ func _ready():
 	elif Global.game_mode == 3:
 		turn_label.visible = false
 		timer.visible = false
-		currency_label.text = "inf\ninf"
-		currency = Global.game_size*1000*1000
+		CREATIVE_MODE = true
 		ALLOW_DESTROYING = true
 	
 	# Change the selected building when a building is clicked on the palette
@@ -360,14 +360,9 @@ func _ready():
 			world_map[x].append(0)
 			groups[x].append(0)
 			.set_cell(x, y, 0)
-			
-	# TODO generalize to arbitrary game sizes
-	if Global.game_size == 32:
-		camera.position = cellv_to_screen_position(Vector2(-1, 1))
-	elif Global.game_size == 64:
-		camera.position = cellv_to_screen_position(Vector2(3, 5))
-	elif Global.game_size == 128:
-		camera.position = cellv_to_screen_position(Vector2(11, 13))
+	
+	camera.position = cellv_to_world_position(Vector2(Global.game_size / 2,
+			Global.game_size / 2)) - camera.offset
 	
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
@@ -393,8 +388,10 @@ func _unhandled_input(event):
 		var building = BUILDINGS[self.selected_building]
 		var placement
 		if event.button_index == 1:
-			placement = self.place_building(mouse_cellv -
-					building.get_cell_offset(), self.selected_building)
+			placement = self.place_building(
+					mouse_cellv - building.get_cell_offset(),
+					self.selected_building,
+					CREATIVE_MODE)
 		elif ALLOW_DESTROYING and event.button_index == 2:
 			placement = self.destroy_building(mouse_cellv)
 		else:
@@ -585,8 +582,14 @@ func cellv_to_screen_position(cellv):
 
 # Updates the currency label and turn label
 func _update_labels():
-	#don't update anything if in creative mode
-	if Global.game_mode != 3:
+	# Don't update anything if in creative mode
+	if CREATIVE_MODE:
+		# TODO extract to method to reduce redundancy
+		# Same code duplicated in StatsOverlayUIScript.gd
+		for child in ui_text_layer.get_children():
+			if child.name != "Timer":
+				child.visible = false
+	else:
 		currency_label.text = currency_format % [currency, vp]
 		var turns_remaining = get_turns_remaining()
 		if turns_remaining > 0:
@@ -617,7 +620,8 @@ func _update_preview():
 		return
 	
 	self._clear_preview()
-	preview_node.visible = true
+	# Don't show cost information in creative mode
+	preview_node.visible = not CREATIVE_MODE
 	preview_cellv = mouse_cellv
 	var building = BUILDINGS[selected_building]
 	var building_cellv = preview_cellv - building.get_cell_offset()
