@@ -70,7 +70,6 @@ centered = false
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )
-autoplay = true
 bus = "Background music"
 
 [node name="Camera2D" type="Camera2D" parent="."]

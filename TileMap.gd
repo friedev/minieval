@@ -136,12 +136,12 @@ var BUILDINGS = [
 				[1],
 			], {
 				12: 2, # Shop
-				15: 2, # Field
 			}, {
+				15: 2, # Statue
 			}),
 	# 12: Shop
 	Building.new(false, false, 5, 1, Vector2(6, 5),
-			preload("res://Art/shop.png"), [
+			preload("res://Art/shop2.png"), [
 				[1, 1],
 			], {
 				11: 1,  # House
@@ -158,8 +158,7 @@ var BUILDINGS = [
 				[1, 0],
 			], {
 				12: 3, # Shop
-				15: 6, # Field
-				# Add benefit from fields
+				15: 3, # Statue
 			}, {
 				16: 4, # Cathedral
 			}),
@@ -174,22 +173,18 @@ var BUILDINGS = [
 			}, {
 				16: -5, # Cathedral
 			}),
-	# 15: Field
-	Building.new(false, false, 4, 0, Vector2(7, 7),
-			preload("res://Art/field.png"), [
-				[1, 1, 1],
-				[1, 1, 1],
-				[1, 1, 1],
+	# 15: Statue
+	Building.new(false, false, 4, 0, Vector2(3, 4),
+			preload("res://Art/statue.png"), [
+				[1],
+				[1],
 			], {
-				11: 2, # House
-				13: 6, # Big House
-				15: 2, # Field
 			}, {
 				16: -1, # Cathedral
 			}),
 	# 16: Cathedral
-	Building.new(false, false, 20, 20, Vector2(6, 5),
-			preload("res://Art/cathedral.png"), [
+	Building.new(false, false, 40, 20, Vector2(6, 5),
+			preload("res://Art/cathedral3.png"), [
 				[0, 1, 0, 0],
 				[1, 1, 1, 1],
 				[0, 1, 0, 0],
@@ -200,7 +195,6 @@ var BUILDINGS = [
 				12: -5,  # Shop
 				13: 4,   # Big house
 				14: -5,  # Forge
-				15: -1,  # Field
 				16: -10, # Cathedral
 				17: 10,  # Keep
 				19: 20,  # Pyramid
@@ -217,7 +211,6 @@ var BUILDINGS = [
 			}, {
 				11: 1,   # House
 				13: 1,   # Big house
-				15: -1,  # Field
 				16: 5,   # Cathedral
 				17: -20, # Keep
 				18: 10,  # Tower
@@ -231,7 +224,6 @@ var BUILDINGS = [
 			], {
 				14: 10, # Forge
 			}, {
-				15: -1, # Field
 				17: 10, # Keep
 				18: -5, # Tower
 				19: 10, # Pyramid
@@ -249,7 +241,6 @@ var BUILDINGS = [
 				11: -1, # House
 				12: -5, # Shop
 				13: -2, # Big house
-				15: -1, # Field
 				16: 10, # Cathedral
 				17: 10, # Keep
 				18: 10, # Tower
