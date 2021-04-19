@@ -323,6 +323,12 @@ onready var preview_building = get_node(@"/root/Root/TileMap/PreviewBuilding")
 var mouse_cellv = null
 var preview_cellv = null
 var show_preview = true
+const PREVIEW_COLOR = Color.white
+const PREVIEW_COLOR_INVALID = Color(1, 0.25, 0.25, 0.5)
+const PREVIEW_COLOR_GOOD = Color(0.25, 1, 0.25, 1)
+const PREVIEW_COLOR_MIXED = Color(1, 1, 0.25, 1)
+const PREVIEW_COLOR_BAD = Color(1, 0.25, 0.25, 1)
+var modulated_buildings = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -587,6 +593,10 @@ func cellv_to_screen_position(cellv):
 	return (cellv_to_world_position(cellv) - camera.position) / camera.zoom
 
 
+func get_building_sprite(id):
+	return get_node(NodePath("Buildings/building_%d" % id))
+
+
 # Updates the currency label and turn label
 func _update_labels():
 	# Don't update anything if in creative mode
@@ -612,7 +622,10 @@ func _clear_preview():
 		$PreviewBuilding.visible = false
 		preview_label.text = ''
 		preview_node.visible = false
-
+		for modulated_building in modulated_buildings:
+			var sprite = get_building_sprite(modulated_building)
+			if sprite != null and not sprite.is_queued_for_deletion():
+				sprite.modulate = Color.white
 
 func _update_preview():
 	# Only update the preview if the mouse has moved to a different cell
@@ -636,19 +649,38 @@ func _update_preview():
 	
 	# Shade preview building in red if the placement is blocked
 	if building.is_tile:
-		$PreviewTile.modulate = Color.white
+		$PreviewTile.modulate = PREVIEW_COLOR
 		if self.get_cellv(building_cellv) != 0:
-			$PreviewTile.modulate = Color.red
+			$PreviewTile.modulate = PREVIEW_COLOR_INVALID
 	else:
-		$PreviewBuilding.modulate = Color.white
+		$PreviewBuilding.modulate = PREVIEW_COLOR
 		for cellv in building.get_cells(building_cellv):
 			if self.get_cellv(cellv) != 0:
-				$PreviewBuilding.modulate = Color.red
+				$PreviewBuilding.modulate = PREVIEW_COLOR_INVALID
 				break
 	
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
+		var area_building = get_cellv(cellv)
+		if area_building > 0:
+			var area_building_type = get_type(area_building)
+			var area_building_sprite = get_building_sprite(area_building)
+			var currency_interaction = building.currency_interactions.get(area_building_type, 0)
+			var vp_interaction = building.vp_interactions.get(area_building_type, 0)
+			var modulation = null
+			if (currency_interaction > 0 and vp_interaction >= 0) or \
+					(currency_interaction >= 0 and vp_interaction > 0):
+						modulation = PREVIEW_COLOR_GOOD
+			elif (currency_interaction < 0 and vp_interaction <= 0) or \
+					(currency_interaction <= 0 and vp_interaction < 0):
+						modulation = PREVIEW_COLOR_BAD
+			elif (currency_interaction < 0 and vp_interaction > 0) or \
+					(currency_interaction > 0 and vp_interaction < 0):
+						modulation = PREVIEW_COLOR_MIXED
+			if modulation:
+				area_building_sprite.modulate = modulation
+				modulated_buildings.append(area_building)
 	
 	# Update preview label with expected building value
 	var value = get_building_value(building_cellv, self.selected_building)
@@ -792,7 +824,7 @@ func destroy_building(cellv, id = null):
 	var type = id
 	if not is_tile:
 		# If this isn't a tile building, free its sprite
-		var instance = get_node(NodePath("Buildings/building_%d" % id))
+		var instance = get_building_sprite(id)
 		if instance and not instance.is_queued_for_deletion():
 			instance.free()
 		type = building_types[id]
