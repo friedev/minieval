@@ -26,10 +26,10 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.34051
-margin_top = 5.46774
-margin_right = 1.34033
-margin_bottom = 5.46777
+margin_left = 1.97113
+margin_top = 5.0473
+margin_right = 1.97095
+margin_bottom = 5.04736
 color = Color( 0, 0, 0, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -67,7 +67,6 @@ margin_right = 235.67
 margin_bottom = 360.37
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -103,7 +102,6 @@ margin_right = 243.67
 margin_bottom = 391.624
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -163,7 +161,6 @@ margin_right = 490.948
 margin_bottom = 360.37
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,7 +172,6 @@ margin_right = 599.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -188,7 +184,6 @@ margin_right = 599.0
 margin_bottom = 392.036
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -201,7 +196,6 @@ margin_right = 498.948
 margin_bottom = 391.624
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -245,19 +239,17 @@ margin_right = 475.694
 margin_bottom = 482.796
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldCurrInt" type="Label" parent="Control/TopRowLabels/House"]
-margin_left = 482.993
-margin_top = 464.579
-margin_right = 508.993
-margin_bottom = 482.579
+[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 449.993
+margin_top = 524.579
+margin_right = 475.993
+margin_bottom = 542.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -285,7 +277,6 @@ margin_right = 744.911
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -297,7 +288,6 @@ margin_right = 840.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -310,7 +300,6 @@ margin_right = 840.0
 margin_bottom = 395.701
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -323,7 +312,6 @@ margin_right = 752.911
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -367,7 +355,6 @@ margin_right = 733.143
 margin_bottom = 482.796
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -379,7 +366,6 @@ margin_right = 766.442
 margin_bottom = 482.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-4"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -391,7 +377,6 @@ margin_right = 794.685
 margin_bottom = 482.796
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -403,7 +388,6 @@ margin_right = 827.984
 margin_bottom = 482.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -415,7 +399,6 @@ margin_right = 861.281
 margin_bottom = 482.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-4"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -443,7 +426,6 @@ margin_right = 1003.91
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -455,7 +437,6 @@ margin_right = 1101.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -468,7 +449,6 @@ margin_right = 1101.0
 margin_bottom = 397.036
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -481,7 +461,6 @@ margin_right = 1011.91
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -525,19 +504,28 @@ margin_right = 988.942
 margin_bottom = 482.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 962.942
+margin_top = 522.579
+margin_right = 988.942
+margin_bottom = 540.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CathedralVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
-margin_left = 962.942
-margin_top = 520.141
-margin_right = 988.942
-margin_bottom = 538.141
+margin_left = 993.942
+margin_top = 523.141
+margin_right = 1019.94
+margin_bottom = 541.141
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -565,7 +553,6 @@ margin_right = 1254.87
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -577,7 +564,6 @@ margin_right = 1346.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -590,7 +576,6 @@ margin_right = 1346.0
 margin_bottom = 394.699
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -603,7 +588,6 @@ margin_right = 1262.87
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -647,7 +631,6 @@ margin_right = 1245.84
 margin_bottom = 482.579
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -659,7 +642,6 @@ margin_right = 1245.84
 margin_bottom = 538.138
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -671,19 +653,6 @@ margin_right = 1274.08
 margin_bottom = 482.796
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KeepCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
-margin_left = 1281.38
-margin_top = 464.579
-margin_right = 1307.38
-margin_bottom = 482.579
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -702,7 +671,7 @@ scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 786446, 12, 0, 786447, 15, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786458, 16, 0, 786462, 12, 0, 786470, 12, 0, 786471, 14, 0, 786472, 17, 0, 917534, 16, 0, 917542, 16, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
+tile_data = PoolIntArray( 786446, 12, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786458, 16, 0, 786462, 12, 0, 786470, 12, 0, 786471, 14, 0, 917518, 15, 0, 917534, 15, 0, 917535, 16, 0, 917542, 16, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
 
 [node name="BottomRowLabels" type="Control" parent="Control"]
 margin_left = -145.0
@@ -727,50 +696,49 @@ scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 1376274, 4, 0, 1441798, 11, 0, 1441799, 15, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441822, 14, 0, 1441830, 14, 0, 1572870, 16, 0, 1572878, 11, 0, 1572879, 12, 0, 1572880, 13, 0, 1572881, 14, 0, 1572882, 15, 0, 1572886, 11, 0, 1572887, 13, 0, 1572888, 15, 0, 1572889, 16, 0, 1572890, 17, 0, 1572894, 15, 0, 1572895, 17, 0, 1572896, 18, 0, 1572897, 19, 0, 1572902, 11, 0, 1572903, 12, 0, 1572904, 13, 0, 1572905, 15, 0, 1572906, 16, 0, 1703950, 16, 0, 1703951, 17, 0, 1703952, 19, 0, 1703958, 18, 0, 1703974, 17, 0, 1703975, 18, 0, 1703976, 19, 0 )
+tile_data = PoolIntArray( 1376274, 4, 0, 1441806, 14, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441822, 14, 0, 1441830, 14, 0, 1572870, 11, 0, 1572871, 13, 0, 1572872, 15, 0, 1572878, 11, 0, 1572879, 12, 0, 1572880, 13, 0, 1572881, 14, 0, 1572882, 16, 0, 1572886, 11, 0, 1572887, 13, 0, 1572888, 16, 0, 1572889, 17, 0, 1572890, 18, 0, 1572894, 17, 0, 1572895, 18, 0, 1572896, 19, 0, 1572902, 11, 0, 1572903, 12, 0, 1572904, 13, 0, 1572905, 16, 0, 1572906, 17, 0, 1703950, 19, 0, 1703974, 18, 0, 1703975, 19, 0 )
 
-[node name="Field" type="Control" parent="Control/BottomRowLabels"]
+[node name="Statue" type="Control" parent="Control/BottomRowLabels"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldIntCoin" type="Sprite" parent="Control/BottomRowLabels/Field"]
+[node name="StatueIntCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 175.954, 438.341 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 3 )
 
-[node name="FieldIntVP" type="Sprite" parent="Control/BottomRowLabels/Field"]
+[node name="StatueIntVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 175.538, 501.381 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 6 )
 
-[node name="FieldName" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueName" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 201.34
 margin_top = 311.531
 margin_right = 311.34
 margin_bottom = 329.531
 theme = ExtResource( 5 )
-text = "Field"
+text = "Statue"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldCost" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueCost" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 229.67
 margin_top = 342.37
 margin_right = 235.67
 margin_bottom = 360.37
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldCostIncrement" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueCostIncrement" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 252.0
 margin_top = 342.0
 margin_right = 324.0
@@ -782,7 +750,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldVPIncrement" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueVPIncrement" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 252.0
 margin_top = 370.541
 margin_right = 324.0
@@ -794,29 +762,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldVPGain" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueVPGain" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 229.67
 margin_top = 373.624
 margin_right = 243.67
 margin_bottom = 391.624
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldCoin" type="Sprite" parent="Control/BottomRowLabels/Field"]
+[node name="StatueCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 206.583, 348.872 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 3 )
 
-[node name="FieldVP" type="Sprite" parent="Control/BottomRowLabels/Field"]
+[node name="StatueVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 206.583, 381.576 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 6 )
 
-[node name="FieldInteractions" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="StatueInteractions" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 201.34
 margin_top = 401.598
 margin_right = 321.34
@@ -828,38 +795,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HouseCurrInt" type="Label" parent="Control/BottomRowLabels/Field"]
+[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 193.904
-margin_top = 458.948
+margin_top = 521.948
 margin_right = 219.904
-margin_bottom = 476.948
+margin_bottom = 539.948
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Field"]
-margin_left = 199.5
-margin_top = 520.0
-margin_right = 215.5
-margin_bottom = 538.0
+[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 226.904
+margin_top = 521.948
+margin_right = 252.904
+margin_bottom = 539.948
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldCurrInt" type="Label" parent="Control/BottomRowLabels/Field"]
-margin_left = 227.203
-margin_top = 458.731
-margin_right = 253.203
-margin_bottom = 476.731
+[node name="StatueVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 258.203
+margin_top = 521.731
+margin_right = 284.203
+margin_bottom = 539.731
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -890,7 +854,6 @@ margin_right = 490.948
 margin_bottom = 360.37
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -902,7 +865,6 @@ margin_right = 567.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -915,7 +877,6 @@ margin_right = 567.0
 margin_bottom = 390.919
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -928,7 +889,6 @@ margin_right = 498.948
 margin_bottom = 391.624
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -965,6 +925,17 @@ position = Vector2( 430.486, 501.381 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 6 )
 
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 450.948
+margin_top = 456.33
+margin_right = 476.948
+margin_bottom = 474.33
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 450.948
 margin_top = 524.33
@@ -972,7 +943,6 @@ margin_right = 476.948
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -984,7 +954,6 @@ margin_right = 510.247
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -996,43 +965,6 @@ margin_right = 539.502
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
-margin_left = 443.945
-margin_top = 587.5
-margin_right = 473.945
-margin_bottom = 605.5
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "-10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
-margin_left = 476.341
-margin_top = 587.532
-margin_right = 508.341
-margin_bottom = 605.532
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
-margin_left = 510.68
-margin_top = 587.749
-margin_right = 550.68
-margin_bottom = 605.749
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+20"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1044,19 +976,28 @@ margin_right = 572.801
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 578.0
 margin_top = 524.0
 margin_right = 604.0
 margin_bottom = 542.0
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 443.68
+margin_top = 587.749
+margin_right = 483.68
+margin_bottom = 605.749
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1087,7 +1028,6 @@ margin_right = 744.911
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1099,7 +1039,6 @@ margin_right = 827.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1112,7 +1051,6 @@ margin_right = 827.0
 margin_bottom = 395.919
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1125,7 +1063,6 @@ margin_right = 752.911
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1169,7 +1106,6 @@ margin_right = 733.656
 margin_bottom = 472.83
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1181,7 +1117,6 @@ margin_right = 734.656
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1193,55 +1128,39 @@ margin_right = 767.955
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
-margin_left = 771.211
-margin_top = 524.33
-margin_right = 797.211
-margin_bottom = 542.33
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "-1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
-margin_left = 701.654
-margin_top = 587.5
-margin_right = 731.654
-margin_bottom = 605.5
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
-margin_left = 804.51
+margin_left = 765.51
 margin_top = 524.113
-margin_right = 830.51
+margin_right = 791.51
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
-margin_left = 835.709
+margin_left = 793.709
 margin_top = 524.0
-margin_right = 861.709
+margin_right = 831.709
 margin_bottom = 542.0
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 831.654
+margin_top = 524.5
+margin_right = 863.654
+margin_bottom = 542.5
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1269,7 +1188,6 @@ margin_right = 1003.91
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1281,7 +1199,6 @@ margin_right = 1078.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1294,7 +1211,6 @@ margin_right = 1078.0
 margin_bottom = 395.919
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1307,7 +1223,6 @@ margin_right = 1011.91
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1351,55 +1266,39 @@ margin_right = 988.79
 margin_bottom = 472.83
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
-margin_left = 963.79
-margin_top = 524.33
-margin_right = 989.79
-margin_bottom = 542.33
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "-1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
-margin_left = 991.089
+margin_left = 960.089
 margin_top = 524.113
-margin_right = 1023.09
+margin_right = 992.09
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
-margin_left = 1026.34
+margin_left = 994.34
 margin_top = 524.33
-margin_right = 1052.34
+margin_right = 1020.34
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
-margin_left = 1055.64
+margin_left = 1023.64
 margin_top = 524.113
-margin_right = 1087.64
+margin_right = 1055.64
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1427,7 +1326,6 @@ margin_right = 1254.87
 margin_bottom = 365.27
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1439,7 +1337,6 @@ margin_right = 1362.0
 margin_bottom = 365.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1452,7 +1349,6 @@ margin_right = 1362.0
 margin_bottom = 394.73
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
-text = "(+0.1)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1465,7 +1361,6 @@ margin_right = 1262.87
 margin_bottom = 396.524
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1502,6 +1397,17 @@ position = Vector2( 1198.34, 501.381 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 6 )
 
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1213.81
+margin_top = 454.83
+margin_right = 1245.81
+margin_bottom = 472.83
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
 margin_left = 1219.48
 margin_top = 524.33
@@ -1509,7 +1415,6 @@ margin_right = 1245.48
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1521,7 +1426,6 @@ margin_right = 1276.67
 margin_bottom = 542.113
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1533,79 +1437,50 @@ margin_right = 1308.92
 margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "-2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1211.37
-margin_top = 587.5
-margin_right = 1243.37
-margin_bottom = 605.5
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1243.76
-margin_top = 587.532
-margin_right = 1275.76
-margin_bottom = 605.532
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "+10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1277.38
-margin_top = 588.469
-margin_right = 1321.38
-margin_bottom = 606.469
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "-100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FieldVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1316.22
-margin_top = 524.113
-margin_right = 1342.22
-margin_bottom = 542.113
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-text = "-1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1347.42
+margin_left = 1311.42
 margin_top = 524.0
-margin_right = 1373.42
+margin_right = 1343.42
 margin_bottom = 542.0
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1213.81
-margin_top = 454.83
-margin_right = 1245.81
-margin_bottom = 472.83
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1344.37
+margin_top = 523.5
+margin_right = 1376.37
+margin_bottom = 541.5
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
-text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1207.76
+margin_top = 587.532
+margin_right = 1239.76
+margin_bottom = 605.532
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1243.38
+margin_top = 588.469
+margin_right = 1287.38
+margin_bottom = 606.469
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
