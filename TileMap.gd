@@ -648,7 +648,7 @@ func _update_preview():
 	
 	# Update preview label with expected building value
 	var value = get_building_value(building_cellv, self.selected_building)
-	preview_label.text = "%d\n%d" % value
+	preview_label.text = "%s\n%s" % format_value(value)
 	preview_node.rect_position = cellv_to_screen_position(building_cellv) + \
 			Vector2(7, -8) / camera.zoom #- preview_label.rect_size / 2
 
@@ -693,6 +693,10 @@ func get_building_value(cellv, id):
 	
 	return [floor(currency_value), floor(vp_value)]
 
+
+func format_value(value):
+	return [('+%d' if value[0] > 0 else '%d') % value[0],
+			('+%d' if value[1] > 0 else '%d') % value[1]]
 
 func place_building(cellv, id, force = false):
 	var building = BUILDINGS[id]
