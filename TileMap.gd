@@ -4,12 +4,8 @@ extends TileMap
 class Building:
 	var is_tile: bool
 	var groupable: bool
-	var base_cost: int
-	var cost: float
-	var cost_increment: float
-	var base_vp: int
-	var vp: float
-	var vp_increment: float
+	var cost: int
+	var vp: int
 	var area: Vector2
 	var texture: Texture
 	var cells: Array
@@ -19,10 +15,8 @@ class Building:
 	
 	func _init(is_tile: bool,
 			groupable: bool,
-			base_cost: int,
-			cost_increment: float,
-			base_vp: int,
-			vp_increment: float,
+			cost: int,
+			vp: int,
 			area: Vector2,
 			texture: Texture,
 			cells: Array,
@@ -30,12 +24,8 @@ class Building:
 			vp_interactions: Dictionary):
 		self.is_tile = is_tile
 		self.groupable = groupable
-		self.base_cost = base_cost
-		self.cost = base_cost
-		self.cost_increment = 0
-		self.base_vp = base_vp
-		self.vp = base_vp
-		self.vp_increment = 0
+		self.cost = cost
+		self.vp = vp
 		self.area = area
 		self.texture = texture
 		self.cells = cells
@@ -127,7 +117,7 @@ var BUILDINGS = [
 	null, # 0: Empty
 	null, # 1: Selection box
 	# 2: Road
-	Building.new(true, true, 1, 0, 0, 0, Vector2(0, 0), null, [
+	Building.new(true, true, 1, 0, Vector2(0, 0), null, [
 				[1],
 			], {
 			}, {
@@ -141,7 +131,7 @@ var BUILDINGS = [
 	null, # 9: Unused
 	null, # 10: Unused
 	# 11: House
-	Building.new(false, false, 1, 0.07, 1, 0, Vector2(3, 3),
+	Building.new(false, false, 1, 1, Vector2(3, 3),
 			preload("res://Art/house.png"), [
 				[1],
 			], {
@@ -150,45 +140,42 @@ var BUILDINGS = [
 			}, {
 			}),
 	# 12: Shop
-	Building.new(false, false, 4, 0.2, 1, 0, Vector2(6, 5),
+	Building.new(false, false, 5, 1, Vector2(6, 5),
 			preload("res://Art/shop.png"), [
 				[1, 1],
 			], {
-				11: 2,  # House
-				12: -4, # Shop
-				13: 6,  # Big house
-				14: 3,  # Forge
+				11: 1,  # House
+				12: -5, # Shop
+				13: 2,  # Big house
+				14: 2,  # Forge
 				16: -4, # Cathedral
 			}, {
 			}),
 	# 13: Big house
-	Building.new(false, false, 6, 0.2, 2, 0, Vector2(4, 4),
+	Building.new(false, false, 5, 2, Vector2(4, 4),
 			preload("res://Art/big_house.png"), [
 				[1, 1],
 				[1, 0],
 			], {
-				12: 6, # Shop
+				12: 3, # Shop
 				15: 6, # Field
 				# Add benefit from fields
 			}, {
 				16: 4, # Cathedral
 			}),
 	# 14: Forge
-	Building.new(false, false, 8, 0.5, 2, 0, Vector2(6, 6),
+	Building.new(false, false, 10, 2, Vector2(6, 6),
 			preload("res://Art/forge.png"), [
 				[1, 1],
 				[1, 1],
 			], {
-				12: 3,   # Shop
-				14: -10, # Forge
-				17: 5,   # Keep
-				19: 10, # Pyramid
-				16: 10, # Cathedral
+				12: 2,  # Shop
+				14: -5, # Forge
 			}, {
 				16: -5, # Cathedral
 			}),
 	# 15: Field
-	Building.new(false, false, 4, 1, 0, 0, Vector2(7, 7),
+	Building.new(false, false, 4, 0, Vector2(7, 7),
 			preload("res://Art/field.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
@@ -201,7 +188,7 @@ var BUILDINGS = [
 				16: -1, # Cathedral
 			}),
 	# 16: Cathedral
-	Building.new(false, false, 20, 5, 20, 10, Vector2(6, 5),
+	Building.new(false, false, 20, 20, Vector2(6, 5),
 			preload("res://Art/cathedral.png"), [
 				[0, 1, 0, 0],
 				[1, 1, 1, 1],
@@ -219,7 +206,7 @@ var BUILDINGS = [
 				19: 20,  # Pyramid
 			}),
 	# 17: Keep
-	Building.new(false, false, 40, 10, 20, 5, Vector2(8, 7),
+	Building.new(false, false, 40, 20, Vector2(9, 8),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
@@ -236,7 +223,7 @@ var BUILDINGS = [
 				18: 10,  # Tower
 			}),
 	# 18: Tower
-	Building.new(false, false, 20, 5, 0, 0, Vector2(7, 5),
+	Building.new(false, false, 20, 0, Vector2(7, 5),
 			preload("res://Art/tower.png"), [
 				[1],
 				[1],
@@ -250,7 +237,7 @@ var BUILDINGS = [
 				19: 10, # Pyramid
 			}),
 	# 19: Pyramid
-	Building.new(false, false, 100, 100, 100, 100, Vector2(16, 12),
+	Building.new(false, false, 100, 100, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
 				[0, 0, 1, 1, 1, 1, 0, 0],
@@ -297,8 +284,6 @@ const BASE_GROUP_INDEX = 1
 const DEFAULT_BUILDING = 2
 #changed to var to allow for creative mode to change - Kalen
 var ALLOW_DESTROYING = false
-# Currency yields are multiplied this amount for buildings connected by road
-var ROAD_MODIFIER = 1
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map = []
@@ -680,8 +665,8 @@ func _update_preview():
 # Includes the building's flat cost and VP, as well as interactions
 func get_building_value(cellv, id):
 	var building = BUILDINGS[id]
-	var currency_value = -floor(building.cost)
-	var vp_value = floor(building.vp)
+	var currency_value = -building.cost
+	var vp_value = building.vp
 	var counted_ids = []
 	var occupied_cells = building.get_cells(cellv)
 	
@@ -708,10 +693,10 @@ func get_building_value(cellv, id):
 			counted_groups.append(adjacent_group)
 			for adjacent_building in adjacent_buildings[adjacent_group]:
 				if not counted_ids.has(adjacent_building):
-					# Only add currency value, modified by ROAD_MODIFIER
+					# Only add currency value
 					counted_ids.append(adjacent_building)
 					var adjacent_type = get_type(adjacent_building)
-					currency_value += building.currency_interactions.get(adjacent_type, 0) * ROAD_MODIFIER
+					currency_value += building.currency_interactions.get(adjacent_type, 0)
 	
 	return [floor(currency_value), floor(vp_value)]
 
@@ -736,9 +721,6 @@ func place_building(cellv, id, force = false):
 	# Check if the additional cost from interactions would lead to negative currency
 	if currency + currency_change < 0 and not force:
 		return null
-	
-	building.cost += building.cost_increment
-	building.vp += building.vp_increment
 	
 	$BuildingPlaceSound.play()
 	
@@ -814,8 +796,6 @@ func destroy_building(cellv, id = null):
 			instance.free()
 		type = building_types[id]
 	var building = BUILDINGS[type]
-	building.cost -= building.cost_increment
-	building.vp -= building.vp_increment
 	
 	$BuildingDestroySound.play()
 
