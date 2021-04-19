@@ -345,6 +345,13 @@ func _ready():
 		timer.visible = false
 		CREATIVE_MODE = true
 		ALLOW_DESTROYING = true
+		
+		# Hide UIs in creative mode
+		# TODO extract to method to reduce redundancy
+		# Same code duplicated in StatsOverlayUIScript.gd
+		for child in ui_text_layer.get_children():
+			if child.name != "Timer":
+				child.visible = false
 	
 	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
@@ -583,13 +590,7 @@ func cellv_to_screen_position(cellv):
 # Updates the currency label and turn label
 func _update_labels():
 	# Don't update anything if in creative mode
-	if CREATIVE_MODE:
-		# TODO extract to method to reduce redundancy
-		# Same code duplicated in StatsOverlayUIScript.gd
-		for child in ui_text_layer.get_children():
-			if child.name != "Timer":
-				child.visible = false
-	else:
+	if not CREATIVE_MODE:
 		currency_label.text = currency_format % [currency, vp]
 		var turns_remaining = get_turns_remaining()
 		if turns_remaining > 0:
