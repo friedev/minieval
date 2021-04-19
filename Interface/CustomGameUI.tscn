@@ -13,7 +13,7 @@
 
 [sub_resource type="ImageTexture" id=2]
 
-[node name="TurnBasedMenu" type="Panel"]
+[node name="CustomGameMenu" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -28,7 +28,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackToChooseModeButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -29.0
@@ -96,7 +96,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TurnLimitLabel2" type="Label" parent="."]
+[node name="TurnLimitUnitsLabel" type="Label" parent="."]
 margin_left = 333.103
 margin_top = 140.603
 margin_right = 446.103
@@ -108,7 +108,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TurnLimitLabel3" type="Label" parent="."]
+[node name="TimeLimitUnitsLabel" type="Label" parent="."]
 margin_left = 333.103
 margin_top = 188.603
 margin_right = 446.103
@@ -120,7 +120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TurnLimitLabel4" type="Label" parent="."]
+[node name="MapSizeUnitsLabel" type="Label" parent="."]
 margin_left = 333.103
 margin_top = 236.603
 margin_right = 446.103
@@ -149,7 +149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapSizeLabel2" type="Label" parent="."]
+[node name="CreativeModeLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -256,7 +256,7 @@ custom_styles/normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="BackToChooseModeButton" to="." method="_on_BackToChooseModeButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackToChooseModeButton_pressed"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="text_changed" from="TurnLimitInput" to="." method="_on_TurnLimitInput_text_changed"]
 [connection signal="text_changed" from="TimeLimitInput" to="." method="_on_TimeLimitInput_text_changed"]
