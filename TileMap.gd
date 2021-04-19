@@ -32,10 +32,10 @@ class Building:
 		self.groupable = groupable
 		self.base_cost = base_cost
 		self.cost = base_cost
-		self.cost_increment = cost_increment
+		self.cost_increment = 0
 		self.base_vp = base_vp
 		self.vp = base_vp
-		self.vp_increment = vp_increment
+		self.vp_increment = 0
 		self.area = area
 		self.texture = texture
 		self.cells = cells
