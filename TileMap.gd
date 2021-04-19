@@ -157,9 +157,9 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 0],
 			], {
-				12: 3, # Shop
-				15: 3, # Statue
+				12: 4, # Shop
 			}, {
+				15: 4, # Statue
 				16: 4, # Cathedral
 			}),
 	# 14: Forge
@@ -174,16 +174,18 @@ var BUILDINGS = [
 				16: -5, # Cathedral
 			}),
 	# 15: Statue
-	Building.new(false, false, 4, 0, Vector2(3, 4),
+	Building.new(false, false, 5, 5, Vector2(5, 6),
 			preload("res://Art/statue.png"), [
 				[1],
 				[1],
 			], {
 			}, {
-				16: -1, # Cathedral
+				11: 1, # House
+				13: 2, # Big house
+				15: -5, # Statue
 			}),
 	# 16: Cathedral
-	Building.new(false, false, 40, 20, Vector2(6, 5),
+	Building.new(false, false, 40, 20, Vector2(8, 7),
 			preload("res://Art/cathedral3.png"), [
 				[0, 1, 0, 0],
 				[1, 1, 1, 1],
