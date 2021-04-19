@@ -147,7 +147,7 @@ var BUILDINGS = [
 				11: 1,  # House
 				12: -5, # Shop
 				13: 2,  # Big house
-				14: 3,  # Forge
+				14: 2,  # Forge
 				16: -4, # Cathedral
 			}, {
 			}),
@@ -169,11 +169,8 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 1],
 			], {
-				12: 3,   # Shop
-				14: -10, # Forge
-				17: 5,   # Keep
-				19: 10, # Pyramid
-				16: 10, # Cathedral
+				12: 2,  # Shop
+				14: -5, # Forge
 			}, {
 				16: -5, # Cathedral
 			}),
@@ -209,7 +206,7 @@ var BUILDINGS = [
 				19: 20,  # Pyramid
 			}),
 	# 17: Keep
-	Building.new(false, false, 40, 20, Vector2(8, 7),
+	Building.new(false, false, 40, 20, Vector2(9, 8),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
