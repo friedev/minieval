@@ -18,6 +18,10 @@ func _input(event):
 			if child.name != "Timer":
 				child.visible = false
 		update_currency()
+		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
+		_node_input_pause(pauseMenu)
+		var info = get_node(@"/root/Root/InfoOverlay/Control")
+		_node_input_pause(info)
 		visible = true
 	elif event.is_action_released("score_report") && Recap.game_over == false:
 		isPaused = false
@@ -28,6 +32,10 @@ func _input(event):
 				child.visible = true
 		if Global.game_mode > 0:
 			turn_label.visible = false
+		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
+		_node_input_pause(pauseMenu)
+		var info = get_node(@"/root/Root/InfoOverlay/Control")
+		_node_input_pause(info)
 		visible = false
 
 func update_currency():
@@ -48,3 +56,8 @@ func update_currency():
 	if(BuildingCount == "69"):
 		BuildingCount = "69 (nice.)"
 	get_node("Stats/BuildingsPlacedCountLabel").text = BuildingCount
+	
+#pauses input for a given node
+func _node_input_pause(node):
+	var nodeInput = node.is_processing_input()
+	node.set_process_input(!nodeInput)
