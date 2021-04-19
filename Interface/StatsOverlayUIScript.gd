@@ -42,20 +42,20 @@ func _input(event):
 func update_currency():
 	if Global.game_mode != 3:
 		var currencyCount = str(tilemap.currency)
-		if(currencyCount == "69"):
+		if currencyCount == "69":
 			currencyCount = "69 (nice.)"
 		$Stats/CurrencyCountLabel.text = currencyCount
 		var VPCount = str(tilemap.vp)
-		if(VPCount == "69"):
+		if VPCount == "69":
 			VPCount = "69 (nice.)"
 		$Stats/VPCountLabel.text = VPCount
 	else:
 		$Stats/CurrencyCountLabel.text = "inf"
 		$Stats/VPCountLabel.text = "inf"
-	var BuildingCount = str(tilemap.buildings_placed)
-	if(BuildingCount == "69"):
-		BuildingCount = "69 (nice.)"
-	$Stats/BuildingsPlacedCountLabel.text = BuildingCount
+	var buildingCount = str(tilemap.buildings_placed)
+	if buildingCount == "69":
+		buildingCount = "69 (nice.)"
+	$Stats/BuildingsPlacedCountLabel.text = buildingCount
 	
 #pauses input for a given node
 func _node_input_pause(node):

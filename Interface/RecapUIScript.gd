@@ -1,12 +1,15 @@
 extends Control
 
-var tilemap
+onready var tilemap = get_node(@"/root/Root/TileMap")
+onready var palette = get_node(@"/root/Root/Palette/Menu")
+onready var ui_text_layer = get_node(@"/root/Root/UITextLayer")
+onready var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
+onready var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 var game_over = false
 var freeplay = false
 onready var gameMusic = get_node(@"/root/Root/BackgroundMusic")
 
 func _unhandled_input(event):
-	tilemap = get_node(@"/root/Root/TileMap")
 	if tilemap.get_turns_remaining() == 0 && Global.game_mode == 0 && game_over == false:
 		end_game()
 	elif Global.timer_over == true && Global.game_mode == 1:
@@ -23,9 +26,6 @@ func end_game():
 	tilemap._update_labels()
 	get_tree().paused = true
 	update_labels()
-	var palette = get_node(@"/root/Root/Palette/Menu")
-	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
-	var timer = get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 	visible = true
 	palette.visible = false
 	timer.visible = false
@@ -35,15 +35,15 @@ func end_game():
 
 func update_labels():
 	var currencyCount = str(tilemap.currency)
-	if(currencyCount == "69"):
+	if currencyCount == "69":
 		currencyCount = "69 (nice.)"
 	$Stats/CurrencyCountLabel.text = currencyCount
 	var VPCount = str(tilemap.vp)
-	if(VPCount == "69"):
+	if VPCount == "69":
 		VPCount = "69 (nice.)"
 	$Stats/VPCountLabel.text = VPCount
 	var BuildingCount = str(tilemap.buildings_placed)
-	if(BuildingCount == "69"):
+	if BuildingCount == "69":
 		BuildingCount = "69 (nice.)"
 	$Stats/BuildingsPlacedCountLabel.text = BuildingCount
 
@@ -54,9 +54,6 @@ func _on_FreeplayButton_pressed():
 	game_over = false
 	Global.game_mode = 2
 	get_tree().paused = false
-	var palette = get_node(@"/root/Root/Palette/Menu")
-	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
-	var turn_label = get_node(@"/root/Root/UITextLayer/TurnLabel")
 	visible = false
 	palette.visible = true
 	for child in ui_text_layer.get_children():
@@ -73,8 +70,6 @@ func _on_UndoButton_pressed():
 	undo.action = "undo"
 	undo.pressed = true
 	Input.parse_input_event(undo)
-	var palette = get_node(@"/root/Root/Palette/Menu")
-	var ui_text_layer = get_node(@"/root/Root/UITextLayer")
 	visible = false
 	palette.visible = true
 	for child in ui_text_layer.get_children():

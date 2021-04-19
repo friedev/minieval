@@ -1,5 +1,8 @@
 extends Control
 
+onready var title_ui = get_node(@"/root/Control/TitleUI/Control")
+onready var title_scene = "res://Interface/Title.tscn"
+
 onready var camera = $OptionsHeader/CameraSpeedValue
 onready var volume = $OptionsHeader/VolumeValue
 onready var sfx_value = $OptionsHeader/SFXValue
@@ -14,15 +17,14 @@ onready var sound_effects = AudioServer.get_bus_index("Sound Effects")
 var volume_values = [-80, -40, -20, -10, -5, 0, 2, 4, 6, 8, 9]
 
 func _input(event):
-	if Global.last_scene != "res://Interface/Title.tscn":
+	if Global.last_scene != title_scene:
 		if event.is_action_pressed("pause"):
 			visible = false
 			options_header.visible = true
 
 func _on_ReturnToGame_pressed():
-	var title_ui = get_node(@"/root/Control/TitleUI/Control")
 	visible = false
-	if Global.last_scene == "res://Interface/Title.tscn":
+	if Global.last_scene == title_scene:
 		title_ui.visible = true
 
 func _on_CameraSpeed_value_changed(value):

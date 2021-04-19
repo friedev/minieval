@@ -121,7 +121,7 @@ func _node_input_pause(node):
 
 func _set_currency_interactions(row, buildings, buildingName, buildingNumber, interactionName, interactionNumber):
 	var currInt = buildings[buildingNumber].currency_interactions[interactionNumber]
-	if(currInt > 0):
+	if currInt > 0:
 		get_node(row + "RowLabels/" + buildingName + "/" + interactionName + "CurrInt").text = '+' + str(currInt)
 	else:
 		get_node(row + "RowLabels/" + buildingName + "/" + interactionName + "CurrInt").text = str(currInt)
@@ -129,7 +129,7 @@ func _set_currency_interactions(row, buildings, buildingName, buildingNumber, in
 
 func _set_vp_interactions(row, buildings, buildingName, buildingNumber, interactionName, interactionNumber):
 	var vpInt = buildings[buildingNumber].vp_interactions[interactionNumber]
-	if(vpInt > 0):
+	if vpInt > 0:
 		get_node(row + "RowLabels/" + buildingName + "/" + interactionName + "VPInt").text = '+' + str(vpInt)
 	else:
 		get_node(row + "RowLabels/" + buildingName + "/" + interactionName + "VPInt").text = str(vpInt)
