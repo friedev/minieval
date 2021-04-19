@@ -169,9 +169,9 @@ __meta__ = {
 }
 
 [node name="HouseCostIncrement" type="Label" parent="Control/TopRowLabels/House"]
-margin_left = 505.0
+margin_left = 527.0
 margin_top = 342.0
-margin_right = 577.0
+margin_right = 599.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
@@ -182,9 +182,9 @@ __meta__ = {
 }
 
 [node name="HouseVPIncrement" type="Label" parent="Control/TopRowLabels/House"]
-margin_left = 505.0
+margin_left = 527.0
 margin_top = 374.036
-margin_right = 577.0
+margin_right = 599.0
 margin_bottom = 392.036
 rect_pivot_offset = Vector2( -55.8164, 21.4049 )
 theme = ExtResource( 5 )
