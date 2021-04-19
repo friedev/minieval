@@ -298,7 +298,7 @@ const DEFAULT_BUILDING = 2
 #changed to var to allow for creative mode to change - Kalen
 var ALLOW_DESTROYING = false
 # Currency yields are multiplied this amount for buildings connected by road
-var ROAD_MODIFIER = 0.5
+var ROAD_MODIFIER = 1
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map = []
