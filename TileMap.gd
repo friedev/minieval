@@ -141,7 +141,7 @@ var BUILDINGS = [
 	null, # 9: Unused
 	null, # 10: Unused
 	# 11: House
-	Building.new(false, false, 1, 0.1, 1, 0, Vector2(3, 3),
+	Building.new(false, false, 1, 0.07, 1, 0, Vector2(3, 3),
 			preload("res://Art/house.png"), [
 				[1],
 			], {
@@ -156,8 +156,8 @@ var BUILDINGS = [
 			], {
 				11: 2,  # House
 				12: -4, # Shop
-				13: 2,  # Big house
-				14: 2,  # Forge
+				13: 6,  # Big house
+				14: 3,  # Forge
 				16: -4, # Cathedral
 			}, {
 			}),
@@ -167,9 +167,11 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 0],
 			], {
-				12: 4, # Shop
+				12: 6, # Shop
+				15: 6, # Field
+				# Add benefit from fields
 			}, {
-				16: -5, # Cathedral
+				16: 4, # Cathedral
 			}),
 	# 14: Forge
 	Building.new(false, false, 8, 0.5, 2, 0, Vector2(6, 6),
@@ -177,9 +179,11 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 1],
 			], {
-				12: 2,   # Shop
+				12: 3,   # Shop
 				14: -10, # Forge
 				17: 5,   # Keep
+				19: 10, # Pyramid
+				16: 10, # Cathedral
 			}, {
 				16: -5, # Cathedral
 			}),
@@ -191,6 +195,7 @@ var BUILDINGS = [
 				[1, 1, 1],
 			], {
 				11: 2, # House
+				13: 6, # Big House
 				15: 2, # Field
 			}, {
 				16: -1, # Cathedral
@@ -202,10 +207,11 @@ var BUILDINGS = [
 				[1, 1, 1, 1],
 				[0, 1, 0, 0],
 			], {
+				14: 10, # Forge
 			}, {
 				11: 2,   # House
 				12: -5,  # Shop
-				13: 2,   # Big house
+				13: 4,   # Big house
 				14: -5,  # Forge
 				15: -1,  # Field
 				16: -10, # Cathedral
@@ -251,7 +257,7 @@ var BUILDINGS = [
 				[0, 1, 1, 1, 1, 1, 1, 0],
 				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
-				14: 25, # Forge
+				14: 10, # Forge
 			}, {
 				11: -1, # House
 				12: -5, # Shop
