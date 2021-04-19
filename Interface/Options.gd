@@ -52,15 +52,15 @@ func _on_GameVolume_value_changed(value):
 	elif value == 5:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 0)
 	elif value == 6:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 3)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 2)
 	elif value == 7:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 6)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 4)
 	elif value == 8:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 9)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 6)
 	elif value == 9:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 12)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 8)
 	elif value == 10:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 15)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 9)
 
 
 func _on_SFXVolume_value_changed(value):

@@ -75,7 +75,7 @@ margin_top = 136.0
 margin_right = 56.0
 margin_bottom = 154.0
 theme = ExtResource( 3 )
-text = "In-Game Music"
+text = "Music Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
