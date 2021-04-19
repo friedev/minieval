@@ -413,6 +413,13 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		self._clear_preview()
 		
+		print('id: %d' % get_cellv(mouse_cellv))
+		print('group: %d' % get_group(mouse_cellv))
+		print('base group: %d' % get_base_group(get_group(mouse_cellv)))
+		print('adjacent buildings:')
+		print(adjacent_buildings[get_base_group(get_group(mouse_cellv))])
+		print()
+		
 		var building = BUILDINGS[self.selected_building]
 		var placement
 		if event.button_index == 1:
@@ -703,7 +710,7 @@ func get_building_value(cellv, id):
 	# Account for buildings connected via road
 	var counted_groups = []
 	for adjacent_cellv in building.get_adjacent_cells(cellv):
-		var adjacent_group = get_group(adjacent_cellv)
+		var adjacent_group = get_base_group(get_group(adjacent_cellv))
 		if adjacent_group >= BASE_GROUP_INDEX and not counted_groups.has(adjacent_group):
 			counted_groups.append(adjacent_group)
 			for adjacent_building in adjacent_buildings[adjacent_group]:
