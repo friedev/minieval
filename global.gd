@@ -8,5 +8,5 @@ var game_time = 60
 var timer_over = false
 var last_scene = ""
 var speed = 10.0
-var music_volume = 1
-var sfx_volume = 1
+var music_volume = 5
+var sfx_volume = 5
