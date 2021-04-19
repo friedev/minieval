@@ -413,13 +413,6 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		self._clear_preview()
 		
-		print('id: %d' % get_cellv(mouse_cellv))
-		print('group: %d' % get_group(mouse_cellv))
-		print('base group: %d' % get_base_group(get_group(mouse_cellv)))
-		print('adjacent buildings:')
-		print(adjacent_buildings[get_base_group(get_group(mouse_cellv))])
-		print()
-		
 		var building = BUILDINGS[self.selected_building]
 		var placement
 		if event.button_index == 1:
