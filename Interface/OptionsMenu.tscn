@@ -52,9 +52,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -200.0
-margin_top = -182.0
+margin_top = -160.0
 margin_right = 200.0
-margin_bottom = 138.0
+margin_bottom = 160.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,57 +66,57 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -106.0
-margin_top = -160.0
+margin_top = -136.0
 margin_right = 106.0
-margin_bottom = -96.0
+margin_bottom = -72.0
 theme = ExtResource( 4 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraOption" type="Label" parent="Options/OptionsHeader"]
-margin_left = -64.0
-margin_top = 88.0
-margin_right = 112.0
-margin_bottom = 106.0
+[node name="CameraOption" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 312.0
+margin_right = 646.0
+margin_bottom = 330.0
 theme = ExtResource( 3 )
 text = "Camera Speed"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VolumeOption" type="Label" parent="Options/OptionsHeader"]
-margin_left = -64.0
-margin_top = 136.0
-margin_right = 112.0
-margin_bottom = 154.0
+[node name="VolumeOption" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 360.0
+margin_right = 646.0
+margin_bottom = 378.0
 theme = ExtResource( 3 )
 text = "Music Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SoundEffects" type="Label" parent="Options/OptionsHeader"]
-margin_left = -64.0
-margin_top = 184.0
-margin_right = 112.0
-margin_bottom = 202.0
+[node name="SoundEffects" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 408.0
+margin_right = 646.0
+margin_bottom = 426.0
 theme = ExtResource( 3 )
 text = "SFX Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CameraSpeed" type="HSlider" parent="Options/OptionsHeader"]
+[node name="CameraSpeed" type="HSlider" parent="Options"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -2.0
-margin_top = 55.685
+margin_top = -48.315
 margin_right = 165.0
-margin_bottom = 71.685
+margin_bottom = -32.315
 custom_icons/grabber_disabled = SubResource( 1 )
 custom_icons/grabber_highlight = SubResource( 2 )
 custom_icons/grabber = SubResource( 3 )
@@ -130,15 +130,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameVolume" type="HSlider" parent="Options/OptionsHeader"]
+[node name="GameVolume" type="HSlider" parent="Options"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -2.00001
-margin_top = 104.0
+margin_left = -2.0
 margin_right = 165.0
-margin_bottom = 120.0
+margin_bottom = 16.0
 custom_icons/grabber_disabled = SubResource( 4 )
 custom_icons/grabber_highlight = SubResource( 5 )
 custom_icons/grabber = SubResource( 6 )
@@ -151,15 +150,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SFXVolume" type="HSlider" parent="Options/OptionsHeader"]
+[node name="SFXVolume" type="HSlider" parent="Options"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -2.0
-margin_top = 152.0
+margin_top = 48.0
 margin_right = 165.0
-margin_bottom = 168.0
+margin_bottom = 64.0
 custom_icons/grabber_disabled = SubResource( 7 )
 custom_icons/grabber_highlight = SubResource( 8 )
 custom_icons/grabber = SubResource( 9 )
@@ -172,15 +171,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReturnToGame" type="Button" parent="Options/OptionsHeader"]
+[node name="ReturnToGame" type="Button" parent="Options"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -76.0
-margin_top = 203.0
+margin_top = 99.0
 margin_right = 76.0
-margin_bottom = 229.0
+margin_bottom = 125.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
@@ -192,7 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="ready" from="Options" to="Options" method="_on_Options_ready"]
-[connection signal="value_changed" from="Options/OptionsHeader/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
-[connection signal="value_changed" from="Options/OptionsHeader/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
-[connection signal="value_changed" from="Options/OptionsHeader/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
-[connection signal="pressed" from="Options/OptionsHeader/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]
+[connection signal="value_changed" from="Options/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
+[connection signal="value_changed" from="Options/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
+[connection signal="value_changed" from="Options/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
+[connection signal="pressed" from="Options/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]
