@@ -1,0 +1,263 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Interface/Themes/theme_ui.tres" type="Theme" id=1]
+[ext_resource path="res://Interface/Themes/theme_title.tres" type="Theme" id=2]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_hover.tres" type="StyleBox" id=3]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=4]
+[ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=5]
+[ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://Interface/CustomGameUIScript.gd" type="Script" id=7]
+[ext_resource path="res://Art/check.png" type="Texture" id=8]
+
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="ImageTexture" id=2]
+
+[node name="TurnBasedMenu" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -256.0
+margin_top = -218.0
+margin_right = 256.0
+margin_bottom = 218.0
+custom_styles/panel = ExtResource( 5 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToChooseModeButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -29.0
+margin_top = 377.015
+margin_right = 29.0
+margin_bottom = 403.015
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 4 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -25.0
+margin_top = 331.54
+margin_right = 25.0
+margin_bottom = 357.54
+theme = ExtResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 4 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTitle" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.0
+margin_top = -176.0
+margin_right = 188.0
+margin_bottom = -112.0
+theme = ExtResource( 2 )
+text = "Custom Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLimitLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -165.0
+margin_top = -81.0
+margin_right = -58.0
+margin_bottom = -63.0
+rect_pivot_offset = Vector2( 118.981, 27.5106 )
+theme = ExtResource( 1 )
+text = "Turn Limit:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLimitLabel2" type="Label" parent="."]
+margin_left = 333.103
+margin_top = 140.603
+margin_right = 446.103
+margin_bottom = 158.603
+rect_pivot_offset = Vector2( 118.981, 27.5106 )
+theme = ExtResource( 1 )
+text = "turns"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLimitLabel3" type="Label" parent="."]
+margin_left = 333.103
+margin_top = 188.603
+margin_right = 446.103
+margin_bottom = 206.603
+rect_pivot_offset = Vector2( 118.981, 27.5106 )
+theme = ExtResource( 1 )
+text = "seconds"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLimitLabel4" type="Label" parent="."]
+margin_left = 333.103
+margin_top = 236.603
+margin_right = 446.103
+margin_bottom = 254.603
+rect_pivot_offset = Vector2( 118.981, 27.5106 )
+theme = ExtResource( 1 )
+text = "tiles"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapSizeLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -152.0
+margin_top = 15.0
+margin_right = -58.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 59.6399, 9 )
+theme = ExtResource( 1 )
+text = "Map Size:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapSizeLabel2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -206.0
+margin_top = 63.0
+margin_right = -58.0
+margin_bottom = 81.0
+rect_pivot_offset = Vector2( 59.6399, 9 )
+theme = ExtResource( 1 )
+text = "Creative Mode:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLimitLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -166.0
+margin_top = -33.0
+margin_right = -58.0
+margin_bottom = -15.0
+theme = ExtResource( 1 )
+text = "Time Limit:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnLimitInput" type="LineEdit" parent="."]
+margin_left = 212.084
+margin_top = 136.175
+margin_right = 316.084
+margin_bottom = 162.175
+theme = ExtResource( 1 )
+custom_styles/read_only = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+max_length = 3
+context_menu_enabled = false
+placeholder_text = "Unlimited"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLimitInput" type="LineEdit" parent="."]
+margin_left = 212.084
+margin_top = 184.175
+margin_right = 316.084
+margin_bottom = 210.175
+theme = ExtResource( 1 )
+custom_styles/read_only = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+max_length = 3
+context_menu_enabled = false
+placeholder_text = "Unlimited"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameSizeInput" type="LineEdit" parent="."]
+margin_left = 212.084
+margin_top = 232.175
+margin_right = 316.084
+margin_bottom = 258.175
+theme = ExtResource( 1 )
+custom_styles/read_only = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+text = "64"
+max_length = 3
+context_menu_enabled = false
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreativeMode" type="CheckBox" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_top = -154.112
+margin_right = 12.0
+margin_bottom = -128.112
+theme = ExtResource( 1 )
+custom_icons/radio_checked = ExtResource( 8 )
+custom_icons/checked = ExtResource( 8 )
+custom_icons/radio_unchecked = SubResource( 1 )
+custom_icons/unchecked = SubResource( 2 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/hover_pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="BackToChooseModeButton" to="." method="_on_BackToChooseModeButton_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="text_changed" from="TurnLimitInput" to="." method="_on_TurnLimitInput_text_changed"]
+[connection signal="text_changed" from="TimeLimitInput" to="." method="_on_TimeLimitInput_text_changed"]
+[connection signal="text_changed" from="GameSizeInput" to="." method="_on_MapSizeInput_text_changed"]

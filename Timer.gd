@@ -6,14 +6,9 @@ var minutes: int = 0
 
 func _ready():
 	if Global.game_mode == 1: 
-		if Global.game_time == 60:
-			minutes = 1
-		elif Global.game_time == 300:
-			minutes = 5
-		elif Global.game_time == 600:
-			minutes = 10
-		elif Global.game_time == 1800:
-			minutes = 30
+		Global.timer_over = false
+		minutes = int(Global.game_time / 60)
+		seconds = Global.game_time % 60
 		$timeLeftLabel.set_text(str(minutes, ":", str(seconds).pad_zeros(2)))
 		timer = Timer.new()
 		timer.connect("timeout",self,"_on_timer_timeout") 
@@ -24,7 +19,7 @@ func _ready():
 
 
 func _on_timer_timeout():
-	if seconds == 0 && minutes == 0:
+	if seconds == 0 and minutes == 0:
 		Global.timer_over = true
 	if seconds == 0:
 		seconds = 60

@@ -23,9 +23,9 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.12244
+margin_left = -2.18189
 margin_top = 2.2449
-margin_right = -1.12244
+margin_right = -2.18188
 margin_bottom = 2.24487
 color = Color( 0, 0, 0, 0.501961 )
 __meta__ = {
@@ -46,40 +46,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitGameButton" type="Button" parent="Control/Menu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -56.0
-margin_top = 115.0
-margin_right = 56.0
-margin_bottom = 141.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 7 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
-text = "Exit Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NewGameButton" type="Button" parent="Control/Menu"]
+[node name="PlayButton" type="Button" parent="Control/Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -58.0
-margin_top = 199.776
-margin_right = 58.0
-margin_bottom = 225.776
+margin_left = -25.0
+margin_top = 152.0
+margin_right = 25.0
+margin_bottom = 178.0
+rect_pivot_offset = Vector2( 209.919, -24.398 )
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 7 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 5 )
-text = "New Game"
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CustomGameButton" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = 19.0
+margin_right = 75.0
+margin_bottom = 45.0
+rect_pivot_offset = Vector2( 209.919, -24.398 )
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "Custom Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,6 +106,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExitGameButton" type="Button" parent="Control/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = 115.0
+margin_right = 56.0
+margin_bottom = 141.0
+theme = ExtResource( 3 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+text = "Exit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MenuTitle" type="Label" parent="Control/Menu"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -118,6 +140,7 @@ text = "City Builder"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
-[connection signal="pressed" from="Control/Menu/NewGameButton" to="Control" method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Control/Menu/PlayButton" to="Control" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Control/Menu/CustomGameButton" to="Control" method="_on_CustomGameButton_pressed"]
 [connection signal="pressed" from="Control/Menu/OptionsButton" to="Control" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Control/Menu/ExitGameButton" to="Control" method="_on_ExitGameButton_pressed"]
