@@ -10,10 +10,10 @@ onready var advanced_header = get_node("Advanced Header")
 onready var options_header = get_node("OptionsHeader")
 
 func _input(event):
-	if event.is_action_pressed("pause"):
-		visible = false
-		advanced_header.visible = false
-		options_header.visible = true
+	if Global.last_scene != "res://Interface/Title.tscn":
+		if event.is_action_pressed("pause"):
+			visible = false
+			options_header.visible = true
 
 func _on_ReturnToGame_pressed():
 	var title_ui = get_node(@"/root/Control/TitleUI/Control")
@@ -21,12 +21,10 @@ func _on_ReturnToGame_pressed():
 	if Global.last_scene == "res://Interface/Title.tscn":
 		title_ui.visible = true
 
-
 func _on_CameraSpeed_value_changed(value):
 	var value_text = get_node("OptionsHeader/CameraSpeedValue")
 	Global.speed = value
 	value_text.text = str(value)
-
 
 func _on_Options_ready():
 	camera.text = str(Global.speed)
@@ -62,7 +60,6 @@ func _on_GameVolume_value_changed(value):
 	elif value == 10:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background music"), 9)
 
-
 func _on_SFXVolume_value_changed(value):
 	Global.sfx_volume = value
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound Effects"), value)
@@ -90,14 +87,3 @@ func _on_SFXVolume_value_changed(value):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound Effects"), 12)
 	elif value == 10:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound Effects"), 15)
-
-
-func _on_Advanced_pressed():
-	options_header.visible = false
-	advanced_header.visible = true
-
-
-
-func _on_Back_Button_pressed():
-	options_header.visible = true
-	advanced_header.visible = false

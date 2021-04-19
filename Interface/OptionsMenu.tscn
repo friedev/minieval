@@ -158,70 +158,9 @@ __meta__ = {
 }
 
 [node name="ReturnToGame" type="Button" parent="Options/OptionsHeader"]
-margin_left = 152.0
+margin_left = 16.0
 margin_top = 248.0
-margin_right = 320.0
-margin_bottom = 304.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 1 )
-text = "Back to Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Advanced" type="Button" parent="Options/OptionsHeader"]
-margin_left = -80.0
-margin_top = 248.0
-margin_right = 80.0
-margin_bottom = 304.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 1 )
-text = "Advanced"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Advanced Header" type="Label" parent="Options"]
-visible = false
-margin_left = 400.0
-margin_top = 200.0
-margin_right = 892.0
-margin_bottom = 264.0
-theme = ExtResource( 4 )
-text = "Advanced Options"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Back Button" type="Button" parent="Options/Advanced Header"]
-margin_left = 48.0
-margin_top = 248.0
-margin_right = 208.0
-margin_bottom = 304.0
-theme = ExtResource( 3 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 1 )
-text = "Back to Options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ReturnToGame2" type="Button" parent="Options/Advanced Header"]
-margin_left = 280.0
-margin_top = 248.0
-margin_right = 448.0
+margin_right = 184.0
 margin_bottom = 304.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
@@ -238,6 +177,3 @@ __meta__ = {
 [connection signal="value_changed" from="Options/OptionsHeader/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
 [connection signal="value_changed" from="Options/OptionsHeader/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
 [connection signal="pressed" from="Options/OptionsHeader/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]
-[connection signal="pressed" from="Options/OptionsHeader/Advanced" to="Options" method="_on_Advanced_pressed"]
-[connection signal="pressed" from="Options/Advanced Header/Back Button" to="Options" method="_on_Back_Button_pressed"]
-[connection signal="pressed" from="Options/Advanced Header/ReturnToGame2" to="Options" method="_on_ReturnToGame_pressed"]
