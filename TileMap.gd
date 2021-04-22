@@ -148,8 +148,8 @@ var BUILDINGS = [
 				12: -5, # Shop
 				13: 2,  # Big house
 				14: 2,  # Forge
-				16: -4, # Cathedral
 			}, {
+				16: -5, # Cathedral
 			}),
 	# 13: Big house
 	Building.new(false, false, 5, 2, Vector2(4, 4),
@@ -160,7 +160,6 @@ var BUILDINGS = [
 				12: 4, # Shop
 			}, {
 				15: 4, # Statue
-				16: 4, # Cathedral
 			}),
 	# 14: Forge
 	Building.new(false, false, 10, 2, Vector2(6, 6),
@@ -172,6 +171,7 @@ var BUILDINGS = [
 				14: -5, # Forge
 			}, {
 				16: -5, # Cathedral
+				17: 5,  # Keep
 			}),
 	# 15: Statue
 	Building.new(false, false, 5, 5, Vector2(5, 6),
@@ -180,9 +180,10 @@ var BUILDINGS = [
 				[1],
 			], {
 			}, {
-				11: 1, # House
-				13: 2, # Big house
+				11: 1,  # House
+				13: 2,  # Big house
 				15: -5, # Statue
+				16: 10, # Cathedral
 			}),
 	# 16: Cathedral
 	Building.new(false, false, 40, 20, Vector2(8, 7),
@@ -191,46 +192,43 @@ var BUILDINGS = [
 				[1, 1, 1, 1],
 				[0, 1, 0, 0],
 			], {
-				14: 10, # Forge
-			}, {
-				11: 2,   # House
-				12: -5,  # Shop
-				13: 4,   # Big house
-				14: -5,  # Forge
+				14: 10,  # Forge
 				16: -20, # Cathedral
-				19: 20,  # Pyramid
+			}, {
+				12: -5,  # Shop
+				14: -5,  # Forge
+				15: 10,  # Statue
+				16: -20, # Cathedral
 			}),
 	# 17: Keep
-	Building.new(false, false, 40, 20, Vector2(9, 8),
+	Building.new(false, false, 80, 20, Vector2(9, 8),
 			preload("res://Art/keep.png"), [
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 				[1, 1, 1],
 			], {
-				14: 10, # Forge
+				14: 10,  # Forge
+				17: -40, # Keep
 			}, {
-				11: 1,   # House
-				13: 1,   # Big house
-				16: 5,   # Cathedral
+				14: 10,  # Forge
 				17: -20, # Keep
-				18: 10,  # Tower
+				18: 20,  # Tower
 			}),
 	# 18: Tower
-	Building.new(false, false, 20, 0, Vector2(7, 5),
+	Building.new(false, false, 20, 0, Vector2(5, 5),
 			preload("res://Art/tower.png"), [
 				[1],
 				[1],
 				[1],
 			], {
-				14: 10, # Forge
+				14: 5, # Forge
 			}, {
-				17: 10, # Keep
-				18: -5, # Tower
-				19: 10, # Pyramid
+				17: 20,  # Keep
+				18: -10, # Tower
 			}),
-	# 19: Pyramid
-	Building.new(false, false, 100, 100, Vector2(16, 12),
+	# 19: Pyramid - UNBALANCED
+	Building.new(false, false, 1000, 100, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
 				[0, 0, 1, 1, 1, 1, 0, 0],
@@ -626,6 +624,7 @@ func _clear_preview():
 			var sprite = get_building_sprite(modulated_building)
 			if sprite != null and not sprite.is_queued_for_deletion():
 				sprite.modulate = Color.white
+		modulated_buildings.clear()
 
 func _update_preview():
 	# Only update the preview if the mouse has moved to a different cell

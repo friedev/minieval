@@ -8,7 +8,10 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		cellv = ((event.position - self.global_position) / 64).floor()
 	elif event is InputEventKey and event.pressed:
-		cellv = Vector2(event.scancode - KEY_1, 0)
+		if event.scancode == KEY_0:
+			cellv = Vector2(9, 0)
+		else:
+			cellv = Vector2(event.scancode - KEY_1, 0)
 	else:
 		return
 	var id = self.get_cellv(cellv)

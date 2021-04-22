@@ -1,6 +1,6 @@
 extends Control
 
-onready var title_ui = get_node(@"/root/Control/TitleUI/Control")
+onready var title_ui_path = @"/root/Control/TitleUI/Control"
 onready var title_scene = "res://Interface/Title.tscn"
 
 onready var camera_speed = $CameraSpeed
@@ -25,7 +25,7 @@ func _input(event):
 func _on_ReturnToGame_pressed():
 	visible = false
 	if Global.last_scene == title_scene:
-		title_ui.visible = true
+		get_node(title_ui_path).visible = true
 
 func _on_CameraSpeed_value_changed(value):
 	Global.speed = value
