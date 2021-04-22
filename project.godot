@@ -15,7 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="City Builder"
+config/name="Minieval"
+config/description="A tiny medieval city builder"
 run/main_scene="res://Interface/Title.tscn"
 
 [audio]
