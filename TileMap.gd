@@ -658,6 +658,9 @@ func _update_preview():
 				$PreviewBuilding.modulate = PREVIEW_COLOR_INVALID
 				break
 	
+	if CREATIVE_MODE:
+		return
+	
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
