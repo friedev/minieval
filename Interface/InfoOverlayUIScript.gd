@@ -109,10 +109,9 @@ func _input(event):
 		_node_input_pause(stats)
 		visible = false
 
-#pauses input for a given node
+# Pauses or unpauses input for a given node
 func _node_input_pause(node):
-	var nodeInput = node.is_processing_input()
-	node.set_process_input(!nodeInput)
+	node.set_process_input(not node.is_processing_input())
 
 
 func _set_currency_interactions(row, buildings, buildingName, buildingNumber, interactionName, interactionNumber):

@@ -19,6 +19,7 @@ var game_size = GAME_SIZE
 var game_time = GAME_TIME
 var timer_over = false
 var last_scene = ""
+var tutorial_seen = false
 
 # Options
 var speed = SPEED
