@@ -15,11 +15,11 @@ Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to z
 ## Credits
 
 - [Aaron Friesen](https://maugrift.com): Team Lead, Programming, UI Design, Art, Title Screen Music, Balancing
-- [Kalen Wallin](https://kalenwallin.itch.io): UI Design, Programming
-- [Evan Mielak](https://evanmielak.itch.io): Sound Effects, Programming, Balancing
-- Viet Ninh: UI Design, Programming
-- [Jackson Herman](https://qotus.itch.io): In-Game Music, Balancing
-- [Ethan Fox](https://magosjurisvulpes.itch.io): Balancing
+- [Kalen Wallin](https://github.com/kalenwallin): UI Design, Programming
+- [Evan Mielak](https://github.com/EvanJMielak): Sound Effects, Programming, Balancing
+- [Viet Ninh](https://github.com/viet-ninh): UI Design, Programming
+- [Jackson Herman](https://github.com/jack-herman): In-Game Music, Balancing
+- [Ethan Fox](https://github.com/EthanFox01): Balancing
 
 ## Assets and Tools
 
