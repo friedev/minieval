@@ -675,7 +675,7 @@ func _update_preview():
 	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
 		var area_building = get_cellv(cellv)
-		if area_building > 0:
+		if area_building >= BASE_BUILDING_INDEX:
 			var area_building_type = get_type(area_building)
 			var area_building_sprite = get_building_sprite(area_building)
 			var currency_interaction = building.currency_interactions.get(area_building_type, 0)
