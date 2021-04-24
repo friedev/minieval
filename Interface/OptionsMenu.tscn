@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Interface/Styleboxes/stylebox_menu.tres" type="StyleBox" id=1]
 [ext_resource path="res://Interface/Options.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/Styleboxes/stylebox_button.tres" type="StyleBox" id=7]
 [ext_resource path="res://Interface/Styleboxes/stylebox_grabber.tres" type="StyleBox" id=8]
+[ext_resource path="res://Art/check.png" type="Texture" id=9]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -26,6 +27,10 @@
 [sub_resource type="ImageTexture" id=8]
 
 [sub_resource type="ImageTexture" id=9]
+
+[sub_resource type="ImageTexture" id=10]
+
+[sub_resource type="ImageTexture" id=11]
 
 [node name="OptionsMenu" type="CanvasLayer"]
 
@@ -52,9 +57,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -200.0
-margin_top = -160.0
+margin_top = -184.0
 margin_right = 200.0
-margin_bottom = 160.0
+margin_bottom = 184.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,9 +71,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -106.0
-margin_top = -136.0
+margin_top = -160.0
 margin_right = 106.0
-margin_bottom = -72.0
+margin_bottom = -96.0
 theme = ExtResource( 4 )
 text = "Options"
 __meta__ = {
@@ -77,9 +82,9 @@ __meta__ = {
 
 [node name="CameraOption" type="Label" parent="Options"]
 margin_left = 470.0
-margin_top = 312.0
+margin_top = 296.0
 margin_right = 646.0
-margin_bottom = 330.0
+margin_bottom = 314.0
 theme = ExtResource( 3 )
 text = "Camera Speed"
 __meta__ = {
@@ -88,9 +93,9 @@ __meta__ = {
 
 [node name="VolumeOption" type="Label" parent="Options"]
 margin_left = 470.0
-margin_top = 360.0
+margin_top = 344.0
 margin_right = 646.0
-margin_bottom = 378.0
+margin_bottom = 362.0
 theme = ExtResource( 3 )
 text = "Music Volume"
 __meta__ = {
@@ -99,11 +104,22 @@ __meta__ = {
 
 [node name="SoundEffects" type="Label" parent="Options"]
 margin_left = 470.0
-margin_top = 408.0
+margin_top = 392.0
 margin_right = 646.0
-margin_bottom = 426.0
+margin_bottom = 410.0
 theme = ExtResource( 3 )
 text = "SFX Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenLabel" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 440.0
+margin_right = 646.0
+margin_bottom = 458.0
+theme = ExtResource( 3 )
+text = "Fullscreen"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,9 +130,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -2.0
-margin_top = -48.315
+margin_top = -64.315
 margin_right = 165.0
-margin_bottom = -32.315
+margin_bottom = -48.315
 custom_icons/grabber_disabled = SubResource( 1 )
 custom_icons/grabber_highlight = SubResource( 2 )
 custom_icons/grabber = SubResource( 3 )
@@ -136,8 +152,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -2.0
+margin_top = -16.0
 margin_right = 165.0
-margin_bottom = 16.0
 custom_icons/grabber_disabled = SubResource( 4 )
 custom_icons/grabber_highlight = SubResource( 5 )
 custom_icons/grabber = SubResource( 6 )
@@ -156,9 +172,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -2.0
-margin_top = 48.0
+margin_top = 32.0
 margin_right = 165.0
-margin_bottom = 64.0
+margin_bottom = 48.0
 custom_icons/grabber_disabled = SubResource( 7 )
 custom_icons/grabber_highlight = SubResource( 8 )
 custom_icons/grabber = SubResource( 9 )
@@ -171,15 +187,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Fullscreen" type="CheckBox" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 76.0
+margin_top = 75.0
+margin_right = 100.0
+margin_bottom = 101.0
+theme = ExtResource( 3 )
+custom_icons/radio_checked = ExtResource( 9 )
+custom_icons/checked = ExtResource( 9 )
+custom_icons/radio_unchecked = SubResource( 10 )
+custom_icons/unchecked = SubResource( 11 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/hover_pressed = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ReturnToGame" type="Button" parent="Options"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -76.0
-margin_top = 99.0
+margin_top = 123.0
 margin_right = 76.0
-margin_bottom = 125.0
+margin_bottom = 149.0
 theme = ExtResource( 3 )
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
@@ -195,4 +235,5 @@ __meta__ = {
 [connection signal="value_changed" from="Options/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
 [connection signal="value_changed" from="Options/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
 [connection signal="value_changed" from="Options/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
+[connection signal="toggled" from="Options/Fullscreen" to="Options" method="_on_Fullscreen_toggled"]
 [connection signal="pressed" from="Options/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]

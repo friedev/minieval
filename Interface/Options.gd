@@ -40,3 +40,6 @@ func _on_SFXVolume_value_changed(value):
 
 func _on_Options_visibility_changed():
 	$BlackOverlay.visible = Global.last_scene != title_scene
+
+func _on_Fullscreen_toggled(button_pressed):
+	OS.window_fullscreen = button_pressed

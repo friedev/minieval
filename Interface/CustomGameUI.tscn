@@ -10,9 +10,9 @@
 [ext_resource path="res://Art/check.png" type="Texture" id=8]
 [ext_resource path="res://MenuBackground.tscn" type="PackedScene" id=9]
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id=10]
 
-[sub_resource type="ImageTexture" id=2]
+[sub_resource type="ImageTexture" id=11]
 
 [node name="CustomGameMenu" type="Panel"]
 anchor_right = 1.0
@@ -283,8 +283,8 @@ margin_bottom = 93.0
 theme = ExtResource( 1 )
 custom_icons/radio_checked = ExtResource( 8 )
 custom_icons/checked = ExtResource( 8 )
-custom_icons/radio_unchecked = SubResource( 1 )
-custom_icons/unchecked = SubResource( 2 )
+custom_icons/radio_unchecked = SubResource( 10 )
+custom_icons/unchecked = SubResource( 11 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 3 )
