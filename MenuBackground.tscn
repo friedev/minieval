@@ -91,13 +91,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -155.0
-margin_top = -34.0
-margin_right = 155.0
+margin_left = -180.0
+margin_top = -55.0
+margin_right = 180.0
 margin_bottom = -16.0
 rect_pivot_offset = Vector2( 266, 36 )
 theme = SubResource( 5 )
-text = "https://maugrift.itch.io/minieval"
+text = "https://maugrift.itch.io/minieval
+https://github.com/Maugrift/Minieval"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
