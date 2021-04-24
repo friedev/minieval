@@ -394,6 +394,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 994.942
+margin_top = 464.579
+margin_right = 1020.94
+margin_bottom = 482.579
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
 margin_left = 962.942
 margin_top = 522.579
@@ -529,7 +540,7 @@ scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 786446, 12, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786462, 12, 0, 786470, 12, 0, 786471, 14, 0, 917518, 15, 0, 917526, 16, 0, 917534, 15, 0, 917542, 16, 0, 917543, 17, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
+tile_data = PoolIntArray( 786446, 12, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786462, 12, 0, 786463, 13, 0, 786470, 12, 0, 786471, 14, 0, 917518, 15, 0, 917526, 16, 0, 917534, 15, 0, 917542, 16, 0, 917543, 17, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
 
 [node name="BottomRowLabels" type="Control" parent="Control"]
 margin_left = -145.0

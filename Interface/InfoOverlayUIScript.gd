@@ -35,6 +35,7 @@ func _input(event):
 		$TopRowLabels/BigHouse/BigHouseCost.text = str(buildings[13].cost)
 		$TopRowLabels/BigHouse/BigHouseVPGain.text = str(buildings[13].vp)
 		_set_currency_interactions("Top", buildings, "BigHouse", 13, "Shop", 12)
+		_set_currency_interactions("Top", buildings, "BigHouse", 13, "BigHouse", 13)
 		_set_vp_interactions("Top", buildings, "BigHouse", 13, "Statue", 15)
 		#update forge labels
 		$TopRowLabels/Forge/ForgeCost.text = str(buildings[14].cost)

@@ -157,9 +157,10 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 0],
 			], {
-				12: 3, # Shop
+				12: 4, # Shop
+				13: -2, # Big house
 			}, {
-				15: 3, # Statue
+				15: 4, # Statue
 			}),
 	# 14: Forge
 	Building.new(false, false, 10, 2, Vector2(6, 6),
@@ -167,7 +168,7 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 1],
 			], {
-				12: 2,  # Shop
+				12: 3,  # Shop
 				14: -5, # Forge
 			}, {
 				16: -5, # Cathedral
@@ -183,7 +184,7 @@ var BUILDINGS = [
 				11: 1,  # House
 				13: 2,  # Big house
 				15: -5, # Statue
-				16: 10, # Cathedral
+				16: 5,  # Cathedral
 			}),
 	# 16: Cathedral
 	Building.new(false, false, 40, 20, Vector2(8, 7),
@@ -195,8 +196,8 @@ var BUILDINGS = [
 				14: 10,  # Forge
 				16: -20, # Cathedral
 			}, {
-				12: -5,  # Shop
-				14: -5,  # Forge
+				12: -10,  # Shop
+				14: -10,  # Forge
 				15: 10,  # Statue
 				16: -20, # Cathedral
 			}),
