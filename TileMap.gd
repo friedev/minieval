@@ -413,19 +413,18 @@ func _unhandled_input(event):
 					mouse_cellv - building.get_cell_offset(),
 					self.selected_building,
 					CREATIVE_MODE)
-		elif ALLOW_DESTROYING and event.button_index == 2:
-			placement = self.destroy_building(mouse_cellv)
-		else:
-			return
+			
+			if placement:
+				currency += placement.currency_change
+				vp += placement.vp_change
+				history.append(placement)
+				future.clear()
+				self._update_labels()
+			else:
+				$BuildingPlaceErrorSound.play()
 		
-		if placement:
-			currency += placement.currency_change
-			vp += placement.vp_change
-			history.append(placement)
-			future.clear()
-			self._update_labels()
-		else:
-			$BuildingPlaceErrorSound.play()
+		if ALLOW_DESTROYING and event.button_index == 2:
+			self.destroy_building(mouse_cellv)
 	elif event.is_action_pressed("undo"):
 		self._clear_preview()
 		var prev_placement = history.pop_back()
@@ -451,9 +450,9 @@ func _unhandled_input(event):
 		self._clear_preview()
 	elif event.is_action_released("score_report"):
 		show_preview = true
-	elif event is InputEventKey and event.scancode == KEY_B:
-		# Manually break for debugging
-		breakpoint
+	#elif event is InputEventKey and event.scancode == KEY_B:
+	#	# Manually break for debugging
+	#	breakpoint
 
 
 # Overridden from TileMap
@@ -700,6 +699,13 @@ func _update_preview():
 	preview_node.rect_position = \
 			cellv_to_screen_position(Vector2(preview_cellv.x, building_cellv.y)) + \
 			Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
+	
+	# Shade preview building in red if you can't afford to place it
+	if value[0] + currency < 0:
+		if building.is_tile:
+			$PreviewTile.modulate = PREVIEW_COLOR_INVALID
+		else:
+			$PreviewBuilding.modulate = PREVIEW_COLOR_INVALID
 
 
 # Gets the total value that would result from placing the building with the
