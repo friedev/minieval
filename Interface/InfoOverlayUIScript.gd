@@ -76,13 +76,7 @@ func _input(event):
 		#update pyramid labels
 		$BottomRowLabels/Pyramid/PyramidCost.text = str(buildings[19].cost)
 		$BottomRowLabels/Pyramid/PyramidVPGain.text = str(buildings[19].vp)
-		_set_currency_interactions("Bottom", buildings, "Pyramid", 18, "Forge", 14)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "House", 11)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Shop", 12)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "BigHouse", 13)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Cathedral", 16)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Keep", 17)
-		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Tower", 18)
+		_set_currency_interactions("Bottom", buildings, "Pyramid", 19, "Pyramid", 19)
 		_set_vp_interactions("Bottom", buildings, "Pyramid", 19, "Pyramid", 19)
 		for child in ui_text_layer.get_children():
 			if child.name != "Timer":

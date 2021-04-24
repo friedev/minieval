@@ -696,7 +696,7 @@ scale = Vector2( 4, 4 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 1376274, 4, 0, 1441806, 14, 0, 1441807, 16, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441815, 17, 0, 1441822, 14, 0, 1441830, 14, 0, 1572870, 11, 0, 1572871, 13, 0, 1572872, 15, 0, 1572873, 16, 0, 1572878, 12, 0, 1572879, 14, 0, 1572880, 15, 0, 1572881, 16, 0, 1572886, 14, 0, 1572887, 17, 0, 1572888, 18, 0, 1572894, 17, 0, 1572895, 18, 0, 1572902, 11, 0, 1572903, 12, 0, 1572904, 13, 0, 1572905, 16, 0, 1572906, 17, 0, 1703974, 18, 0, 1703975, 19, 0 )
+tile_data = PoolIntArray( 1376274, 4, 0, 1441806, 14, 0, 1441807, 16, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441815, 17, 0, 1441822, 14, 0, 1441830, 20, 0, 1572870, 11, 0, 1572871, 13, 0, 1572872, 15, 0, 1572873, 16, 0, 1572878, 12, 0, 1572879, 14, 0, 1572880, 15, 0, 1572881, 16, 0, 1572886, 14, 0, 1572887, 17, 0, 1572888, 18, 0, 1572894, 17, 0, 1572895, 18, 0, 1572902, 20, 0 )
 
 [node name="Statue" type="Control" parent="Control/BottomRowLabels"]
 margin_right = 40.0
@@ -1253,9 +1253,9 @@ texture = ExtResource( 6 )
 
 [node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Tower"]
 margin_left = 956.79
-margin_top = 454.83
+margin_top = 456.0
 margin_right = 988.79
-margin_bottom = 472.83
+margin_bottom = 474.0
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
 __meta__ = {
@@ -1380,77 +1380,11 @@ position = Vector2( 1198.34, 501.381 )
 scale = Vector2( 1.60083, 1.60083 )
 texture = ExtResource( 6 )
 
-[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
 margin_left = 1213.81
-margin_top = 454.83
+margin_top = 456.0
 margin_right = 1245.81
-margin_bottom = 472.83
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1219.48
-margin_top = 524.33
-margin_right = 1245.48
-margin_bottom = 542.33
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShopVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1250.67
-margin_top = 524.113
-margin_right = 1276.67
-margin_bottom = 542.113
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1282.92
-margin_top = 524.33
-margin_right = 1308.92
-margin_bottom = 542.33
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1311.42
-margin_top = 524.0
-margin_right = 1343.42
-margin_bottom = 542.0
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1344.37
-margin_top = 523.5
-margin_right = 1376.37
-margin_bottom = 541.5
-rect_pivot_offset = Vector2( -35.8931, 21.1975 )
-theme = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1207.76
-margin_top = 587.532
-margin_right = 1239.76
-margin_bottom = 605.532
+margin_bottom = 474.0
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
 __meta__ = {
@@ -1458,10 +1392,10 @@ __meta__ = {
 }
 
 [node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
-margin_left = 1243.38
-margin_top = 588.469
-margin_right = 1287.38
-margin_bottom = 606.469
+margin_left = 1219.48
+margin_top = 524.33
+margin_right = 1245.48
+margin_bottom = 542.33
 rect_pivot_offset = Vector2( -35.8931, 21.1975 )
 theme = ExtResource( 5 )
 __meta__ = {
