@@ -147,7 +147,7 @@ var BUILDINGS = [
 				11: 1,  # House
 				12: -5, # Shop
 				13: 2,  # Big house
-				14: 2,  # Forge
+				14: 3,  # Forge
 			}, {
 				16: -5, # Cathedral
 			}),
