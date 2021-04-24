@@ -23,10 +23,6 @@ __meta__ = {
 [node name="BlackOverlay" type="ColorRect" parent="Tutorial"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.00464
-margin_top = -1.33484
-margin_right = 4.00464
-margin_bottom = -1.33484
 color = Color( 0, 0, 0, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false

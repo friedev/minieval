@@ -10,7 +10,7 @@ The Currency and VP you earn from a Building are affected by the Buildings next 
 
 Roads can be used to connect Buildings that are otherwise out of range. Any Buildings connected by a Road will interact with ALL Buildings on that same Road network. These interactions will only affect the Currency you gain from the Building, and NOT the VP.
 
-Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to zoom, Z or U to undo, and Y or R to redo. Left-Click a Building on the palette to select it, or press the Number Key corresponding to its position. Press Escape to open the menu, I to show an info overlay with every interaction, and hold Shift to show some stats about your current run.
+Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to zoom, Z or U to undo, and Y or R to redo. Left-Click a Building on the palette to select it, or press the Number Key corresponding to its position. Press Escape to open the menu, press I to show an info overlay with every interaction, and hold Shift to show some stats about your current run.
 
 ## Credits
 
