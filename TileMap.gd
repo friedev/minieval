@@ -227,23 +227,33 @@ var BUILDINGS = [
 				17: 20,  # Keep
 				18: -10, # Tower
 			}),
-	# 19: Pyramid - UNBALANCED
-	Building.new(false, false, 1000, 100, Vector2(16, 12),
+	# 19: Pyramid
+	Building.new(false, false, 150, 50, Vector2(16, 12),
 			preload("res://Art/pyramid.png"), [
 				[0, 0, 0, 1, 1, 0, 0, 0],
 				[0, 0, 1, 1, 1, 1, 0, 0],
 				[0, 1, 1, 1, 1, 1, 1, 0],
 				[1, 1, 1, 1, 1, 1, 1, 1],
 			], {
-				14: 10, # Forge
+				11: -5,
+				12: -5,
+				13: -5,
+				14: -5,
+				15: -5,
+				16: -5,
+				17: -5,
+				18: -5,
+				19: -5,
 			}, {
-				11: -1, # House
-				12: -5, # Shop
-				13: -2, # Big house
-				16: 10, # Cathedral
-				17: 10, # Keep
-				18: 10, # Tower
-				19: -100, # Pyramid
+				11: 5,
+				12: 5,
+				13: 5,
+				14: 5,
+				15: 5,
+				16: 5,
+				17: 5,
+				18: 5,
+				19: 5,
 			}),
 ]
 
