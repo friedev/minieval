@@ -604,6 +604,21 @@ func get_building_sprite(id):
 	return get_node(NodePath("Buildings/building_%d" % id))
 
 
+# Returns the buildings connected by road to the given building
+func get_road_connections(cellv, id):
+	var building = BUILDINGS[id]
+	var road_connections = []
+	var counted_groups = []
+	for adjacent_cellv in building.get_adjacent_cells(cellv):
+		var adjacent_group = get_base_group(get_group(adjacent_cellv))
+		if adjacent_group >= BASE_GROUP_INDEX and not counted_groups.has(adjacent_group):
+			counted_groups.append(adjacent_group)
+			for adjacent_building in adjacent_buildings[adjacent_group]:
+				# Only add currency value
+				road_connections.append(adjacent_building)
+	return road_connections
+
+
 # Updates the currency label and turn label
 func _update_labels():
 	# Don't update anything if in creative mode
@@ -634,6 +649,32 @@ func _clear_preview():
 			if sprite != null and not sprite.is_queued_for_deletion():
 				sprite.modulate = Color.white
 		modulated_buildings.clear()
+
+# Modulates the building with the given id based on its interaction with the
+# given building type
+# id is the modulated building's id, building is what it's modulated relative to
+func modulate_building(building, id, road_connection):
+	if id < BASE_BUILDING_INDEX:
+		return
+	
+	var type = get_type(id)
+	var currency_interaction = building.currency_interactions.get(type, 0)
+	var vp_interaction = 0 if road_connection else building.vp_interactions.get(type, 0)
+	
+	var modulation = null
+	if (currency_interaction > 0 and vp_interaction >= 0) or \
+			(currency_interaction >= 0 and vp_interaction > 0):
+				modulation = PREVIEW_COLOR_GOOD
+	elif (currency_interaction < 0 and vp_interaction <= 0) or \
+			(currency_interaction <= 0 and vp_interaction < 0):
+				modulation = PREVIEW_COLOR_BAD
+	elif (currency_interaction < 0 and vp_interaction > 0) or \
+			(currency_interaction > 0 and vp_interaction < 0):
+				modulation = PREVIEW_COLOR_MIXED
+	
+	if modulation:
+		get_building_sprite(id).modulate = modulation
+		modulated_buildings.append(id)
 
 func _update_preview():
 	# Only update the preview if the mouse has moved to a different cell
@@ -673,28 +714,16 @@ func _update_preview():
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
-		var area_building = get_cellv(cellv)
-		if area_building >= BASE_BUILDING_INDEX:
-			var area_building_type = get_type(area_building)
-			var area_building_sprite = get_building_sprite(area_building)
-			var currency_interaction = building.currency_interactions.get(area_building_type, 0)
-			var vp_interaction = building.vp_interactions.get(area_building_type, 0)
-			var modulation = null
-			if (currency_interaction > 0 and vp_interaction >= 0) or \
-					(currency_interaction >= 0 and vp_interaction > 0):
-						modulation = PREVIEW_COLOR_GOOD
-			elif (currency_interaction < 0 and vp_interaction <= 0) or \
-					(currency_interaction <= 0 and vp_interaction < 0):
-						modulation = PREVIEW_COLOR_BAD
-			elif (currency_interaction < 0 and vp_interaction > 0) or \
-					(currency_interaction > 0 and vp_interaction < 0):
-						modulation = PREVIEW_COLOR_MIXED
-			if modulation:
-				area_building_sprite.modulate = modulation
-				modulated_buildings.append(area_building)
+		var id = get_cellv(cellv)
+		modulate_building(building, id, false)
+	
+	var road_connections = get_road_connections(building_cellv, selected_building)
+	for connected_building in road_connections:
+		if !modulated_buildings.has(connected_building):
+			modulate_building(building, connected_building, true)
 	
 	# Update preview label with expected building value
-	var value = get_building_value(building_cellv, self.selected_building)
+	var value = get_building_value(building_cellv, self.selected_building, road_connections)
 	preview_label.text = "%s\n%s" % format_value(value)
 	preview_node.rect_position = \
 			cellv_to_screen_position(Vector2(preview_cellv.x, building_cellv.y)) + \
@@ -711,7 +740,7 @@ func _update_preview():
 # Gets the total value that would result from placing the building with the
 # given ID at the given cellv, returned in the form [currency, vp]
 # Includes the building's flat cost and VP, as well as interactions
-func get_building_value(cellv, id):
+func get_building_value(cellv, id, road_connections = null):
 	var building = BUILDINGS[id]
 	var currency_value = -building.cost
 	var vp_value = building.vp
@@ -734,18 +763,16 @@ func get_building_value(cellv, id):
 		vp_value += building.vp_interactions.get(neighbor_type, 0)
 	
 	# Account for buildings connected via road
-	var counted_groups = []
-	for adjacent_cellv in building.get_adjacent_cells(cellv):
-		var adjacent_group = get_base_group(get_group(adjacent_cellv))
-		if adjacent_group >= BASE_GROUP_INDEX and not counted_groups.has(adjacent_group):
-			counted_groups.append(adjacent_group)
-			for adjacent_building in adjacent_buildings[adjacent_group]:
-				if not counted_ids.has(adjacent_building):
-					# Only add currency value
-					counted_ids.append(adjacent_building)
-					var adjacent_type = get_type(adjacent_building)
-					currency_value += building.currency_interactions.get(adjacent_type, 0)
+	if road_connections == null:
+		road_connections = get_road_connections(cellv, id)
 	
+	for connected_building in road_connections:
+		if not counted_ids.has(connected_building):
+			counted_ids.append(connected_building)
+			# Only add currency value
+			var connected_type = get_type(connected_building)
+			currency_value += building.currency_interactions.get(connected_type, 0)
+		
 	return [floor(currency_value), floor(vp_value)]
 
 
