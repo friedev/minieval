@@ -137,10 +137,10 @@ __meta__ = {
 }
 
 [node name="PreviewLabel" type="Label" parent="PreviewLayer/PreviewNode"]
-margin_left = -11.0231
-margin_top = -8.37004
-margin_right = 48.9769
-margin_bottom = 9.62996
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 102.0
+margin_bottom = 31.0
 theme = ExtResource( 13 )
 text = "1 
 -1"

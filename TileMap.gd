@@ -640,10 +640,10 @@ func _update_preview():
 	var building_cellv = preview_cellv - building.get_cell_offset()
 	
 	# Move the building preview
+	$PreviewBuilding.position = cellv_to_world_position(building_cellv)
 	if building.is_tile:
 		$PreviewTile.set_cellv(building_cellv, selected_building)
 	else:
-		$PreviewBuilding.position = cellv_to_world_position(building_cellv)
 		$PreviewBuilding.visible = true
 	
 	# Shade preview building in red if the placement is blocked
@@ -687,8 +687,9 @@ func _update_preview():
 	# Update preview label with expected building value
 	var value = get_building_value(building_cellv, self.selected_building)
 	preview_label.text = "%s\n%s" % format_value(value)
-	preview_node.rect_position = cellv_to_screen_position(building_cellv) + \
-			Vector2(7, -8) / camera.zoom #- preview_label.rect_size / 2
+	preview_node.rect_position = \
+			cellv_to_screen_position(Vector2(preview_cellv.x, building_cellv.y)) + \
+			Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
 
 
 # Gets the total value that would result from placing the building with the
