@@ -37,3 +37,7 @@ func _on_GameVolume_value_changed(value):
 func _on_SFXVolume_value_changed(value):
 	Global.sfx_volume = value
 	AudioServer.set_bus_volume_db(sound_effects, VOLUME_VALUES[value])
+
+
+func _on_Options_visibility_changed():
+	$BlackOverlay.visible = Global.last_scene != title_scene

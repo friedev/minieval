@@ -17,6 +17,6 @@ func _on_ExitGameButton_pressed():
 	get_tree().quit()
 
 func _on_OptionsButton_pressed():
-	options_menu.visible = true
-	visible = false
 	Global.last_scene = "res://Interface/Title.tscn"
+	visible = false
+	options_menu.visible = true

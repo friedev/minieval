@@ -8,7 +8,7 @@
 [ext_resource path="res://Interface/Styleboxes/stylebox_button_pressed.tres" type="StyleBox" id=6]
 [ext_resource path="res://Interface/CustomGameUIScript.gd" type="Script" id=7]
 [ext_resource path="res://Art/check.png" type="Texture" id=8]
-[ext_resource path="res://MenuTileMap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://MenuBackground.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -23,14 +23,6 @@ __meta__ = {
 }
 
 [node name="TileMap" parent="." instance=ExtResource( 9 )]
-
-[node name="BlackOverlay" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.501961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 384.0

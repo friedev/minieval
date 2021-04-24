@@ -191,6 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="ready" from="Options" to="Options" method="_on_Options_ready"]
+[connection signal="visibility_changed" from="Options" to="Options" method="_on_Options_visibility_changed"]
 [connection signal="value_changed" from="Options/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
 [connection signal="value_changed" from="Options/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
 [connection signal="value_changed" from="Options/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]

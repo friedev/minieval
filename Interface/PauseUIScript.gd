@@ -34,8 +34,8 @@ func _on_ReturnToTitleButton_pressed():
 	get_tree().change_scene("res://Interface/Title.tscn")
 
 func _on_OptionsButton_pressed():
+	Global.last_scene = "res://Main.tscn"
 	options.visible = true
 	var new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
-	Global.last_scene = "res://Main.tscn"
