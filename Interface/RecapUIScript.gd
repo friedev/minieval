@@ -16,8 +16,10 @@ func _unhandled_input(event):
 		end_game()
 
 func end_game():
-	gameMusic.playing = false
-	$EndGameMusic.playing = true
+	if gameMusic.playing:
+		gameMusic.playing = false
+	if not $EndGameMusic.playing:
+		$EndGameMusic.playing = true
 	if Global.game_mode == 1:
 		var undo_button = $UndoButton
 		undo_button.set_disabled(true)
