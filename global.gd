@@ -2,7 +2,7 @@ extends Node
 
 # Default game parameters
 const GAME_MODE = 0
-const NUM_TURNS = 100
+const NUM_TURNS = 150
 const GAME_SIZE = 64
 const GAME_TIME = 300
 

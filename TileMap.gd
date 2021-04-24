@@ -309,7 +309,7 @@ var group_index = BASE_GROUP_INDEX
 
 var building_scene = preload("res://Building.tscn")
 
-var currency = 10
+var currency = 25
 var vp = 0
 var selected_building = DEFAULT_BUILDING
 var buildings_placed = 0
