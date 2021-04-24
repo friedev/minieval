@@ -6,7 +6,7 @@ A tiny medieval city builder, inspired by [Islanders](https://store.steampowered
 
 In Minieval, your goal is to earn as many Victory Points (VP) as you can in a limited number of turns, shown on the top right. You can earn VP by placing Buildings. However, Buildings cost Currency to build. You can see your current Currency and VP on the top left.
 
-The Currency and VP you earn from a Building is affected by the Buildings next to it. For example, placing a House next to a Shop will earn you more Currency than placing them far apart. However, placing 2 Shops next to each other will cost you more Currency due to competition. The Range of a Building is shown with a White highlight. Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red. The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
+The Currency and VP you earn from a Building are affected by the Buildings next to it. For example, placing a House next to a Shop will earn you more Currency than placing them far apart. However, placing 2 Shops next to each other will cost you more Currency due to competition. The Range of a Building is shown with a White highlight. Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red. The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
 
 Roads can be used to connect Buildings that are otherwise out of range. Any Buildings connected by a Road will interact with ALL Buildings on that same Road network. These interactions will only affect the Currency you gain from the Building, and NOT the VP.
 
