@@ -4,7 +4,7 @@ onready var options_menu = get_node(@"/root/Control/OptionsMenu/Options")
 
 func _ready():
 	if not TitleMusic.playing:
-		TitleMusic.playing = true
+		TitleMusic.play()
 
 func _on_PlayButton_pressed():
 	Global.reset_game_parameters()
