@@ -5,6 +5,9 @@ onready var stats = get_node(@"/root/Root/StatsOverlay/Control")
 onready var info = get_node(@"/root/Root/InfoOverlay/Control")
 onready var options = get_node(@"/root/Root/OptionsMenu/Options")
 
+func _ready():
+	$Menu/ExitGameButton.disabled = OS.get_name() == "HTML5"
+
 # Make pause menu appear when user presses pause (Escape)
 func _input(event):
 	if event.is_action_pressed("pause") && recap.game_over == false:
