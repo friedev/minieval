@@ -157,9 +157,9 @@ var BUILDINGS = [
 				[1, 1],
 				[1, 0],
 			], {
-				12: 4, # Shop
+				12: 3, # Shop
 			}, {
-				15: 4, # Statue
+				15: 3, # Statue
 			}),
 	# 14: Forge
 	Building.new(false, false, 10, 2, Vector2(6, 6),
