@@ -26,7 +26,7 @@ Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to z
 ### Fonts
 
 - Title Font: [BitmGothic](https://www.1001fonts.com/bitmgothic-font.html) by [Nomi](http://www.thenomi.org)
-- Normal Font: [pixelFJ8pt](https://www.1001fonts.com/pixelfj8pt1-font.html), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html
+- Normal Font: [pixelFJ8pt](https://www.1001fonts.com/pixelfj8pt1-font.html), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
 
 ### Audio
 
