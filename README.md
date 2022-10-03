@@ -1,6 +1,6 @@
 # Minieval
 
-A tiny medieval city builder, inspired by [Islanders](https://store.steampowered.com/app/1046030/ISLANDERS). Play it online on [itch.io](https://maugrift.itch.io/minieval)!
+A tiny medieval city builder, inspired by [Islanders](https://store.steampowered.com/app/1046030/ISLANDERS).
 
 ## How to Play
 
