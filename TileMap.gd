@@ -11,8 +11,8 @@ class Building:
 	var cells: Array
 	var currency_interactions: Dictionary
 	var vp_interactions: Dictionary
-	
-	
+
+
 	func _init(is_tile: bool,
 			groupable: bool,
 			cost: int,
@@ -31,28 +31,28 @@ class Building:
 		self.cells = cells
 		self.currency_interactions = currency_interactions
 		self.vp_interactions = vp_interactions
-	
-	
+
+
 	func get_size():
 		return Vector2(get_width(), get_height())
-	
-	
+
+
 	func get_cell_offset():
 		return (get_size() / 2).ceil() - Vector2(1, 1)
-	
-	
+
+
 	func get_area_offset():
 		return (get_size() / 2).floor()
-	
-	
+
+
 	func get_width():
 		return len(self.cells[0])
-	
-	
+
+
 	func get_height():
 		return len(self.cells)
-	
-	
+
+
 	# Returns a list of all cell vectors orthogonally adjacent to the given cell
 	# Duplicated from outer scope
 	static func get_orthogonal(cellv):
@@ -66,8 +66,8 @@ class Building:
 		if cellv.y < Global.game_size:
 			orthogonal.append(Vector2(cellv.x, cellv.y + 1))
 		return orthogonal
-	
-	
+
+
 	static func get_cells_in_radius(cellv, radius = Vector2(1.5, 1.5)):
 		if radius is int:
 			radius = Vector2(radius, radius)
@@ -78,8 +78,8 @@ class Building:
 					min(Global.game_size, cellv.y + ceil(radius.y))):
 						cells.append(Vector2(x, y))
 		return cells
-	
-	
+
+
 	func get_cells(cellv = Vector2(0, 0)):
 		var cells = []
 		for y in range(0, len(self.cells)):
@@ -88,12 +88,12 @@ class Building:
 					cells.append(Vector2(x, y) + cellv)
 					# TODO prevent placing buildings partially out of bounds
 		return cells
-	
-	
+
+
 	func get_area_cells(cellv = Vector2(0, 0)):
 		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
-	
-	
+
+
 	func get_adjacent_cells(cellv = Vector2(0, 0)):
 		var adjacent_cell_map = []
 		for y in range(0, len(self.cells) + 2):
@@ -265,8 +265,8 @@ class Placement:
 	var currency_change: int
 	var vp_change: int
 	var group_joins: Array
-	
-	
+
+
 	func _init(id: int,
 			cellv: Vector2,
 			currency_change: int,
@@ -360,21 +360,21 @@ func _ready():
 		timer.visible = false
 		CREATIVE_MODE = true
 		ALLOW_DESTROYING = true
-		
+
 		# Hide UIs in creative mode
 		# TODO extract to method to reduce redundancy
 		# Same code duplicated in StatsOverlayUIScript.gd
 		for child in ui_text_layer.get_children():
 			if child.name != "Timer":
 				child.visible = false
-	
+
 	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
 			self, "_select_building")
-	
+
 	self._update_mouse_cellv()
 	self._update_labels()
-	
+
 	for x in range(0, Global.game_size):
 		world_map.append([])
 		groups.append([])
@@ -382,19 +382,19 @@ func _ready():
 			world_map[x].append(0)
 			groups[x].append(0)
 			.set_cell(x, y, 0)
-	
+
 	camera.position = cellv_to_world_position(Vector2(Global.game_size / 2,
 			Global.game_size / 2)) - camera.offset
-	
+
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
 		building_roots.append(null)
-	
+
 	for i in range(BASE_GROUP_INDEX):
 		groups.append(null)
 		group_joins.append(null)
 		adjacent_buildings.append(null)
-	
+
 	_select_building(DEFAULT_BUILDING)
 
 
@@ -406,7 +406,7 @@ func _process(delta):
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		self._clear_preview()
-		
+
 		var building = BUILDINGS[self.selected_building]
 		var placement
 		if event.button_index == 1:
@@ -414,7 +414,7 @@ func _unhandled_input(event):
 					mouse_cellv - building.get_cell_offset(),
 					self.selected_building,
 					CREATIVE_MODE)
-			
+
 			if placement:
 				currency += placement.currency_change
 				vp += placement.vp_change
@@ -423,7 +423,7 @@ func _unhandled_input(event):
 				self._update_labels()
 			else:
 				$BuildingPlaceErrorSound.play()
-		
+
 		if ALLOW_DESTROYING and event.button_index == 2:
 			self.destroy_building(mouse_cellv)
 	elif event.is_action_pressed("undo"):
@@ -657,11 +657,11 @@ func _clear_preview():
 func modulate_building(building, id, road_connection):
 	if id < BASE_BUILDING_INDEX:
 		return
-	
+
 	var type = get_type(id)
 	var currency_interaction = building.currency_interactions.get(type, 0)
 	var vp_interaction = 0 if road_connection else building.vp_interactions.get(type, 0)
-	
+
 	var modulation = null
 	if (currency_interaction > 0 and vp_interaction >= 0) or \
 			(currency_interaction >= 0 and vp_interaction > 0):
@@ -672,7 +672,7 @@ func modulate_building(building, id, road_connection):
 	elif (currency_interaction < 0 and vp_interaction > 0) or \
 			(currency_interaction > 0 and vp_interaction < 0):
 				modulation = PREVIEW_COLOR_MIXED
-	
+
 	if modulation:
 		get_building_sprite(id).modulate = modulation
 		modulated_buildings.append(id)
@@ -682,21 +682,21 @@ func _update_preview():
 	self._update_mouse_cellv()
 	if mouse_cellv == preview_cellv:
 		return
-	
+
 	self._clear_preview()
 	# Don't show cost information in creative mode
 	preview_node.visible = not CREATIVE_MODE
 	preview_cellv = mouse_cellv
 	var building = BUILDINGS[selected_building]
 	var building_cellv = preview_cellv - building.get_cell_offset()
-	
+
 	# Move the building preview
 	$PreviewBuilding.position = cellv_to_world_position(building_cellv)
 	if building.is_tile:
 		$PreviewTile.set_cellv(building_cellv, selected_building)
 	else:
 		$PreviewBuilding.visible = true
-	
+
 	# Shade preview building in red if the placement is blocked
 	if building.is_tile:
 		$PreviewTile.modulate = PREVIEW_COLOR
@@ -708,28 +708,28 @@ func _update_preview():
 			if self.get_cellv(cellv) != 0:
 				$PreviewBuilding.modulate = PREVIEW_COLOR_INVALID
 				break
-	
+
 	if CREATIVE_MODE:
 		return
-	
+
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
 		$Preview.set_cellv(cellv, 1)
 		var id = get_cellv(cellv)
 		modulate_building(building, id, false)
-	
+
 	var road_connections = get_road_connections(building_cellv, selected_building)
 	for connected_building in road_connections:
 		if !modulated_buildings.has(connected_building):
 			modulate_building(building, connected_building, true)
-	
+
 	# Update preview label with expected building value
 	var value = get_building_value(building_cellv, self.selected_building, road_connections)
 	preview_label.text = "%s\n%s" % format_value(value)
 	preview_node.rect_position = \
 			cellv_to_screen_position(Vector2(preview_cellv.x, building_cellv.y)) + \
 			Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
-	
+
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + currency < 0:
 		if building.is_tile:
@@ -747,33 +747,33 @@ func get_building_value(cellv, id, road_connections = null):
 	var vp_value = building.vp
 	var counted_ids = []
 	var occupied_cells = building.get_cells(cellv)
-	
+
 	# Account for nearby buildings
 	for area_cellv in building.get_area_cells(cellv):
 		# Ignore the exact cells where the building is being placed
 		if occupied_cells.has(area_cellv):
 			continue
-		
+
 		var neighbor_id = self.get_cellv(area_cellv)
 		if counted_ids.has(neighbor_id):
 			continue
 		counted_ids.append(neighbor_id)
-		
+
 		var neighbor_type = get_type(neighbor_id)
 		currency_value += building.currency_interactions.get(neighbor_type, 0)
 		vp_value += building.vp_interactions.get(neighbor_type, 0)
-	
+
 	# Account for buildings connected via road
 	if road_connections == null:
 		road_connections = get_road_connections(cellv, id)
-	
+
 	for connected_building in road_connections:
 		if not counted_ids.has(connected_building):
 			counted_ids.append(connected_building)
 			# Only add currency value
 			var connected_type = get_type(connected_building)
 			currency_value += building.currency_interactions.get(connected_type, 0)
-		
+
 	return [floor(currency_value), floor(vp_value)]
 
 
@@ -783,29 +783,29 @@ func format_value(value):
 
 func place_building(cellv, id, force = false):
 	var building = BUILDINGS[id]
-	
+
 	# Prevent placement if building overlaps any existing buildings
 	for building_cellv in building.get_cells(cellv):
 		if get_type(self.get_cellv(building_cellv)) != 0:
 			return null
-	
+
 	# Check if building can be built in the first place
 	#if currency - floor(building.cost) < 0:
 	#	return null
-	
+
 	# Give currency based on nearby buildings
 	var building_value = get_building_value(cellv, id)
 	var currency_change = building_value[0]
 	var vp_change = building_value[1]
-	
+
 	# Check if the additional cost from interactions would lead to negative currency
 	if currency + currency_change < 0 and not force:
 		return null
-	
+
 	$BuildingPlaceSound.play()
-	
+
 	buildings_placed += 1
-	
+
 	var neighbor_groups = []
 	if building.groupable:
 		for neighbor in get_orthogonal(cellv):
@@ -829,7 +829,7 @@ func place_building(cellv, id, force = false):
 			for group in neighbor_groups:
 				group_joins[group] = joined_group
 			groups[x][y] = joined_group
-		
+
 		# Update the list of buildings adjacent to the group
 		adjacent_buildings[groups[x][y]] = get_adjacent_buildings(cellv)
 	else:
@@ -840,7 +840,7 @@ func place_building(cellv, id, force = false):
 			if group >= BASE_GROUP_INDEX and not adjacent_groups.has(group):
 				adjacent_groups.append(group)
 				adjacent_buildings[group].append(building_index)
-	
+
 	# Instance a new sprite if this building is not a tile
 	if not building.is_tile:
 		var instance = building_scene.instance()
@@ -848,7 +848,7 @@ func place_building(cellv, id, force = false):
 		instance.texture = building.texture
 		instance.set_name("building_%d" % building_index)
 		$Buildings.add_child(instance)
-	
+
 	self.set_cellv(cellv, id)
 	return Placement.new(id, cellv, currency_change, vp_change, neighbor_groups)
 
@@ -865,9 +865,9 @@ func destroy_building(cellv, id = null):
 	id = self.get_cellv(cellv)
 	if id <= 0:
 		return null
-	
+
 	var is_tile = id < BASE_BUILDING_INDEX
-	
+
 	var type = id
 	if not is_tile:
 		# If this isn't a tile building, free its sprite
@@ -876,11 +876,11 @@ func destroy_building(cellv, id = null):
 			instance.free()
 		type = building_types[id]
 	var building = BUILDINGS[type]
-	
+
 	$BuildingDestroySound.play()
 
 	buildings_placed -= 1
-	
+
 	var root = cellv
 	if is_tile:
 		self.set_cellv(cellv, 0)
@@ -898,7 +898,7 @@ func destroy_building(cellv, id = null):
 		for building_cellv in building.get_cells(root):
 			self.set_cellv(building_cellv, 0)
 			groups[building_cellv.x][building_cellv.y] = 0
-		
+
 		var adjacent_groups = []
 		for adjacent_cellv in building.get_adjacent_cells(root):
 			var group = get_base_group(get_group(adjacent_cellv))

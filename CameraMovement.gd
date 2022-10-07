@@ -24,7 +24,7 @@ func zoom(zoomfactor):
 	var new_zoom_level = (zoom * zoomfactor).x
 	if new_zoom_level > 1 or new_zoom_level < 0.0625:
 		return
-	
+
 	zoom *= zoomfactor
 	# Compensate for the upcoming offset change by adjusting the position
 	# This way, the camera zooms out from the center rather than the top left

@@ -20,19 +20,19 @@ func _on_PlayButton_pressed():
 	else:
 		Global.num_turns = int(turn_limit.text)
 		Global.game_mode = 0
-	
+
 	if time_limit.text == '':
 		Global.game_time = 0
 	else:
 		Global.num_turns = 0
 		Global.game_time = int(time_limit.text)
 		Global.game_mode = 1
-	
+
 	if creative_mode.pressed:
 		Global.game_mode = 3
 	elif turn_limit.text == '' and time_limit.text == '':
 		Global.game_mode = 2
-	
+
 	Global.game_size = int(game_size.text)
 	get_tree().change_scene("res://Main.tscn")
 

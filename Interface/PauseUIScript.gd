@@ -16,7 +16,7 @@ func _input(event):
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
-		
+
 # Pauses or unpauses input for a given node
 func _node_input_pause(node):
 	node.set_process_input(not node.is_processing_input())

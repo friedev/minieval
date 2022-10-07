@@ -56,7 +56,7 @@ func update_currency():
 	if buildingCount == "69":
 		buildingCount = "69 (nice.)"
 	$Stats/BuildingsPlacedCountLabel.text = buildingCount
-	
+
 #pauses input for a given node
 func _node_input_pause(node):
 	var nodeInput = node.is_processing_input()

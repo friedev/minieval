@@ -19,7 +19,7 @@ func _ready():
 		Global.timer_over = false
 		seconds_remaining = Global.game_time
 		update_label()
-		
+
 		timer = Timer.new()
 		timer.connect("timeout", self, "_on_timer_timeout") 
 		timer.set_wait_time(1)
@@ -31,7 +31,7 @@ func _ready():
 func _on_timer_timeout():
 	seconds_remaining -= 1
 	update_label()
-	
+
 	if seconds_remaining == 0:
 		Global.timer_over = true
 		timer.queue_free()
