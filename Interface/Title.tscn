@@ -15,4 +15,4 @@ __meta__ = {
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 3 )]
 
-[node name="TileMap" parent="." instance=ExtResource( 2 )]
+[node name="MenuBackground" parent="." instance=ExtResource( 2 )]

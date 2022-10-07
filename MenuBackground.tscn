@@ -27,6 +27,7 @@ font_data = ExtResource( 2 )
 default_font = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=5]
@@ -63,42 +64,43 @@ margin_left = -124.0
 margin_top = -52.0
 margin_right = -16.0
 margin_bottom = -16.0
+grow_horizontal = 0
 rect_pivot_offset = Vector2( 266, 36 )
 theme = SubResource( 3 )
-text = "v1.0.0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+text = "v1.1.0-dev"
 
 [node name="Authors" type="Label" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = -76.0
-margin_right = 350.0
+margin_top = -244.0
+margin_right = 684.0
 margin_bottom = -16.0
+grow_vertical = 0
 rect_pivot_offset = Vector2( 266, 36 )
 theme = SubResource( 5 )
-text = "By Aaron Friesen, Kalen Wallin,
-Evan Mielak, Viet Ninh,
-Jackson Herman, and Ethan Fox"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+text = "By:
+Aaron Friesen
+Kalen Wallin
+Evan Mielak
+Viet Ninh
+Jackson Herman
+Ethan Fox"
 
-[node name="Authors2" type="Label" parent="."]
+[node name="Links" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -180.0
-margin_top = -55.0
+margin_top = -34.0
 margin_right = 180.0
 margin_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
 rect_pivot_offset = Vector2( 266, 36 )
 theme = SubResource( 5 )
-text = "https://maugrift.itch.io/minieval
-https://github.com/Maugrift/Minieval"
+text = "https://frie.dev/minieval"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
