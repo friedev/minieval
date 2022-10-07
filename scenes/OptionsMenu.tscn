@@ -1,0 +1,240 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://scripts/Options.gd" type="Script" id=1]
+[ext_resource path="res://sprites/check.png" type="Texture" id=2]
+[ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/styles/stylebox_menu.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/themes/theme_title.tres" type="Theme" id=5]
+[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=6]
+[ext_resource path="res://ui/styles/stylebox_button_pressed.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/styles/stylebox_button_hover.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/styles/stylebox_grabber.tres" type="StyleBox" id=9]
+
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="ImageTexture" id=2]
+
+[sub_resource type="ImageTexture" id=3]
+
+[sub_resource type="ImageTexture" id=4]
+
+[sub_resource type="ImageTexture" id=5]
+
+[sub_resource type="ImageTexture" id=6]
+
+[sub_resource type="ImageTexture" id=7]
+
+[sub_resource type="ImageTexture" id=8]
+
+[sub_resource type="ImageTexture" id=9]
+
+[sub_resource type="ImageTexture" id=10]
+
+[sub_resource type="ImageTexture" id=11]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+
+[node name="Options" type="Control" parent="."]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Options"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -184.0
+margin_right = 200.0
+margin_bottom = 184.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsHeader" type="Label" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.0
+margin_top = -160.0
+margin_right = 106.0
+margin_bottom = -96.0
+theme = ExtResource( 5 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraOption" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 296.0
+margin_right = 646.0
+margin_bottom = 314.0
+theme = ExtResource( 6 )
+text = "Camera Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeOption" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 344.0
+margin_right = 646.0
+margin_bottom = 362.0
+theme = ExtResource( 6 )
+text = "Music Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundEffects" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 392.0
+margin_right = 646.0
+margin_bottom = 410.0
+theme = ExtResource( 6 )
+text = "SFX Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenLabel" type="Label" parent="Options"]
+margin_left = 470.0
+margin_top = 440.0
+margin_right = 646.0
+margin_bottom = 458.0
+theme = ExtResource( 6 )
+text = "Fullscreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraSpeed" type="HSlider" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.0
+margin_top = -64.315
+margin_right = 165.0
+margin_bottom = -48.315
+custom_icons/grabber_disabled = SubResource( 1 )
+custom_icons/grabber_highlight = SubResource( 2 )
+custom_icons/grabber = SubResource( 3 )
+custom_styles/slider = ExtResource( 3 )
+custom_styles/grabber_area_highlight = ExtResource( 9 )
+custom_styles/grabber_area = ExtResource( 9 )
+min_value = 1.0
+max_value = 20.0
+value = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameVolume" type="HSlider" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.0
+margin_top = -16.0
+margin_right = 165.0
+custom_icons/grabber_disabled = SubResource( 4 )
+custom_icons/grabber_highlight = SubResource( 5 )
+custom_icons/grabber = SubResource( 6 )
+custom_styles/slider = ExtResource( 3 )
+custom_styles/grabber_area_highlight = ExtResource( 9 )
+custom_styles/grabber_area = ExtResource( 9 )
+max_value = 10.0
+value = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SFXVolume" type="HSlider" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.0
+margin_top = 32.0
+margin_right = 165.0
+margin_bottom = 48.0
+custom_icons/grabber_disabled = SubResource( 7 )
+custom_icons/grabber_highlight = SubResource( 8 )
+custom_icons/grabber = SubResource( 9 )
+custom_styles/slider = ExtResource( 3 )
+custom_styles/grabber_area_highlight = ExtResource( 9 )
+custom_styles/grabber_area = ExtResource( 9 )
+max_value = 10.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="CheckBox" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 76.0
+margin_top = 75.0
+margin_right = 100.0
+margin_bottom = 101.0
+theme = ExtResource( 6 )
+custom_icons/radio_checked = ExtResource( 2 )
+custom_icons/checked = ExtResource( 2 )
+custom_icons/radio_unchecked = SubResource( 10 )
+custom_icons/unchecked = SubResource( 11 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/hover_pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReturnToGame" type="Button" parent="Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.0
+margin_top = 123.0
+margin_right = 76.0
+margin_bottom = 149.0
+theme = ExtResource( 6 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+text = "Back to Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="ready" from="Options" to="Options" method="_on_Options_ready"]
+[connection signal="visibility_changed" from="Options" to="Options" method="_on_Options_visibility_changed"]
+[connection signal="value_changed" from="Options/CameraSpeed" to="Options" method="_on_CameraSpeed_value_changed"]
+[connection signal="value_changed" from="Options/GameVolume" to="Options" method="_on_GameVolume_value_changed"]
+[connection signal="value_changed" from="Options/SFXVolume" to="Options" method="_on_SFXVolume_value_changed"]
+[connection signal="toggled" from="Options/Fullscreen" to="Options" method="_on_Fullscreen_toggled"]
+[connection signal="pressed" from="Options/ReturnToGame" to="Options" method="_on_ReturnToGame_pressed"]

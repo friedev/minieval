@@ -16,16 +16,12 @@ _global_script_class_icons={
 
 config/name="Minieval"
 config/description="A tiny medieval city builder"
-run/main_scene="res://Interface/Title.tscn"
-
-[audio]
-
-default_bus_layout="res://Audio/default_bus_layout.tres"
+run/main_scene="res://scenes/Title.tscn"
 
 [autoload]
 
-Global="*res://global.gd"
-TitleMusic="*res://TitleMusic.gd"
+Global="*res://scripts/global.gd"
+TitleMusic="*res://scripts/TitleMusic.gd"
 
 [display]
 

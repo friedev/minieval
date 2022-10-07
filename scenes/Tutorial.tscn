@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/styles/stylebox_menu.tres" type="StyleBox" id=1]
+[ext_resource path="res://scripts/Tutorial.gd" type="Script" id=2]
+[ext_resource path="res://ui/styles/stylebox_button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/styles/stylebox_button_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/themes/theme_title.tres" type="Theme" id=6]
+[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=7]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 100
+
+[node name="Tutorial" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Tutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Panel" parent="Tutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 101.0
+margin_top = 57.0
+margin_right = -100.0
+margin_bottom = -56.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="Tutorial/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -44.0
+margin_top = 243.0
+margin_right = 44.0
+margin_bottom = 269.0
+theme = ExtResource( 7 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuTitle" type="Label" parent="Tutorial/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -124.0
+margin_top = -280.0
+margin_right = 124.0
+margin_bottom = -216.0
+theme = ExtResource( 6 )
+text = "Tutorial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -506.5
+margin_top = -202.5
+margin_right = 507.5
+margin_bottom = 236.5
+theme = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Welcome to Minieval, a tiny medieval city builder! In this game, your goal is to earn as many [color=#00c0ff]Victory Points (VP)[/color] as you can in a limited number of turns, shown on the top right. You can earn [color=#00c0ff]VP[/color] by placing [color=#804000]Buildings[/color]. However, [color=#804000]Buildings[/color] cost [color=#ffc000]Currency[/color] to build. You can see your current [color=#ffc000]Currency[/color] and [color=#00c0ff]VP[/color] on the top left.
+
+The [color=#ffc000]Currency[/color] and [color=#00c0ff]VP[/color] you earn from a [color=#804000]Building[/color] are affected by the [color=#804000]Buildings[/color] next to it. For example, placing a [color=#804000]House[/color] next to a [color=#804000]Shop[/color] will earn you more [color=#ffc000]Currency[/color] than placing them far apart. However, placing 2 [color=#804000]Shops[/color] next to each other will cost you more [color=#ffc000]Currency[/color] due to competition. The [color=#c0c0c0]Range[/color] of a [color=#804000]Building[/color] is shown with a [color=#c0c0c0]White[/color] highlight. [color=#00ff00]Positive[/color] interactions between [color=#804000]Buildings[/color] are highlighted in [color=#00ff00]Green[/color], [color=#ffff00]Mixed[/color] interactions in [color=#ffff00]Yellow[/color], and [color=#ff0000]Negative[/color] interactions in [color=#ff0000]Red[/color]. The total amount of [color=#ffc000]Currency[/color] and [color=#00c0ff]VP[/color] that you will gain or lose by placing a [color=#804000]Building[/color] is shown above it.
+
+[color=#c08000]Roads[/color] can be used to connect [color=#804000]Buildings[/color] that are otherwise out of range. Any [color=#804000]Buildings[/color] connected by a [color=#c08000]Road[/color] will interact with ALL [color=#804000]Buildings[/color] on that same [color=#c08000]Road[/color] network. These interactions will only affect the [color=#ffc000]Currency[/color] you gain from the [color=#804000]Building[/color], and [color=#ff0000]NOT[/color] the [color=#00c0ff]VP[/color].
+
+Use [color=#ff00ff]Left-Click[/color] to place a [color=#804000]Building[/color], [color=#ff00ff]WASD[/color] or [color=#ff00ff]Arrow Keys[/color] to pan, [color=#ff00ff]Scroll[/color] or [color=#ff00ff]QE[/color] to zoom, [color=#ff00ff]Z[/color] or [color=#ff00ff]U[/color] to undo, and [color=#ff00ff]Y[/color] or [color=#ff00ff]R[/color] to redo. [color=#ff00ff]Left-Click[/color] a [color=#804000]Building[/color] on the palette to select it, or press the [color=#ff00ff]Number Key[/color] corresponding to its position. Press [color=#ff00ff]Escape[/color] to open the menu, press [color=#ff00ff]I[/color] to show an info overlay with every interaction, and hold [color=#ff00ff]Shift[/color] to show some stats about your current run.
+
+[center]Good luck, have fun, and thanks for playing Minieval![/center]"
+text = "Welcome to Minieval, a tiny medieval city builder! In this game, your goal is to earn as many Victory Points (VP) as you can in a limited number of turns, shown on the top right. You can earn VP by placing Buildings. However, Buildings cost Currency to build. You can see your current Currency and VP on the top left.
+
+The Currency and VP you earn from a Building are affected by the Buildings next to it. For example, placing a House next to a Shop will earn you more Currency than placing them far apart. However, placing 2 Shops next to each other will cost you more Currency due to competition. The Range of a Building is shown with a White highlight. Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red. The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
+
+Roads can be used to connect Buildings that are otherwise out of range. Any Buildings connected by a Road will interact with ALL Buildings on that same Road network. These interactions will only affect the Currency you gain from the Building, and NOT the VP.
+
+Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to zoom, Z or U to undo, and Y or R to redo. Left-Click a Building on the palette to select it, or press the Number Key corresponding to its position. Press Escape to open the menu, press I to show an info overlay with every interaction, and hold Shift to show some stats about your current run.
+
+Good luck, have fun, and thanks for playing Minieval!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Tutorial/Menu/PlayButton" to="Tutorial" method="_on_PlayButton_pressed"]

@@ -1,0 +1,1163 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/InfoOverlayUIScript.gd" type="Script" id=1]
+[ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://sprites/currency_icon.png" type="Texture" id=3]
+[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=5]
+[ext_resource path="res://sprites/vp_icon.png" type="Texture" id=6]
+
+[node name="InfoOverlayUI" type="CanvasLayer"]
+layer = 100
+
+[node name="Control" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.943848
+margin_top = -0.943878
+margin_right = -0.943848
+margin_bottom = -0.943848
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.33826
+margin_top = -0.25
+margin_right = -1.33838
+margin_bottom = -0.249939
+color = Color( 0, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRowLabels" type="Control" parent="Control"]
+margin_left = -145.0
+margin_top = -208.0
+margin_right = -105.0
+margin_bottom = -168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Road" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RoadName" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 201.34
+margin_top = 311.531
+margin_right = 311.34
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Road"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadCost" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 261.67
+margin_top = 342.37
+margin_right = 267.67
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadVPGain" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 261.67
+margin_top = 373.624
+margin_right = 275.67
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 238.583, 348.872 )
+texture = ExtResource( 3 )
+
+[node name="RoadVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 238.583, 381.576 )
+texture = ExtResource( 6 )
+
+[node name="RoadInteractions" type="Label" parent="Control/TopRowLabels/Road"]
+margin_left = 201.34
+margin_top = 404.37
+margin_right = 321.34
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoadIntCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 175.954, 439.149 )
+texture = ExtResource( 3 )
+
+[node name="RoadIntVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+position = Vector2( 175.538, 502.819 )
+texture = ExtResource( 6 )
+
+[node name="House" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HouseName" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 456.618
+margin_top = 311.531
+margin_right = 566.618
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "House"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCost" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 516.948
+margin_top = 342.37
+margin_right = 522.948
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseVPGain" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 516.948
+margin_top = 373.624
+margin_right = 530.948
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 493.861, 348.872 )
+texture = ExtResource( 3 )
+
+[node name="HouseVP" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 493.861, 381.576 )
+texture = ExtResource( 6 )
+
+[node name="HouseInteractionsLabel" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 453.332
+margin_top = 404.37
+margin_right = 573.332
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseIntCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 430.954, 439.779 )
+texture = ExtResource( 3 )
+
+[node name="HouseIntVP" type="Sprite" parent="Control/TopRowLabels/House"]
+position = Vector2( 430.538, 502.819 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 445.694
+margin_top = 461.0
+margin_right = 471.694
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/House"]
+margin_left = 445.993
+margin_top = 525.0
+margin_right = 471.993
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shop" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ShopName" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 710.581
+margin_top = 316.431
+margin_right = 820.581
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Shop"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCost" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 770.911
+margin_top = 347.27
+margin_right = 776.911
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPGain" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 770.911
+margin_top = 378.524
+margin_right = 784.911
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 747.824, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="ShopVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 747.824, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="ShopInteractions" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 710.938
+margin_top = 404.37
+margin_right = 830.938
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopIntCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 688.559, 439.779 )
+texture = ExtResource( 3 )
+
+[node name="ShopIntVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+position = Vector2( 688.143, 502.819 )
+texture = ExtResource( 6 )
+
+[node name="HouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 706.0
+margin_top = 461.0
+margin_right = 724.0
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 736.0
+margin_top = 461.0
+margin_right = 760.0
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 765.685
+margin_top = 461.0
+margin_right = 791.685
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 795.984
+margin_top = 461.0
+margin_right = 821.984
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/TopRowLabels/Shop"]
+margin_left = 704.0
+margin_top = 525.0
+margin_right = 728.0
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouse" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BigHouseName" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 969.577
+margin_top = 316.431
+margin_right = 1079.58
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Big House"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCost" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 1029.91
+margin_top = 347.27
+margin_right = 1035.91
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPGain" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 1029.91
+margin_top = 378.524
+margin_right = 1043.91
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 1006.82, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="BigHouseVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 1006.82, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="BigHouseInteractions" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 970.788
+margin_top = 404.37
+margin_right = 1090.79
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseIntCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 940.551, 439.779 )
+texture = ExtResource( 3 )
+
+[node name="BigHouseIntVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+position = Vector2( 940.135, 502.819 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 955.942
+margin_top = 461.0
+margin_right = 981.942
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 992.0
+margin_top = 461.0
+margin_right = 1018.0
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+margin_left = 958.942
+margin_top = 525.0
+margin_right = 984.942
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Forge" type="Control" parent="Control/TopRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ForgeName" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1220.54
+margin_top = 316.431
+margin_right = 1330.54
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Forge"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCost" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1280.87
+margin_top = 347.27
+margin_right = 1286.87
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPGain" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1280.87
+margin_top = 378.524
+margin_right = 1294.87
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1257.79, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="ForgeVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1257.79, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="ForgeInteractions" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1217.57
+margin_top = 404.37
+margin_right = 1337.57
+margin_bottom = 422.37
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeIntCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1195.91, 439.779 )
+texture = ExtResource( 3 )
+
+[node name="ForgeIntVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+position = Vector2( 1195.5, 502.819 )
+texture = ExtResource( 6 )
+
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1213.84
+margin_top = 461.0
+margin_right = 1239.84
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1246.08
+margin_top = 461.0
+margin_right = 1272.08
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1215.84
+margin_top = 525.0
+margin_right = 1241.84
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/TopRowLabels/Forge"]
+margin_left = 1245.84
+margin_top = 525.0
+margin_right = 1271.84
+margin_bottom = 543.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMapTopRow" type="TileMap" parent="Control/TopRowLabels"]
+position = Vector2( 97, 241 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 2, 2, 0, 6, 11, 0, 10, 12, 0, 14, 13, 0, 18, 14, 0 )
+
+[node name="TopRowInteractionsMap2" type="TileMap" parent="Control/TopRowLabels"]
+position = Vector2( 0, 40 )
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 786446, 12, 0, 786454, 11, 0, 786455, 12, 0, 786456, 13, 0, 786457, 14, 0, 786462, 12, 0, 786463, 13, 0, 786470, 12, 0, 786471, 14, 0, 917518, 15, 0, 917526, 16, 0, 917534, 15, 0, 917542, 16, 0, 917543, 17, 0, 1376274, 4, 0, 1441810, 4, 0, 1441811, 4, 0 )
+
+[node name="BottomRowLabels" type="Control" parent="Control"]
+margin_left = -145.0
+margin_top = 98.0
+margin_right = -105.0
+margin_bottom = 138.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMapBottomRow" type="TileMap" parent="Control/BottomRowLabels"]
+position = Vector2( 97, -18 )
+scale = Vector2( 8, 8 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 262146, 15, 0, 262150, 16, 0, 262154, 17, 0, 262158, 18, 0, 262162, 19, 0 )
+
+[node name="BottomRowInteractionsMap" type="TileMap" parent="Control/BottomRowLabels"]
+position = Vector2( 0, -281 )
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 1376274, 4, 0, 1441806, 14, 0, 1441807, 16, 0, 1441810, 4, 0, 1441811, 4, 0, 1441814, 14, 0, 1441815, 17, 0, 1441822, 14, 0, 1441830, 20, 0, 1572870, 11, 0, 1572871, 13, 0, 1572872, 15, 0, 1572873, 16, 0, 1572878, 12, 0, 1572879, 14, 0, 1572880, 15, 0, 1572881, 16, 0, 1572886, 14, 0, 1572887, 17, 0, 1572888, 18, 0, 1572894, 17, 0, 1572895, 18, 0, 1572902, 20, 0 )
+
+[node name="Statue" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueIntCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+position = Vector2( 175.954, 438.341 )
+texture = ExtResource( 3 )
+
+[node name="StatueIntVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+position = Vector2( 175.538, 501.381 )
+texture = ExtResource( 6 )
+
+[node name="StatueName" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 201.34
+margin_top = 311.531
+margin_right = 311.34
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Statue"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueCost" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 261.67
+margin_top = 342.37
+margin_right = 267.67
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPGain" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 261.67
+margin_top = 373.624
+margin_right = 275.67
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+position = Vector2( 238.583, 348.872 )
+texture = ExtResource( 3 )
+
+[node name="StatueVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+position = Vector2( 238.583, 381.576 )
+texture = ExtResource( 6 )
+
+[node name="StatueInteractions" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 201.34
+margin_top = 401.598
+margin_right = 321.34
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HouseVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 194.0
+margin_top = 523.0
+margin_right = 212.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 222.904
+margin_top = 523.0
+margin_right = 248.904
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 256.0
+margin_top = 523.0
+margin_right = 280.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+margin_left = 286.0
+margin_top = 523.0
+margin_right = 312.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cathedral" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralName" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 456.618
+margin_top = 311.531
+margin_right = 566.618
+margin_bottom = 329.531
+theme = ExtResource( 5 )
+text = "Cathedral"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCost" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 516.948
+margin_top = 342.37
+margin_right = 522.948
+margin_bottom = 360.37
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPGain" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 516.948
+margin_top = 373.624
+margin_right = 530.948
+margin_bottom = 391.624
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 493.861, 348.872 )
+texture = ExtResource( 3 )
+
+[node name="CathedralVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 493.861, 381.576 )
+texture = ExtResource( 6 )
+
+[node name="CathedralInteractionsLabel2" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 453.332
+margin_top = 401.598
+margin_right = 573.332
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralIntCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 430.902, 438.341 )
+texture = ExtResource( 3 )
+
+[node name="CathedralIntVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+position = Vector2( 430.486, 501.381 )
+texture = ExtResource( 6 )
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 441.948
+margin_top = 460.0
+margin_right = 473.948
+margin_bottom = 478.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralCurrInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 474.948
+margin_top = 460.0
+margin_right = 512.948
+margin_bottom = 478.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 445.247
+margin_top = 523.0
+margin_right = 475.247
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 474.801
+margin_top = 523.0
+margin_right = 504.801
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatueVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 506.801
+margin_top = 523.0
+margin_right = 538.801
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CathedralVPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+margin_left = 539.0
+margin_top = 523.0
+margin_right = 577.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keep" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepName" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 710.581
+margin_top = 316.431
+margin_right = 820.581
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Keep"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCost" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 770.911
+margin_top = 347.27
+margin_right = 776.911
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPGain" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 770.911
+margin_top = 378.524
+margin_right = 784.911
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 747.824, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="KeepVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 747.824, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="KeepInteractions2" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 710.938
+margin_top = 401.598
+margin_right = 830.938
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepIntCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 691.606, 438.341 )
+texture = ExtResource( 3 )
+
+[node name="KeepIntVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+position = Vector2( 691.19, 501.381 )
+texture = ExtResource( 6 )
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 697.656
+margin_top = 460.0
+margin_right = 729.656
+margin_bottom = 478.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepCurrInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 731.656
+margin_top = 459.83
+margin_right = 769.656
+margin_bottom = 477.83
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-40"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForgeVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 697.446
+margin_top = 523.0
+margin_right = 729.446
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 731.0
+margin_top = 523.0
+margin_right = 769.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+margin_left = 770.654
+margin_top = 523.0
+margin_right = 808.654
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tower" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TowerName" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 969.577
+margin_top = 316.431
+margin_right = 1079.58
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Tower"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerCost" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1029.91
+margin_top = 347.27
+margin_right = 1035.91
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPGain" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 1029.91
+margin_top = 378.524
+margin_right = 1043.91
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 1006.82, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="TowerVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 1006.82, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="TowerInteractions2" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 970.787
+margin_top = 401.598
+margin_right = 1090.79
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerIntCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 939.845, 438.341 )
+texture = ExtResource( 3 )
+
+[node name="TowerIntVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+position = Vector2( 939.429, 501.381 )
+texture = ExtResource( 6 )
+
+[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 957.0
+margin_top = 460.0
+margin_right = 983.0
+margin_bottom = 478.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeepVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 954.089
+margin_top = 523.0
+margin_right = 994.089
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerVPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+margin_left = 995.34
+margin_top = 523.0
+margin_right = 1025.34
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pyramid" type="Control" parent="Control/BottomRowLabels"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PyramidName" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1220.54
+margin_top = 316.431
+margin_right = 1330.54
+margin_bottom = 334.431
+theme = ExtResource( 5 )
+text = "Pyramid"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidCost" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1280.87
+margin_top = 347.27
+margin_right = 1286.87
+margin_bottom = 365.27
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPGain" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1280.87
+margin_top = 378.524
+margin_right = 1294.87
+margin_bottom = 396.524
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1257.79, 353.772 )
+texture = ExtResource( 3 )
+
+[node name="PyramidVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1257.79, 386.476 )
+texture = ExtResource( 6 )
+
+[node name="PyramidInteractions2" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1217.57
+margin_top = 401.598
+margin_right = 1337.57
+margin_bottom = 419.598
+theme = ExtResource( 5 )
+text = "Interactions:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidIntCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1198.76, 438.341 )
+texture = ExtResource( 3 )
+
+[node name="PyramidIntVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+position = Vector2( 1198.34, 501.381 )
+texture = ExtResource( 6 )
+
+[node name="PyramidCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1216.0
+margin_top = 460.0
+margin_right = 1240.0
+margin_bottom = 478.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "-5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PyramidVPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+margin_left = 1214.0
+margin_top = 523.0
+margin_right = 1240.0
+margin_bottom = 541.0
+rect_pivot_offset = Vector2( -35.8931, 21.1975 )
+theme = ExtResource( 5 )
+text = "+5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
