@@ -4,18 +4,39 @@ A tiny medieval city builder, inspired by [Islanders](https://store.steampowered
 
 ## How to Play
 
-In Minieval, your goal is to earn as many Victory Points (VP) as you can in a limited number of turns, shown on the top right. You can earn VP by placing Buildings. However, Buildings cost Currency to build. You can see your current Currency and VP on the top left.
+In Minieval, your goal is to earn as many Victory Points (VP) as you can in a limited number of turns, shown on the top right.
+You can earn VP by placing Buildings.
+However, Buildings cost Currency to build.
+You can see your current Currency and VP on the top left.
 
-The Currency and VP you earn from a Building are affected by the Buildings next to it. For example, placing a House next to a Shop will earn you more Currency than placing them far apart. However, placing 2 Shops next to each other will cost you more Currency due to competition. The Range of a Building is shown with a White highlight. Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red. The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
+The Currency and VP you earn from a Building are affected by the Buildings next to it.
+For example, placing a House next to a Shop will earn you more Currency than placing them far apart.
+However, placing 2 Shops next to each other will cost you more Currency due to competition.
+The Range of a Building is shown with a White highlight.
+Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red.
+The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
 
-Roads can be used to connect Buildings that are otherwise out of range. Any Buildings connected by a Road will interact with ALL Buildings on that same Road network. These interactions will only affect the Currency you gain from the Building, and NOT the VP.
+Roads can be used to connect Buildings that are otherwise out of range.
+Any Buildings connected by a Road will interact with ALL Buildings on that same Road network.
+These interactions will only affect the Currency you gain from the Building, and NOT the VP.
 
-Use Left-Click to place a Building, WASD or Arrow Keys to pan, Scroll or QE to zoom, Z or U to undo, and Y or R to redo. Left-Click a Building on the palette to select it, or press the Number Key corresponding to its position. Press Escape to open the menu, press I to show an info overlay with every interaction, and hold Shift to show some stats about your current run.
+### Controls
+
+- Left-Click: Place a Building, Select Building from Palette
+- Right-Click: Remove a Building (Creative Mode Only)
+- WASD/Arrows: Pan
+- Scroll/QE: Zoom
+- Z/U: Undo
+- Y/R: Redo
+- 0-9: Select Building from Palette
+- I: Show Building Interactions
+- Shift: Show Stats
+- Escape: Menu
 
 ## Credits
 
-- [Aaron Friesen](https://maugrift.com): Team Lead, Programming, UI Design, Art, Title Screen Music, Balancing
-- [Kalen Wallin](https://github.com/kalenwallin): UI Design, Programming
+- [Aaron Friesen](https://frie.dev): Team Lead, Programming, UI Design, Art, Title Screen Music, Balancing
+- [Kalen Wallin](https://www.kalenwallin.com): UI Design, Programming
 - [Evan Mielak](https://github.com/EvanJMielak): Sound Effects, Programming, Balancing
 - [Viet Ninh](https://github.com/viet-ninh): UI Design, Programming
 - [Jackson Herman](https://github.com/jack-herman): In-Game Music, Balancing
