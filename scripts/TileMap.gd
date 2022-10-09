@@ -282,7 +282,7 @@ class Placement:
 const TILE_SIZE = 8
 const BASE_BUILDING_INDEX = 20 # First unused index
 const BASE_GROUP_INDEX = 1
-const DEFAULT_BUILDING = 2
+const DEFAULT_BUILDING = 11
 var CREATIVE_MODE = false
 var ALLOW_DESTROYING = false
 
