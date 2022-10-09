@@ -375,7 +375,6 @@ var building_scene := preload("res://scenes/Building.tscn")
 var currency := 25
 var vp := 0
 var selected_building := DEFAULT_BUILDING
-var buildings_placed := 0
 
 onready var ui_text_layer := get_node(@"/root/Root/UITextLayer")
 onready var currency_label := get_node(@"/root/Root/UITextLayer/CurrencyLabel")
@@ -917,8 +916,6 @@ func place_building(cellv: Vector2, id: int, force := false):
 
 	$BuildingPlaceSound.play()
 
-	buildings_placed += 1
-
 	var neighbor_groups := []
 	if building.groupable:
 		for neighbor in get_orthogonal(cellv):
@@ -991,8 +988,6 @@ func destroy_building(cellv: Vector2, id = null):
 	var building: Building = BUILDINGS[type]
 
 	$BuildingDestroySound.play()
-
-	buildings_placed -= 1
 
 	var root := cellv
 	if is_tile:

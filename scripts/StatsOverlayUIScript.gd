@@ -52,10 +52,6 @@ func update_currency():
 	else:
 		$Stats/CurrencyCountLabel.text = "inf"
 		$Stats/VPCountLabel.text = "inf"
-	var buildingCount = str(tilemap.buildings_placed)
-	if buildingCount == "69":
-		buildingCount = "69 (nice.)"
-	$Stats/BuildingsPlacedCountLabel.text = buildingCount
 
 #pauses input for a given node
 func _node_input_pause(node):

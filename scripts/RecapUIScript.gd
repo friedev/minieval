@@ -44,10 +44,6 @@ func update_labels():
 	if VPCount == "69":
 		VPCount = "69 (nice.)"
 	$Stats/VPCountLabel.text = VPCount
-	var BuildingCount = str(tilemap.buildings_placed)
-	if BuildingCount == "69":
-		BuildingCount = "69 (nice.)"
-	$Stats/BuildingsPlacedCountLabel.text = BuildingCount
 
 
 func _on_FreeplayButton_pressed():

@@ -93,29 +93,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuildingsPlacedLabel" type="Label" parent="Control/Stats"]
-margin_left = -1.0
-margin_top = 128.0
-margin_right = 161.0
-margin_bottom = 146.0
-theme = ExtResource( 5 )
-text = "Buildings Placed:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BuildingsPlacedCountLabel" type="Label" parent="Control/Stats"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -28.0
-margin_top = 128.0
-margin_bottom = 146.0
-theme = ExtResource( 5 )
-text = "69"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="FreeplayButton" type="Button" parent="Control"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -203,6 +180,7 @@ __meta__ = {
 
 [node name="EndGameMusic" type="AudioStreamPlayer" parent="Control"]
 stream = ExtResource( 7 )
+
 [connection signal="pressed" from="Control/FreeplayButton" to="Control" method="_on_FreeplayButton_pressed"]
 [connection signal="pressed" from="Control/UndoButton" to="Control" method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="Control/TitleScreenButton" to="Control" method="_on_TitleScreenButton_pressed"]
