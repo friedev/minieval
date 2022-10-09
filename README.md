@@ -27,7 +27,6 @@ These interactions will only affect the GP you gain from the building, and NOT t
 - Z/U: undo
 - Y/R: redo
 - 0-9: select building from palette
-- I: show building interactions
 - Escape: menu
 
 ## Credits
