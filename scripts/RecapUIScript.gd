@@ -83,7 +83,7 @@ func _on_UndoButton_pressed():
 func _on_TitleScreenButton_pressed():
 	game_over = false
 	get_tree().paused = false
-	get_tree().change_scene("res://Interface/Title.tscn")
+	get_tree().change_scene("res://scenes/Title.tscn")
 
 
 func _on_ExitGameButton_pressed():

@@ -1,7 +1,7 @@
 extends Control
 
 onready var title_ui_path = @"/root/Control/TitleUI/Control"
-onready var title_scene = "res://Interface/Title.tscn"
+onready var title_scene = "res://scenes/Title.tscn"
 
 onready var camera_speed = $CameraSpeed
 onready var music_volume = $GameVolume
