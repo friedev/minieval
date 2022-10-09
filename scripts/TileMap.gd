@@ -2,6 +2,7 @@ extends TileMap
 
 
 class Building:
+	var name: String
 	var is_tile: bool
 	var groupable: bool
 	var gp: int
@@ -13,6 +14,7 @@ class Building:
 	var vp_interactions: Dictionary
 
 	func _init(
+		name: String,
 		is_tile: bool,
 		groupable: bool,
 		gp: int,
@@ -23,6 +25,7 @@ class Building:
 		gp_interactions: Dictionary,
 		vp_interactions: Dictionary
 	):
+		self.name = name
 		self.is_tile = is_tile
 		self.groupable = groupable
 		self.gp = gp
@@ -125,6 +128,7 @@ enum {
 var BUILDINGS := {
 	EMPTY: null,
 	ROAD: Building.new(
+		"Road", # name
 		true, # is_tile
 		true, # groupable
 		-1, # gp
@@ -138,6 +142,7 @@ var BUILDINGS := {
 		{} # vp_interactions
 	),
 	HOUSE: Building.new(
+		"House", # name
 		false, # is_tile
 		false, # groupable
 		-1, # gp
@@ -155,6 +160,7 @@ var BUILDINGS := {
 		}
 	),
 	SHOP: Building.new(
+		"Shop", # name
 		false, # is_tile
 		false, # groupable
 		-5, # gp
@@ -175,6 +181,7 @@ var BUILDINGS := {
 		}
 	),
 	MANSION: Building.new(
+		"Mansion", # name
 		false, # is_tile
 		false, # groupable
 		-5, # gp
@@ -192,6 +199,7 @@ var BUILDINGS := {
 		}
 	),
 	FORGE: Building.new(
+		"Forge", # name
 		false, # is_tile
 		false, # groupable
 		-10, # gp
@@ -212,6 +220,7 @@ var BUILDINGS := {
 		}
 	),
 	STATUE: Building.new(
+		"Statue", # name
 		false, # is_tile
 		false, # groupable
 		-5, # gp
@@ -231,6 +240,7 @@ var BUILDINGS := {
 		}
 	),
 	CATHEDRAL: Building.new(
+		"Cathedral", # name
 		false, # is_tile
 		false, # groupable
 		-40, # gp
@@ -254,6 +264,7 @@ var BUILDINGS := {
 		}
 	),
 	KEEP: Building.new(
+		"Keep", # name
 		false, # is_tile
 		false, # groupable
 		-80, # gp
@@ -277,6 +288,7 @@ var BUILDINGS := {
 		}
 	),
 	TOWER: Building.new(
+		"Tower", # name
 		false, # is_tile
 		false, # groupable
 		-20, # gp
@@ -297,6 +309,7 @@ var BUILDINGS := {
 		}
 	),
 	PYRAMID: Building.new(
+		"Pyramid", # name
 		false, # is_tile
 		false, # groupable
 		-150, # gp

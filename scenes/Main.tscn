@@ -140,9 +140,6 @@ margin_bottom = 31.0
 theme = ExtResource( 13 )
 text = "1 
 -1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GPPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
 position = Vector2( -22, 0.25 )
