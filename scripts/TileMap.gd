@@ -12,16 +12,17 @@ class Building:
 	var currency_interactions: Dictionary
 	var vp_interactions: Dictionary
 
-
-	func _init(is_tile: bool,
-			groupable: bool,
-			cost: int,
-			vp: int,
-			area: Vector2,
-			texture: Texture,
-			cells: Array,
-			currency_interactions: Dictionary,
-			vp_interactions: Dictionary):
+	func _init(
+		is_tile: bool,
+		groupable: bool,
+		cost: int,
+		vp: int,
+		area: Vector2,
+		texture: Texture,
+		cells: Array,
+		currency_interactions: Dictionary,
+		vp_interactions: Dictionary
+	):
 		self.is_tile = is_tile
 		self.groupable = groupable
 		self.cost = cost
@@ -32,26 +33,20 @@ class Building:
 		self.currency_interactions = currency_interactions
 		self.vp_interactions = vp_interactions
 
-
 	func get_size():
 		return Vector2(get_width(), get_height())
-
 
 	func get_cell_offset():
 		return (get_size() / 2).ceil() - Vector2(1, 1)
 
-
 	func get_area_offset():
 		return (get_size() / 2).floor()
-
 
 	func get_width():
 		return len(self.cells[0])
 
-
 	func get_height():
 		return len(self.cells)
-
 
 	# Returns a list of all cell vectors orthogonally adjacent to the given cell
 	# Duplicated from outer scope
@@ -67,7 +62,6 @@ class Building:
 			orthogonal.append(Vector2(cellv.x, cellv.y + 1))
 		return orthogonal
 
-
 	static func get_cells_in_radius(cellv, radius = Vector2(1.5, 1.5)):
 		if radius is int:
 			radius = Vector2(radius, radius)
@@ -79,7 +73,6 @@ class Building:
 						cells.append(Vector2(x, y))
 		return cells
 
-
 	func get_cells(cellv = Vector2(0, 0)):
 		var cells = []
 		for y in range(0, len(self.cells)):
@@ -89,10 +82,8 @@ class Building:
 					# TODO prevent placing buildings partially out of bounds
 		return cells
 
-
 	func get_area_cells(cellv = Vector2(0, 0)):
 		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
-
 
 	func get_adjacent_cells(cellv = Vector2(0, 0)):
 		var adjacent_cell_map = []
@@ -113,150 +104,216 @@ class Building:
 		return adjacent_cells
 
 
-var BUILDINGS = [
-	null, # 0: Empty
-	null, # 1: Selection box
-	# 2: Road
-	Building.new(true, true, 1, 0, Vector2(0, 0), null, [
-				[1],
-			], {
-			}, {
-			}),
-	null, # 3: Unused
-	null, # 4: Unused
-	null, # 5: Unused
-	null, # 6: Unused
-	null, # 7: Unused
-	null, # 8: Unused
-	null, # 9: Unused
-	null, # 10: Unused
-	# 11: House
-	Building.new(false, false, 1, 1, Vector2(3, 3),
-			preload("res://sprites/house.png"), [
-				[1],
-			], {
-				12: 2, # Shop
-			}, {
-				15: 2, # Statue
-			}),
-	# 12: Shop
-	Building.new(false, false, 5, 1, Vector2(6, 5),
-			preload("res://sprites/shop2.png"), [
-				[1, 1],
-			], {
-				11: 1,  # House
-				12: -5, # Shop
-				13: 2,  # Big house
-				14: 3,  # Forge
-			}, {
-				16: -5, # Cathedral
-			}),
-	# 13: Big house
-	Building.new(false, false, 5, 2, Vector2(4, 4),
-			preload("res://sprites/big_house.png"), [
-				[1, 1],
-				[1, 0],
-			], {
-				12: 4, # Shop
-				13: -2, # Big house
-			}, {
-				15: 4, # Statue
-			}),
-	# 14: Forge
-	Building.new(false, false, 10, 2, Vector2(6, 6),
-			preload("res://sprites/forge.png"), [
-				[1, 1],
-				[1, 1],
-			], {
-				12: 3,  # Shop
-				14: -5, # Forge
-			}, {
-				16: -5, # Cathedral
-				17: 5,  # Keep
-			}),
-	# 15: Statue
-	Building.new(false, false, 5, 5, Vector2(5, 6),
-			preload("res://sprites/statue.png"), [
-				[1],
-				[1],
-			], {
-			}, {
-				11: 1,  # House
-				13: 2,  # Big house
-				15: -5, # Statue
-				16: 5,  # Cathedral
-			}),
-	# 16: Cathedral
-	Building.new(false, false, 40, 20, Vector2(8, 7),
-			preload("res://sprites/cathedral3.png"), [
-				[0, 1, 0, 0],
-				[1, 1, 1, 1],
-				[0, 1, 0, 0],
-			], {
-				14: 10,  # Forge
-				16: -20, # Cathedral
-			}, {
-				12: -10,  # Shop
-				14: -10,  # Forge
-				15: 10,  # Statue
-				16: -20, # Cathedral
-			}),
-	# 17: Keep
-	Building.new(false, false, 80, 20, Vector2(9, 8),
-			preload("res://sprites/keep.png"), [
-				[1, 1, 1],
-				[1, 1, 1],
-				[1, 1, 1],
-				[1, 1, 1],
-			], {
-				14: 10,  # Forge
-				17: -40, # Keep
-			}, {
-				14: 10,  # Forge
-				17: -20, # Keep
-				18: 20,  # Tower
-			}),
-	# 18: Tower
-	Building.new(false, false, 20, 0, Vector2(5, 5),
-			preload("res://sprites/tower.png"), [
-				[1],
-				[1],
-				[1],
-			], {
-				14: 5, # Forge
-			}, {
-				17: 20,  # Keep
-				18: -10, # Tower
-			}),
-	# 19: Pyramid
-	Building.new(false, false, 150, 50, Vector2(16, 12),
-			preload("res://sprites/pyramid.png"), [
-				[0, 0, 0, 1, 1, 0, 0, 0],
-				[0, 0, 1, 1, 1, 1, 0, 0],
-				[0, 1, 1, 1, 1, 1, 1, 0],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-			], {
-				11: -5,
-				12: -5,
-				13: -5,
-				14: -5,
-				15: -5,
-				16: -5,
-				17: -5,
-				18: -5,
-				19: -5,
-			}, {
-				11: 5,
-				12: 5,
-				13: 5,
-				14: 5,
-				15: 5,
-				16: 5,
-				17: 5,
-				18: 5,
-				19: 5,
-			}),
-]
+enum {
+	ROAD = 2,
+	HOUSE = 11,
+	SHOP = 12,
+	BIG_HOUSE = 13,
+	FORGE = 14,
+	STATUE = 15,
+	CATHEDRAL = 16,
+	KEEP = 17,
+	TOWER = 18,
+	PYRAMID = 19,
+}
+
+
+var BUILDINGS = {
+	ROAD: Building.new(
+		true, # is_tile
+		true, # groupable
+		1, # cost
+		0, # vp
+		Vector2(0, 0), # area
+		null, # texture
+		[ # cells
+			[1],
+		],
+		{}, # currency_interactions
+		{} # vp_interactions
+	),
+	HOUSE: Building.new(
+		false, # is_tile
+		false, # groupable
+		1, # cost
+		1, # vp
+		Vector2(3, 3), # area
+		preload("res://sprites/house.png"), # texture
+		[ # cells
+			[1],
+		],
+		{ # currency_interactions
+			SHOP: 2,
+		},
+		{ # vp_interactions
+			STATUE: 2,
+		}
+	),
+	SHOP: Building.new(
+		false, # is_tile
+		false, # groupable
+		5, # cost
+		1, # vp
+		Vector2(6, 5), # area
+		preload("res://sprites/shop2.png"), # texture
+		[ # cells
+			[1, 1],
+		],
+		{ # currency_interactions
+			HOUSE: 1,
+			SHOP: -5,
+			BIG_HOUSE: 2,
+			FORGE: 3,
+		},
+		{ # vp_interactions
+			CATHEDRAL: -5,
+		}
+	),
+	BIG_HOUSE: Building.new(
+		false, # is_tile
+		false, # groupable
+		5, # cost
+		2, # vp
+		Vector2(4, 4), # area
+		preload("res://sprites/big_house.png"), # texture
+		[
+			[1, 1],
+			[1, 0],
+		], {
+			SHOP: 4,
+			BIG_HOUSE: -2,
+		}, {
+			STATUE: 4,
+		}),
+	FORGE: Building.new(
+		false, # is_tile
+		false, # groupable
+		10, # cost
+		2, # vp
+		Vector2(6, 6), # area
+		preload("res://sprites/forge.png"), # texture
+		[ # cells
+			[1, 1],
+			[1, 1],
+		],
+		{ # currency_interactions
+			SHOP: 3,
+			FORGE: -5,
+		},
+		{ # vp_interactions
+			CATHEDRAL: -5,
+			KEEP: 5,
+		}),
+	STATUE: Building.new(
+		false, # is_tile
+		false, # groupable
+		5, # cost
+		5, # vp
+		Vector2(5, 6), # area
+		preload("res://sprites/statue.png"), # texture
+		[ # cells
+			[1],
+			[1],
+		],
+		{}, # currency_interactions
+		{ # vp_interactions
+			HOUSE: 1,
+			BIG_HOUSE: 2,
+			STATUE: -5,
+			CATHEDRAL: 5,
+		}),
+	CATHEDRAL: Building.new(
+		false, # is_tile
+		false, # groupable
+		40, # cost
+		20, # vp
+		Vector2(8, 7), # area,
+		preload("res://sprites/cathedral3.png"), # texture
+		[ # cells
+			[0, 1, 0, 0],
+			[1, 1, 1, 1],
+			[0, 1, 0, 0],
+		],
+		{ # currency_interactions
+			FORGE: 10,  # Forge
+			CATHEDRAL: -20, # Cathedral
+		},
+		{ # vp_interactions
+			SHOP: -10,
+			FORGE: -10,
+			STATUE: 10,
+			CATHEDRAL: -20,
+		}
+	),
+	KEEP: Building.new(false, false, 80, 20, Vector2(9, 8),
+		preload("res://sprites/keep.png"), [
+			[1, 1, 1],
+			[1, 1, 1],
+			[1, 1, 1],
+			[1, 1, 1],
+		], {
+			14: 10,  # Forge
+			17: -40, # Keep
+		}, {
+			14: 10,  # Forge
+			17: -20, # Keep
+			18: 20,  # Tower
+		}),
+	TOWER: Building.new(
+		false, # is_tile
+		false, # groupable
+		20, # cost
+		0, # vp
+		Vector2(5, 5), # area
+		preload("res://sprites/tower.png"), # texture
+		[ # cells
+			[1],
+			[1],
+			[1],
+		],
+		{ # currency_interactions
+			FORGE: 5,
+		},
+		{ # vp_interactions
+			KEEP: 20,
+			TOWER: -10,
+		}),
+	PYRAMID: Building.new(
+		false, # is_tile
+		false, # groupable
+		150, # cost
+		50, # vp
+		Vector2(16, 12), # area
+		preload("res://sprites/pyramid.png"), # texture
+		[ # cells
+			[0, 0, 0, 1, 1, 0, 0, 0],
+			[0, 0, 1, 1, 1, 1, 0, 0],
+			[0, 1, 1, 1, 1, 1, 1, 0],
+			[1, 1, 1, 1, 1, 1, 1, 1],
+		],
+		{ # currency_interactions
+			HOUSE: -5,
+			SHOP: -5,
+			BIG_HOUSE: -5,
+			FORGE: -5,
+			STATUE: -5,
+			CATHEDRAL: -5,
+			KEEP: -5,
+			TOWER: -5,
+			PYRAMID: -5,
+		},
+		{ # vp_interactions
+			HOUSE: 5,
+			SHOP: 5,
+			BIG_HOUSE: 5,
+			FORGE: 5,
+			STATUE: 5,
+			CATHEDRAL: 5,
+			KEEP: 5,
+			TOWER: 5,
+			PYRAMID: 5,
+		}),
+}
 
 
 class Placement:
@@ -266,12 +323,13 @@ class Placement:
 	var vp_change: int
 	var group_joins: Array
 
-
-	func _init(id: int,
-			cellv: Vector2,
-			currency_change: int,
-			vp_change: int,
-			group_joins: Array):
+	func _init(
+		id: int,
+		cellv: Vector2,
+		currency_change: int,
+		vp_change: int,
+		group_joins: Array
+	):
 		self.id = id
 		self.cellv = cellv
 		self.currency_change = currency_change
@@ -369,8 +427,11 @@ func _ready():
 				child.visible = false
 
 	# Change the selected building when a building is clicked on the palette
-	get_node(@"/root/Root/Palette/Menu/TileMap").connect("palette_selection",
-			self, "_select_building")
+	get_node(@"/root/Root/Palette/Menu/TileMap").connect(
+		"palette_selection",
+		self,
+		"_select_building"
+	)
 
 	self._update_mouse_cellv()
 	self._update_labels()
@@ -383,8 +444,9 @@ func _ready():
 			groups[x].append(0)
 			.set_cell(x, y, 0)
 
-	camera.position = cellv_to_world_position(Vector2(Global.game_size / 2,
-			Global.game_size / 2)) - camera.offset
+	camera.position = cellv_to_world_position(
+		Vector2(Global.game_size / 2, Global.game_size / 2)
+	) - camera.offset
 
 	for i in range(BASE_BUILDING_INDEX):
 		building_types.append(null)
@@ -411,9 +473,10 @@ func _unhandled_input(event):
 		var placement
 		if event.button_index == 1:
 			placement = self.place_building(
-					mouse_cellv - building.get_cell_offset(),
-					self.selected_building,
-					CREATIVE_MODE)
+				mouse_cellv - building.get_cell_offset(),
+				self.selected_building,
+				CREATIVE_MODE
+			)
 
 			if placement:
 				currency += placement.currency_change
@@ -473,9 +536,15 @@ func get_cellv(position: Vector2):
 # Updates world map, building types, and building roots where applicable
 # Does NOT spawn a building sprite, update groups, or fully clean up destroyed
 # buildings
-func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
-		flip_y: bool = false, transpose: bool = false,
-		autotile_coord: Vector2 = Vector2( 0, 0 )):
+func set_cell(
+	x: int,
+	y: int,
+	tile: int,
+	flip_x: bool = false,
+	flip_y: bool = false,
+	transpose: bool = false,
+	autotile_coord: Vector2 = Vector2( 0, 0 )
+):
 	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
 		push_error('Tried to set a cell out of bounds')
 	if tile < 0 and tile >= len(BUILDINGS) and tile != INVALID_CELL:
@@ -498,11 +567,23 @@ func set_cell(x: int, y: int, tile: int, flip_x: bool = false,
 
 
 # Overridden from TileMap
-func set_cellv(position: Vector2, tile: int, flip_x: bool = false,
-		flip_y: bool = false, transpose: bool = false,
-		autotile_coord: Vector2 = Vector2( 0, 0 )):
-	set_cell(position.x, position.y, tile, flip_x, flip_y, transpose,
-			autotile_coord)
+func set_cellv(
+	position: Vector2,
+	tile: int,
+	flip_x: bool = false,
+	flip_y: bool = false,
+	transpose: bool = false,
+	autotile_coord: Vector2 = Vector2( 0, 0 )
+):
+	set_cell(
+		position.x,
+		position.y,
+		tile,
+		flip_x,
+		flip_y,
+		transpose,
+		autotile_coord
+	)
 
 
 # Helper function to get a building's type (an index into the BUILDINGS array)
@@ -514,8 +595,10 @@ func get_type(id):
 
 
 func get_group(cellv):
-	if cellv.x < 0 or cellv.x >= len(world_map) or \
-			cellv.y < 0 or cellv.y >= len(world_map[cellv.x]):
+	if (
+		cellv.x < 0 or cellv.x >= len(world_map)
+		or cellv.y < 0 or cellv.y >= len(world_map[cellv.x])
+	):
 		return INVALID_CELL
 	return groups[cellv.x][cellv.y]
 
@@ -557,13 +640,19 @@ func get_adjacent_buildings(cellv, adjacent = [], visited = []):
 		var adjacent_group = get_base_group(get_group(adjacent_cellv))
 		if adjacent_group == group:
 			if not visited.has(adjacent_cellv):
-				adjacent = get_adjacent_buildings(adjacent_cellv, adjacent, visited)
+				adjacent = get_adjacent_buildings(
+					adjacent_cellv,
+					adjacent,
+					visited
+				)
 		else:
 			var adjacent_id = get_cellv(adjacent_cellv)
 			if adjacent_id >= BASE_BUILDING_INDEX:
 				var adjacent_building = BUILDINGS[get_type(adjacent_id)]
-				if not adjacent_building.is_tile and \
-						not adjacent.has(adjacent_id):
+				if (
+					not adjacent_building.is_tile
+					and not adjacent.has(adjacent_id)
+				):
 					adjacent.append(adjacent_id)
 	return adjacent
 
@@ -612,7 +701,10 @@ func get_road_connections(cellv, id):
 	var counted_groups = []
 	for adjacent_cellv in building.get_adjacent_cells(cellv):
 		var adjacent_group = get_base_group(get_group(adjacent_cellv))
-		if adjacent_group >= BASE_GROUP_INDEX and not counted_groups.has(adjacent_group):
+		if (
+			adjacent_group >= BASE_GROUP_INDEX
+			and not counted_groups.has(adjacent_group)
+		):
 			counted_groups.append(adjacent_group)
 			for adjacent_building in adjacent_buildings[adjacent_group]:
 				# Only add currency value
@@ -660,18 +752,28 @@ func modulate_building(building, id, road_connection):
 
 	var type = get_type(id)
 	var currency_interaction = building.currency_interactions.get(type, 0)
-	var vp_interaction = 0 if road_connection else building.vp_interactions.get(type, 0)
+	var vp_interaction = (
+		0
+		if road_connection
+		else building.vp_interactions.get(type, 0)
+	)
 
 	var modulation = null
-	if (currency_interaction > 0 and vp_interaction >= 0) or \
-			(currency_interaction >= 0 and vp_interaction > 0):
-				modulation = PREVIEW_COLOR_GOOD
-	elif (currency_interaction < 0 and vp_interaction <= 0) or \
-			(currency_interaction <= 0 and vp_interaction < 0):
-				modulation = PREVIEW_COLOR_BAD
-	elif (currency_interaction < 0 and vp_interaction > 0) or \
-			(currency_interaction > 0 and vp_interaction < 0):
-				modulation = PREVIEW_COLOR_MIXED
+	if (
+		(currency_interaction > 0 and vp_interaction >= 0)
+		or (currency_interaction >= 0 and vp_interaction > 0)
+	):
+		modulation = PREVIEW_COLOR_GOOD
+	elif (
+		(currency_interaction < 0 and vp_interaction <= 0)
+		or (currency_interaction <= 0 and vp_interaction < 0)
+	):
+		modulation = PREVIEW_COLOR_BAD
+	elif (
+		(currency_interaction < 0 and vp_interaction > 0)
+		or (currency_interaction > 0 and vp_interaction < 0)
+	):
+		modulation = PREVIEW_COLOR_MIXED
 
 	if modulation:
 		get_building_sprite(id).modulate = modulation
@@ -724,11 +826,15 @@ func _update_preview():
 			modulate_building(building, connected_building, true)
 
 	# Update preview label with expected building value
-	var value = get_building_value(building_cellv, self.selected_building, road_connections)
+	var value = get_building_value(
+		building_cellv,
+		self.selected_building,
+		road_connections
+	)
 	preview_label.text = "%s\n%s" % format_value(value)
-	preview_node.rect_position = \
-			cellv_to_screen_position(Vector2(preview_cellv.x, building_cellv.y)) + \
-			Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
+	preview_node.rect_position = cellv_to_screen_position(
+		Vector2(preview_cellv.x, building_cellv.y)
+	) + Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
 
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + currency < 0:
