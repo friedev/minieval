@@ -1,7 +1,14 @@
 extends Node
 
+enum {
+	TURN_MODE,
+	TIME_MODE,
+	ENDLESS_MODE,
+	CREATIVE_MODE,
+}
+
 # Default game parameters
-const GAME_MODE = 0
+const GAME_MODE = TURN_MODE
 const NUM_TURNS = 150
 const GAME_SIZE = 64
 const GAME_TIME = 300
@@ -11,8 +18,6 @@ const SPEED = 10.0
 const MUSIC_VOLUME = 5
 const SFX_VOLUME = 5
 
-# Game parameters
-# 0 - turn, 1 - time, 2 - freeplay, 3 - creative
 var game_mode = GAME_MODE
 var num_turns = NUM_TURNS
 var game_size = GAME_SIZE

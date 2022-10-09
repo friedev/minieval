@@ -432,19 +432,17 @@ var modulated_buildings := []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	TitleMusic.playing = false
-	#enable turn based
-	if Global.game_mode == 0:
+	if Global.game_mode == Global.TURN_MODE:
 		turn_label.visible = true
 		timer.visible = false
-	#enable time based
-	elif Global.game_mode == 1:
+	elif Global.game_mode == Global.TIME_MODE:
 		turn_label.visible = false
 		timer.visible = true
 	#enable freeplay
-	elif Global.game_mode == 2:
+	elif Global.game_mode == Global.ENDLESS_MODE:
 		turn_label.visible = false
 		timer.visible = false
-	elif Global.game_mode == 3:
+	elif Global.game_mode == Global.CREATIVE_MODE:
 		turn_label.visible = false
 		timer.visible = false
 		CREATIVE_MODE = true
