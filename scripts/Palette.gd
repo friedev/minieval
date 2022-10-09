@@ -2,9 +2,9 @@ extends TileMap
 
 signal palette_selection(id)
 
-func _input(event):
+func _input(event: InputEvent):
 	# Handle mouse clicks (and not unclicks)
-	var cellv
+	var cellv: Vector2
 	if event is InputEventMouseButton and event.pressed:
 		cellv = ((event.position - self.global_position) / 64).floor()
 	elif event is InputEventKey and event.pressed:
@@ -14,7 +14,7 @@ func _input(event):
 			cellv = Vector2(event.scancode - KEY_1, 0)
 	else:
 		return
-	var id = self.get_cellv(cellv)
+	var id := self.get_cellv(cellv)
 	if id != INVALID_CELL:
 		# Hack to map nice road icon (21) to actual road ID (2)
 		if id == 21:
