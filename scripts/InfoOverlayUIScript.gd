@@ -28,15 +28,15 @@ func _input(event):
 		$TopRowLabels/Shop/ShopVPGain.text = str(buildings[12].vp)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "House", 11)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "Shop", 12)
-		_set_currency_interactions("Top", buildings, "Shop", 12, "BigHouse", 13)
+		_set_currency_interactions("Top", buildings, "Shop", 12, "Mansion", 13)
 		_set_currency_interactions("Top", buildings, "Shop", 12, "Forge", 14)
 		_set_vp_interactions("Top",buildings, "Shop", 12, "Cathedral", 16)
-		#update big house labels
-		$TopRowLabels/BigHouse/BigHouseCost.text = str(buildings[13].cost)
-		$TopRowLabels/BigHouse/BigHouseVPGain.text = str(buildings[13].vp)
-		_set_currency_interactions("Top", buildings, "BigHouse", 13, "Shop", 12)
-		_set_currency_interactions("Top", buildings, "BigHouse", 13, "BigHouse", 13)
-		_set_vp_interactions("Top", buildings, "BigHouse", 13, "Statue", 15)
+		#update mansion labels
+		$TopRowLabels/Mansion/MansionCost.text = str(buildings[13].cost)
+		$TopRowLabels/Mansion/MansionVPGain.text = str(buildings[13].vp)
+		_set_currency_interactions("Top", buildings, "Mansion", 13, "Shop", 12)
+		_set_currency_interactions("Top", buildings, "Mansion", 13, "Mansion", 13)
+		_set_vp_interactions("Top", buildings, "Mansion", 13, "Statue", 15)
 		#update forge labels
 		$TopRowLabels/Forge/ForgeCost.text = str(buildings[14].cost)
 		$TopRowLabels/Forge/ForgeVPGain.text = str(buildings[14].vp)
@@ -48,7 +48,7 @@ func _input(event):
 		$BottomRowLabels/Statue/StatueCost.text = str(buildings[15].cost)
 		$BottomRowLabels/Statue/StatueVPGain.text = str(buildings[15].vp)
 		_set_vp_interactions("Bottom", buildings, "Statue", 15, "House", 11)
-		_set_vp_interactions("Bottom", buildings, "Statue", 15, "BigHouse", 13)
+		_set_vp_interactions("Bottom", buildings, "Statue", 15, "Mansion", 13)
 		_set_vp_interactions("Bottom", buildings, "Statue", 15, "Statue", 15)
 		_set_vp_interactions("Bottom", buildings, "Statue", 15, "Cathedral", 16)
 		#update cathedral labels

@@ -112,7 +112,7 @@ enum {
 	ROAD = 2,
 	HOUSE = 11,
 	SHOP = 12,
-	BIG_HOUSE = 13,
+	MANSION = 13,
 	FORGE = 14,
 	STATUE = 15,
 	CATHEDRAL = 16,
@@ -167,26 +167,26 @@ var BUILDINGS := {
 		{ # currency_interactions
 			HOUSE: 1,
 			SHOP: -5,
-			BIG_HOUSE: 2,
+			MANSION: 2,
 			FORGE: 3,
 		},
 		{ # vp_interactions
 			CATHEDRAL: -5,
 		}
 	),
-	BIG_HOUSE: Building.new(
+	MANSION: Building.new(
 		false, # is_tile
 		false, # groupable
 		5, # cost
 		2, # vp
 		Vector2(4, 4), # area
-		preload("res://sprites/big_house.png"), # texture
+		preload("res://sprites/mansion.png"), # texture
 		[
 			[1, 1],
 			[1, 0],
 		], {
 			SHOP: 4,
-			BIG_HOUSE: -2,
+			MANSION: -2,
 		}, {
 			STATUE: 4,
 		}),
@@ -223,7 +223,7 @@ var BUILDINGS := {
 		{}, # currency_interactions
 		{ # vp_interactions
 			HOUSE: 1,
-			BIG_HOUSE: 2,
+			MANSION: 2,
 			STATUE: -5,
 			CATHEDRAL: 5,
 		}),
@@ -299,7 +299,7 @@ var BUILDINGS := {
 		{ # currency_interactions
 			HOUSE: -5,
 			SHOP: -5,
-			BIG_HOUSE: -5,
+			MANSION: -5,
 			FORGE: -5,
 			STATUE: -5,
 			CATHEDRAL: -5,
@@ -310,7 +310,7 @@ var BUILDINGS := {
 		{ # vp_interactions
 			HOUSE: 5,
 			SHOP: 5,
-			BIG_HOUSE: 5,
+			MANSION: 5,
 			FORGE: 5,
 			STATUE: 5,
 			CATHEDRAL: 5,
@@ -578,7 +578,7 @@ func set_cellv(
 	flip_x: bool = false,
 	flip_y: bool = false,
 	transpose: bool = false,
-	autotile_coord: Vector2 = Vector2( 0, 0 )
+	autotile_coord: Vector2 = Vector2(0, 0)
 ) -> void:
 	set_cell(
 		position.x,

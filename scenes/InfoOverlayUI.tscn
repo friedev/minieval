@@ -290,7 +290,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="MansionCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 765.685
 margin_top = 461.0
 margin_right = 791.685
@@ -326,23 +326,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouse" type="Control" parent="Control/TopRowLabels"]
+[node name="Mansion" type="Control" parent="Control/TopRowLabels"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="BigHouseName" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionName" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 969.577
 margin_top = 316.431
 margin_right = 1079.58
 margin_bottom = 334.431
 theme = ExtResource( 5 )
-text = "Big House"
+text = "Mansion"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseCost" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionCost" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 1029.91
 margin_top = 347.27
 margin_right = 1035.91
@@ -353,7 +353,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseVPGain" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionVPGain" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 1029.91
 margin_top = 378.524
 margin_right = 1043.91
@@ -364,15 +364,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionCoin" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 1006.82, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="BigHouseVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionVP" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 1006.82, 386.476 )
 texture = ExtResource( 6 )
 
-[node name="BigHouseInteractions" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionInteractions" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 970.788
 margin_top = 404.37
 margin_right = 1090.79
@@ -384,15 +384,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseIntCoin" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionIntCoin" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 940.551, 439.779 )
 texture = ExtResource( 3 )
 
-[node name="BigHouseIntVP" type="Sprite" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionIntVP" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 940.135, 502.819 )
 texture = ExtResource( 6 )
 
-[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 955.942
 margin_top = 461.0
 margin_right = 981.942
@@ -404,7 +404,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseCurrInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="MansionCurrInt" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 992.0
 margin_top = 461.0
 margin_right = 1018.0
@@ -416,7 +416,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/BigHouse"]
+[node name="StatueVPInt" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 958.942
 margin_top = 525.0
 margin_right = 984.942
@@ -664,7 +664,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BigHouseVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
+[node name="MansionVPInt" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 222.904
 margin_top = 523.0
 margin_right = 248.904

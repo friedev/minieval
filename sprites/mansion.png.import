@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/big_house.png-939b7a5066c7c52dbfc30f6e7fdb12a6.stex"
+path="res://.import/mansion.png-bdd4afa65d072d7e70566922d415155e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/big_house.png"
-dest_files=[ "res://.import/big_house.png-939b7a5066c7c52dbfc30f6e7fdb12a6.stex" ]
+source_file="res://sprites/mansion.png"
+dest_files=[ "res://.import/mansion.png-bdd4afa65d072d7e70566922d415155e.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
