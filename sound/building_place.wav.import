@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/building.wav-7821a57ac06aa74978c5232cdac26ac1.sample"
+path="res://.import/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample"
 
 [deps]
 
-source_file="res://sound/building.wav"
-dest_files=[ "res://.import/building.wav-7821a57ac06aa74978c5232cdac26ac1.sample" ]
+source_file="res://sound/building_place.wav"
+dest_files=[ "res://.import/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample" ]
 
 [params]
 
