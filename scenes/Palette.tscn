@@ -21,9 +21,6 @@ margin_top = -112.0
 margin_right = 328.0
 margin_bottom = -32.0
 custom_styles/panel = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TileMap" type="TileMap" parent="Menu"]
 position = Vector2( 8, 8 )
@@ -31,7 +28,7 @@ scale = Vector2( 8, 8 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 0, 2, 0, 1, 11, 0, 2, 13, 0, 3, 12, 0, 4, 15, 0, 5, 14, 0, 6, 16, 0, 7, 17, 0, 8, 18, 0, 9, 19, 0 )
+tile_data = PoolIntArray( 0, 21, 0, 1, 11, 0, 2, 13, 0, 3, 12, 0, 4, 15, 0, 5, 14, 0, 6, 16, 0, 7, 17, 0, 8, 18, 0, 9, 19, 0 )
 script = ExtResource( 2 )
 
 [node name="TooltipIncomplete" type="Popup" parent="."]

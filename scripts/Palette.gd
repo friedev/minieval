@@ -16,4 +16,7 @@ func _input(event):
 		return
 	var id = self.get_cellv(cellv)
 	if id != INVALID_CELL:
+		# Hack to map nice road icon (21) to actual road ID (2)
+		if id == 21:
+			id = 2
 		emit_signal("palette_selection", id)
