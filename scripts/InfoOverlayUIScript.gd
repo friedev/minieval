@@ -84,8 +84,6 @@ func _input(event):
 				child.visible = false
 		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
 		_node_input_pause(pauseMenu)
-		var stats = get_node(@"/root/Root/StatsOverlay/Control")
-		_node_input_pause(stats)
 		visible = true
 	elif event.is_action_pressed("info_overlay") && Recap.game_over == false && isPaused == true:
 		isPaused = false
@@ -98,8 +96,6 @@ func _input(event):
 			turn_label.visible = false
 		var pauseMenu = get_node(@"/root/Root/PauseMenu/Pause")
 		_node_input_pause(pauseMenu)
-		var stats = get_node(@"/root/Root/StatsOverlay/Control")
-		_node_input_pause(stats)
 		visible = false
 
 # Pauses or unpauses input for a given node

@@ -30,7 +30,6 @@ These interactions will only affect the Currency you gain from the Building, and
 - Y/R: Redo
 - 0-9: Select Building from Palette
 - I: Show Building Interactions
-- Shift: Show Stats
 - Escape: Menu
 
 ## Credits

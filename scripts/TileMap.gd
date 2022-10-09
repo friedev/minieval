@@ -425,7 +425,6 @@ func _ready():
 
 		# Hide UIs in creative mode
 		# TODO extract to method to reduce redundancy
-		# Same code duplicated in StatsOverlayUIScript.gd
 		for child in ui_text_layer.get_children():
 			if child.name != "Timer":
 				child.visible = false
@@ -513,11 +512,6 @@ func _unhandled_input(event: InputEvent):
 			vp += next_placement.vp_change
 			history.append(next_placement)
 			self._update_labels()
-	elif event.is_action_pressed("score_report"):
-		show_preview = false
-		self._clear_preview()
-	elif event.is_action_released("score_report"):
-		show_preview = true
 	#elif event is InputEventKey and event.scancode == KEY_B:
 	#	# Manually break for debugging
 	#	breakpoint

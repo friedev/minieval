@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scripts/CameraMovement.gd" type="Script" id=8]
 [ext_resource path="res://ui/fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://sound/building_place_error.wav" type="AudioStream" id=10]
-[ext_resource path="res://scenes/StatsOverlayUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/RecapUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=13]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=14]
@@ -155,9 +154,6 @@ texture = ExtResource( 15 )
 [node name="VictoryPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
 position = Vector2( -22, 20.5 )
 texture = ExtResource( 14 )
-
-[node name="StatsOverlay" parent="." instance=ExtResource( 11 )]
-layer = 97
 
 [node name="RecapUI" parent="." instance=ExtResource( 12 )]
 
