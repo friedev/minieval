@@ -189,7 +189,8 @@ var BUILDINGS := {
 			MANSION: -2,
 		}, {
 			STATUE: 4,
-		}),
+		}
+	),
 	FORGE: Building.new(
 		false, # is_tile
 		false, # groupable
@@ -208,7 +209,8 @@ var BUILDINGS := {
 		{ # vp_interactions
 			CATHEDRAL: -5,
 			KEEP: 5,
-		}),
+		}
+	),
 	STATUE: Building.new(
 		false, # is_tile
 		false, # groupable
@@ -226,7 +228,8 @@ var BUILDINGS := {
 			MANSION: 2,
 			STATUE: -5,
 			CATHEDRAL: 5,
-		}),
+		}
+	),
 	CATHEDRAL: Building.new(
 		false, # is_tile
 		false, # groupable
@@ -250,20 +253,29 @@ var BUILDINGS := {
 			CATHEDRAL: -20,
 		}
 	),
-	KEEP: Building.new(false, false, 80, 20, Vector2(9, 8),
-		preload("res://sprites/keep.png"), [
+	KEEP: Building.new(
+		false, # is_tile
+		false, # groupable
+		-80, # gp
+		20, # vp
+		Vector2(9, 8), # area
+		preload("res://sprites/keep.png"), # sprite
+		[ # cells
 			[1, 1, 1],
 			[1, 1, 1],
 			[1, 1, 1],
 			[1, 1, 1],
-		], {
-			14: 10,  # Forge
-			17: -40, # Keep
-		}, {
-			14: 10,  # Forge
-			17: -20, # Keep
-			18: 20,  # Tower
-		}),
+		],
+		{ # gp_interactions
+			FORGE: 10,
+			KEEP: -40,
+		},
+		{ # vp_interactions
+			FORGE: 10,
+			KEEP: -20,
+			TOWER: 20,
+		}
+	),
 	TOWER: Building.new(
 		false, # is_tile
 		false, # groupable
@@ -282,7 +294,8 @@ var BUILDINGS := {
 		{ # vp_interactions
 			KEEP: 20,
 			TOWER: -10,
-		}),
+		}
+	),
 	PYRAMID: Building.new(
 		false, # is_tile
 		false, # groupable
@@ -317,7 +330,8 @@ var BUILDINGS := {
 			KEEP: 5,
 			TOWER: 5,
 			PYRAMID: 5,
-		}),
+		}
+	),
 }
 
 
