@@ -160,7 +160,7 @@ var BUILDINGS := {
 		-5, # gp
 		1, # vp
 		Vector2(6, 5), # area
-		preload("res://sprites/shop2.png"), # texture
+		preload("res://sprites/shop.png"), # texture
 		[ # cells
 			[1, 1],
 		],
@@ -233,7 +233,7 @@ var BUILDINGS := {
 		-40, # gp
 		20, # vp
 		Vector2(8, 7), # area,
-		preload("res://sprites/cathedral3.png"), # texture
+		preload("res://sprites/cathedral.png"), # texture
 		[ # cells
 			[0, 1, 0, 0],
 			[1, 1, 1, 1],
