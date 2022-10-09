@@ -71,17 +71,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrencyLabel" type="Label" parent="Control/Stats"]
+[node name="GPLabel" type="Label" parent="Control/Stats"]
 margin_top = 64.0
 margin_right = 146.0
 margin_bottom = 82.0
 theme = ExtResource( 5 )
-text = "Currency:"
+text = "GP:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrencyCountLabel" type="Label" parent="Control/Stats"]
+[node name="GPCountLabel" type="Label" parent="Control/Stats"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -28.0

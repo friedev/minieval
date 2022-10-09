@@ -36,10 +36,10 @@ func end_game():
 				child.visible = false
 
 func update_labels():
-	var currencyCount = str(tilemap.currency)
-	if currencyCount == "69":
-		currencyCount = "69 (nice.)"
-	$Stats/CurrencyCountLabel.text = currencyCount
+	var gpCount = str(tilemap.gp)
+	if gpCount == "69":
+		gpCount = "69 (nice.)"
+	$Stats/GPCountLabel.text = gpCount
 	var VPCount = str(tilemap.vp)
 	if VPCount == "69":
 		VPCount = "69 (nice.)"

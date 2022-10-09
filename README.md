@@ -4,33 +4,31 @@ A tiny medieval city builder, inspired by [Islanders](https://store.steampowered
 
 ## How to Play
 
-In Minieval, your goal is to earn as many Victory Points (VP) as you can in a limited number of turns, shown on the top right.
-You can earn VP by placing Buildings.
-However, Buildings cost Currency to build.
-You can see your current Currency and VP on the top left.
+In Minieval, your goal is to earn as many victory points (VP) as you can in a limited number of turns, shown on the top right.
+You can earn VP by placing buildings.
+However, buildings cost gold (GP) to build.
 
-The Currency and VP you earn from a Building are affected by the Buildings next to it.
-For example, placing a House next to a Shop will earn you more Currency than placing them far apart.
-However, placing 2 Shops next to each other will cost you more Currency due to competition.
-The Range of a Building is shown with a White highlight.
-Positive interactions between Buildings are highlighted in Green, Mixed interactions in Yellow, and Negative interactions in Red.
-The total amount of Currency and VP that you will gain or lose by placing a Building is shown above it.
+The GP and VP you earn from a building are affected by the buildings next to it.
+For example, placing a house next to a shop will earn you more GP than placing them far apart.
+However, placing 2 shops next to each other will cost you more GP due to competition.
+The range of a building is shown with a white highlight.
+Positive interactions between buildings are highlighted in green, mixed interactions in yellow, and negative interactions in red.
 
-Roads can be used to connect Buildings that are otherwise out of range.
-Any Buildings connected by a Road will interact with ALL Buildings on that same Road network.
-These interactions will only affect the Currency you gain from the Building, and NOT the VP.
+Roads can be used to connect buildings that are otherwise out of range.
+Any buildings connected by a road will interact with ALL buildings on that same road network.
+These interactions will only affect the GP you gain from the building, and NOT the VP.
 
 ### Controls
 
-- Left-Click: Place a Building, Select Building from Palette
-- Right-Click: Remove a Building (Creative Mode Only)
-- WASD/Arrows: Pan
-- Scroll/QE: Zoom
-- Z/U: Undo
-- Y/R: Redo
-- 0-9: Select Building from Palette
-- I: Show Building Interactions
-- Escape: Menu
+- Left-click: place a building, select building from palette
+- Right-click: remove a building (creative mode only)
+- WASD/arrows: pan
+- Scroll/QE: zoom
+- Z/U: undo
+- Y/R: redo
+- 0-9: select building from palette
+- I: show building interactions
+- Escape: menu
 
 ## Credits
 

@@ -13,7 +13,7 @@
 [ext_resource path="res://scenes/RecapUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=13]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=14]
-[ext_resource path="res://sprites/currency_icon.png" type="Texture" id=15]
+[ext_resource path="res://sprites/gp_icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/OptionsMenu.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/Timer.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/InfoOverlayUI.tscn" type="PackedScene" id=18]
@@ -92,7 +92,7 @@ layer = 99
 
 [node name="Timer" parent="UITextLayer" instance=ExtResource( 17 )]
 
-[node name="CurrencyLabel" type="Label" parent="UITextLayer"]
+[node name="GPVPLabel" type="Label" parent="UITextLayer"]
 margin_left = 56.0
 margin_top = 16.0
 margin_right = 207.0
@@ -100,9 +100,6 @@ margin_bottom = 91.0
 custom_fonts/font = SubResource( 1 )
 text = "0
 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TurnLabel" type="Label" parent="UITextLayer"]
 anchor_left = 1.0
@@ -118,12 +115,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrencyIcon" type="Sprite" parent="UITextLayer"]
+[node name="GPIcon" type="Sprite" parent="UITextLayer"]
 position = Vector2( 32, 32 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 15 )
 
-[node name="VictoryPointIcon" type="Sprite" parent="UITextLayer"]
+[node name="VPIcon" type="Sprite" parent="UITextLayer"]
 position = Vector2( 32, 72 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 14 )
@@ -147,11 +144,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrencyPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
+[node name="GPPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
 position = Vector2( -22, 0.25 )
 texture = ExtResource( 15 )
 
-[node name="VictoryPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
+[node name="VPPreview" type="Sprite" parent="PreviewLayer/PreviewNode"]
 position = Vector2( -22, 20.5 )
 texture = ExtResource( 14 )
 

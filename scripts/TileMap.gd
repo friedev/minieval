@@ -4,33 +4,33 @@ extends TileMap
 class Building:
 	var is_tile: bool
 	var groupable: bool
-	var cost: int
+	var gp: int
 	var vp: int
 	var area: Vector2
 	var texture: Texture
 	var cells: Array
-	var currency_interactions: Dictionary
+	var gp_interactions: Dictionary
 	var vp_interactions: Dictionary
 
 	func _init(
 		is_tile: bool,
 		groupable: bool,
-		cost: int,
+		gp: int,
 		vp: int,
 		area: Vector2,
 		texture: Texture,
 		cells: Array,
-		currency_interactions: Dictionary,
+		gp_interactions: Dictionary,
 		vp_interactions: Dictionary
 	):
 		self.is_tile = is_tile
 		self.groupable = groupable
-		self.cost = cost
+		self.gp = gp
 		self.vp = vp
 		self.area = area
 		self.texture = texture
 		self.cells = cells
-		self.currency_interactions = currency_interactions
+		self.gp_interactions = gp_interactions
 		self.vp_interactions = vp_interactions
 
 	func get_size() -> Vector2:
@@ -127,27 +127,27 @@ var BUILDINGS := {
 	ROAD: Building.new(
 		true, # is_tile
 		true, # groupable
-		1, # cost
+		-1, # gp
 		0, # vp
 		Vector2(0, 0), # area
 		null, # texture
 		[ # cells
 			[1],
 		],
-		{}, # currency_interactions
+		{}, # gp_interactions
 		{} # vp_interactions
 	),
 	HOUSE: Building.new(
 		false, # is_tile
 		false, # groupable
-		1, # cost
+		-1, # gp
 		1, # vp
 		Vector2(3, 3), # area
 		preload("res://sprites/house.png"), # texture
 		[ # cells
 			[1],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			SHOP: 2,
 		},
 		{ # vp_interactions
@@ -157,14 +157,14 @@ var BUILDINGS := {
 	SHOP: Building.new(
 		false, # is_tile
 		false, # groupable
-		5, # cost
+		-5, # gp
 		1, # vp
 		Vector2(6, 5), # area
 		preload("res://sprites/shop2.png"), # texture
 		[ # cells
 			[1, 1],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			HOUSE: 1,
 			SHOP: -5,
 			MANSION: 2,
@@ -177,7 +177,7 @@ var BUILDINGS := {
 	MANSION: Building.new(
 		false, # is_tile
 		false, # groupable
-		5, # cost
+		-5, # gp
 		2, # vp
 		Vector2(4, 4), # area
 		preload("res://sprites/mansion.png"), # texture
@@ -193,7 +193,7 @@ var BUILDINGS := {
 	FORGE: Building.new(
 		false, # is_tile
 		false, # groupable
-		10, # cost
+		-10, # gp
 		2, # vp
 		Vector2(6, 6), # area
 		preload("res://sprites/forge.png"), # texture
@@ -201,7 +201,7 @@ var BUILDINGS := {
 			[1, 1],
 			[1, 1],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			SHOP: 3,
 			FORGE: -5,
 		},
@@ -212,7 +212,7 @@ var BUILDINGS := {
 	STATUE: Building.new(
 		false, # is_tile
 		false, # groupable
-		5, # cost
+		-5, # gp
 		5, # vp
 		Vector2(5, 6), # area
 		preload("res://sprites/statue.png"), # texture
@@ -220,7 +220,7 @@ var BUILDINGS := {
 			[1],
 			[1],
 		],
-		{}, # currency_interactions
+		{}, # gp_interactions
 		{ # vp_interactions
 			HOUSE: 1,
 			MANSION: 2,
@@ -230,7 +230,7 @@ var BUILDINGS := {
 	CATHEDRAL: Building.new(
 		false, # is_tile
 		false, # groupable
-		40, # cost
+		-40, # gp
 		20, # vp
 		Vector2(8, 7), # area,
 		preload("res://sprites/cathedral3.png"), # texture
@@ -239,7 +239,7 @@ var BUILDINGS := {
 			[1, 1, 1, 1],
 			[0, 1, 0, 0],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			FORGE: 10,  # Forge
 			CATHEDRAL: -20, # Cathedral
 		},
@@ -267,7 +267,7 @@ var BUILDINGS := {
 	TOWER: Building.new(
 		false, # is_tile
 		false, # groupable
-		20, # cost
+		-20, # gp
 		0, # vp
 		Vector2(5, 5), # area
 		preload("res://sprites/tower.png"), # texture
@@ -276,7 +276,7 @@ var BUILDINGS := {
 			[1],
 			[1],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			FORGE: 5,
 		},
 		{ # vp_interactions
@@ -286,7 +286,7 @@ var BUILDINGS := {
 	PYRAMID: Building.new(
 		false, # is_tile
 		false, # groupable
-		150, # cost
+		-150, # gp
 		50, # vp
 		Vector2(16, 12), # area
 		preload("res://sprites/pyramid.png"), # texture
@@ -296,7 +296,7 @@ var BUILDINGS := {
 			[0, 1, 1, 1, 1, 1, 1, 0],
 			[1, 1, 1, 1, 1, 1, 1, 1],
 		],
-		{ # currency_interactions
+		{ # gp_interactions
 			HOUSE: -5,
 			SHOP: -5,
 			MANSION: -5,
@@ -324,20 +324,20 @@ var BUILDINGS := {
 class Placement:
 	var id: int
 	var cellv: Vector2
-	var currency_change: int
+	var gp_change: int
 	var vp_change: int
 	var group_joins: Array
 
 	func _init(
 		id: int,
 		cellv: Vector2,
-		currency_change: int,
+		gp_change: int,
 		vp_change: int,
 		group_joins: Array
 	):
 		self.id = id
 		self.cellv = cellv
-		self.currency_change = currency_change
+		self.gp_change = gp_change
 		self.vp_change = vp_change
 		self.group_joins = group_joins
 
@@ -372,13 +372,13 @@ var group_index := BASE_GROUP_INDEX
 
 var building_scene := preload("res://scenes/Building.tscn")
 
-var currency := 25
+var gp := 25
 var vp := 0
 var selected_building := DEFAULT_BUILDING
 
 onready var ui_text_layer := get_node(@"/root/Root/UITextLayer")
-onready var currency_label := get_node(@"/root/Root/UITextLayer/CurrencyLabel")
-var currency_format := "%d\n%d"
+onready var gpvp_label := get_node(@"/root/Root/UITextLayer/GPVPLabel")
+var gpvp_format := "%d\n%d"
 onready var turn_label := get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format := "%d Turns Left"
 onready var timer := get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
@@ -482,7 +482,7 @@ func _unhandled_input(event: InputEvent):
 			)
 
 			if placement:
-				currency += placement.currency_change
+				gp += placement.gp_change
 				vp += placement.vp_change
 				history.append(placement)
 				future.clear()
@@ -497,7 +497,7 @@ func _unhandled_input(event: InputEvent):
 		var prev_placement: Placement = history.pop_back()
 		if prev_placement:
 			self.destroy_building(prev_placement.cellv, prev_placement.id)
-			currency -= prev_placement.currency_change
+			gp -= prev_placement.gp_change
 			vp -= prev_placement.vp_change
 			for join in prev_placement.group_joins:
 				group_joins[join] = join
@@ -508,7 +508,7 @@ func _unhandled_input(event: InputEvent):
 		var next_placement: Placement = future.pop_back()
 		if next_placement:
 			self.place_building(next_placement.cellv, next_placement.id, true)
-			currency += next_placement.currency_change
+			gp += next_placement.gp_change
 			vp += next_placement.vp_change
 			history.append(next_placement)
 			self._update_labels()
@@ -705,16 +705,16 @@ func get_road_connections(cellv: Vector2, id: int) -> Array:
 		):
 			counted_groups.append(adjacent_group)
 			for adjacent_building in adjacent_buildings[adjacent_group]:
-				# Only add currency value
+				# Only add GP value
 				road_connections.append(adjacent_building)
 	return road_connections
 
 
-# Updates the currency label and turn label
+# Updates the GP/VP label and turn label
 func _update_labels() -> void:
 	# Don't update anything if in creative mode
 	if not CREATIVE_MODE:
-		currency_label.text = currency_format % [currency, vp]
+		gpvp_label.text = gpvp_format % [gp, vp]
 		var turns_remaining := get_turns_remaining()
 		if turns_remaining > 0:
 			turn_label.text = turn_format % turns_remaining
@@ -749,7 +749,7 @@ func modulate_building(building: Building, id: int, road_connection) -> void:
 		return
 
 	var type := get_type(id)
-	var currency_interaction: int = building.currency_interactions.get(type, 0)
+	var gp_interaction: int = building.gp_interactions.get(type, 0)
 	var vp_interaction: int = (
 		0
 		if road_connection
@@ -758,18 +758,18 @@ func modulate_building(building: Building, id: int, road_connection) -> void:
 
 	var modulation = null
 	if (
-		(currency_interaction > 0 and vp_interaction >= 0)
-		or (currency_interaction >= 0 and vp_interaction > 0)
+		(gp_interaction > 0 and vp_interaction >= 0)
+		or (gp_interaction >= 0 and vp_interaction > 0)
 	):
 		modulation = PREVIEW_COLOR_GOOD
 	elif (
-		(currency_interaction < 0 and vp_interaction <= 0)
-		or (currency_interaction <= 0 and vp_interaction < 0)
+		(gp_interaction < 0 and vp_interaction <= 0)
+		or (gp_interaction <= 0 and vp_interaction < 0)
 	):
 		modulation = PREVIEW_COLOR_BAD
 	elif (
-		(currency_interaction < 0 and vp_interaction > 0)
-		or (currency_interaction > 0 and vp_interaction < 0)
+		(gp_interaction < 0 and vp_interaction > 0)
+		or (gp_interaction > 0 and vp_interaction < 0)
 	):
 		modulation = PREVIEW_COLOR_MIXED
 
@@ -784,7 +784,7 @@ func _update_preview() -> void:
 		return
 
 	self._clear_preview()
-	# Don't show cost information in creative mode
+	# Don't show GP/VP information in creative mode
 	preview_node.visible = not CREATIVE_MODE
 	preview_cellv = mouse_cellv
 	var building: Building = BUILDINGS[selected_building]
@@ -835,7 +835,7 @@ func _update_preview() -> void:
 	) + Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
 
 	# Shade preview building in red if you can't afford to place it
-	if value[0] + currency < 0:
+	if value[0] + gp < 0:
 		if building.is_tile:
 			$PreviewTile.modulate = PREVIEW_COLOR_INVALID
 		else:
@@ -843,11 +843,11 @@ func _update_preview() -> void:
 
 
 # Gets the total value that would result from placing the building with the
-# given ID at the given cellv, returned in the form [currency, vp]
-# Includes the building's flat cost and VP, as well as interactions
+# given ID at the given cellv, returned in the form [gp, vp]
+# Includes the building's flat GP and VP, as well as interactions
 func get_building_value(cellv: Vector2, id: int, road_connections = null) -> Array:
 	var building: Building = BUILDINGS[id]
-	var currency_value := -building.cost
+	var gp_value := building.gp
 	var vp_value := building.vp
 	var counted_ids := []
 	var occupied_cells := building.get_cells(cellv)
@@ -864,7 +864,7 @@ func get_building_value(cellv: Vector2, id: int, road_connections = null) -> Arr
 		counted_ids.append(neighbor_id)
 
 		var neighbor_type := get_type(neighbor_id)
-		currency_value += building.currency_interactions.get(neighbor_type, 0)
+		gp_value += building.gp_interactions.get(neighbor_type, 0)
 		vp_value += building.vp_interactions.get(neighbor_type, 0)
 
 	# Account for buildings connected via road
@@ -874,11 +874,11 @@ func get_building_value(cellv: Vector2, id: int, road_connections = null) -> Arr
 	for connected_building in road_connections:
 		if not counted_ids.has(connected_building):
 			counted_ids.append(connected_building)
-			# Only add currency value
+			# Only add gp value
 			var connected_type := get_type(connected_building)
-			currency_value += building.currency_interactions.get(connected_type, 0)
+			gp_value += building.gp_interactions.get(connected_type, 0)
 
-	return [floor(currency_value), floor(vp_value)]
+	return [floor(gp_value), floor(vp_value)]
 
 
 func format_value(value: Array) -> Array:
@@ -896,16 +896,16 @@ func place_building(cellv: Vector2, id: int, force := false):
 			return null
 
 	# Check if building can be built in the first place
-#	if currency - floor(building.cost) < 0:
+#	if gp + floor(building.gp) < 0:
 #		return null
 
-	# Give currency based on nearby buildings
+	# Give GP based on nearby buildings
 	var building_value := get_building_value(cellv, id)
-	var currency_change: int = building_value[0]
+	var gp_change: int = building_value[0]
 	var vp_change: int = building_value[1]
 
-	# Check if the additional cost from interactions would lead to negative currency
-	if currency + currency_change < 0 and not force:
+	# Check if the additional GP from interactions would lead to negative GP
+	if gp + gp_change < 0 and not force:
 		return null
 
 	$BuildingPlaceSound.play()
@@ -954,7 +954,7 @@ func place_building(cellv: Vector2, id: int, force := false):
 		$Buildings.add_child(instance)
 
 	self.set_cellv(cellv, id)
-	return Placement.new(id, cellv, currency_change, vp_change, neighbor_groups)
+	return Placement.new(id, cellv, gp_change, vp_change, neighbor_groups)
 
 
 func destroy_building(cellv: Vector2, id = null):

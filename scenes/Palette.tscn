@@ -5,7 +5,7 @@
 [ext_resource path="res://ui/styles/stylebox_menu.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=4]
 [ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=5]
-[ext_resource path="res://sprites/currency_icon.png" type="Texture" id=6]
+[ext_resource path="res://sprites/gp_icon.png" type="Texture" id=6]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]

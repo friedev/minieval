@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/InfoOverlayUIScript.gd" type="Script" id=1]
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://sprites/currency_icon.png" type="Texture" id=3]
+[ext_resource path="res://sprites/gp_icon.png" type="Texture" id=3]
 [ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=5]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=6]
 
@@ -60,7 +60,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RoadCost" type="Label" parent="Control/TopRowLabels/Road"]
+[node name="RoadGP" type="Label" parent="Control/TopRowLabels/Road"]
 margin_left = 261.67
 margin_top = 342.37
 margin_right = 267.67
@@ -71,7 +71,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RoadVPGain" type="Label" parent="Control/TopRowLabels/Road"]
+[node name="RoadVP" type="Label" parent="Control/TopRowLabels/Road"]
 margin_left = 261.67
 margin_top = 373.624
 margin_right = 275.67
@@ -82,11 +82,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RoadCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+[node name="RoadGPSprite" type="Sprite" parent="Control/TopRowLabels/Road"]
 position = Vector2( 238.583, 348.872 )
 texture = ExtResource( 3 )
 
-[node name="RoadVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+[node name="RoadVPSprite" type="Sprite" parent="Control/TopRowLabels/Road"]
 position = Vector2( 238.583, 381.576 )
 texture = ExtResource( 6 )
 
@@ -102,11 +102,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RoadIntCoin" type="Sprite" parent="Control/TopRowLabels/Road"]
+[node name="RoadIntGPSprite" type="Sprite" parent="Control/TopRowLabels/Road"]
 position = Vector2( 175.954, 439.149 )
 texture = ExtResource( 3 )
 
-[node name="RoadIntVP" type="Sprite" parent="Control/TopRowLabels/Road"]
+[node name="RoadIntVPSprite" type="Sprite" parent="Control/TopRowLabels/Road"]
 position = Vector2( 175.538, 502.819 )
 texture = ExtResource( 6 )
 
@@ -126,7 +126,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HouseCost" type="Label" parent="Control/TopRowLabels/House"]
+[node name="HouseGP" type="Label" parent="Control/TopRowLabels/House"]
 margin_left = 516.948
 margin_top = 342.37
 margin_right = 522.948
@@ -137,7 +137,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HouseVPGain" type="Label" parent="Control/TopRowLabels/House"]
+[node name="HouseVP" type="Label" parent="Control/TopRowLabels/House"]
 margin_left = 516.948
 margin_top = 373.624
 margin_right = 530.948
@@ -148,11 +148,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HouseCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+[node name="HouseGPSprite" type="Sprite" parent="Control/TopRowLabels/House"]
 position = Vector2( 493.861, 348.872 )
 texture = ExtResource( 3 )
 
-[node name="HouseVP" type="Sprite" parent="Control/TopRowLabels/House"]
+[node name="HouseVPSprite" type="Sprite" parent="Control/TopRowLabels/House"]
 position = Vector2( 493.861, 381.576 )
 texture = ExtResource( 6 )
 
@@ -168,15 +168,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HouseIntCoin" type="Sprite" parent="Control/TopRowLabels/House"]
+[node name="HouseIntGPSprite" type="Sprite" parent="Control/TopRowLabels/House"]
 position = Vector2( 430.954, 439.779 )
 texture = ExtResource( 3 )
 
-[node name="HouseIntVP" type="Sprite" parent="Control/TopRowLabels/House"]
+[node name="HouseIntVPSprite" type="Sprite" parent="Control/TopRowLabels/House"]
 position = Vector2( 430.538, 502.819 )
 texture = ExtResource( 6 )
 
-[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/House"]
+[node name="ShopGPInt" type="Label" parent="Control/TopRowLabels/House"]
 margin_left = 445.694
 margin_top = 461.0
 margin_right = 471.694
@@ -216,7 +216,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopCost" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="ShopGP" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 770.911
 margin_top = 347.27
 margin_right = 776.911
@@ -227,7 +227,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopVPGain" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="ShopVP" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 770.911
 margin_top = 378.524
 margin_right = 784.911
@@ -238,11 +238,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+[node name="ShopGPSprite" type="Sprite" parent="Control/TopRowLabels/Shop"]
 position = Vector2( 747.824, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="ShopVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+[node name="ShopVPSprite" type="Sprite" parent="Control/TopRowLabels/Shop"]
 position = Vector2( 747.824, 386.476 )
 texture = ExtResource( 6 )
 
@@ -258,15 +258,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopIntCoin" type="Sprite" parent="Control/TopRowLabels/Shop"]
+[node name="ShopIntGPSprite" type="Sprite" parent="Control/TopRowLabels/Shop"]
 position = Vector2( 688.559, 439.779 )
 texture = ExtResource( 3 )
 
-[node name="ShopIntVP" type="Sprite" parent="Control/TopRowLabels/Shop"]
+[node name="ShopIntVPSprite" type="Sprite" parent="Control/TopRowLabels/Shop"]
 position = Vector2( 688.143, 502.819 )
 texture = ExtResource( 6 )
 
-[node name="HouseCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="HouseGPInt" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 706.0
 margin_top = 461.0
 margin_right = 724.0
@@ -278,7 +278,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="ShopGPInt" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 736.0
 margin_top = 461.0
 margin_right = 760.0
@@ -290,7 +290,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="MansionGPInt" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 765.685
 margin_top = 461.0
 margin_right = 791.685
@@ -302,7 +302,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Shop"]
+[node name="ForgeGPInt" type="Label" parent="Control/TopRowLabels/Shop"]
 margin_left = 795.984
 margin_top = 461.0
 margin_right = 821.984
@@ -342,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionCost" type="Label" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionGP" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 1029.91
 margin_top = 347.27
 margin_right = 1035.91
@@ -353,7 +353,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionVPGain" type="Label" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionVP" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 1029.91
 margin_top = 378.524
 margin_right = 1043.91
@@ -364,11 +364,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionCoin" type="Sprite" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionGPSprite" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 1006.82, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="MansionVP" type="Sprite" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionVPSprite" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 1006.82, 386.476 )
 texture = ExtResource( 6 )
 
@@ -384,15 +384,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionIntCoin" type="Sprite" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionIntGPSprite" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 940.551, 439.779 )
 texture = ExtResource( 3 )
 
-[node name="MansionIntVP" type="Sprite" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionIntVPSprite" type="Sprite" parent="Control/TopRowLabels/Mansion"]
 position = Vector2( 940.135, 502.819 )
 texture = ExtResource( 6 )
 
-[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Mansion"]
+[node name="ShopGPInt" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 955.942
 margin_top = 461.0
 margin_right = 981.942
@@ -404,7 +404,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MansionCurrInt" type="Label" parent="Control/TopRowLabels/Mansion"]
+[node name="MansionGPInt" type="Label" parent="Control/TopRowLabels/Mansion"]
 margin_left = 992.0
 margin_top = 461.0
 margin_right = 1018.0
@@ -444,7 +444,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeCost" type="Label" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeGP" type="Label" parent="Control/TopRowLabels/Forge"]
 margin_left = 1280.87
 margin_top = 347.27
 margin_right = 1286.87
@@ -455,7 +455,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeVPGain" type="Label" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeVP" type="Label" parent="Control/TopRowLabels/Forge"]
 margin_left = 1280.87
 margin_top = 378.524
 margin_right = 1294.87
@@ -466,11 +466,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeGPSprite" type="Sprite" parent="Control/TopRowLabels/Forge"]
 position = Vector2( 1257.79, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="ForgeVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeVPSprite" type="Sprite" parent="Control/TopRowLabels/Forge"]
 position = Vector2( 1257.79, 386.476 )
 texture = ExtResource( 6 )
 
@@ -486,15 +486,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeIntCoin" type="Sprite" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeIntGPSprite" type="Sprite" parent="Control/TopRowLabels/Forge"]
 position = Vector2( 1195.91, 439.779 )
 texture = ExtResource( 3 )
 
-[node name="ForgeIntVP" type="Sprite" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeIntVPSprite" type="Sprite" parent="Control/TopRowLabels/Forge"]
 position = Vector2( 1195.5, 502.819 )
 texture = ExtResource( 6 )
 
-[node name="ShopCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+[node name="ShopGPInt" type="Label" parent="Control/TopRowLabels/Forge"]
 margin_left = 1213.84
 margin_top = 461.0
 margin_right = 1239.84
@@ -506,7 +506,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ForgeCurrInt" type="Label" parent="Control/TopRowLabels/Forge"]
+[node name="ForgeGPInt" type="Label" parent="Control/TopRowLabels/Forge"]
 margin_left = 1246.08
 margin_top = 461.0
 margin_right = 1272.08
@@ -590,11 +590,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatueIntCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueIntGPSprite" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 175.954, 438.341 )
 texture = ExtResource( 3 )
 
-[node name="StatueIntVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueIntVPSprite" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 175.538, 501.381 )
 texture = ExtResource( 6 )
 
@@ -610,7 +610,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatueCost" type="Label" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueGP" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 261.67
 margin_top = 342.37
 margin_right = 267.67
@@ -621,7 +621,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatueVPGain" type="Label" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueVP" type="Label" parent="Control/BottomRowLabels/Statue"]
 margin_left = 261.67
 margin_top = 373.624
 margin_right = 275.67
@@ -632,11 +632,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatueCoin" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueGPSprite" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 238.583, 348.872 )
 texture = ExtResource( 3 )
 
-[node name="StatueVP" type="Sprite" parent="Control/BottomRowLabels/Statue"]
+[node name="StatueVPSprite" type="Sprite" parent="Control/BottomRowLabels/Statue"]
 position = Vector2( 238.583, 381.576 )
 texture = ExtResource( 6 )
 
@@ -719,7 +719,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralCost" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralGP" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 516.948
 margin_top = 342.37
 margin_right = 522.948
@@ -730,7 +730,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralVPGain" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralVP" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 516.948
 margin_top = 373.624
 margin_right = 530.948
@@ -741,11 +741,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralGPSprite" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
 position = Vector2( 493.861, 348.872 )
 texture = ExtResource( 3 )
 
-[node name="CathedralVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralVPSprite" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
 position = Vector2( 493.861, 381.576 )
 texture = ExtResource( 6 )
 
@@ -761,15 +761,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralIntCoin" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralIntGPSprite" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
 position = Vector2( 430.902, 438.341 )
 texture = ExtResource( 3 )
 
-[node name="CathedralIntVP" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralIntVPSprite" type="Sprite" parent="Control/BottomRowLabels/Cathedral"]
 position = Vector2( 430.486, 501.381 )
 texture = ExtResource( 6 )
 
-[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+[node name="ForgeGPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 441.948
 margin_top = 460.0
 margin_right = 473.948
@@ -781,7 +781,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CathedralCurrInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
+[node name="CathedralGPInt" type="Label" parent="Control/BottomRowLabels/Cathedral"]
 margin_left = 474.948
 margin_top = 460.0
 margin_right = 512.948
@@ -860,7 +860,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeepCost" type="Label" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepGP" type="Label" parent="Control/BottomRowLabels/Keep"]
 margin_left = 770.911
 margin_top = 347.27
 margin_right = 776.911
@@ -871,7 +871,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeepVPGain" type="Label" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepVP" type="Label" parent="Control/BottomRowLabels/Keep"]
 margin_left = 770.911
 margin_top = 378.524
 margin_right = 784.911
@@ -882,11 +882,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeepCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepGPSprite" type="Sprite" parent="Control/BottomRowLabels/Keep"]
 position = Vector2( 747.824, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="KeepVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepVPSprite" type="Sprite" parent="Control/BottomRowLabels/Keep"]
 position = Vector2( 747.824, 386.476 )
 texture = ExtResource( 6 )
 
@@ -902,15 +902,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeepIntCoin" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepIntGPSprite" type="Sprite" parent="Control/BottomRowLabels/Keep"]
 position = Vector2( 691.606, 438.341 )
 texture = ExtResource( 3 )
 
-[node name="KeepIntVP" type="Sprite" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepIntVPSprite" type="Sprite" parent="Control/BottomRowLabels/Keep"]
 position = Vector2( 691.19, 501.381 )
 texture = ExtResource( 6 )
 
-[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+[node name="ForgeGPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
 margin_left = 697.656
 margin_top = 460.0
 margin_right = 729.656
@@ -922,7 +922,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeepCurrInt" type="Label" parent="Control/BottomRowLabels/Keep"]
+[node name="KeepGPInt" type="Label" parent="Control/BottomRowLabels/Keep"]
 margin_left = 731.656
 margin_top = 459.83
 margin_right = 769.656
@@ -986,7 +986,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TowerCost" type="Label" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerGP" type="Label" parent="Control/BottomRowLabels/Tower"]
 margin_left = 1029.91
 margin_top = 347.27
 margin_right = 1035.91
@@ -997,7 +997,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TowerVPGain" type="Label" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerVP" type="Label" parent="Control/BottomRowLabels/Tower"]
 margin_left = 1029.91
 margin_top = 378.524
 margin_right = 1043.91
@@ -1008,11 +1008,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TowerCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerGPSprite" type="Sprite" parent="Control/BottomRowLabels/Tower"]
 position = Vector2( 1006.82, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="TowerVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerVPSprite" type="Sprite" parent="Control/BottomRowLabels/Tower"]
 position = Vector2( 1006.82, 386.476 )
 texture = ExtResource( 6 )
 
@@ -1028,15 +1028,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TowerIntCoin" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerIntGPSprite" type="Sprite" parent="Control/BottomRowLabels/Tower"]
 position = Vector2( 939.845, 438.341 )
 texture = ExtResource( 3 )
 
-[node name="TowerIntVP" type="Sprite" parent="Control/BottomRowLabels/Tower"]
+[node name="TowerIntVPSprite" type="Sprite" parent="Control/BottomRowLabels/Tower"]
 position = Vector2( 939.429, 501.381 )
 texture = ExtResource( 6 )
 
-[node name="ForgeCurrInt" type="Label" parent="Control/BottomRowLabels/Tower"]
+[node name="ForgeGPInt" type="Label" parent="Control/BottomRowLabels/Tower"]
 margin_left = 957.0
 margin_top = 460.0
 margin_right = 983.0
@@ -1088,7 +1088,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PyramidCost" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidGP" type="Label" parent="Control/BottomRowLabels/Pyramid"]
 margin_left = 1280.87
 margin_top = 347.27
 margin_right = 1286.87
@@ -1099,7 +1099,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PyramidVPGain" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidVP" type="Label" parent="Control/BottomRowLabels/Pyramid"]
 margin_left = 1280.87
 margin_top = 378.524
 margin_right = 1294.87
@@ -1110,11 +1110,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PyramidCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidGPSprite" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
 position = Vector2( 1257.79, 353.772 )
 texture = ExtResource( 3 )
 
-[node name="PyramidVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidVPSprite" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
 position = Vector2( 1257.79, 386.476 )
 texture = ExtResource( 6 )
 
@@ -1130,15 +1130,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PyramidIntCoin" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidIntGPSprite" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
 position = Vector2( 1198.76, 438.341 )
 texture = ExtResource( 3 )
 
-[node name="PyramidIntVP" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidIntVPSprite" type="Sprite" parent="Control/BottomRowLabels/Pyramid"]
 position = Vector2( 1198.34, 501.381 )
 texture = ExtResource( 6 )
 
-[node name="PyramidCurrInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
+[node name="PyramidGPInt" type="Label" parent="Control/BottomRowLabels/Pyramid"]
 margin_left = 1216.0
 margin_top = 460.0
 margin_right = 1240.0
