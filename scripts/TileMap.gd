@@ -108,6 +108,7 @@ class Building:
 
 
 enum {
+	EMPTY = 0,
 	ROAD = 2,
 	HOUSE = 11,
 	SHOP = 12,
@@ -122,6 +123,7 @@ enum {
 
 
 var BUILDINGS := {
+	EMPTY: null,
 	ROAD: Building.new(
 		true, # is_tile
 		true, # groupable
