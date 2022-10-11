@@ -405,8 +405,8 @@ var vp := 0
 var selected_building := DEFAULT_BUILDING
 
 onready var ui_text_layer := get_node(@"/root/Root/UITextLayer")
-onready var gpvp_label := get_node(@"/root/Root/UITextLayer/GPVPLabel")
-var gpvp_format := "%d\n%d"
+onready var gp_label := get_node(@"/root/Root/UITextLayer/GPLabel")
+onready var vp_label := get_node(@"/root/Root/UITextLayer/VPLabel")
 onready var turn_label := get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format := "%d Turns Left"
 onready var timer := get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
@@ -739,7 +739,8 @@ func get_road_connections(cellv: Vector2, id: int) -> Array:
 func _update_labels() -> void:
 	# Don't update anything if in creative mode
 	if not CREATIVE_MODE:
-		gpvp_label.text = gpvp_format % [gp, vp]
+		gp_label.text = str(gp)
+		vp_label.text = str(vp)
 		var turns_remaining := get_turns_remaining()
 		turn_label.text = turn_format % turns_remaining
 

@@ -92,14 +92,21 @@ layer = 99
 
 [node name="Timer" parent="UITextLayer" instance=ExtResource( 17 )]
 
-[node name="GPVPLabel" type="Label" parent="UITextLayer"]
+[node name="GPLabel" type="Label" parent="UITextLayer"]
 margin_left = 56.0
 margin_top = 16.0
 margin_right = 207.0
 margin_bottom = 91.0
 custom_fonts/font = SubResource( 1 )
-text = "0
-0"
+text = "0"
+
+[node name="VPLabel" type="Label" parent="UITextLayer"]
+margin_left = 56.0
+margin_top = 56.0
+margin_right = 207.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
 
 [node name="TurnLabel" type="Label" parent="UITextLayer"]
 anchor_left = 1.0
