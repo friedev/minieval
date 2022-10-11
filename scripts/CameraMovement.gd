@@ -1,27 +1,34 @@
 extends Camera2D
 
+onready var default_zoom := self.zoom
+onready var default_offset := self.offset
 
 
-onready var default_zoom = zoom
-onready var default_offset = offset
+func _process(delta: float) -> void:
+	var input_x := (
+		int(Input.is_action_pressed("ui_right"))
+		- int(Input.is_action_pressed("ui_left"))
+	)
+	var input_y := (
+		int(Input.is_action_pressed("ui_down"))
+		- int(Input.is_action_pressed("ui_up"))
+	)
+	var input := Vector2(input_x, input_y)
+	position = lerp(
+		position,
+		position + input * Global.speed,
+		Global.speed * delta
+	)
 
 
-func _process(delta):
-	var input_x = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
-	var input_y = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
-	var input = Vector2(input_x, input_y)
-
-	position = lerp(position, position + input * Global.speed, Global.speed * delta)
-
-
-func reset_zoom():
+func reset_zoom() -> void:
 	zoom = default_zoom
 	position += offset - default_offset
 	offset = default_offset
 
 
-func zoom(zoomfactor):
-	var new_zoom_level = (zoom * zoomfactor).x
+func zoom(zoomfactor: float) -> void:
+	var new_zoom_level := (zoom * zoomfactor).x
 	if new_zoom_level > 1 or new_zoom_level < 0.0625:
 		return
 
@@ -33,10 +40,10 @@ func zoom(zoomfactor):
 	offset *= zoomfactor
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom_in"):
 		zoom(0.5)
 	if event.is_action_pressed("zoom_out"):
-		zoom(2)
+		zoom(2.0)
 	if event.is_action_pressed("zoom_reset"):
 		reset_zoom()

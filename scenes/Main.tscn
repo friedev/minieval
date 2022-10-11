@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=14]
 [ext_resource path="res://sprites/gp_icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/OptionsMenu.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/Timer.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scenes/Tutorial.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=1]
@@ -89,8 +88,6 @@ script = ExtResource( 8 )
 layer = 99
 
 [node name="UITextLayer" type="CanvasLayer" parent="."]
-
-[node name="Timer" parent="UITextLayer" instance=ExtResource( 17 )]
 
 [node name="GPLabel" type="Label" parent="UITextLayer"]
 margin_left = 56.0

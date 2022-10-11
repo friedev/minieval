@@ -374,8 +374,6 @@ const TILE_SIZE := 8
 const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
-var CREATIVE_MODE := false
-var ALLOW_DESTROYING := false
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map := []
@@ -409,7 +407,6 @@ onready var gp_label := get_node(@"/root/Root/UITextLayer/GPLabel")
 onready var vp_label := get_node(@"/root/Root/UITextLayer/VPLabel")
 onready var turn_label := get_node(@"/root/Root/UITextLayer/TurnLabel")
 const turn_format := "%d Turns Left"
-onready var timer := get_node(@"/root/Root/UITextLayer/Timer/timeLeftLabel")
 
 var game_length: int = Global.num_turns
 var history := []
@@ -430,29 +427,9 @@ const PREVIEW_COLOR_BAD := Color(1, 0.25, 0.25, 1)
 var modulated_buildings := []
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	TitleMusic.playing = false
-	if Global.game_mode == Global.TURN_MODE:
-		turn_label.visible = true
-		timer.visible = false
-	elif Global.game_mode == Global.TIME_MODE:
-		turn_label.visible = false
-		timer.visible = true
-	elif Global.game_mode == Global.ENDLESS_MODE:
-		turn_label.visible = false
-		timer.visible = false
-	elif Global.game_mode == Global.CREATIVE_MODE:
-		turn_label.visible = false
-		timer.visible = false
-		CREATIVE_MODE = true
-		ALLOW_DESTROYING = true
-
-		# Hide UIs in creative mode
-		# TODO extract to method to reduce redundancy
-		for child in ui_text_layer.get_children():
-			if child.name != "Timer":
-				child.visible = false
+	turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
 	get_node(@"/root/Root/Palette/Menu/TileMap").connect(
@@ -503,7 +480,7 @@ func _unhandled_input(event: InputEvent):
 			placement = self.place_building(
 				mouse_cellv - building.get_cell_offset(),
 				self.selected_building,
-				CREATIVE_MODE
+				false
 			)
 
 			if placement:
@@ -514,9 +491,6 @@ func _unhandled_input(event: InputEvent):
 				self._update_labels()
 			else:
 				$BuildingPlaceErrorSound.play()
-
-		if ALLOW_DESTROYING and event.button_index == 2:
-			self.destroy_building(mouse_cellv)
 	elif event.is_action_pressed("undo"):
 		self._clear_preview()
 		var prev_placement: Placement = history.pop_back()
@@ -737,12 +711,10 @@ func get_road_connections(cellv: Vector2, id: int) -> Array:
 
 # Updates the GP/VP label and turn label
 func _update_labels() -> void:
-	# Don't update anything if in creative mode
-	if not CREATIVE_MODE:
-		gp_label.text = str(gp)
-		vp_label.text = str(vp)
-		var turns_remaining := get_turns_remaining()
-		turn_label.text = turn_format % turns_remaining
+	gp_label.text = str(gp)
+	vp_label.text = str(vp)
+	var turns_remaining := get_turns_remaining()
+	turn_label.text = turn_format % turns_remaining
 
 
 func _update_mouse_cellv() -> void:
@@ -807,8 +779,7 @@ func _update_preview() -> void:
 		return
 
 	self._clear_preview()
-	# Don't show GP/VP information in creative mode
-	preview_node.visible = not CREATIVE_MODE
+	preview_node.visible = true
 	preview_cellv = mouse_cellv
 	var building: Building = BUILDINGS[selected_building]
 	var building_cellv: Vector2 = preview_cellv - building.get_cell_offset()
@@ -831,9 +802,6 @@ func _update_preview() -> void:
 			if self.get_cellv(cellv) != 0:
 				$PreviewBuilding.modulate = PREVIEW_COLOR_INVALID
 				break
-
-	if CREATIVE_MODE:
-		return
 
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):

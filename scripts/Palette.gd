@@ -22,6 +22,7 @@ onready var building_ids: Array = tile_map.BUILDINGS.keys()
 onready var tooltip_position: Vector2 = tooltip.rect_position
 var last_tooltip_id := -1
 
+
 func _ready():
 	building_ids.remove(tile_map.EMPTY)
 	building_ids.sort()

@@ -21,7 +21,6 @@ These interactions will only affect the GP you gain from the building, and NOT t
 ### Controls
 
 - Left-click: place a building, select building from palette
-- Right-click: remove a building (creative mode only)
 - WASD/arrows: pan
 - Scroll/QE: zoom
 - Z/U: undo
