@@ -439,7 +439,6 @@ func _ready():
 	elif Global.game_mode == Global.TIME_MODE:
 		turn_label.visible = false
 		timer.visible = true
-	#enable freeplay
 	elif Global.game_mode == Global.ENDLESS_MODE:
 		turn_label.visible = false
 		timer.visible = false
@@ -742,10 +741,7 @@ func _update_labels() -> void:
 	if not CREATIVE_MODE:
 		gpvp_label.text = gpvp_format % [gp, vp]
 		var turns_remaining := get_turns_remaining()
-		if turns_remaining > 0:
-			turn_label.text = turn_format % turns_remaining
-		else:
-			turn_label.text = ""
+		turn_label.text = turn_format % turns_remaining
 
 
 func _update_mouse_cellv() -> void:

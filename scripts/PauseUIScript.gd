@@ -8,7 +8,7 @@ func _ready():
 
 # Make pause menu appear when user presses pause (Escape)
 func _input(event):
-	if event.is_action_pressed("pause") && recap.game_over == false:
+	if event.is_action_pressed("pause") && recap.visible == false:
 		var new_pause_state = not get_tree().paused
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
