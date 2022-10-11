@@ -97,9 +97,12 @@ margin_bottom = 18.0
 theme = ExtResource( 4 )
 text = "<vp>"
 
-[node name="InteractionsLabel" type="Label" parent="Menu/Tooltip/VBoxContainer"]
+[node name="InteractionsLabel" type="RichTextLabel" parent="Menu/Tooltip/VBoxContainer"]
 visible = false
 margin_top = 66.0
 margin_right = 72.0
-margin_bottom = 84.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 275, 0 )
+rect_clip_content = false
 theme = ExtResource( 4 )
+fit_content_height = true
