@@ -406,6 +406,7 @@ onready var ui_text_layer := get_node(@"/root/Root/UITextLayer")
 onready var gp_label := get_node(@"/root/Root/UITextLayer/GPLabel")
 onready var vp_label := get_node(@"/root/Root/UITextLayer/VPLabel")
 onready var turn_label := get_node(@"/root/Root/UITextLayer/TurnLabel")
+onready var undo_label := get_node(@"/root/Root/UITextLayer/UndoLabel")
 const turn_format := "%d Turns Left"
 
 var game_length: int = Global.num_turns
@@ -715,6 +716,7 @@ func _update_labels() -> void:
 	vp_label.text = str(vp)
 	var turns_remaining := get_turns_remaining()
 	turn_label.text = turn_format % turns_remaining
+	undo_label.visible = gp == 0
 
 
 func _update_mouse_cellv() -> void:

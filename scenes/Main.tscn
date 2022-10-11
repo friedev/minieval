@@ -116,6 +116,18 @@ custom_fonts/font = SubResource( 1 )
 text = "Turns Left"
 align = 2
 
+[node name="UndoLabel" type="Label" parent="UITextLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -146.0
+margin_top = 16.0
+margin_right = 146.0
+margin_bottom = 91.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 1 )
+text = "(Press Z/U to Undo)"
+align = 1
+
 [node name="GPIcon" type="Sprite" parent="UITextLayer"]
 position = Vector2( 32, 32 )
 scale = Vector2( 2, 2 )
