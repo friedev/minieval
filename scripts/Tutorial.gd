@@ -11,8 +11,17 @@ func _ready() -> void:
 		get_tree().paused = true
 
 
-func _on_PlayButton_pressed() -> void:
+func close_tutorial() -> void:
 	pause.set_process_input(true)
 	get_tree().paused = false
 	visible = false
 	Global.tutorial_seen = true
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		close_tutorial()
+
+
+func _on_PlayButton_pressed() -> void:
+	close_tutorial()
