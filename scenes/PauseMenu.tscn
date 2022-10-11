@@ -31,14 +31,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -140.0
-margin_top = -180.0
-margin_right = 135.0
-margin_bottom = 180.0
+margin_left = -137.5
+margin_top = -207.0
+margin_right = 137.5
+margin_bottom = 207.0
 custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ResumeButton" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
@@ -46,9 +43,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = -29.0
+margin_top = -61.0
 margin_right = 64.0
-margin_bottom = -3.0
+margin_bottom = -35.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
@@ -64,9 +61,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 115.0
+margin_top = 131.0
 margin_right = 64.0
-margin_bottom = 141.0
+margin_bottom = 157.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
@@ -75,9 +72,6 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 5 )
 text = "Exit Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OptionsButton" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
@@ -85,9 +79,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 19.0
+margin_top = -13.0
 margin_right = 64.0
-margin_bottom = 45.0
+margin_bottom = 13.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
@@ -100,15 +94,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TutorialButton" type="Button" parent="Pause/Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = 35.0
+margin_right = 64.0
+margin_bottom = 61.0
+grow_horizontal = 2
+theme = ExtResource( 7 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 5 )
+text = "Tutorial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TitleButton" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
 anchor_top = 0.497
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 68.9
+margin_top = 84.9
 margin_right = 64.0
-margin_bottom = 94.0
+margin_bottom = 110.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
@@ -117,9 +132,6 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 5 )
 text = "Title Screen"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MenuTitle" type="Label" parent="Pause/Menu"]
 anchor_left = 0.5
@@ -127,16 +139,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -96.0
-margin_top = -136.0
+margin_top = -168.0
 margin_right = 96.0
-margin_bottom = -72.0
+margin_bottom = -104.0
 theme = ExtResource( 6 )
 text = "Paused"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="Pause/Menu/ResumeButton" to="Pause" method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Pause/Menu/ExitGameButton" to="Pause" method="_on_ExitGameButton_pressed"]
 [connection signal="pressed" from="Pause/Menu/OptionsButton" to="Pause" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Pause/Menu/TutorialButton" to="Pause" method="_on_TutorialButton_pressed"]
 [connection signal="pressed" from="Pause/Menu/TitleButton" to="Pause" method="_on_ReturnToTitleButton_pressed"]

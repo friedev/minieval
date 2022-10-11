@@ -5,16 +5,19 @@ onready var pause := get_node("/root/Root/PauseMenu/Pause")
 
 func _ready() -> void:
 	if Global.tutorial_seen:
-		visible = false
+		close_tutorial()
 	else:
-		pause.set_process_input(false)
-		get_tree().paused = true
+		open_tutorial()
+
+
+func open_tutorial() -> void:
+	pause.set_process_input(false)
+	visible = true
 
 
 func close_tutorial() -> void:
-	pause.set_process_input(true)
-	get_tree().paused = false
 	visible = false
+	pause.set_process_input(true)
 	Global.tutorial_seen = true
 
 

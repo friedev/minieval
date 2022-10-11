@@ -13,6 +13,7 @@ layer = 100
 
 [node name="Tutorial" type="Control" parent="."]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -35,9 +36,6 @@ margin_top = -283.0
 margin_right = 361.5
 margin_bottom = 283.0
 custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayButton" type="Button" parent="Tutorial/Menu"]
 anchor_left = 0.5

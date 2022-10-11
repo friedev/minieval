@@ -2,6 +2,7 @@ extends Control
 
 onready var recap := get_node("/root/Root/RecapUI/Control")
 onready var options := get_node("/root/Root/OptionsMenu/Options")
+onready var tutorial := get_node("/root/Root/Tutorial/Tutorial")
 
 const title_scene := "res://scenes/Title.tscn"
 const main_scene := "res://scenes/Main.tscn"
@@ -40,3 +41,8 @@ func _on_OptionsButton_pressed():
 	Global.last_scene = main_scene
 	options.visible = true
 	set_paused(false)
+
+
+func _on_TutorialButton_pressed():
+	set_paused(false)
+	tutorial.open_tutorial()
