@@ -25,9 +25,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.501961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Menu" type="Panel" parent="Pause"]
 anchor_left = 0.5
@@ -48,10 +45,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -44.0
+margin_left = -64.0
 margin_top = -29.0
-margin_right = 44.0
+margin_right = 64.0
 margin_bottom = -3.0
+grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -59,19 +57,17 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 5 )
 text = "Resume"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ExitGameButton" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -56.0
+margin_left = -64.0
 margin_top = 115.0
-margin_right = 56.0
+margin_right = 64.0
 margin_bottom = 141.0
+grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -88,10 +84,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -40.0
+margin_left = -64.0
 margin_top = 19.0
-margin_right = 40.0
+margin_right = 64.0
 margin_bottom = 45.0
+grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -112,6 +109,7 @@ margin_left = -64.0
 margin_top = 68.9
 margin_right = 64.0
 margin_bottom = 94.0
+grow_horizontal = 2
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -137,6 +135,7 @@ text = "Paused"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Pause/Menu/ResumeButton" to="Pause" method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Pause/Menu/ExitGameButton" to="Pause" method="_on_ExitGameButton_pressed"]
 [connection signal="pressed" from="Pause/Menu/OptionsButton" to="Pause" method="_on_OptionsButton_pressed"]
