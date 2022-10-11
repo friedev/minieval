@@ -112,6 +112,7 @@ class Building:
 
 enum {
 	EMPTY = 0,
+	SELECTION = 1,
 	ROAD = 2,
 	HOUSE = 11,
 	SHOP = 12,
@@ -839,7 +840,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
-		$Preview.set_cellv(cellv, 1)
+		$Preview.set_cellv(cellv, SELECTION)
 		var id := get_cellv(cellv)
 		modulate_building(building, id, false)
 

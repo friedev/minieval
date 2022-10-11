@@ -14,6 +14,7 @@ onready var name_label := tooltip.get_node("VBoxContainer/NameLabel")
 onready var gp_label := tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
 onready var vp_label := tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
 onready var interactions_label := tooltip.get_node("VBoxContainer/InteractionsLabel")
+onready var selection := get_node("../Selection")
 onready var tile_map := get_node("/root/Root/TileMap")
 onready var buildings: Dictionary = tile_map.BUILDINGS
 onready var building_ids: Array = tile_map.BUILDINGS.keys()
@@ -120,7 +121,6 @@ func update_tooltip(id: int) -> void:
 		# RichTextLabel does not have fit_content_width or get_content_width()
 		# Instead, determine the length of the string (in plain text) in the chosen font
 		interactions_label.rect_min_size.x = max_line_width(lines)
-		print(interactions_label.rect_min_size.x)
 	else:
 		interactions_label.hide()
 
@@ -162,4 +162,6 @@ func _input(event: InputEvent):
 		update_tooltip(id)
 		tooltip.show()
 	else:
+		selection.clear()
+		selection.set_cellv(cellv, tile_map.SELECTION)
 		emit_signal("palette_selection", id)
