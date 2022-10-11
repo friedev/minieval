@@ -26,12 +26,14 @@ __meta__ = {
 }
 
 [node name="Menu" type="Panel" parent="Tutorial"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 101.0
-margin_top = 57.0
-margin_right = -100.0
-margin_bottom = -56.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -361.5
+margin_top = -283.0
+margin_right = 361.5
+margin_bottom = 283.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,13 +41,13 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="Tutorial/Menu"]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 margin_left = -44.0
-margin_top = 243.0
+margin_top = -58.0
 margin_right = 44.0
-margin_bottom = 269.0
+margin_bottom = -32.0
 theme = ExtResource( 7 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 3 )
@@ -59,13 +61,11 @@ __meta__ = {
 
 [node name="MenuTitle" type="Label" parent="Tutorial/Menu"]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 margin_left = -124.0
-margin_top = -288.0
+margin_top = 32.0
 margin_right = 124.0
-margin_bottom = -216.0
+margin_bottom = 104.0
 theme = ExtResource( 6 )
 text = "Tutorial"
 __meta__ = {
@@ -77,29 +77,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -506.5
-margin_top = -202.5
-margin_right = 507.5
-margin_bottom = 236.5
+margin_left = -327.5
+margin_top = -172.5
+margin_right = 327.5
+margin_bottom = 188.5
 theme = ExtResource( 7 )
 bbcode_enabled = true
-bbcode_text = "Welcome to Minieval, a tiny medieval city builder! In this game, your goal is to earn as many [color=#00ccff]victory points (VP)[/color] as you can in a limited number of turns, shown on the top right. You can earn [color=#00ccff]VP[/color] by placing [color=#884400]buildings[/color]. However, [color=#884400]buildings[/color] cost [color=#ffcc00]gold (GP)[/color] to build. You can see your current [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] on the top left.
+bbcode_text = "Welcome to Minieval! Your goal is to earn as many [color=#00ccff]victory points (VP)[/color] as you can in a limited number of turns. You can earn [color=#00ccff]VP[/color] by placing [color=#884400]buildings[/color], but [color=#884400]buildings[/color] cost [color=#ffcc00]gold (GP)[/color] to build. You can see your current [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] on the top left.
 
-The [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] you earn from a [color=#884400]building[/color] are affected by the [color=#884400]buildings[/color] next to it. For example, placing a [color=#884400]house[/color] next to a [color=#884400]shop[/color] will earn you more [color=#ffcc00]GP[/color] than placing them far apart. However, placing 2 [color=#884400]shops[/color] next to each other will cost you more [color=#ffcc00]GP[/color] due to competition. The range of a [color=#884400]building[/color] is shown with a white highlight. [color=#00ff00]Positive[/color] interactions between [color=#884400]buildings[/color] are highlighted in [color=#00ff00]green[/color], [color=#ffff00]mixed[/color] interactions in [color=#ffff00]yellow[/color], and [color=#ff0000]negative[/color] interactions in [color=#ff0000]red[/color]. The total amount of [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] that you will gain or lose by placing a [color=#884400]building[/color] is shown above it.
+The [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] you earn from a [color=#884400]building[/color] are affected by the [color=#884400]buildings[/color] next to it. For example, placing a [color=#884400]house[/color] next to a [color=#884400]shop[/color] will earn you more [color=#ffcc00]GP[/color], but placing 2 [color=#884400]shops[/color] next to each other will cost you more [color=#ffcc00]GP[/color] due to competition.
 
 [color=#cc8800]Roads[/color] can be used to connect [color=#884400]buildings[/color] that are otherwise out of range. Any [color=#884400]buildings[/color] connected by a [color=#cc8800]road[/color] will interact with ALL [color=#884400]buildings[/color] on that same [color=#cc8800]road[/color] network. These interactions will only affect the [color=#ffcc00]GP[/color] you gain from the [color=#884400]building[/color], and [color=#ff0000]NOT[/color] the [color=#00ccff]VP[/color].
 
-Use [color=#ff00ff]Left-Click[/color] to place a [color=#884400]building[/color], [color=#ff00ff]WASD[/color] or [color=#ff00ff]Arrow Keys[/color] to pan, [color=#ff00ff]Scroll[/color] or [color=#ff00ff]QE[/color] to zoom, [color=#ff00ff]Z[/color] or [color=#ff00ff]U[/color] to undo, and [color=#ff00ff]Y[/color] or [color=#ff00ff]R[/color] to redo. [color=#ff00ff]Left-Click[/color] a [color=#884400]building[/color] on the palette to select it, or press the [color=#ff00ff]Number Key[/color] corresponding to its position.
+[color=#884400]Buildings[/color] can't be destroyed, but you can always press [color=#ff00ff]Z[/color] or [color=#ff00ff]U[/color] to undo your last move. You can also press [color=#ff00ff]Y[/color] or [color=#ff00ff]R[/color] to redo.
 
-[center]Good luck, have fun, and thanks for playing Minieval![/center]"
-text = "Welcome to Minieval, a tiny medieval city builder! In this game, your goal is to earn as many victory points (VP) as you can in a limited number of turns, shown on the top right. You can earn VP by placing buildings. However, buildings cost gold (GP) to build. You can see your current GP and VP on the top left.
+[center]Good luck, and thanks for playing Minieval![/center]"
+text = "Welcome to Minieval! Your goal is to earn as many victory points (VP) as you can in a limited number of turns. You can earn VP by placing buildings, but buildings cost gold (GP) to build. You can see your current GP and VP on the top left.
 
-The GP and VP you earn from a building are affected by the buildings next to it. For example, placing a house next to a shop will earn you more GP than placing them far apart. However, placing 2 shops next to each other will cost you more GP due to competition. The range of a building is shown with a white highlight. Positive interactions between buildings are highlighted in green, mixed interactions in yellow, and negative interactions in red. The total amount of GP and VP that you will gain or lose by placing a building is shown above it.
+The GP and VP you earn from a building are affected by the buildings next to it. For example, placing a house next to a shop will earn you more GP, but placing 2 shops next to each other will cost you more GP due to competition.
 
 Roads can be used to connect buildings that are otherwise out of range. Any buildings connected by a road will interact with ALL buildings on that same road network. These interactions will only affect the GP you gain from the building, and NOT the VP.
 
-Use Left-Click to place a building, WASD or Arrow Keys to pan, Scroll or QE to zoom, Z or U to undo, and Y or R to redo. Left-Click a building on the palette to select it, or press the Number Key corresponding to its position.
+Buildings can't be destroyed, but you can always press Z or U to undo your last move. You can also press Y or R to redo.
 
-Good luck, have fun, and thanks for playing Minieval!"
+Good luck, and thanks for playing Minieval!"
+fit_content_height = true
 
 [connection signal="pressed" from="Tutorial/Menu/PlayButton" to="Tutorial" method="_on_PlayButton_pressed"]
