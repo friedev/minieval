@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=1]
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
@@ -16,6 +16,30 @@
 [ext_resource path="res://sprites/gp_icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/OptionsMenu.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/Tutorial.tscn" type="PackedScene" id=19]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 48.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -64.0
+linear_accel_random = 0.5
+scale = 4.0
+scale_random = 0.25
+scale_curve = SubResource( 3 )
+color = Color( 0.8, 0.8, 0.8, 1 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -66,6 +90,15 @@ format = 1
 [node name="PreviewBuilding" type="Sprite" parent="TileMap"]
 centered = false
 
+[node name="BuildingParticles" type="Particles2D" parent="TileMap"]
+z_index = -1
+emitting = false
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+process_material = SubResource( 4 )
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 5 )
@@ -81,11 +114,6 @@ drag_margin_top = 1.0
 drag_margin_right = 1.0
 drag_margin_bottom = 1.0
 script = ExtResource( 8 )
-
-[node name="Palette" parent="." instance=ExtResource( 4 )]
-
-[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
-layer = 99
 
 [node name="UITextLayer" type="CanvasLayer" parent="."]
 
@@ -162,7 +190,12 @@ texture = ExtResource( 15 )
 position = Vector2( -22, 20.5 )
 texture = ExtResource( 14 )
 
+[node name="Palette" parent="." instance=ExtResource( 4 )]
+
 [node name="RecapUI" parent="." instance=ExtResource( 12 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+layer = 99
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 16 )]
 

@@ -427,6 +427,12 @@ const PREVIEW_COLOR_MIXED := Color(1, 1, 0.25, 1)
 const PREVIEW_COLOR_BAD := Color(1, 0.25, 0.25, 1)
 var modulated_buildings := []
 
+onready var particles_material: ParticlesMaterial = $BuildingParticles.process_material
+onready var particles_amount = $BuildingParticles.amount
+onready var particles_scale = particles_material.scale
+onready var particles_velocity = particles_material.initial_velocity
+onready var particles_accel = particles_material.linear_accel
+
 
 func _ready():
 	TitleMusic.playing = false
@@ -880,6 +886,32 @@ func format_value(value: Array) -> Array:
 		('+%d' if value[1] > 0 else '%d') % value[1],
 	]
 
+
+func reset_particles() -> void:
+	var material: ParticlesMaterial = $BuildingParticles.process_material
+	$BuildingParticles.amount = particles_amount
+	material.scale = particles_scale
+	material.initial_velocity = particles_velocity
+	material.linear_accel = particles_accel
+
+
+func emit_particles(cellv: Vector2, building: Building) -> void:
+	if building.is_tile:
+		return
+
+	reset_particles()
+
+	var size := Vector2(len(building.cells[0]), len(building.cells))
+	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
+	$BuildingParticles.position = cellv_to_world_position(cellv + size / 2)
+	particles_material.emission_sphere_radius = size.length() / 2
+	$BuildingParticles.amount *= multiplier
+	particles_material.scale *= multiplier
+	particles_material.initial_velocity *= multiplier
+	particles_material.linear_accel *= multiplier
+	$BuildingParticles.restart()
+
+
 func place_building(cellv: Vector2, id: int, force := false):
 	var building: Building = BUILDINGS[id]
 
@@ -902,6 +934,7 @@ func place_building(cellv: Vector2, id: int, force := false):
 		return null
 
 	$BuildingPlaceSound.play()
+	emit_particles(cellv, building)
 
 	var neighbor_groups := []
 	if building.groupable:
@@ -975,6 +1008,7 @@ func destroy_building(cellv: Vector2, id = null):
 	var building: Building = BUILDINGS[type]
 
 	$BuildingDestroySound.play()
+	emit_particles(cellv - building.get_cell_offset(), building)
 
 	var root := cellv
 	if is_tile:
