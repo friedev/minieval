@@ -15,7 +15,7 @@ Roads can be used to connect buildings that are otherwise out of range.
 Any buildings connected by a road will interact with ALL buildings on that same road network.
 These interactions will only affect the GP you gain from the building, and NOT the VP.
 
-Buildings can't be destroyed, but you can always press undo your last move.
+Buildings can't be destroyed, but you can always undo your last move.
 
 ### Controls
 
