@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/RecapUIScript.gd" type="Script" id=1]
-[ext_resource path="res://ui/styles/stylebox_button_hover.tres" type="StyleBox" id=2]
-[ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/themes/theme_title.tres" type="Theme" id=4]
-[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=5]
-[ext_resource path="res://ui/styles/stylebox_button_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/fonts/title_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=5]
 [ext_resource path="res://music/end_music.ogg" type="AudioStream" id=7]
 
 [node name="RecapUI" type="CanvasLayer"]
@@ -20,6 +17,7 @@ margin_left = -0.943848
 margin_top = -0.943878
 margin_right = -0.943848
 margin_bottom = -0.943848
+theme = ExtResource( 5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,11 +32,6 @@ margin_right = -88.056
 margin_bottom = 651.0
 grow_horizontal = 2
 theme = ExtResource( 5 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 3 )
 text = "Undo Last Move"
 
 [node name="FreeplayButton" type="Button" parent="Control"]
@@ -49,11 +42,6 @@ margin_top = 625.0
 margin_right = 60.0
 margin_bottom = 651.0
 theme = ExtResource( 5 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 3 )
 text = "Freeplay"
 
 [node name="TitleScreenButton" type="Button" parent="Control"]
@@ -64,11 +52,6 @@ margin_top = 625.0
 margin_right = 216.0
 margin_bottom = 651.0
 theme = ExtResource( 5 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 3 )
 text = "Title Screen"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,7 +65,8 @@ margin_top = 69.0
 margin_right = 88.0
 margin_bottom = 133.0
 grow_horizontal = 2
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 text = "Game Over"
 align = 1
 

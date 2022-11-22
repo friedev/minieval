@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://ui/styles/stylebox_menu.tres" type="StyleBox" id=1]
 [ext_resource path="res://scripts/PauseUIScript.gd" type="Script" id=2]
-[ext_resource path="res://ui/styles/stylebox_button_pressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/styles/stylebox_button_hover.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/themes/theme_title.tres" type="Theme" id=6]
-[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=7]
+[ext_resource path="res://ui/fonts/title_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -16,14 +12,13 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BlackOverlay" type="ColorRect" parent="Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 color = Color( 0, 0, 0, 0.501961 )
 
 [node name="Menu" type="Panel" parent="Pause"]
@@ -35,24 +30,19 @@ margin_left = -137.5
 margin_top = -207.0
 margin_right = 137.5
 margin_bottom = 207.0
-custom_styles/panel = ExtResource( 1 )
+theme = ExtResource( 7 )
 
 [node name="ResumeButton" type="Button" parent="Pause/Menu"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
+margin_left = -66.5
 margin_top = -61.0
-margin_right = 64.0
-margin_bottom = -35.0
+margin_right = 72.5
+margin_bottom = -27.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Resume"
 
 [node name="ExitGameButton" type="Button" parent="Pause/Menu"]
@@ -60,17 +50,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
+margin_left = -67.5
 margin_top = 131.0
-margin_right = 64.0
-margin_bottom = 157.0
+margin_right = 69.5
+margin_bottom = 165.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Exit Game"
 
 [node name="OptionsButton" type="Button" parent="Pause/Menu"]
@@ -78,17 +63,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
+margin_left = -66.5
 margin_top = -13.0
-margin_right = 64.0
-margin_bottom = 13.0
+margin_right = 70.5
+margin_bottom = 21.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,17 +79,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
+margin_left = -67.5
 margin_top = 35.0
-margin_right = 64.0
-margin_bottom = 61.0
+margin_right = 69.5
+margin_bottom = 69.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Tutorial"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -126,11 +101,6 @@ margin_right = 64.0
 margin_bottom = 110.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Title Screen"
 
 [node name="MenuTitle" type="Label" parent="Pause/Menu"]
@@ -142,7 +112,8 @@ margin_left = -96.0
 margin_top = -168.0
 margin_right = 96.0
 margin_bottom = -104.0
-theme = ExtResource( 6 )
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 6 )
 text = "Paused"
 
 [connection signal="pressed" from="Pause/Menu/ResumeButton" to="Pause" method="_on_ResumeButton_pressed"]

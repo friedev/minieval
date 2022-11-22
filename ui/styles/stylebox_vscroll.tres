@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxLine" format=2]
+
+[resource]
+grow_begin = -1.0
+grow_end = -1.0
+thickness = 8
+vertical = true

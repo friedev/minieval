@@ -2,3 +2,4 @@
 
 [resource]
 bg_color = Color( 1, 1, 1, 1 )
+corner_detail = 1

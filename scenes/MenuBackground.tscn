@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sprites/menu_background.png" type="Texture" id=1]
-[ext_resource path="res://ui/fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=2]
 
 [sub_resource type="TileSet" id=1]
 0/name = "menu_background.png 0"
@@ -18,20 +18,6 @@
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=5]
-default_font = SubResource( 4 )
 
 [node name="Control" type="Control"]
 margin_right = 1280.0
@@ -50,6 +36,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 65536, 0, 0, 65537, 0, 0, 6
 [node name="BlackOverlay" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 color = Color( 0, 0, 0, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,8 +53,10 @@ margin_right = -16.0
 margin_bottom = -16.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( 266, 36 )
-theme = SubResource( 3 )
+theme = ExtResource( 2 )
 text = "v1.1.0-dev"
+align = 2
+valign = 2
 
 [node name="Authors" type="Label" parent="."]
 anchor_top = 1.0
@@ -78,7 +67,7 @@ margin_right = 684.0
 margin_bottom = -16.0
 grow_vertical = 0
 rect_pivot_offset = Vector2( 266, 36 )
-theme = SubResource( 5 )
+theme = ExtResource( 2 )
 text = "By:
 Aaron Friesen
 Kalen Wallin
@@ -86,6 +75,7 @@ Evan Mielak
 Viet Ninh
 Jackson Herman
 Ethan Fox"
+valign = 2
 
 [node name="Links" type="Label" parent="."]
 anchor_left = 0.5
@@ -99,9 +89,10 @@ margin_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 rect_pivot_offset = Vector2( 266, 36 )
-theme = SubResource( 5 )
+theme = ExtResource( 2 )
 text = "https://frie.dev/minieval"
 align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

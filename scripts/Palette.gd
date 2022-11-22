@@ -158,7 +158,10 @@ func _input(event: InputEvent):
 		# Hide and re-show the tooltip to force a layout refresh
 		tooltip.hide()
 		last_tooltip_id = id
-		tooltip.rect_position = tooltip_position + Vector2(cellv.x * 64, 0)
+		# Add the horizonal offset corresponding to the hovered tile
+		# Add to y to fine-tune the vertical offset
+		tooltip.rect_position = tooltip_position + Vector2(cellv.x * 64, 16)
+		# Shrink tooltip to size 0 to force fit-to-content
 		tooltip.rect_size = Vector2(0, 0)
 		update_tooltip(id)
 		tooltip.show()

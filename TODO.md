@@ -1,6 +1,4 @@
 # TODO
 
-- Rewrite UI
-	- Use Containers
-	- Expand theme to include styles currently being specified manually
+- Rewrite UI to use Containers
 - Drag to place multiple buildings

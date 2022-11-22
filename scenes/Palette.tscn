@@ -1,24 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Palette.gd" type="Script" id=2]
-[ext_resource path="res://ui/styles/stylebox_menu.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui/themes/theme_ui.tres" type="Theme" id=4]
+[ext_resource path="res://ui/styles/stylebox_button.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=4]
 [ext_resource path="res://sprites/gp_icon.png" type="Texture" id=6]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=7]
-
-[sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color( 1, 1, 1, 1 )
-anti_aliasing = false
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 100
@@ -32,7 +19,7 @@ margin_left = -328.0
 margin_top = -112.0
 margin_right = 328.0
 margin_bottom = -32.0
-custom_styles/panel = ExtResource( 3 )
+theme = ExtResource( 4 )
 
 [node name="Selection" type="TileMap" parent="Menu"]
 modulate = Color( 1, 1, 1, 0.376471 )
@@ -53,28 +40,28 @@ tile_data = PoolIntArray( 0, 21, 0, 1, 11, 0, 2, 13, 0, 3, 12, 0, 4, 15, 0, 5, 1
 script = ExtResource( 2 )
 
 [node name="Tooltip" type="PanelContainer" parent="Menu"]
-visible = false
 margin_top = -44.0
 margin_right = 104.0
 margin_bottom = 56.0
 grow_vertical = 0
-custom_styles/panel = SubResource( 1 )
+theme = ExtResource( 4 )
+custom_styles/panel = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/Tooltip"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 88.0
-margin_bottom = 84.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 92.0
 
 [node name="NameLabel" type="Label" parent="Menu/Tooltip/VBoxContainer"]
-margin_right = 72.0
+margin_right = 88.0
 margin_bottom = 18.0
 theme = ExtResource( 4 )
 text = "<name>"
 
 [node name="GPContainer" type="HBoxContainer" parent="Menu/Tooltip/VBoxContainer"]
 margin_top = 22.0
-margin_right = 72.0
+margin_right = 88.0
 margin_bottom = 40.0
 
 [node name="GPIcon" type="TextureRect" parent="Menu/Tooltip/VBoxContainer/GPContainer"]
@@ -91,7 +78,7 @@ text = "<gp>"
 
 [node name="VPContainer" type="HBoxContainer" parent="Menu/Tooltip/VBoxContainer"]
 margin_top = 44.0
-margin_right = 72.0
+margin_right = 88.0
 margin_bottom = 62.0
 
 [node name="VPIcon" type="TextureRect" parent="Menu/Tooltip/VBoxContainer/VPContainer"]
