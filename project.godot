@@ -17,6 +17,7 @@ _global_script_class_icons={
 config/name="Minieval"
 config/description="A tiny medieval city builder"
 run/main_scene="res://scenes/Title.tscn"
+config/icon="res://sprites/logo.png"
 
 [autoload]
 
