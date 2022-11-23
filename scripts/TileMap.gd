@@ -486,25 +486,24 @@ func _process(delta: float):
 
 
 func _unhandled_input(event: InputEvent):
-	if event is InputEventMouseButton and event.pressed:
+	if (event is InputEventMouseButton or event is InputEventMouseMotion) and Input.is_mouse_button_pressed(BUTTON_LEFT):
 		self._clear_preview()
 
 		var building: Building = BUILDINGS[self.selected_building]
-		var placement: Placement
-		if event.button_index == 1:
-			placement = self.place_building(
-				mouse_cellv - building.get_cell_offset(),
-				self.selected_building,
-				false
-			)
+		var placement: Placement = self.place_building(
+			mouse_cellv - building.get_cell_offset(),
+			self.selected_building,
+			false
+		)
 
-			if placement:
-				gp += placement.gp_change
-				vp += placement.vp_change
-				history.append(placement)
-				future.clear()
-				self._update_labels()
-			else:
+		if placement:
+			gp += placement.gp_change
+			vp += placement.vp_change
+			history.append(placement)
+			future.clear()
+			self._update_labels()
+		else:
+			if event is InputEventMouseButton:
 				$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
 		self._clear_preview()
@@ -526,9 +525,6 @@ func _unhandled_input(event: InputEvent):
 			vp += next_placement.vp_change
 			history.append(next_placement)
 			self._update_labels()
-	#elif event is InputEventKey and event.scancode == KEY_B:
-	#	# Manually break for debugging
-	#	breakpoint
 
 
 # Overridden from TileMap

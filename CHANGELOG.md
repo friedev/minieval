@@ -3,6 +3,7 @@
 ### 1.1.0 (2022-10-??)
 
 - Add tooltips when hovering over buildings in the toolbar
+- Add ability to place multiple buildings by dragging the mouse
 - Add particles when placing or destroying buildings
 - Add button to reopen the tutorial from the pause menu
 - Add a highlight to the currently selected building in the toolbar
