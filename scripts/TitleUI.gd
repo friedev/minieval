@@ -5,12 +5,12 @@ const main_scene := "res://scenes/Main.tscn"
 onready var title := self.get_node("/root/Title")
 onready var options_menu := self.title.find_node("Options")
 onready var custom_game_ui := self.title.find_node("CustomGameUI")
+onready var title_music := self.title.find_node("TitleMusic")
 onready var exit_game_button := self.find_node("ExitGameButton")
 
 
 func _ready() -> void:
-	if not TitleMusic.playing:
-		TitleMusic.play()
+	self.title_music.play(56.6)
 	self.exit_game_button.visible = OS.get_name() != "HTML5"
 	self.call_deferred("popup")
 

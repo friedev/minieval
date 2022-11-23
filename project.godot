@@ -22,7 +22,6 @@ config/icon="res://sprites/logo.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
-TitleMusic="*res://scripts/TitleMusic.gd"
 
 [display]
 

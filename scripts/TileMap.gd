@@ -445,7 +445,6 @@ onready var particles_accel = particles_material.linear_accel
 
 
 func _ready():
-	TitleMusic.playing = false
 	turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
