@@ -6,6 +6,7 @@ var title: Node
 var title_ui: Node
 var main: Node
 var black_overlay: Node
+var tilemap: Node
 
 onready var camera_speed := self.find_node("CameraSpeedSlider")
 onready var music_volume := self.find_node("MusicVolumeSlider")
@@ -25,7 +26,7 @@ func _ready() -> void:
 	else:
 		self.main = self.get_node("/root/Main")
 		self.black_overlay = self.main.find_node("BlackOverlay")
-
+		self.tilemap = self.main.find_node("TileMap")
 	camera_speed.value = Global.speed
 	sound_volume.value = Global.sound_volume
 	music_volume.value = Global.music_volume
@@ -67,3 +68,4 @@ func _on_Fullscreen_toggled(button_pressed: bool) -> void:
 func _on_Options_visibility_changed():
 	if not self.is_title:
 		black_overlay.visible = self.visible
+		self.tilemap.in_menu = self.visible

@@ -8,21 +8,16 @@ onready var palette := self.main.find_node("Palette")
 onready var turn_label := self.main.find_node("TurnLabel")
 onready var game_music := self.main.find_node("BackgroundMusic")
 
-func _process(delta: float) -> void:
-	if not Global.endless and tilemap.get_turns_remaining() == 0:
-		end_game()
-
 
 func end_game() -> void:
 	if game_music.playing:
 		game_music.playing = false
 	if not $EndGameMusic.playing:
 		$EndGameMusic.playing = true
-	tilemap._clear_preview()
-	tilemap._update_labels()
 	visible = true
 	palette.visible = false
 	turn_label.visible = false
+	tilemap.in_menu = true
 
 
 func _on_FreeplayButton_pressed() -> void:
@@ -31,20 +26,17 @@ func _on_FreeplayButton_pressed() -> void:
 	Global.endless = true
 	visible = false
 	palette.visible = true
+	tilemap.in_menu = false
 
 
 func _on_UndoButton_pressed() -> void:
 	game_music.playing = true
 	$EndGameMusic.playing = false
-
-	var undo := InputEventAction.new()
-	undo.action = "undo"
-	undo.pressed = true
-	Input.parse_input_event(undo)
-
+	tilemap.undo()
 	visible = false
 	palette.visible = true
 	turn_label.visible = true
+	tilemap.in_menu = false
 
 
 func _on_TitleScreenButton_pressed():

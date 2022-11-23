@@ -416,8 +416,8 @@ var future := []
 
 var mouse_cellv = null
 var preview_cellv = null
-var show_preview := true
 var modulated_buildings := []
+var in_menu := false
 
 onready var main := self.get_node("/root/Main")
 
@@ -429,6 +429,8 @@ onready var undo_label := self.main.find_node("UndoLabel")
 
 onready var palette = self.main.find_node("Palette")
 onready var palette_tiemap = self.palette.find_node("TileMap")
+
+onready var recap = self.main.find_node("Recap")
 
 onready var camera := self.main.find_node("Camera2D")
 onready var preview_label := self.main.find_node("PreviewLabel")
@@ -481,12 +483,20 @@ func _ready():
 
 
 func _process(delta: float):
-	if show_preview:
+	if not self.in_menu:
 		self._update_preview()
+	else:
+		self._clear_preview()
 
 
 func _unhandled_input(event: InputEvent):
-	if (event is InputEventMouseButton or event is InputEventMouseMotion) and Input.is_mouse_button_pressed(BUTTON_LEFT):
+	if self.in_menu:
+		return
+
+	if (
+		event is InputEventMouseButton
+		or event is InputEventMouseMotion
+	) and Input.is_mouse_button_pressed(BUTTON_LEFT):
 		self._clear_preview()
 
 		var building: Building = BUILDINGS[self.selected_building]
@@ -502,30 +512,39 @@ func _unhandled_input(event: InputEvent):
 			history.append(placement)
 			future.clear()
 			self._update_labels()
+			if self.is_game_over():
+				recap.end_game()
 		else:
 			if event is InputEventMouseButton:
 				$BuildingPlaceErrorSound.play()
 	elif event.is_action_pressed("undo"):
-		self._clear_preview()
-		var prev_placement: Placement = history.pop_back()
-		if prev_placement:
-			self.destroy_building(prev_placement.cellv, prev_placement.id)
-			gp -= prev_placement.gp_change
-			vp -= prev_placement.vp_change
-			for join in prev_placement.group_joins:
-				group_joins[join] = join
-			future.append(prev_placement)
-			self._update_labels()
+		self.undo()
 	elif event.is_action_pressed("redo"):
-		self._clear_preview()
-		var next_placement: Placement = future.pop_back()
-		if next_placement:
-			self.place_building(next_placement.cellv, next_placement.id, true)
-			gp += next_placement.gp_change
-			vp += next_placement.vp_change
-			history.append(next_placement)
-			self._update_labels()
+		self.redo()
 
+
+func undo() -> void:
+	self._clear_preview()
+	var prev_placement: Placement = history.pop_back()
+	if prev_placement:
+		self.destroy_building(prev_placement.cellv, prev_placement.id)
+		gp -= prev_placement.gp_change
+		vp -= prev_placement.vp_change
+		for join in prev_placement.group_joins:
+			group_joins[join] = join
+		future.append(prev_placement)
+		self._update_labels()
+
+
+func redo() -> void:
+	self._clear_preview()
+	var next_placement: Placement = future.pop_back()
+	if next_placement:
+		self.place_building(next_placement.cellv, next_placement.id, true)
+		gp += next_placement.gp_change
+		vp += next_placement.vp_change
+		history.append(next_placement)
+		self._update_labels()
 
 # Overridden from TileMap
 # Returns the building ID at the given position instead of the tile ID
@@ -683,6 +702,10 @@ func get_turn() -> int:
 
 func get_turns_remaining() -> int:
 	return game_length - get_turn()
+
+
+func is_game_over() -> bool:
+	return not Global.endless and self.get_turns_remaining() == 0
 
 
 # May be a redundant implementation of TileMap's world_to_map function

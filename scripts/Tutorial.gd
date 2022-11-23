@@ -2,6 +2,7 @@ extends Popup
 
 
 onready var main := self.get_node("/root/Main")
+onready var tilemap := self.main.find_node("TileMap")
 onready var pause := self.main.find_node("Pause")
 onready var black_overlay := self.main.find_node("BlackOverlay")
 
@@ -35,3 +36,4 @@ func _on_PlayButton_pressed() -> void:
 
 func _on_Tutorial_visibility_changed():
 	black_overlay.visible = self.visible
+	self.tilemap.in_menu = self.visible
