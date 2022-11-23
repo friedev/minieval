@@ -1,6 +1,9 @@
-extends Control
+extends Popup
 
-onready var pause := get_node("/root/Root/PauseMenu/Pause")
+
+onready var main := self.get_node("/root/Main")
+onready var pause := self.main.find_node("Pause")
+onready var black_overlay := self.main.find_node("BlackOverlay")
 
 
 func _ready() -> void:
@@ -12,7 +15,7 @@ func _ready() -> void:
 
 func open_tutorial() -> void:
 	pause.set_process_input(false)
-	visible = true
+	self.call_deferred("popup")
 
 
 func close_tutorial() -> void:
@@ -28,3 +31,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_PlayButton_pressed() -> void:
 	close_tutorial()
+
+
+func _on_Tutorial_visibility_changed():
+	black_overlay.visible = self.visible

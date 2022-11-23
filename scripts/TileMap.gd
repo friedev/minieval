@@ -370,10 +370,20 @@ class Placement:
 		self.group_joins = group_joins
 
 
-const TILE_SIZE := 8
+const PREVIEW_COLOR := Color.white
+const PREVIEW_COLOR_INVALID := Color(1, 0.25, 0.25, 0.5)
+const PREVIEW_COLOR_GOOD := Color(0.25, 1, 0.25, 1)
+const PREVIEW_COLOR_MIXED := Color(1, 1, 0.25, 1)
+const PREVIEW_COLOR_BAD := Color(1, 0.25, 0.25, 1)
+
+const TILE_SIZE := 8 # TODO determine from node properties
 const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
+
+const building_scene := preload("res://scenes/Building.tscn")
+
+const turn_format := "%d Turns Left"
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map := []
@@ -396,36 +406,34 @@ var adjacent_buildings := []
 var building_index := BASE_BUILDING_INDEX
 var group_index := BASE_GROUP_INDEX
 
-var building_scene := preload("res://scenes/Building.tscn")
-
 var gp := 25
 var vp := 0
 var selected_building := DEFAULT_BUILDING
-
-onready var ui_text_layer := get_node(@"/root/Root/UITextLayer")
-onready var gp_label := get_node(@"/root/Root/UITextLayer/GPLabel")
-onready var vp_label := get_node(@"/root/Root/UITextLayer/VPLabel")
-onready var turn_label := get_node(@"/root/Root/UITextLayer/TurnLabel")
-onready var undo_label := get_node(@"/root/Root/UITextLayer/UndoLabel")
-const turn_format := "%d Turns Left"
 
 var game_length: int = Global.num_turns
 var history := []
 var future := []
 
-onready var camera := get_node(@"/root/Root/Camera2D")
-onready var preview_label := get_node(@"/root/Root/PreviewLayer/PreviewNode/PreviewLabel")
-onready var preview_node := get_node(@"/root/Root/PreviewLayer/PreviewNode")
-onready var preview_building := get_node(@"/root/Root/TileMap/PreviewBuilding")
 var mouse_cellv = null
 var preview_cellv = null
 var show_preview := true
-const PREVIEW_COLOR := Color.white
-const PREVIEW_COLOR_INVALID := Color(1, 0.25, 0.25, 0.5)
-const PREVIEW_COLOR_GOOD := Color(0.25, 1, 0.25, 1)
-const PREVIEW_COLOR_MIXED := Color(1, 1, 0.25, 1)
-const PREVIEW_COLOR_BAD := Color(1, 0.25, 0.25, 1)
 var modulated_buildings := []
+
+onready var main := self.get_node("/root/Main")
+
+onready var ui_text_layer := self.main.find_node("UITextLayer")
+onready var gp_label := self.main.find_node("GPLabel")
+onready var vp_label := self.main.find_node("VPLabel")
+onready var turn_label := self.main.find_node("TurnLabel")
+onready var undo_label := self.main.find_node("UndoLabel")
+
+onready var palette = self.main.find_node("Palette")
+onready var palette_tiemap = self.palette.find_node("TileMap")
+
+onready var camera := self.main.find_node("Camera2D")
+onready var preview_label := self.main.find_node("PreviewLabel")
+onready var preview_node := self.main.find_node("PreviewNode")
+onready var preview_building := self.main.find_node("PreviewBuilding")
 
 onready var particles_material: ParticlesMaterial = $BuildingParticles.process_material
 onready var particles_amount = $BuildingParticles.amount
@@ -439,7 +447,7 @@ func _ready():
 	turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
-	get_node(@"/root/Root/Palette/Menu/TileMap").connect(
+	self.palette_tiemap.connect(
 		"palette_selection",
 		self,
 		"_select_building"

@@ -1,11 +1,12 @@
 extends Control
 
-
-onready var tilemap := get_node("/root/Root/TileMap")
-onready var palette := get_node("/root/Root/Palette/Menu")
-onready var turn_label := get_node("/root/Root/UITextLayer/TurnLabel")
-onready var game_music := get_node("/root/Root/BackgroundMusic")
 const title_scene := "res://scenes/Title.tscn"
+
+onready var main := self.get_node("/root/Main")
+onready var tilemap := self.main.find_node("TileMap")
+onready var palette := self.main.find_node("Palette")
+onready var turn_label := self.main.find_node("TurnLabel")
+onready var game_music := self.main.find_node("BackgroundMusic")
 
 func _process(delta: float) -> void:
 	if not Global.endless and tilemap.get_turns_remaining() == 0:

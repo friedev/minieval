@@ -15,7 +15,7 @@ onready var gp_label := tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
 onready var vp_label := tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
 onready var interactions_label := tooltip.get_node("VBoxContainer/InteractionsLabel")
 onready var selection := get_node("../Selection")
-onready var tile_map := get_node("/root/Root/TileMap")
+onready var tile_map := get_node("/root/Main/TileMap")
 onready var buildings: Dictionary = tile_map.BUILDINGS
 onready var building_ids: Array = tile_map.BUILDINGS.keys()
 

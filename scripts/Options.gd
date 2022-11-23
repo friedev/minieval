@@ -1,34 +1,49 @@
-extends Control
+extends Popup
 
-onready var title_ui_path := @"/root/Control/TitleUI/Control"
-onready var title_scene := "res://scenes/Title.tscn"
+export var is_title := false
 
-onready var camera_speed := $CameraSpeed
-onready var music_volume := $GameVolume
-onready var sfx_volume := $SFXVolume
+var title: Node
+var title_ui: Node
+var main: Node
+var black_overlay: Node
 
-onready var background_music := AudioServer.get_bus_index("Background music")
-onready var sound_effects := AudioServer.get_bus_index("Sound Effects")
+onready var camera_speed := self.find_node("CameraSpeedSlider")
+onready var music_volume := self.find_node("MusicVolumeSlider")
+onready var sfx_volume := self.find_node("SoundVolumeSlider")
+
+onready var background_music := AudioServer.get_bus_index("Music")
+onready var sound_effects := AudioServer.get_bus_index("Sound")
+
 
 const VOLUME_VALUES := [-80, -40, -20, -10, -5, 0, 2, 4, 6, 8, 9]
 
 
-func _on_Options_ready() -> void:
+func _ready() -> void:
+	if self.is_title:
+		self.title = self.get_node("/root/Title")
+		self.title_ui = self.title.find_node("TitleUI")
+	else:
+		self.main = self.get_node("/root/Main")
+		self.black_overlay = self.main.find_node("BlackOverlay")
+
 	camera_speed.value = Global.speed
 	sfx_volume.value = Global.sfx_volume
 	music_volume.value = Global.music_volume
 
 
+func _go_back() -> void:
+	self.hide()
+	if self.is_title:
+		self.title_ui.popup()
+
+
 func _input(event: InputEvent) -> void:
-	if Global.last_scene != title_scene:
-		if event.is_action_pressed("pause"):
-			visible = false
+	if event.is_action_pressed("pause"):
+		self._go_back()
 
 
 func _on_ReturnToGame_pressed() -> void:
-	visible = false
-	if Global.last_scene == title_scene:
-		get_node(title_ui_path).visible = true
+	self._go_back()
 
 
 func _on_CameraSpeed_value_changed(value: float) -> void:
@@ -45,9 +60,10 @@ func _on_SFXVolume_value_changed(value: int) -> void:
 	AudioServer.set_bus_volume_db(sound_effects, VOLUME_VALUES[value])
 
 
-func _on_Options_visibility_changed() -> void:
-	$BlackOverlay.visible = Global.last_scene != title_scene
-
-
 func _on_Fullscreen_toggled(button_pressed: bool) -> void:
 	OS.window_fullscreen = button_pressed
+
+
+func _on_Options_visibility_changed():
+	if not self.is_title:
+		black_overlay.visible = self.visible

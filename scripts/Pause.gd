@@ -1,17 +1,19 @@
-extends Control
+extends Popup
 
-onready var recap := get_node("/root/Root/RecapUI/Control")
-onready var options := get_node("/root/Root/OptionsMenu/Options")
-onready var tutorial := get_node("/root/Root/Tutorial/Tutorial")
+onready var main := self.get_node("/root/Main")
+onready var recap := self.main.find_node("Recap")
+onready var options := self.main.find_node("Options")
+onready var tutorial := self.main.find_node("Tutorial")
+onready var black_overlay := self.main.find_node("BlackOverlay")
+onready var exit_game_button := self.find_node("ExitGameButton")
 
 const title_scene := "res://scenes/Title.tscn"
-const main_scene := "res://scenes/Main.tscn"
 
 var paused := false
 
 
 func _ready():
-	$Menu/ExitGameButton.disabled = OS.get_name() == "HTML5"
+	self.exit_game_button.disabled = OS.get_name() == "HTML5"
 
 
 func set_paused(new_paused: bool) -> void:
@@ -38,11 +40,14 @@ func _on_ReturnToTitleButton_pressed():
 
 
 func _on_OptionsButton_pressed():
-	Global.last_scene = main_scene
-	options.visible = true
 	set_paused(false)
+	options.popup()
 
 
 func _on_TutorialButton_pressed():
 	set_paused(false)
 	tutorial.open_tutorial()
+
+
+func _on_Pause_visibility_changed():
+	black_overlay.visible = self.visible

@@ -7,10 +7,7 @@
 [ext_resource path="res://sprites/gp_icon.png" type="Texture" id=6]
 [ext_resource path="res://sprites/vp_icon.png" type="Texture" id=7]
 
-[node name="CanvasLayer" type="CanvasLayer"]
-layer = 100
-
-[node name="Menu" type="Panel" parent="."]
+[node name="Palette" type="Panel"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -21,7 +18,7 @@ margin_right = 328.0
 margin_bottom = -32.0
 theme = ExtResource( 4 )
 
-[node name="Selection" type="TileMap" parent="Menu"]
+[node name="Selection" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.376471 )
 position = Vector2( 8, 8 )
 scale = Vector2( 8, 8 )
@@ -30,7 +27,7 @@ cell_size = Vector2( 8, 8 )
 format = 1
 tile_data = PoolIntArray( 1, 1, 0 )
 
-[node name="TileMap" type="TileMap" parent="Menu"]
+[node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 8, 8 )
 scale = Vector2( 8, 8 )
 tile_set = ExtResource( 1 )
@@ -39,7 +36,8 @@ format = 1
 tile_data = PoolIntArray( 0, 21, 0, 1, 11, 0, 2, 13, 0, 3, 12, 0, 4, 15, 0, 5, 14, 0, 6, 16, 0, 7, 17, 0, 8, 18, 0, 9, 19, 0 )
 script = ExtResource( 2 )
 
-[node name="Tooltip" type="PanelContainer" parent="Menu"]
+[node name="Tooltip" type="PanelContainer" parent="."]
+visible = false
 margin_top = -44.0
 margin_right = 104.0
 margin_bottom = 56.0
@@ -47,53 +45,53 @@ grow_vertical = 0
 theme = ExtResource( 4 )
 custom_styles/panel = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Tooltip"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tooltip"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 96.0
 margin_bottom = 92.0
 
-[node name="NameLabel" type="Label" parent="Menu/Tooltip/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Tooltip/VBoxContainer"]
 margin_right = 88.0
 margin_bottom = 18.0
 theme = ExtResource( 4 )
 text = "<name>"
 
-[node name="GPContainer" type="HBoxContainer" parent="Menu/Tooltip/VBoxContainer"]
+[node name="GPContainer" type="HBoxContainer" parent="Tooltip/VBoxContainer"]
 margin_top = 22.0
 margin_right = 88.0
 margin_bottom = 40.0
 
-[node name="GPIcon" type="TextureRect" parent="Menu/Tooltip/VBoxContainer/GPContainer"]
+[node name="GPIcon" type="TextureRect" parent="Tooltip/VBoxContainer/GPContainer"]
 margin_right = 16.0
 margin_bottom = 18.0
 texture = ExtResource( 6 )
 
-[node name="GPLabel" type="Label" parent="Menu/Tooltip/VBoxContainer/GPContainer"]
+[node name="GPLabel" type="Label" parent="Tooltip/VBoxContainer/GPContainer"]
 margin_left = 20.0
 margin_right = 60.0
 margin_bottom = 18.0
 theme = ExtResource( 4 )
 text = "<gp>"
 
-[node name="VPContainer" type="HBoxContainer" parent="Menu/Tooltip/VBoxContainer"]
+[node name="VPContainer" type="HBoxContainer" parent="Tooltip/VBoxContainer"]
 margin_top = 44.0
 margin_right = 88.0
 margin_bottom = 62.0
 
-[node name="VPIcon" type="TextureRect" parent="Menu/Tooltip/VBoxContainer/VPContainer"]
+[node name="VPIcon" type="TextureRect" parent="Tooltip/VBoxContainer/VPContainer"]
 margin_right = 16.0
 margin_bottom = 18.0
 texture = ExtResource( 7 )
 
-[node name="VPLabel" type="Label" parent="Menu/Tooltip/VBoxContainer/VPContainer"]
+[node name="VPLabel" type="Label" parent="Tooltip/VBoxContainer/VPContainer"]
 margin_left = 20.0
 margin_right = 60.0
 margin_bottom = 18.0
 theme = ExtResource( 4 )
 text = "<vp>"
 
-[node name="InteractionsLabel" type="RichTextLabel" parent="Menu/Tooltip/VBoxContainer"]
+[node name="InteractionsLabel" type="RichTextLabel" parent="Tooltip/VBoxContainer"]
 visible = false
 margin_top = 66.0
 margin_right = 72.0

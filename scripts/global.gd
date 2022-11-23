@@ -12,7 +12,6 @@ const SFX_VOLUME := 5
 var endless := false
 var num_turns := NUM_TURNS
 var game_size := GAME_SIZE
-var last_scene := ""
 var tutorial_seen := false
 
 # Options
