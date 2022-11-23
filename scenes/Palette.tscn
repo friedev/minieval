@@ -19,7 +19,6 @@ margin_bottom = -32.0
 theme = ExtResource( 4 )
 
 [node name="Selection" type="TileMap" parent="."]
-modulate = Color( 1, 1, 1, 0.376471 )
 position = Vector2( 8, 8 )
 scale = Vector2( 8, 8 )
 tile_set = ExtResource( 1 )
