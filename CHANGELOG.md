@@ -1,6 +1,6 @@
 # Changelog
 
-### 1.1.0 (2022-10-??)
+### 1.1.0 (2022-11-23)
 
 - Add tooltips when hovering over buildings in the toolbar
 - Add ability to place multiple buildings by dragging the mouse

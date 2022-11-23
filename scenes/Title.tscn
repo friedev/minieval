@@ -52,7 +52,7 @@ margin_bottom = -16.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( 266, 36 )
 theme = ExtResource( 5 )
-text = "v1.1.0-dev"
+text = "v1.1.0"
 align = 2
 valign = 2
 
