@@ -12,7 +12,7 @@ const title_scene := "res://scenes/Title.tscn"
 
 
 func _ready():
-	self.exit_game_button.disabled = OS.get_name() == "HTML5"
+	self.exit_game_button.visible = OS.get_name() != "HTML5"
 
 
 # Make pause menu appear when user presses pause (Escape)
