@@ -9,10 +9,10 @@ var black_overlay: Node
 
 onready var camera_speed := self.find_node("CameraSpeedSlider")
 onready var music_volume := self.find_node("MusicVolumeSlider")
-onready var sfx_volume := self.find_node("SoundVolumeSlider")
+onready var sound_volume := self.find_node("SoundVolumeSlider")
 
-onready var background_music := AudioServer.get_bus_index("Music")
-onready var sound_effects := AudioServer.get_bus_index("Sound")
+onready var music_bus := AudioServer.get_bus_index("Music")
+onready var sound_bus := AudioServer.get_bus_index("Sound")
 
 
 const VOLUME_VALUES := [-80, -40, -20, -10, -5, 0, 2, 4, 6, 8, 9]
@@ -27,7 +27,7 @@ func _ready() -> void:
 		self.black_overlay = self.main.find_node("BlackOverlay")
 
 	camera_speed.value = Global.speed
-	sfx_volume.value = Global.sfx_volume
+	sound_volume.value = Global.sound_volume
 	music_volume.value = Global.music_volume
 
 
@@ -52,12 +52,12 @@ func _on_CameraSpeed_value_changed(value: float) -> void:
 
 func _on_GameVolume_value_changed(value: int) -> void:
 	Global.music_volume = value
-	AudioServer.set_bus_volume_db(background_music, VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(music_bus, VOLUME_VALUES[value])
 
 
 func _on_SFXVolume_value_changed(value: int) -> void:
-	Global.sfx_volume = value
-	AudioServer.set_bus_volume_db(sound_effects, VOLUME_VALUES[value])
+	Global.sound_volume = value
+	AudioServer.set_bus_volume_db(sound_bus, VOLUME_VALUES[value])
 
 
 func _on_Fullscreen_toggled(button_pressed: bool) -> void:

@@ -5,6 +5,7 @@
 [ext_resource path="res://ui/theme.tres" type="Theme" id=6]
 
 [node name="Options" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 popup_exclusive = true
@@ -16,10 +17,10 @@ margin_bottom = 720.0
 theme = ExtResource( 6 )
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
-margin_left = 632.0
-margin_top = 352.0
-margin_right = 648.0
-margin_bottom = 368.0
+margin_left = 424.0
+margin_top = 196.0
+margin_right = 856.0
+margin_bottom = 524.0
 theme = ExtResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
@@ -79,7 +80,7 @@ margin_top = 46.0
 margin_right = 150.0
 margin_bottom = 64.0
 theme = ExtResource( 6 )
-text = "SFX Volume"
+text = "Sound Volume"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -95,7 +96,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 6 )
 max_value = 10.0
-value = 1.0
+value = 5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

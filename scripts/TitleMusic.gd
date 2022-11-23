@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 
 func _ready() -> void:
 	stream = load("res://music/title_music.ogg")
-	set_bus("Background music")
+	set_bus("Music")
 	play()
 
 
