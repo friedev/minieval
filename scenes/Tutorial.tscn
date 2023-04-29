@@ -1,65 +1,40 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://c82d8rm7yseq0"]
 
-[ext_resource path="res://scripts/Tutorial.gd" type="Script" id=2]
-[ext_resource path="res://ui/fonts/title_font.tres" type="DynamicFont" id=6]
-[ext_resource path="res://ui/theme.tres" type="Theme" id=7]
+[ext_resource type="Script" path="res://scripts/Tutorial.gd" id="2"]
+[ext_resource type="FontFile" path="res://ui/fonts/title_font.tres" id="6"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
-[node name="Tutorial" type="Popup"]
+[node name="CenterContainer" type="CenterContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-popup_exclusive = true
-script = ExtResource( 2 )
+theme = ExtResource("7")
+script = ExtResource("2")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 7 )
+[node name="Menu" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("7")
 
-[node name="Menu" type="PanelContainer" parent="CenterContainer"]
-margin_left = 632.0
-margin_top = 352.0
-margin_right = 648.0
-margin_bottom = 368.0
-theme = ExtResource( 7 )
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Menu"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 680.0
-margin_bottom = 531.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Menu/MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 656.0
-margin_bottom = 507.0
-rect_min_size = Vector2( 640, 0 )
-custom_constants/separation = 16
-
-[node name="MenuTitle" type="Label" parent="CenterContainer/Menu/MarginContainer/VBoxContainer"]
-margin_right = 640.0
-margin_bottom = 64.0
-theme = ExtResource( 7 )
-custom_fonts/font = ExtResource( 6 )
+[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 48
 text = "Tutorial"
-align = 1
+horizontal_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/Menu/MarginContainer/VBoxContainer"]
-margin_top = 80.0
-margin_right = 640.0
-margin_bottom = 441.0
-theme = ExtResource( 7 )
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 bbcode_enabled = true
-bbcode_text = "Welcome to Minieval! Your goal is to earn as many [color=#00ccff]victory points (VP)[/color] as you can in a limited number of turns. You can earn [color=#00ccff]VP[/color] by placing [color=#884400]buildings[/color], but [color=#884400]buildings[/color] cost [color=#ffcc00]gold (GP)[/color] to build. You can see your current [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] on the top left.
-
-The [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] you earn from a [color=#884400]building[/color] are affected by the [color=#884400]buildings[/color] next to it. For example, placing a [color=#884400]house[/color] next to a [color=#884400]shop[/color] will earn you more [color=#ffcc00]GP[/color], but placing 2 [color=#884400]shops[/color] next to each other will cost you more [color=#ffcc00]GP[/color] due to competition.
-
-[color=#cc8800]Roads[/color] can be used to connect [color=#884400]buildings[/color] that are otherwise out of range. Any [color=#884400]buildings[/color] connected by a [color=#cc8800]road[/color] will interact with ALL [color=#884400]buildings[/color] on that same [color=#cc8800]road[/color] network. These interactions only affect the [color=#ffcc00]GP[/color] you gain from the [color=#884400]building[/color], and [color=#ff0000]NOT[/color] the [color=#00ccff]VP[/color].
-
-[color=#884400]Buildings[/color] can't be destroyed, but you can always press [color=#ff00ff]Z[/color] or [color=#ff00ff]U[/color] to undo your last move. You can also press [color=#ff00ff]Y[/color] or [color=#ff00ff]R[/color] to redo.
-
-[center]Good luck, and thanks for playing Minieval![/center]"
 text = "Welcome to Minieval! Your goal is to earn as many victory points (VP) as you can in a limited number of turns. You can earn VP by placing buildings, but buildings cost gold (GP) to build. You can see your current GP and VP on the top left.
 
 The GP and VP you earn from a building are affected by the buildings next to it. For example, placing a house next to a shop will earn you more GP, but placing 2 shops next to each other will cost you more GP due to competition.
@@ -69,16 +44,13 @@ Roads can be used to connect buildings that are otherwise out of range. Any buil
 Buildings can't be destroyed, but you can always press Z or U to undo your last move. You can also press Y or R to redo.
 
 Good luck, and thanks for playing Minieval!"
-fit_content_height = true
+fit_content = true
 
-[node name="PlayButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer"]
-margin_left = 291.0
-margin_top = 457.0
-margin_right = 349.0
-margin_bottom = 491.0
+[node name="PlayButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource( 7 )
+theme = ExtResource("7")
 text = "Play"
 
 [connection signal="visibility_changed" from="." to="." method="_on_Tutorial_visibility_changed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

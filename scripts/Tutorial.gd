@@ -1,39 +1,40 @@
-extends Popup
+extends Container
 
 
-onready var main := self.get_node("/root/Main")
-onready var tilemap := self.main.find_node("TileMap")
-onready var pause := self.main.find_node("Pause")
-onready var black_overlay := self.main.find_node("BlackOverlay")
+@onready var main := self.get_node("/root/Main")
+@onready var tilemap := self.main.find_child("TileMap")
+@onready var pause := self.main.find_child("Pause")
+@onready var black_overlay := self.main.find_child("BlackOverlay")
 
 
 func _ready() -> void:
 	if Global.tutorial_seen:
-		close_tutorial()
+		self.close_tutorial()
 	else:
-		open_tutorial()
+		self.open_tutorial()
 
 
 func open_tutorial() -> void:
-	pause.set_process_input(false)
-	self.call_deferred("popup")
+	self.pause.set_process_input(false)
+	self.call_deferred("show")
 
 
 func close_tutorial() -> void:
-	visible = false
-	pause.set_process_input(true)
+	self.hide()
+	self.pause.set_process_input(true)
 	Global.tutorial_seen = true
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		close_tutorial()
+		self.close_tutorial()
 
 
-func _on_PlayButton_pressed() -> void:
-	close_tutorial()
+func _on_Tutorial_visibility_changed() -> void:
+	pass
+	#self.black_overlay.visible = self.visible
+	#self.tilemap.in_menu = self.visible
 
 
-func _on_Tutorial_visibility_changed():
-	black_overlay.visible = self.visible
-	self.tilemap.in_menu = self.visible
+func _on_play_button_pressed() -> void:
+	self.close_tutorial()

@@ -2,6 +2,8 @@ extends TileMap
 
 signal palette_selection(id)
 
+const INVALID_CELL := -1
+
 const GP_STR := "GP"
 const GP_COLOR := Color(1.0, 0.75, 0.0)
 const VP_STR := "VP"
@@ -9,22 +11,22 @@ const VP_COLOR := Color(0.0, 0.75, 1.0)
 const POSITIVE_COLOR := Color(0.0, 1.0, 0.0)
 const NEGATIVE_COLOR := Color(1.0, 0.0, 0.0)
 
-onready var tooltip := get_node("../Tooltip")
-onready var name_label := tooltip.get_node("VBoxContainer/NameLabel")
-onready var gp_label := tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
-onready var vp_label := tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
-onready var interactions_label := tooltip.get_node("VBoxContainer/InteractionsLabel")
-onready var selection := get_node("../Selection")
-onready var tile_map := get_node("/root/Main/TileMap")
-onready var buildings: Dictionary = tile_map.BUILDINGS
-onready var building_ids: Array = tile_map.BUILDINGS.keys()
+@onready var tooltip := get_node("../Tooltip")
+@onready var name_label := tooltip.get_node("VBoxContainer/NameLabel")
+@onready var gp_label := tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
+@onready var vp_label := tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
+@onready var interactions_label: RichTextLabel = tooltip.get_node("VBoxContainer/InteractionsLabel")
+@onready var selection := get_node("../Selection")
+@onready var tile_map := get_node("/root/Main/TileMap")
+@onready var buildings: Dictionary = tile_map.BUILDINGS
+@onready var building_ids: Array = tile_map.BUILDINGS.keys()
 
-onready var tooltip_position: Vector2 = tooltip.rect_position
+@onready var tooltip_position: Vector2 = tooltip.position
 var last_tooltip_id := -1
 
 
 func _ready():
-	building_ids.remove(tile_map.EMPTY)
+	building_ids.remove_at(tile_map.EMPTY) # or erase()?
 	building_ids.sort()
 
 
@@ -101,12 +103,13 @@ func push_all_interactions(id: int) -> Array:
 
 
 func max_line_width(lines: Array) -> float:
-	var max_width := 0.0
-	for line in lines:
-		var width: float = interactions_label.get_font("normal_font").get_string_size(line).x
-		if width > max_width:
-			max_width = width
-	return max_width
+	return 64.0
+#	var max_width := 0.0
+#	for line in lines:
+#		var width: float = interactions_label.get_font("normal_font").get_string_size(line).x
+#		if width > max_width:
+#			max_width = width
+#	return max_width
 
 
 func update_tooltip(id: int) -> void:
@@ -121,7 +124,7 @@ func update_tooltip(id: int) -> void:
 		# Dynamically resize interactions_label
 		# RichTextLabel does not have fit_content_width or get_content_width()
 		# Instead, determine the length of the string (in plain text) in the chosen font
-		interactions_label.rect_min_size.x = max_line_width(lines)
+		interactions_label.custom_minimum_size.x = max_line_width(lines)
 	else:
 		interactions_label.hide()
 
@@ -135,14 +138,14 @@ func _input(event: InputEvent):
 	if hover or click:
 		cellv = ((event.position - self.global_position) / 64).floor()
 	elif key:
-		if event.scancode == KEY_0:
+		if event.keycode == KEY_0:
 			cellv = Vector2(9, 0)
 		else:
-			cellv = Vector2(event.scancode - KEY_1, 0)
+			cellv = Vector2(event.keycode - KEY_1, 0)
 	else:
 		return
 
-	var id := self.get_cellv(cellv)
+	var id := self.get_cell_source_id(0, cellv)
 	if id == INVALID_CELL:
 		tooltip.visible = false
 		return
@@ -160,12 +163,12 @@ func _input(event: InputEvent):
 		last_tooltip_id = id
 		# Add the horizonal offset corresponding to the hovered tile
 		# Add to y to fine-tune the vertical offset
-		tooltip.rect_position = tooltip_position + Vector2(cellv.x * 64, 16)
+		tooltip.position = tooltip_position + Vector2(cellv.x * 64, 16)
 		# Shrink tooltip to size 0 to force fit-to-content
-		tooltip.rect_size = Vector2(0, 0)
+		tooltip.size = Vector2(0, 0)
 		update_tooltip(id)
 		tooltip.show()
 	else:
 		selection.clear()
-		selection.set_cellv(cellv, tile_map.SELECTION)
+		selection.set_cell(0, cellv, tile_map.SELECTION)
 		emit_signal("palette_selection", id)

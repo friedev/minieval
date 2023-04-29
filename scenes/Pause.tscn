@@ -1,105 +1,65 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cxg5cohmko42i"]
 
-[ext_resource path="res://scripts/Pause.gd" type="Script" id=2]
-[ext_resource path="res://ui/fonts/title_font.tres" type="DynamicFont" id=6]
-[ext_resource path="res://ui/theme.tres" type="Theme" id=7]
+[ext_resource type="Script" path="res://scripts/Pause.gd" id="2"]
+[ext_resource type="FontFile" path="res://ui/fonts/title_font.tres" id="6"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
-[node name="Pause" type="Popup"]
+[node name="Pause" type="CenterContainer"]
+process_mode = 2
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-popup_exclusive = true
-script = ExtResource( 2 )
+theme = ExtResource("7")
+script = ExtResource("2")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 7 )
+[node name="Menu" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("7")
 
-[node name="Menu" type="PanelContainer" parent="CenterContainer"]
-margin_left = 632.0
-margin_top = 352.0
-margin_right = 648.0
-margin_bottom = 368.0
-theme = ExtResource( 7 )
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Menu"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 232.0
-margin_bottom = 354.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Menu/MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 208.0
-margin_bottom = 330.0
-custom_constants/separation = 16
-
-[node name="MenuTitle" type="Label" parent="CenterContainer/Menu/MarginContainer/VBoxContainer"]
-margin_right = 192.0
-margin_bottom = 64.0
-theme = ExtResource( 7 )
-custom_fonts/font = ExtResource( 6 )
+[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 48
 text = "Paused"
+horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Menu/MarginContainer/VBoxContainer"]
-margin_left = 28.0
-margin_top = 80.0
-margin_right = 164.0
-margin_bottom = 314.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_constants/separation = 16
+theme_override_constants/separation = 16
 
-[node name="ResumeButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-margin_right = 136.0
-margin_bottom = 34.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
+[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 text = "Resume"
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 50.0
-margin_right = 136.0
-margin_bottom = 84.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
+[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 text = "Options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TutorialButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 136.0
-margin_bottom = 134.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
+[node name="TutorialButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 text = "Tutorial"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TitleButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 150.0
-margin_right = 136.0
-margin_bottom = 184.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
+[node name="TitleButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 text = "Title Screen"
 
-[node name="ExitGameButton" type="Button" parent="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 200.0
-margin_right = 136.0
-margin_bottom = 234.0
-grow_horizontal = 2
-theme = ExtResource( 7 )
+[node name="ExitGameButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
 text = "Exit Game"
 
 [connection signal="visibility_changed" from="." to="." method="_on_Pause_visibility_changed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer/TitleButton" to="." method="_on_ReturnToTitleButton_pressed"]
-[connection signal="pressed" from="CenterContainer/Menu/MarginContainer/VBoxContainer/VBoxContainer/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]

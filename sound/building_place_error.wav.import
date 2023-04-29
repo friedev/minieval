@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/building_place_error.wav-cfbcd504061cec3fc3ba5cf3e460b9b9.sample"
+type="AudioStreamWAV"
+uid="uid://cgpxtc4qse0wi"
+path="res://.godot/imported/building_place_error.wav-cfbcd504061cec3fc3ba5cf3e460b9b9.sample"
 
 [deps]
 
 source_file="res://sound/building_place_error.wav"
-dest_files=[ "res://.import/building_place_error.wav-cfbcd504061cec3fc3ba5cf3e460b9b9.sample" ]
+dest_files=["res://.godot/imported/building_place_error.wav-cfbcd504061cec3fc3ba5cf3e460b9b9.sample"]
 
 [params]
 

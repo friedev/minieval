@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/building_destroy.wav-7a7c6c8ba8ccae2a69f89df28a916e0e.sample"
+type="AudioStreamWAV"
+uid="uid://2rehq7k6rynb"
+path="res://.godot/imported/building_destroy.wav-7a7c6c8ba8ccae2a69f89df28a916e0e.sample"
 
 [deps]
 
 source_file="res://sound/building_destroy.wav"
-dest_files=[ "res://.import/building_destroy.wav-7a7c6c8ba8ccae2a69f89df28a916e0e.sample" ]
+dest_files=["res://.godot/imported/building_destroy.wav-7a7c6c8ba8ccae2a69f89df28a916e0e.sample"]
 
 [params]
 

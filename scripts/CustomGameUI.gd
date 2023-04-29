@@ -1,32 +1,48 @@
-extends Popup
+extends Container
+
+signal menu_closed
 
 const main_scene := "res://scenes/Main.tscn"
 
-onready var title := self.get_node("/root/Title")
-onready var title_ui := self.title.find_node("TitleUI")
+@onready var turn_limit := %TurnLimitLineEdit
+@onready var game_size := %MapSizeLineEdit
 
-onready var turn_limit := self.find_node("TurnLimitLineEdit")
-onready var game_size := self.find_node("MapSizeLineEdit")
-
-onready var old_turn_limit: String = turn_limit.text
-onready var old_game_size: String = game_size.text
-
-
-func _go_back() -> void:
-	self.hide()
-	self.title_ui.popup()
+@onready var old_turn_limit: String = turn_limit.text
+@onready var old_game_size: String = game_size.text
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		self._go_back()
+		self.hide()
+		self.menu_closed.emit()
 
 
-func _on_BackToChooseModeButton_pressed() -> void:
-	self._go_back()
+func _on_title_ui_custom_game_menu_opened() -> void:
+	self.show()
 
 
-func _on_PlayButton_pressed() -> void:
+func _on_turn_limit_line_edit_text_changed(new_text: String) -> void:
+	if new_text == '':
+		return
+	if str(int(new_text)) != new_text or int(new_text) <= 0:
+		self.turn_limit.text = old_turn_limit
+	else:
+		self.old_turn_limit = new_text
+
+
+func _on_map_size_line_edit_text_changed(new_text: String) -> void:
+	if new_text == "" or str(int(new_text)) != new_text or int(new_text) < 0:
+		self.game_size.text = self.old_game_size
+	else:
+		self.old_game_size = new_text
+
+
+func _on_back_button_pressed() -> void:
+	self.hide()
+	self.menu_closed.emit()
+
+
+func _on_play_button_pressed() -> void:
 	if turn_limit.text == '':
 		Global.num_turns = 0
 		Global.endless = true
@@ -35,20 +51,4 @@ func _on_PlayButton_pressed() -> void:
 		Global.endless = false
 
 	Global.game_size = int(game_size.text)
-	get_tree().change_scene(main_scene)
-
-
-func _on_TurnLimitInput_text_changed(new_text) -> void:
-	if new_text == '':
-		return
-	if str(int(new_text)) != new_text or int(new_text) <= 0:
-		turn_limit.text = old_turn_limit
-	else:
-		old_turn_limit = new_text
-
-
-func _on_MapSizeInput_text_changed(new_text) -> void:
-	if not new_text or str(int(new_text)) != new_text or int(new_text) < 0:
-		game_size.text = old_game_size
-	else:
-		old_game_size = new_text
+	self.get_tree().change_scene_to_file(main_scene)

@@ -8,7 +8,7 @@ class Building:
 	var gp: int
 	var vp: int
 	var area: Vector2
-	var texture: Texture
+	var texture: Texture2D
 	var cells: Array
 	var gp_interactions: Dictionary
 	var vp_interactions: Dictionary
@@ -20,7 +20,7 @@ class Building:
 		gp: int,
 		vp: int,
 		area: Vector2,
-		texture: Texture,
+		texture: Texture2D,
 		cells: Array,
 		gp_interactions: Dictionary,
 		vp_interactions: Dictionary
@@ -370,7 +370,9 @@ class Placement:
 		self.group_joins = group_joins
 
 
-const PREVIEW_COLOR := Color.white
+const INVALID_CELL := -1
+
+const PREVIEW_COLOR := Color.WHITE
 const PREVIEW_COLOR_INVALID := Color(1, 0.25, 0.25, 0.5)
 const PREVIEW_COLOR_GOOD := Color(0.25, 1, 0.25, 1)
 const PREVIEW_COLOR_MIXED := Color(1, 1, 0.25, 1)
@@ -419,40 +421,36 @@ var preview_cellv = null
 var modulated_buildings := []
 var in_menu := false
 
-onready var main := self.get_node("/root/Main")
+@onready var main := self.get_node("/root/Main")
 
-onready var ui_text_layer := self.main.find_node("UITextLayer")
-onready var gp_label := self.main.find_node("GPLabel")
-onready var vp_label := self.main.find_node("VPLabel")
-onready var turn_label := self.main.find_node("TurnLabel")
-onready var undo_label := self.main.find_node("UndoLabel")
+@onready var ui_text_layer := self.main.find_child("UITextLayer")
+@onready var gp_label := self.main.find_child("GPLabel")
+@onready var vp_label := self.main.find_child("VPLabel")
+@onready var turn_label := self.main.find_child("TurnLabel")
+@onready var undo_label := self.main.find_child("UndoLabel")
 
-onready var palette = self.main.find_node("Palette")
-onready var palette_tiemap = self.palette.find_node("TileMap")
+@onready var palette = self.main.find_child("Palette")
+@onready var palette_tiemap = self.palette.find_child("TileMap")
 
-onready var recap = self.main.find_node("Recap")
+@onready var recap = self.main.find_child("Recap")
 
-onready var camera := self.main.find_node("Camera2D")
-onready var preview_label := self.main.find_node("PreviewLabel")
-onready var preview_node := self.main.find_node("PreviewNode")
-onready var preview_building := self.main.find_node("PreviewBuilding")
+@onready var camera := self.main.find_child("Camera2D")
+@onready var preview_label := self.main.find_child("PreviewLabel")
+@onready var preview_node := self.main.find_child("PreviewNode")
+@onready var preview_building := self.main.find_child("PreviewBuilding")
 
-onready var particles_material: ParticlesMaterial = $BuildingParticles.process_material
-onready var particles_amount = $BuildingParticles.amount
-onready var particles_scale = particles_material.scale
-onready var particles_velocity = particles_material.initial_velocity
-onready var particles_accel = particles_material.linear_accel
+@onready var particles_material: ParticleProcessMaterial = $BuildingParticles.process_material
+@onready var particles_amount = $BuildingParticles.amount
+@onready var particles_scale = particles_material.scale_min
+@onready var particles_velocity = particles_material.initial_velocity_min
+@onready var particles_accel = particles_material.linear_accel_min
 
 
 func _ready():
 	turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
-	self.palette_tiemap.connect(
-		"palette_selection",
-		self,
-		"_select_building"
-	)
+	self.palette_tiemap.palette_selection.connect(self._select_building)
 
 	self._update_mouse_cellv()
 	self._update_labels()
@@ -463,7 +461,7 @@ func _ready():
 		for y in range(0, Global.game_size):
 			world_map[x].append(0)
 			groups[x].append(0)
-			.set_cell(x, y, 0)
+			super.set_cell(0, Vector2i(x, y), 0, Vector2i.ZERO)
 
 	camera.position = cellv_to_world_position(
 		Vector2(Global.game_size / 2, Global.game_size / 2)
@@ -495,7 +493,7 @@ func _unhandled_input(event: InputEvent):
 	if (
 		event is InputEventMouseButton
 		or event is InputEventMouseMotion
-	) and Input.is_mouse_button_pressed(BUTTON_LEFT):
+	) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		self._clear_preview()
 
 		var building: Building = BUILDINGS[self.selected_building]
@@ -562,15 +560,7 @@ func get_cellv(position: Vector2) -> int:
 # Updates world map, building types, and building roots where applicable
 # Does NOT spawn a building sprite, update groups, or fully clean up destroyed
 # buildings
-func set_cell(
-	x: int,
-	y: int,
-	tile: int,
-	flip_x: bool = false,
-	flip_y: bool = false,
-	transpose: bool = false,
-	autotile_coord: Vector2 = Vector2(0, 0)
-) -> void:
+func set_building(x: int, y: int, tile: int) -> void:
 	if x < 0 or x >= len(world_map) or y < 0 or y >= len(world_map[x]):
 		push_error('Tried to set a cell out of bounds')
 	if tile < 0 and tile >= len(BUILDINGS) and tile != INVALID_CELL:
@@ -582,34 +572,19 @@ func set_cell(
 		for building_cellv in building.get_cells(cellv):
 			world_map[building_cellv.x][building_cellv.y] = building_index
 			# Hide the empty tiles behind the building by setting them to invalid
-			.set_cellv(building_cellv, INVALID_CELL)
+			super.set_cell(0, building_cellv, 0)
 		building_types.append(tile)
 		building_roots.append(cellv)
 		building_index += 1
 	else:
 		world_map[x][y] = tile
-		.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
-		update_bitmask_area(cellv)
+		super.set_cell(0, Vector2i(x, y), tile, Vector2i.ZERO)
+		#update_bitmask_area(cellv)
 
 
 # Overridden from TileMap
-func set_cellv(
-	position: Vector2,
-	tile: int,
-	flip_x: bool = false,
-	flip_y: bool = false,
-	transpose: bool = false,
-	autotile_coord: Vector2 = Vector2(0, 0)
-) -> void:
-	set_cell(
-		position.x,
-		position.y,
-		tile,
-		flip_x,
-		flip_y,
-		transpose,
-		autotile_coord
-	)
+func set_buildingv(position: Vector2, tile: int) -> void:
+	set_building(position.x, position.y, tile)
 
 
 # Helper function to get a building's type (an index into the BUILDINGS array)
@@ -709,7 +684,7 @@ func is_game_over() -> bool:
 
 # May be a redundant implementation of TileMap's world_to_map function
 func position_to_cellv(position: Vector2) -> Vector2:
-	return ((position * camera.zoom + camera.position) / TILE_SIZE).floor()
+	return ((position / camera.zoom + camera.position) / TILE_SIZE).floor()
 
 
 func cellv_to_world_position(cellv: Vector2) -> Vector2:
@@ -717,11 +692,11 @@ func cellv_to_world_position(cellv: Vector2) -> Vector2:
 
 
 func cellv_to_screen_position(cellv: Vector2) -> Vector2:
-	return (cellv_to_world_position(cellv) - camera.position) / camera.zoom
+	return (cellv_to_world_position(cellv) - camera.position) * camera.zoom
 
 
-func get_building_sprite(id: int) -> Sprite:
-	return get_node(NodePath("Buildings/building_%d" % id)) as Sprite
+func get_building_sprite(id: int) -> Sprite2D:
+	return get_node(NodePath("Buildings/building_%d" % id)) as Sprite2D
 
 
 # Returns the buildings connected by road to the given building
@@ -757,7 +732,7 @@ func _update_mouse_cellv() -> void:
 
 func _clear_preview() -> void:
 	if preview_cellv != null:
-		#self.set_cellv(preview_cellv, 0)
+		#self.set_buildingv(preview_cellv, 0)
 		preview_cellv = null
 		$Preview.clear()
 		$PreviewTile.clear()
@@ -767,8 +742,9 @@ func _clear_preview() -> void:
 		for modulated_building in modulated_buildings:
 			var sprite := get_building_sprite(modulated_building)
 			if sprite != null and not sprite.is_queued_for_deletion():
-				sprite.modulate = Color.white
+				sprite.modulate = Color.WHITE
 		modulated_buildings.clear()
+
 
 # Modulates the building with the given id based on its interaction with the
 # given building type
@@ -806,6 +782,7 @@ func modulate_building(building: Building, id: int, road_connection) -> void:
 		get_building_sprite(id).modulate = modulation
 		modulated_buildings.append(id)
 
+
 func _update_preview() -> void:
 	# Only update the preview if the mouse has moved to a different cell
 	self._update_mouse_cellv()
@@ -821,7 +798,7 @@ func _update_preview() -> void:
 	# Move the building preview
 	$PreviewBuilding.position = cellv_to_world_position(building_cellv)
 	if building.is_tile:
-		$PreviewTile.set_cellv(building_cellv, selected_building)
+		$PreviewTile.set_cell(0, building_cellv, selected_building)
 	else:
 		$PreviewBuilding.visible = true
 
@@ -839,7 +816,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
-		$Preview.set_cellv(cellv, SELECTION)
+		$Preview.set_cell(0, cellv, SELECTION)
 		var id := get_cellv(cellv)
 		modulate_building(building, id, false)
 
@@ -855,7 +832,7 @@ func _update_preview() -> void:
 		road_connections
 	)
 	preview_label.text = "%s\n%s" % format_value(value)
-	preview_node.rect_position = cellv_to_screen_position(
+	preview_node.position = cellv_to_screen_position(
 		Vector2(preview_cellv.x, building_cellv.y)
 	) + Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
 
@@ -914,11 +891,14 @@ func format_value(value: Array) -> Array:
 
 
 func reset_particles() -> void:
-	var material: ParticlesMaterial = $BuildingParticles.process_material
+	var material: ParticleProcessMaterial = $BuildingParticles.process_material
 	$BuildingParticles.amount = particles_amount
-	material.scale = particles_scale
-	material.initial_velocity = particles_velocity
-	material.linear_accel = particles_accel
+	material.scale_min = particles_scale
+	material.scale_max = particles_scale
+	material.initial_velocity_min = particles_velocity
+	material.initial_velocity_max = particles_velocity
+	material.linear_accel_min = particles_accel
+	material.linear_accel_max = particles_accel
 
 
 func emit_particles(cellv: Vector2, building: Building) -> void:
@@ -927,14 +907,18 @@ func emit_particles(cellv: Vector2, building: Building) -> void:
 
 	reset_particles()
 
+	# TODO make particles a child of building scene and customize there instead
 	var size := Vector2(len(building.cells[0]), len(building.cells))
 	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
 	$BuildingParticles.position = cellv_to_world_position(cellv + size / 2)
 	particles_material.emission_sphere_radius = size.length() / 2
 	$BuildingParticles.amount *= multiplier
-	particles_material.scale *= multiplier
-	particles_material.initial_velocity *= multiplier
-	particles_material.linear_accel *= multiplier
+	particles_material.scale_min *= multiplier
+	particles_material.scale_max *= multiplier
+	particles_material.initial_velocity_min *= multiplier
+	particles_material.initial_velocity_max *= multiplier
+	particles_material.linear_accel_min *= multiplier
+	particles_material.linear_accel_max *= multiplier
 	$BuildingParticles.restart()
 
 
@@ -999,13 +983,13 @@ func place_building(cellv: Vector2, id: int, force := false):
 
 	# Instance a new sprite if this building is not a tile
 	if not building.is_tile:
-		var instance := building_scene.instance()
+		var instance := building_scene.instantiate()
 		instance.position = cellv_to_world_position(cellv)
 		instance.texture = building.texture
 		instance.set_name("building_%d" % building_index)
 		$Buildings.add_child(instance)
 
-	self.set_cellv(cellv, id)
+	self.set_buildingv(cellv, id)
 	return Placement.new(id, cellv, gp_change, vp_change, neighbor_groups)
 
 
@@ -1038,7 +1022,7 @@ func destroy_building(cellv: Vector2, id = null):
 
 	var root := cellv
 	if is_tile:
-		self.set_cellv(cellv, 0)
+		self.set_buildingv(cellv, 0)
 		groups[cellv.x][cellv.y] = 0
 
 		var adjacent_groups := []
@@ -1051,7 +1035,7 @@ func destroy_building(cellv: Vector2, id = null):
 		# Does NOT modify the group_joins array; currently handled by the undo code
 		root = building_roots[id]
 		for building_cellv in building.get_cells(root):
-			self.set_cellv(building_cellv, 0)
+			self.set_buildingv(building_cellv, 0)
 			groups[building_cellv.x][building_cellv.y] = 0
 
 		var adjacent_groups := []

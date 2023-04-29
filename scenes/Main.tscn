@@ -1,227 +1,233 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=21 format=3 uid="uid://b14c1y35bjrym"]
 
-[ext_resource path="res://scripts/TileMap.gd" type="Script" id=1]
-[ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://scenes/Pause.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Palette.tscn" type="PackedScene" id=4]
-[ext_resource path="res://music/background_music.ogg" type="AudioStream" id=5]
-[ext_resource path="res://sound/building_destroy.wav" type="AudioStream" id=6]
-[ext_resource path="res://sound/building_place.wav" type="AudioStream" id=7]
-[ext_resource path="res://scripts/CameraMovement.gd" type="Script" id=8]
-[ext_resource path="res://ui/fonts/pixelFJ8pt1.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://sound/building_place_error.wav" type="AudioStream" id=10]
-[ext_resource path="res://scenes/Recap.tscn" type="PackedScene" id=12]
-[ext_resource path="res://ui/theme.tres" type="Theme" id=13]
-[ext_resource path="res://sprites/vp_icon.png" type="Texture" id=14]
-[ext_resource path="res://sprites/gp_icon.png" type="Texture" id=15]
-[ext_resource path="res://scenes/Options.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/Tutorial.tscn" type="PackedScene" id=19]
+[ext_resource type="Script" path="res://scripts/TileMap.gd" id="1"]
+[ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/Pause.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/Palette.tscn" id="4"]
+[ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="6"]
+[ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="7"]
+[ext_resource type="Script" path="res://scripts/CameraMovement.gd" id="8"]
+[ext_resource type="FontFile" uid="uid://cnyjnhglwlik8" path="res://ui/fonts/pixelFJ8pt1.ttf" id="9"]
+[ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="10"]
+[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/Recap.tscn" id="12"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="13"]
+[ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="15"]
+[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/Options.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/Tutorial.tscn" id="19"]
 
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id="3"]
+curve = SubResource("2")
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticleProcessMaterial" id="4"]
 emission_shape = 1
 emission_sphere_radius = 1.0
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
+direction = Vector3(0, 1, 0)
 spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 48.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -64.0
-linear_accel_random = 0.5
-scale = 4.0
-scale_random = 0.25
-scale_curve = SubResource( 3 )
-color = Color( 0.8, 0.8, 0.8, 1 )
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("3")
+color = Color(0.8, 0.8, 0.8, 1)
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 9 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("9")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/8/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/8/0/ascent = 0.0
+cache/0/8/0/descent = 0.0
+cache/0/8/0/underline_position = 0.0
+cache/0/8/0/underline_thickness = 0.0
+cache/0/8/0/scale = 1.0
+cache/0/8/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/8/0/kerning_overrides/8/0 = Vector2(0, 0)
+cache/0/8/0/kerning_overrides/32/0 = Vector2(0, 0)
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/8/0 = Vector2(0, 0)
+cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
 [node name="Main" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
-cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
-format = 1
-script = ExtResource( 1 )
+tile_set = ExtResource("2")
+format = 2
+script = ExtResource("1")
 
 [node name="BuildingPlaceErrorSound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource( 10 )
+stream = ExtResource("10")
 volume_db = -6.0
-bus = "Sound"
+bus = &"Sound"
 
 [node name="BuildingPlaceSound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource( 7 )
-bus = "Sound"
+stream = ExtResource("7")
+bus = &"Sound"
 
 [node name="BuildingDestroySound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource( 6 )
-bus = "Sound"
+stream = ExtResource("6")
+bus = &"Sound"
 
 [node name="Buildings" type="Node2D" parent="TileMap"]
 
 [node name="Preview" type="TileMap" parent="TileMap"]
-modulate = Color( 1, 1, 1, 0.12549 )
+modulate = Color(1, 1, 1, 0.12549)
 z_index = -1
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 8, 8 )
+tile_set = ExtResource("2")
 cell_quadrant_size = 8
-cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
-format = 1
+format = 2
 
 [node name="PreviewTile" type="TileMap" parent="TileMap"]
-modulate = Color( 1, 1, 1, 0.501961 )
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 8, 8 )
+modulate = Color(1, 1, 1, 0.501961)
+tile_set = ExtResource("2")
 cell_quadrant_size = 8
-cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
-format = 1
+format = 2
 
-[node name="PreviewBuilding" type="Sprite" parent="TileMap"]
+[node name="PreviewBuilding" type="Sprite2D" parent="TileMap"]
 centered = false
 
-[node name="BuildingParticles" type="Particles2D" parent="TileMap"]
+[node name="BuildingParticles" type="GPUParticles2D" parent="TileMap"]
 z_index = -1
 emitting = false
+process_material = SubResource("4")
 lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 randomness = 0.25
-process_material = SubResource( 4 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 5 )
+process_mode = 2
+stream = ExtResource("5")
 autoplay = true
-bus = "Music"
+bus = &"Music"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 160, 90 )
-current = true
-zoom = Vector2( 0.25, 0.25 )
-drag_margin_left = 1.0
-drag_margin_top = 1.0
-drag_margin_right = 1.0
-drag_margin_bottom = 1.0
-script = ExtResource( 8 )
+offset = Vector2(160, 90)
+zoom = Vector2(4, 4)
+drag_left_margin = 1.0
+drag_top_margin = 1.0
+drag_right_margin = 1.0
+drag_bottom_margin = 1.0
+script = ExtResource("8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TurnLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -308.0
-margin_top = 16.0
-margin_right = -16.0
-margin_bottom = 91.0
-custom_fonts/font = SubResource( 1 )
+offset_left = -308.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 91.0
+theme_override_fonts/font = SubResource("1")
 text = "Turns Left"
-align = 2
+horizontal_alignment = 2
 
 [node name="UndoLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -206.0
-margin_top = 16.0
-margin_right = 206.0
-margin_bottom = 91.0
+offset_left = -206.0
+offset_top = 16.0
+offset_right = 206.0
+offset_bottom = 91.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 1 )
+theme_override_fonts/font = SubResource("1")
 text = "(Press Z/U to Undo)"
-align = 1
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-margin_right = 84.0
-margin_bottom = 96.0
-custom_constants/margin_right = 0
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 0
+offset_right = 84.0
+offset_bottom = 96.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 84.0
-margin_bottom = 96.0
-custom_constants/vseparation = 8
-custom_constants/hseparation = 8
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 columns = 2
 
 [node name="GPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
-margin_right = 32.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 15 )
-expand = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("15")
+expand_mode = 2
 
 [node name="GPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
-margin_left = 40.0
-margin_right = 68.0
-margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+layout_mode = 2
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="VPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
-margin_top = 44.0
-margin_right = 32.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 14 )
-expand = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("14")
+expand_mode = 2
 
 [node name="VPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
-margin_left = 40.0
-margin_top = 44.0
-margin_right = 68.0
-margin_bottom = 80.0
-custom_fonts/font = SubResource( 1 )
+layout_mode = 2
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="PreviewNode" type="Control" parent="CanvasLayer"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 3
+anchors_preset = 0
 
 [node name="PreviewLabel" type="Label" parent="CanvasLayer/PreviewNode"]
-margin_left = -11.0
-margin_top = -8.0
-margin_right = 102.0
-margin_bottom = 31.0
-theme = ExtResource( 13 )
+layout_mode = 0
+offset_left = -11.0
+offset_top = -8.0
+offset_right = 102.0
+offset_bottom = 31.0
+theme = ExtResource("13")
 text = "1 
 -1"
 
-[node name="GPPreview" type="Sprite" parent="CanvasLayer/PreviewNode"]
-position = Vector2( -22, 0.25 )
-texture = ExtResource( 15 )
+[node name="GPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
+position = Vector2(-22, 0.25)
+texture = ExtResource("15")
 
-[node name="VPPreview" type="Sprite" parent="CanvasLayer/PreviewNode"]
-position = Vector2( -22, 20.5 )
-texture = ExtResource( 14 )
+[node name="VPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
+position = Vector2(-22, 20.5)
+texture = ExtResource("14")
 
-[node name="Palette" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="Palette" parent="CanvasLayer" instance=ExtResource("4")]
 
 [node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 13 )
-color = Color( 0, 0, 0, 0.501961 )
+theme = ExtResource("13")
+color = Color(0, 0, 0, 0.501961)
 
-[node name="Recap" parent="CanvasLayer" instance=ExtResource( 12 )]
+[node name="Recap" parent="CanvasLayer" instance=ExtResource("12")]
 
-[node name="Pause" parent="CanvasLayer" instance=ExtResource( 3 )]
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("3")]
+visible = false
 
-[node name="Options" parent="CanvasLayer" instance=ExtResource( 16 )]
+[node name="Options" parent="CanvasLayer" instance=ExtResource("16")]
+visible = false
 
-[node name="Tutorial" parent="CanvasLayer" instance=ExtResource( 19 )]
+[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("19")]

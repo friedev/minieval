@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample"
+type="AudioStreamWAV"
+uid="uid://vrl0b1nt8ccp"
+path="res://.godot/imported/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample"
 
 [deps]
 
 source_file="res://sound/building_place.wav"
-dest_files=[ "res://.import/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample" ]
+dest_files=["res://.godot/imported/building_place.wav-427d591faf0979a1f3cca17e0962e66c.sample"]
 
 [params]
 
