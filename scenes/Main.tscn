@@ -35,9 +35,6 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("9")])
-face_index = null
-embolden = null
-transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -89,13 +86,13 @@ bus = &"Sound"
 modulate = Color(1, 1, 1, 0.12549)
 z_index = -1
 tile_set = ExtResource("2")
-cell_quadrant_size = 8
+rendering_quadrant_size = 8
 format = 2
 
 [node name="PreviewTile" type="TileMap" parent="TileMap"]
 modulate = Color(1, 1, 1, 0.501961)
 tile_set = ExtResource("2")
-cell_quadrant_size = 8
+rendering_quadrant_size = 8
 format = 2
 
 [node name="PreviewBuilding" type="Sprite2D" parent="TileMap"]
