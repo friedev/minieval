@@ -2,3 +2,4 @@
 
 [node name="Building" type="Sprite2D"]
 centered = false
+offset = Vector2(-4, -4)

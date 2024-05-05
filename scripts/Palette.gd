@@ -130,7 +130,7 @@ func update_tooltip(id: int) -> void:
 
 
 func _input(event: InputEvent):
-	var cellv: Vector2
+	var cellv: Vector2i
 	var hover := event is InputEventMouseMotion
 	var click: bool = event is InputEventMouseButton and event.pressed
 	var key = event is InputEventKey and event.pressed
@@ -139,9 +139,9 @@ func _input(event: InputEvent):
 		cellv = ((event.position - self.global_position) / 64).floor()
 	elif key:
 		if event.keycode == KEY_0:
-			cellv = Vector2(9, 0)
+			cellv = Vector2i(9, 0)
 		else:
-			cellv = Vector2(event.keycode - KEY_1, 0)
+			cellv = Vector2i(event.keycode - KEY_1, 0)
 	else:
 		return
 

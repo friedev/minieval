@@ -7,7 +7,7 @@ class Building:
 	var groupable: bool
 	var gp: int
 	var vp: int
-	var area: Vector2
+	var area: Vector2i
 	var texture: Texture2D
 	var cells: Array
 	var gp_interactions: Dictionary
@@ -19,7 +19,7 @@ class Building:
 		groupable: bool,
 		gp: int,
 		vp: int,
-		area: Vector2,
+		area: Vector2i,
 		texture: Texture2D,
 		cells: Array,
 		gp_interactions: Dictionary,
@@ -36,14 +36,14 @@ class Building:
 		self.gp_interactions = gp_interactions
 		self.vp_interactions = vp_interactions
 
-	func get_size() -> Vector2:
-		return Vector2(get_width(), get_height())
+	func get_size() -> Vector2i:
+		return Vector2i(get_width(), get_height())
 
-	func get_cell_offset() -> Vector2:
-		return (get_size() / 2).ceil() - Vector2(1, 1)
+	func get_cell_offset() -> Vector2i:
+		return Vector2i((Vector2(get_size()) / 2).ceil()) - Vector2i(1, 1)
 
-	func get_area_offset() -> Vector2:
-		return (get_size() / 2).floor()
+	func get_area_offset() -> Vector2i:
+		return Vector2i((Vector2(get_size()) / 2).floor())
 
 	func get_width() -> int:
 		return len(self.cells[0])
@@ -53,51 +53,49 @@ class Building:
 
 	# Returns a list of all cell vectors orthogonally adjacent to the given cell
 	# Duplicated from outer scope
-	static func get_orthogonal(cellv: Vector2) -> Array:
+	static func get_orthogonal(cellv: Vector2i) -> Array:
 		var orthogonal := []
 		if cellv.x > 0:
-			orthogonal.append(Vector2(cellv.x - 1, cellv.y))
+			orthogonal.append(Vector2i(cellv.x - 1, cellv.y))
 		if cellv.x < Global.game_size:
-			orthogonal.append(Vector2(cellv.x + 1, cellv.y))
+			orthogonal.append(Vector2i(cellv.x + 1, cellv.y))
 		if cellv.y > 0:
-			orthogonal.append(Vector2(cellv.x, cellv.y - 1))
+			orthogonal.append(Vector2i(cellv.x, cellv.y - 1))
 		if cellv.y < Global.game_size:
-			orthogonal.append(Vector2(cellv.x, cellv.y + 1))
+			orthogonal.append(Vector2i(cellv.x, cellv.y + 1))
 		return orthogonal
 
 	static func get_cells_in_radius(
-		cellv: Vector2,
-		radius = Vector2(1.5, 1.5)
+		cellv: Vector2i,
+		radius: Vector2i
 	) -> Array:
-		if radius is int:
-			radius = Vector2(radius, radius)
 		var cells := []
 		for x in range(max(0, cellv.x - floor(radius.x)),
 				min(Global.game_size, cellv.x + ceil(radius.x))):
 			for y in range(max(0, cellv.y - floor(radius.y)),
 					min(Global.game_size, cellv.y + ceil(radius.y))):
-						cells.append(Vector2(x, y))
+						cells.append(Vector2i(x, y))
 		return cells
 
-	func get_cells(cellv := Vector2(0, 0)) -> Array:
+	func get_cells(cellv := Vector2i(0, 0)) -> Array:
 		var cells := []
 		for y in range(0, len(self.cells)):
 			for x in range(0, len(self.cells[y])):
 				if self.cells[y][x]:
-					cells.append(Vector2(x, y) + cellv)
+					cells.append(Vector2i(x, y) + cellv)
 					# TODO prevent placing buildings partially out of bounds
 		return cells
 
-	func get_area_cells(cellv := Vector2(0, 0)) -> Array:
+	func get_area_cells(cellv := Vector2i(0, 0)) -> Array:
 		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
 
-	func get_adjacent_cells(cellv := Vector2(0, 0)) -> Array:
+	func get_adjacent_cells(cellv := Vector2i(0, 0)) -> Array:
 		var adjacent_cell_map := []
 		for y in range(0, len(self.cells) + 2):
 			adjacent_cell_map.append([])
 			for x in range(0, len(self.cells[0]) + 2):
 				adjacent_cell_map[y].append(0)
-		for building_cellv in get_cells(Vector2(1, 1)):
+		for building_cellv in get_cells(Vector2i(1, 1)):
 			adjacent_cell_map[building_cellv.y][building_cellv.x] = 2
 			for adjacent_cellv in get_orthogonal(building_cellv):
 				adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x] = max(1,
@@ -106,7 +104,7 @@ class Building:
 		for y in range(0, len(adjacent_cell_map)):
 			for x in range(0, len(adjacent_cell_map[y])):
 				if adjacent_cell_map[y][x] == 1:
-					adjacent_cells.append(Vector2(x - 1, y - 1) + cellv)
+					adjacent_cells.append(Vector2i(x - 1, y - 1) + cellv)
 		return adjacent_cells
 
 
@@ -134,7 +132,7 @@ var BUILDINGS := {
 		true, # groupable
 		-1, # gp
 		0, # vp
-		Vector2(0, 0), # area
+		Vector2i(0, 0), # area
 		null, # texture
 		[ # cells
 			[1],
@@ -148,7 +146,7 @@ var BUILDINGS := {
 		false, # groupable
 		-1, # gp
 		1, # vp
-		Vector2(3, 3), # area
+		Vector2i(3, 3), # area
 		preload("res://sprites/house.png"), # texture
 		[ # cells
 			[1],
@@ -166,7 +164,7 @@ var BUILDINGS := {
 		false, # groupable
 		-5, # gp
 		1, # vp
-		Vector2(6, 5), # area
+		Vector2i(6, 5), # area
 		preload("res://sprites/shop.png"), # texture
 		[ # cells
 			[1, 1],
@@ -187,7 +185,7 @@ var BUILDINGS := {
 		false, # groupable
 		-5, # gp
 		2, # vp
-		Vector2(4, 4), # area
+		Vector2i(4, 4), # area
 		preload("res://sprites/mansion.png"), # texture
 		[
 			[1, 1],
@@ -205,7 +203,7 @@ var BUILDINGS := {
 		false, # groupable
 		-10, # gp
 		2, # vp
-		Vector2(6, 6), # area
+		Vector2i(6, 6), # area
 		preload("res://sprites/forge.png"), # texture
 		[ # cells
 			[1, 1],
@@ -226,7 +224,7 @@ var BUILDINGS := {
 		false, # groupable
 		-5, # gp
 		5, # vp
-		Vector2(5, 6), # area
+		Vector2i(5, 6), # area
 		preload("res://sprites/statue.png"), # texture
 		[ # cells
 			[1],
@@ -246,7 +244,7 @@ var BUILDINGS := {
 		false, # groupable
 		-40, # gp
 		20, # vp
-		Vector2(8, 7), # area,
+		Vector2i(8, 7), # area,
 		preload("res://sprites/cathedral.png"), # texture
 		[ # cells
 			[0, 1, 0, 0],
@@ -270,7 +268,7 @@ var BUILDINGS := {
 		false, # groupable
 		-80, # gp
 		20, # vp
-		Vector2(9, 8), # area
+		Vector2i(9, 8), # area
 		preload("res://sprites/keep.png"), # sprite
 		[ # cells
 			[1, 1, 1],
@@ -294,7 +292,7 @@ var BUILDINGS := {
 		false, # groupable
 		-20, # gp
 		0, # vp
-		Vector2(5, 5), # area
+		Vector2i(5, 5), # area
 		preload("res://sprites/tower.png"), # texture
 		[ # cells
 			[1],
@@ -315,7 +313,7 @@ var BUILDINGS := {
 		false, # groupable
 		-150, # gp
 		50, # vp
-		Vector2(16, 12), # area
+		Vector2i(16, 12), # area
 		preload("res://sprites/pyramid.png"), # texture
 		[ # cells
 			[0, 0, 0, 1, 1, 0, 0, 0],
@@ -351,14 +349,14 @@ var BUILDINGS := {
 
 class Placement:
 	var id: int
-	var cellv: Vector2
+	var cellv: Vector2i
 	var gp_change: int
 	var vp_change: int
 	var group_joins: Array
 
 	func _init(
 		id: int,
-		cellv: Vector2,
+		cellv: Vector2i,
 		gp_change: int,
 		vp_change: int,
 		group_joins: Array
@@ -463,7 +461,7 @@ func _ready():
 			groups[x].append(0)
 			super.set_cell(0, Vector2i(x, y), 0, Vector2i.ZERO)
 
-	camera.position = cellv_to_world_position(
+	camera.position = self.map_to_local(
 		Vector2(Global.game_size / 2, Global.game_size / 2)
 	) - camera.offset
 
@@ -552,7 +550,7 @@ func get_cell(x: int, y: int) -> int:
 
 
 # Overridden from TileMap
-func get_cellv(position: Vector2) -> int:
+func get_cellv(position: Vector2i) -> int:
 	return get_cell(position.x, position.y)
 
 
@@ -565,7 +563,7 @@ func set_building(x: int, y: int, tile: int) -> void:
 		push_error('Tried to set a cell out of bounds')
 	if tile < 0 and tile >= len(BUILDINGS) and tile != INVALID_CELL:
 		push_error('Tried to place an invalid building type')
-	var cellv := Vector2(x, y)
+	var cellv := Vector2i(x, y)
 	var building: Building = BUILDINGS[tile]
 	if building and not building.is_tile:
 		# TODO move to place_building or other helper method
@@ -583,7 +581,7 @@ func set_building(x: int, y: int, tile: int) -> void:
 
 
 # Overridden from TileMap
-func set_buildingv(position: Vector2, tile: int) -> void:
+func set_buildingv(position: Vector2i, tile: int) -> void:
 	set_building(position.x, position.y, tile)
 
 
@@ -595,7 +593,7 @@ func get_type(id: int) -> int:
 	return building_types[id]
 
 
-func get_group(cellv: Vector2) -> int:
+func get_group(cellv: Vector2i) -> int:
 	if (
 		cellv.x < 0 or cellv.x >= len(world_map)
 		or cellv.y < 0 or cellv.y >= len(world_map[cellv.x])
@@ -617,22 +615,22 @@ func get_base_group(group: int) -> int:
 
 
 # Returns a list of all cell vectors orthogonally adjacent to the given cell
-func get_orthogonal(cellv: Vector2) -> Array:
+func get_orthogonal(cellv: Vector2i) -> Array:
 	var orthogonal := []
 	if cellv.x > 0:
-		orthogonal.append(Vector2(cellv.x - 1, cellv.y))
+		orthogonal.append(Vector2i(cellv.x - 1, cellv.y))
 	if cellv.x < Global.game_size:
-		orthogonal.append(Vector2(cellv.x + 1, cellv.y))
+		orthogonal.append(Vector2i(cellv.x + 1, cellv.y))
 	if cellv.y > 0:
-		orthogonal.append(Vector2(cellv.x, cellv.y - 1))
+		orthogonal.append(Vector2i(cellv.x, cellv.y - 1))
 	if cellv.y < Global.game_size:
-		orthogonal.append(Vector2(cellv.x, cellv.y + 1))
+		orthogonal.append(Vector2i(cellv.x, cellv.y + 1))
 	return orthogonal
 
 
 # Returns a list of all building IDs adjacent to a group, starting at given tile
 # Uses a recursive depth-first search
-func get_adjacent_buildings(cellv: Vector2, adjacent := [], visited := []) -> Array:
+func get_adjacent_buildings(cellv: Vector2i, adjacent := [], visited := []) -> Array:
 	var group := get_base_group(get_group(cellv))
 	if group < BASE_GROUP_INDEX:
 		return []
@@ -682,17 +680,11 @@ func is_game_over() -> bool:
 	return not Global.endless and self.get_turns_remaining() == 0
 
 
-# May be a redundant implementation of TileMap's world_to_map function
-func position_to_cellv(position: Vector2) -> Vector2:
-	return ((position / camera.zoom + camera.position) / TILE_SIZE).floor()
-
-
-func cellv_to_world_position(cellv: Vector2) -> Vector2:
-	return cellv * TILE_SIZE
-
-
-func cellv_to_screen_position(cellv: Vector2) -> Vector2:
-	return (cellv_to_world_position(cellv) - camera.position) * camera.zoom
+func cellv_to_screen_position(cellv: Vector2i) -> Vector2:
+	return (
+		(self.map_to_local(cellv) - camera.get_screen_center_position()) * camera.zoom
+		+ self.get_viewport_rect().size / 2
+	)
 
 
 func get_building_sprite(id: int) -> Sprite2D:
@@ -700,7 +692,7 @@ func get_building_sprite(id: int) -> Sprite2D:
 
 
 # Returns the buildings connected by road to the given building
-func get_road_connections(cellv: Vector2, id: int) -> Array:
+func get_road_connections(cellv: Vector2i, id: int) -> Array:
 	var building: Building = BUILDINGS[id]
 	var road_connections := []
 	var counted_groups := []
@@ -727,7 +719,7 @@ func _update_labels() -> void:
 
 
 func _update_mouse_cellv() -> void:
-	mouse_cellv = position_to_cellv(get_viewport().get_mouse_position())
+	mouse_cellv = self.local_to_map(self.get_local_mouse_position())
 
 
 func _clear_preview() -> void:
@@ -793,10 +785,10 @@ func _update_preview() -> void:
 	preview_node.visible = true
 	preview_cellv = mouse_cellv
 	var building: Building = BUILDINGS[selected_building]
-	var building_cellv: Vector2 = preview_cellv - building.get_cell_offset()
+	var building_cellv: Vector2i = preview_cellv - building.get_cell_offset()
 
 	# Move the building preview
-	$PreviewBuilding.position = cellv_to_world_position(building_cellv)
+	$PreviewBuilding.position = self.map_to_local(building_cellv)
 	if building.is_tile:
 		$PreviewTile.set_cell(0, building_cellv, selected_building)
 	else:
@@ -833,8 +825,9 @@ func _update_preview() -> void:
 	)
 	preview_label.text = "%s\n%s" % format_value(value)
 	preview_node.position = cellv_to_screen_position(
-		Vector2(preview_cellv.x, building_cellv.y)
-	) + Vector2((1.0 / camera.zoom.x * 4) + 15, -35)
+		Vector2i(preview_cellv.x, building_cellv.y)
+	)
+	preview_node.position.y -= self.TILE_SIZE / 2 * camera.zoom.y
 
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + gp < 0:
@@ -847,7 +840,7 @@ func _update_preview() -> void:
 # Gets the total value that would result from placing the building with the
 # given ID at the given cellv, returned in the form [gp, vp]
 # Includes the building's flat GP and VP, as well as interactions
-func get_building_value(cellv: Vector2, id: int, road_connections = null) -> Array:
+func get_building_value(cellv: Vector2i, id: int, road_connections = null) -> Array:
 	var building: Building = BUILDINGS[id]
 	var gp_value := building.gp
 	var vp_value := building.vp
@@ -901,16 +894,16 @@ func reset_particles() -> void:
 	material.linear_accel_max = particles_accel
 
 
-func emit_particles(cellv: Vector2, building: Building) -> void:
+func emit_particles(cellv: Vector2i, building: Building) -> void:
 	if building.is_tile:
 		return
 
 	reset_particles()
 
 	# TODO make particles a child of building scene and customize there instead
-	var size := Vector2(len(building.cells[0]), len(building.cells))
+	var size := Vector2i(len(building.cells[0]), len(building.cells))
 	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
-	$BuildingParticles.position = cellv_to_world_position(cellv + size / 2)
+	$BuildingParticles.position = self.map_to_local(cellv + size / 2)
 	particles_material.emission_sphere_radius = size.length() / 2
 	$BuildingParticles.amount *= multiplier
 	particles_material.scale_min *= multiplier
@@ -922,7 +915,7 @@ func emit_particles(cellv: Vector2, building: Building) -> void:
 	$BuildingParticles.restart()
 
 
-func place_building(cellv: Vector2, id: int, force := false):
+func place_building(cellv: Vector2i, id: int, force := false):
 	var building: Building = BUILDINGS[id]
 
 	# Prevent placement if building overlaps any existing buildings
@@ -984,7 +977,7 @@ func place_building(cellv: Vector2, id: int, force := false):
 	# Instance a new sprite if this building is not a tile
 	if not building.is_tile:
 		var instance := building_scene.instantiate()
-		instance.position = cellv_to_world_position(cellv)
+		instance.position = self.map_to_local(cellv)
 		instance.texture = building.texture
 		instance.set_name("building_%d" % building_index)
 		$Buildings.add_child(instance)
@@ -993,7 +986,7 @@ func place_building(cellv: Vector2, id: int, force := false):
 	return Placement.new(id, cellv, gp_change, vp_change, neighbor_groups)
 
 
-func destroy_building(cellv: Vector2, id = null):
+func destroy_building(cellv: Vector2i, id = null):
 	# If an ID is given, use it to offset the cellv, ensuring that we won't
 	# select part of the building with empty space
 	# DON'T supply an ID if the cellv is already a tile the building occupies

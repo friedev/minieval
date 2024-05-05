@@ -97,6 +97,7 @@ format = 2
 
 [node name="PreviewBuilding" type="Sprite2D" parent="TileMap"]
 centered = false
+offset = Vector2(-4, -4)
 
 [node name="BuildingParticles" type="GPUParticles2D" parent="TileMap"]
 z_index = -1
@@ -193,20 +194,18 @@ anchors_preset = 0
 
 [node name="PreviewLabel" type="Label" parent="CanvasLayer/PreviewNode"]
 layout_mode = 0
-offset_left = -11.0
-offset_top = -8.0
-offset_right = 102.0
-offset_bottom = 31.0
+offset_top = -39.0
+offset_right = 113.0
 theme = ExtResource("13")
 text = "1 
 -1"
 
 [node name="GPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
-position = Vector2(-22, 0.25)
+position = Vector2(-11, -30.75)
 texture = ExtResource("15")
 
 [node name="VPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
-position = Vector2(-22, 20.5)
+position = Vector2(-11, -10.5)
 texture = ExtResource("14")
 
 [node name="Palette" parent="CanvasLayer" instance=ExtResource("4")]
