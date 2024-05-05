@@ -40,8 +40,8 @@ Buildings can't be destroyed, but you can always undo your last move.
 
 ### Fonts
 
-- Title Font: [BitmGothic](https://www.1001fonts.com/bitmgothic-font.html) by [Nomi](http://www.thenomi.org)
-- Normal Font: [pixelFJ8pt](https://www.1001fonts.com/pixelfj8pt1-font.html), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
+- Title Font: [BitmGothic](https://www.1001fonts.com/bitmgothic-font.html) by [Nomi](http://www.thenomi.org), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
+- Normal Font: [pixelFJ8pt](https://www.1001fonts.com/pixelfj8pt1-font.html) by [MBommeli](https://www.1001fonts.com/users/flashjunior/), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
 
 ### Audio
 
