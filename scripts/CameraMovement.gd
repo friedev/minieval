@@ -42,8 +42,8 @@ func zoom_by(zoomfactor: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom_in"):
-		zoom_by(0.5)
-	if event.is_action_pressed("zoom_out"):
 		zoom_by(2.0)
+	if event.is_action_pressed("zoom_out"):
+		zoom_by(0.5)
 	if event.is_action_pressed("zoom_reset"):
 		reset_zoom()
