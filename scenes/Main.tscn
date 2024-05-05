@@ -109,7 +109,7 @@ explosiveness = 1.0
 randomness = 0.25
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-process_mode = 2
+process_mode = 3
 stream = ExtResource("5")
 autoplay = true
 bus = &"Music"
