@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
 [node name="Pause" type="CenterContainer"]
-process_mode = 2
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

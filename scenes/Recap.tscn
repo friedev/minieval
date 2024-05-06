@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://t6exsd0tr5iu" path="res://music/end_music.ogg" id="7"]
 
 [node name="Recap" type="Control"]
-process_mode = 2
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15

@@ -211,6 +211,7 @@ texture = ExtResource("14")
 [node name="Palette" parent="CanvasLayer" instance=ExtResource("4")]
 
 [node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
