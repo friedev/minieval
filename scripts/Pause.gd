@@ -44,6 +44,7 @@ func _on_TutorialButton_pressed() -> void:
 
 
 func _on_Pause_visibility_changed() -> void:
-	pass
-	#self.black_overlay.visible = self.visible
-	#self.tilemap.in_menu = self.visible
+	if self.black_overlay != null:
+		self.black_overlay.visible = self.visible
+	if self.tilemap != null:
+		self.tilemap.in_menu = self.visible

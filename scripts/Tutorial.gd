@@ -31,9 +31,10 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_Tutorial_visibility_changed() -> void:
-	pass
-	#self.black_overlay.visible = self.visible
-	#self.tilemap.in_menu = self.visible
+	if self.black_overlay != null:
+		self.black_overlay.visible = self.visible
+	if self.tilemap != null:
+		self.tilemap.in_menu = self.visible
 
 
 func _on_play_button_pressed() -> void:

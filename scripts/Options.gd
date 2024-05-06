@@ -2,6 +2,8 @@ extends Container
 
 signal menu_closed
 
+@onready var main := self.get_node("/root/Main")
+
 @onready var camera_speed := %CameraSpeedSlider
 @onready var music_volume := %MusicVolumeSlider
 @onready var sound_volume := %SoundVolumeSlider
@@ -54,7 +56,8 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_visibility_changed() -> void:
-	pass
-	#if not self.is_title:
-	#	self.black_overlay.visible = self.visible
-	#	self.tilemap.in_menu = self.visible
+	if self.main != null:
+		var tilemap := self.main.find_child("TileMap")
+		var black_overlay := self.main.find_child("BlackOverlay")
+		tilemap.in_menu = self.visible
+		black_overlay.visible = self.visible
