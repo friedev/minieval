@@ -67,7 +67,7 @@ class Building:
 
 	static func get_cells_in_radius(
 		cellv: Vector2i,
-		radius: Vector2i
+		radius: Vector2
 	) -> Array:
 		var cells := []
 		for x in range(max(0, cellv.x - floor(radius.x)),
@@ -87,7 +87,7 @@ class Building:
 		return cells
 
 	func get_area_cells(cellv := Vector2i(0, 0)) -> Array:
-		return get_cells_in_radius(cellv + get_area_offset(), area / 2)
+		return get_cells_in_radius(cellv + get_area_offset(), Vector2(area) / 2)
 
 	func get_adjacent_cells(cellv := Vector2i(0, 0)) -> Array:
 		var adjacent_cell_map := []
