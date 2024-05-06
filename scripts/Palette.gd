@@ -103,13 +103,12 @@ func push_all_interactions(id: int) -> Array:
 
 
 func max_line_width(lines: Array) -> float:
-	return 64.0
-#	var max_width := 0.0
-#	for line in lines:
-#		var width: float = interactions_label.get_font("normal_font").get_string_size(line).x
-#		if width > max_width:
-#			max_width = width
-#	return max_width
+	var max_width := 0.0
+	for line in lines:
+		var width: float = interactions_label.get_theme_font("normal_font").get_string_size(line).x
+		if width > max_width:
+			max_width = width
+	return max_width
 
 
 func update_tooltip(id: int) -> void:
@@ -155,19 +154,23 @@ func _input(event: InputEvent):
 		id = tile_map.ROAD
 
 	if hover:
-		tooltip.visible = true
+		tooltip.show()
 		if id == last_tooltip_id:
 			return
-		# Hide and re-show the tooltip to force a layout refresh
-		tooltip.hide()
 		last_tooltip_id = id
-		# Add the horizonal offset corresponding to the hovered tile
-		# Add to y to fine-tune the vertical offset
-		tooltip.position = tooltip_position + Vector2(cellv.x * 64, 16)
-		# Shrink tooltip to size 0 to force fit-to-content
-		tooltip.size = Vector2(0, 0)
 		update_tooltip(id)
-		tooltip.show()
+
+		# Do this refresh twice because Godot doesn't wanna refresh it I guess
+		for _i in range(2):
+			# Hide and re-show the tooltip to force a layout refresh
+			# Shrink tooltip to size 0 to force fit-to-content
+			tooltip.hide()
+			tooltip.size = Vector2(0, 0)
+			tooltip.show()
+
+			# Add the horizonal offset corresponding to the hovered tile
+			# Move the tooltip strictly above the palette
+			tooltip.position = tooltip_position + Vector2(cellv.x * 64, -tooltip.size.y + 32)
 	else:
 		selection.clear()
 		selection.set_cell(0, cellv, tile_map.SELECTION)
