@@ -808,7 +808,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for cellv in building.get_area_cells(building_cellv):
-		$Preview.set_cell(0, cellv, SELECTION)
+		$Preview.set_cell(0, cellv, SELECTION, Vector2i.ZERO)
 		var id := get_cellv(cellv)
 		modulate_building(building, id, false)
 
