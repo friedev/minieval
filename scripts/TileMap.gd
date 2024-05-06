@@ -428,7 +428,7 @@ var in_menu := false
 @onready var undo_label := self.main.find_child("UndoLabel")
 
 @onready var palette = self.main.find_child("Palette")
-@onready var palette_tiemap = self.palette.find_child("TileMap")
+@onready var palette_tilemap = self.palette.find_child("TileMap")
 
 @onready var recap = self.main.find_child("Recap")
 
@@ -448,7 +448,7 @@ func _ready():
 	turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
-	self.palette_tiemap.palette_selection.connect(self._select_building)
+	self.palette_tilemap.palette_selection.connect(self._select_building)
 
 	self._update_mouse_cellv()
 	self._update_labels()
