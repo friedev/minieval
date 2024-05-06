@@ -63,3 +63,8 @@ theme = ExtResource("7")
 text = "Exit Game"
 
 [connection signal="visibility_changed" from="." to="." method="_on_Pause_visibility_changed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TitleButton" to="." method="_on_ReturnToTitleButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]
