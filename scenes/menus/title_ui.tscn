@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cokm5bjuku86c"]
 
-[ext_resource type="Script" path="res://scenes/menus/TitleUI.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/menus/title_ui.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_wpljk"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 

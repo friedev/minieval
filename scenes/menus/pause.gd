@@ -8,7 +8,7 @@ extends Container
 @onready var black_overlay := self.main.find_child("BlackOverlay")
 @onready var exit_game_button := self.find_child("ExitGameButton")
 
-const title_scene := "res://scenes/Title.tscn"
+const title_scene := "res://scenes/title.tscn"
 
 
 func _ready() -> void:

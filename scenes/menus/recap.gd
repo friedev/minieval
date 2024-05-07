@@ -1,6 +1,6 @@
 extends Control
 
-const title_scene := "res://scenes/Title.tscn"
+const title_scene := "res://scenes/title.tscn"
 
 @onready var main := self.get_node("/root/Main")
 @onready var tilemap := self.main.find_child("TileMap")

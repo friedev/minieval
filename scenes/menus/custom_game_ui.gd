@@ -2,7 +2,7 @@ extends Container
 
 signal menu_closed
 
-const main_scene := "res://scenes/Main.tscn"
+const main_scene := "res://scenes/main.tscn"
 
 @onready var turn_limit := %TurnLimitLineEdit
 @onready var game_size := %MapSizeLineEdit

@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://bkd00f67k83ly" path="res://ui/styles/stylebox_grabber.tres" id="3"]
 [ext_resource type="StyleBox" uid="uid://p6o4wre10qrn" path="res://ui/styles/stylebox_button.tres" id="4"]
 [ext_resource type="StyleBox" uid="uid://cl70y1con1qqu" path="res://ui/styles/stylebox_panel.tres" id="5"]
-[ext_resource type="Texture2D" path="res://ui/sprites/check.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bscia1hpdeeu5" path="res://ui/sprites/check.png" id="6"]
 [ext_resource type="StyleBox" uid="uid://ea8mgo6dtqv0" path="res://ui/styles/stylebox_button_disabled.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://ct1vsredro3o0" path="res://ui/styles/stylebox_vscroll.tres" id="8"]
 [ext_resource type="StyleBox" uid="uid://c202u3nchqhwa" path="res://ui/styles/stylebox_vscroll_grabber.tres" id="9"]

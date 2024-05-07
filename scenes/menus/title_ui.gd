@@ -3,7 +3,7 @@ extends Container
 signal custom_game_menu_opened
 signal options_menu_opened
 
-const main_scene := "res://scenes/Main.tscn"
+const main_scene := "res://scenes/main.tscn"
 
 @onready var exit_game_button := %ExitGameButton
 

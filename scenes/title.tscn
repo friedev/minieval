@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://iv13x14ih3mw"]
 
 [ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1"]
-[ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/TitleUI.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/Options.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/CustomGameUI.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/title_ui.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_ui.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6"]
-[ext_resource type="Script" path="res://scenes/TitleMusic.gd" id="7_65lam"]
+[ext_resource type="Script" path="res://scenes/title_music.gd" id="7_65lam"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ooxdy"]
 texture = ExtResource("1")

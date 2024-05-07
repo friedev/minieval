@@ -1,20 +1,20 @@
 [gd_scene load_steps=19 format=3 uid="uid://b14c1y35bjrym"]
 
-[ext_resource type="Script" path="res://scenes/TileMap.gd" id="1"]
-[ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="2"]
-[ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/Pause.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/Palette.tscn" id="4"]
-[ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="5"]
-[ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="6"]
-[ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="7"]
-[ext_resource type="Script" path="res://scenes/CameraMovement.gd" id="8"]
-[ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="10"]
-[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/Recap.tscn" id="12"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="13"]
-[ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="15"]
-[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/Options.tscn" id="16"]
-[ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/Tutorial.tscn" id="19"]
+[ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
+[ext_resource type="Script" path="res://scenes/tile_map.gd" id="2_2brww"]
+[ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="3_dpoud"]
+[ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="4_hyuoe"]
+[ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="5_msfla"]
+[ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="6_5hfa5"]
+[ext_resource type="Script" path="res://scenes/camera_movement.gd" id="7_wdqlp"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="8_kommm"]
+[ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
+[ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
+[ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/palette.tscn" id="11_g2fyb"]
+[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/recap.tscn" id="12_2hgrf"]
+[ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause.tscn" id="13_hwilj"]
+[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options.tscn" id="14_xpfr0"]
+[ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/tutorial.tscn" id="15_0mlr1"]
 
 [sub_resource type="Curve" id="2"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -42,21 +42,21 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
-tile_set = ExtResource("2")
+tile_set = ExtResource("1_fchkj")
 format = 2
-script = ExtResource("1")
+script = ExtResource("2_2brww")
 
 [node name="BuildingPlaceErrorSound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource("10")
+stream = ExtResource("3_dpoud")
 volume_db = -6.0
 bus = &"Sound"
 
 [node name="BuildingPlaceSound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource("7")
+stream = ExtResource("4_hyuoe")
 bus = &"Sound"
 
 [node name="BuildingDestroySound" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource("6")
+stream = ExtResource("5_msfla")
 bus = &"Sound"
 
 [node name="Buildings" type="Node2D" parent="TileMap"]
@@ -65,14 +65,14 @@ z_index = 2
 [node name="Preview" type="TileMap" parent="TileMap"]
 modulate = Color(1, 1, 1, 0.12549)
 z_index = 3
-tile_set = ExtResource("2")
+tile_set = ExtResource("1_fchkj")
 rendering_quadrant_size = 8
 format = 2
 
 [node name="PreviewTile" type="TileMap" parent="TileMap"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 3
-tile_set = ExtResource("2")
+tile_set = ExtResource("1_fchkj")
 rendering_quadrant_size = 8
 format = 2
 
@@ -92,7 +92,7 @@ randomness = 0.25
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("5")
+stream = ExtResource("6_5hfa5")
 autoplay = true
 bus = &"Music"
 
@@ -103,7 +103,7 @@ drag_left_margin = 1.0
 drag_top_margin = 1.0
 drag_right_margin = 1.0
 drag_bottom_margin = 1.0
-script = ExtResource("8")
+script = ExtResource("7_wdqlp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -115,7 +115,7 @@ offset_left = -308.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 91.0
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "Turns Left"
 horizontal_alignment = 2
@@ -129,7 +129,7 @@ offset_top = 16.0
 offset_right = 206.0
 offset_bottom = 91.0
 grow_horizontal = 2
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "(Press Z/U to Undo)"
 horizontal_alignment = 1
@@ -137,7 +137,7 @@ horizontal_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 84.0
 offset_bottom = 96.0
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 0
@@ -152,7 +152,7 @@ columns = 2
 [node name="GPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("15")
+texture = ExtResource("9_4q2tn")
 expand_mode = 2
 
 [node name="GPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
@@ -163,7 +163,7 @@ text = "0"
 [node name="VPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("14")
+texture = ExtResource("10_a8lsb")
 expand_mode = 2
 
 [node name="VPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
@@ -174,25 +174,25 @@ text = "0"
 [node name="PreviewNode" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 
 [node name="PreviewLabel" type="Label" parent="CanvasLayer/PreviewNode"]
 layout_mode = 0
 offset_top = -39.0
 offset_right = 113.0
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 text = "1 
 -1"
 
 [node name="GPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
 position = Vector2(-11, -30.75)
-texture = ExtResource("15")
+texture = ExtResource("9_4q2tn")
 
 [node name="VPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
 position = Vector2(-11, -10.5)
-texture = ExtResource("14")
+texture = ExtResource("10_a8lsb")
 
-[node name="Palette" parent="CanvasLayer" instance=ExtResource("4")]
+[node name="Palette" parent="CanvasLayer" instance=ExtResource("11_g2fyb")]
 
 [node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
@@ -200,16 +200,16 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("13")
+theme = ExtResource("8_kommm")
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Recap" parent="CanvasLayer" instance=ExtResource("12")]
+[node name="Recap" parent="CanvasLayer" instance=ExtResource("12_2hgrf")]
 visible = false
 
-[node name="Pause" parent="CanvasLayer" instance=ExtResource("3")]
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("13_hwilj")]
 visible = false
 
-[node name="Options" parent="CanvasLayer" instance=ExtResource("16")]
+[node name="Options" parent="CanvasLayer" instance=ExtResource("14_xpfr0")]
 visible = false
 
-[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("19")]
+[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("15_0mlr1")]

@@ -381,7 +381,7 @@ const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
 
-const building_scene := preload("res://scenes/Building.tscn")
+const building_scene := preload("res://scenes/building.tscn")
 
 const turn_format := "%d Turns Left"
 
