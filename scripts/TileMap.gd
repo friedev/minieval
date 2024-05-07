@@ -807,7 +807,7 @@ func _update_preview() -> void:
 	# Move the building preview
 	$PreviewBuilding.position = self.map_to_local(building_cellv)
 	if building.is_tile:
-		$PreviewTile.set_cell(0, building_cellv, selected_building)
+		$PreviewTile.set_cells_terrain_connect(0, [building_cellv], 0, 0)
 	else:
 		$PreviewBuilding.visible = true
 
