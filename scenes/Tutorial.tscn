@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c82d8rm7yseq0"]
 
 [ext_resource type="Script" path="res://scripts/Tutorial.gd" id="2"]
-[ext_resource type="FontFile" path="res://ui/fonts/title_font.tres" id="6"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_x0pkj"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
 [node name="CenterContainer" type="CenterContainer"]
@@ -27,7 +27,7 @@ theme_override_constants/separation = 16
 [node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("7")
-theme_override_fonts/font = ExtResource("6")
+theme_override_fonts/font = ExtResource("3_x0pkj")
 theme_override_font_sizes/font_size = 48
 text = "Tutorial"
 horizontal_alignment = 1

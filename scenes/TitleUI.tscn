@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cokm5bjuku86c"]
 
 [ext_resource type="Script" path="res://scripts/TitleUI.gd" id="1"]
-[ext_resource type="FontFile" path="res://ui/fonts/title_font.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_wpljk"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 
 [node name="TitleUI" type="CenterContainer"]
@@ -35,7 +35,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5")
-theme_override_fonts/font = ExtResource("4")
+theme_override_fonts/font = ExtResource("3_wpljk")
 theme_override_font_sizes/font_size = 48
 text = "Minieval"
 horizontal_alignment = 1

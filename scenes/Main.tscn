@@ -230,6 +230,7 @@ theme = ExtResource("13")
 color = Color(0, 0, 0, 0.501961)
 
 [node name="Recap" parent="CanvasLayer" instance=ExtResource("12")]
+visible = false
 
 [node name="Pause" parent="CanvasLayer" instance=ExtResource("3")]
 visible = false

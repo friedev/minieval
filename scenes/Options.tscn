@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btmju8hejufk5"]
 
 [ext_resource type="Script" path="res://scripts/Options.gd" id="1"]
-[ext_resource type="FontFile" path="res://ui/fonts/title_font.tres" id="5"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_jgbkv"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="6"]
 
 [node name="Options" type="CenterContainer"]
@@ -26,7 +26,7 @@ theme_override_constants/separation = 16
 [node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6")
-theme_override_fonts/font = ExtResource("5")
+theme_override_fonts/font = ExtResource("3_jgbkv")
 theme_override_font_sizes/font_size = 48
 text = "Options"
 horizontal_alignment = 1
