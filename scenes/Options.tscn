@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btmju8hejufk5"]
 
-[ext_resource type="Script" path="res://scripts/Options.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/Options.gd" id="2_nhs7l"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_jgbkv"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="6"]
 
@@ -9,7 +9,7 @@ process_mode = 3
 offset_right = 1280.0
 offset_bottom = 720.0
 theme = ExtResource("6")
-script = ExtResource("1")
+script = ExtResource("2_nhs7l")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

@@ -18,7 +18,7 @@ config/icon="res://sprites/logo.png"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
+Global="*res://scenes/global.gd"
 
 [display]
 

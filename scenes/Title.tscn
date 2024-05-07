@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/CustomGameUI.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6"]
-[ext_resource type="Script" path="res://scripts/TitleMusic.gd" id="7_65lam"]
+[ext_resource type="Script" path="res://scenes/TitleMusic.gd" id="7_65lam"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ooxdy"]
 texture = ExtResource("1")

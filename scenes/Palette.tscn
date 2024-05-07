@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbwe2w3gmnago"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1"]
-[ext_resource type="Script" path="res://scripts/Palette.gd" id="2"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_button.tres" id="3"]
+[ext_resource type="Script" path="res://scenes/Palette.gd" id="2"]
+[ext_resource type="StyleBox" uid="uid://p6o4wre10qrn" path="res://ui/styles/stylebox_button.tres" id="3"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="7"]
