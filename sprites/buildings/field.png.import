@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lvr14gwte7oy"
-path="res://.godot/imported/pyramid.png-21d9e9ffc48fa9429f47ff3f8cd15e31.ctex"
+uid="uid://01yfc8jrn358"
+path="res://.godot/imported/field.png-307447f0a06c8624849ed1773c53f045.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pyramid.png"
-dest_files=["res://.godot/imported/pyramid.png-21d9e9ffc48fa9429f47ff3f8cd15e31.ctex"]
+source_file="res://sprites/buildings/field.png"
+dest_files=["res://.godot/imported/field.png-307447f0a06c8624849ed1773c53f045.ctex"]
 
 [params]
 

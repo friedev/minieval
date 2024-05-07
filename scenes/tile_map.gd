@@ -147,7 +147,7 @@ var BUILDINGS := {
 		-1, # gp
 		1, # vp
 		Vector2i(3, 3), # area
-		preload("res://sprites/house.png"), # texture
+		preload("res://sprites/buildings/house.png"), # texture
 		[ # cells
 			[1],
 		],
@@ -165,7 +165,7 @@ var BUILDINGS := {
 		-5, # gp
 		1, # vp
 		Vector2i(6, 5), # area
-		preload("res://sprites/shop.png"), # texture
+		preload("res://sprites/buildings/shop.png"), # texture
 		[ # cells
 			[1, 1],
 		],
@@ -186,7 +186,7 @@ var BUILDINGS := {
 		-5, # gp
 		2, # vp
 		Vector2i(4, 4), # area
-		preload("res://sprites/mansion.png"), # texture
+		preload("res://sprites/buildings/mansion.png"), # texture
 		[
 			[1, 1],
 			[1, 0],
@@ -204,7 +204,7 @@ var BUILDINGS := {
 		-10, # gp
 		2, # vp
 		Vector2i(6, 6), # area
-		preload("res://sprites/forge.png"), # texture
+		preload("res://sprites/buildings/forge.png"), # texture
 		[ # cells
 			[1, 1],
 			[1, 1],
@@ -225,7 +225,7 @@ var BUILDINGS := {
 		-5, # gp
 		5, # vp
 		Vector2i(5, 6), # area
-		preload("res://sprites/statue.png"), # texture
+		preload("res://sprites/buildings/statue.png"), # texture
 		[ # cells
 			[1],
 			[1],
@@ -245,7 +245,7 @@ var BUILDINGS := {
 		-40, # gp
 		20, # vp
 		Vector2i(8, 7), # area,
-		preload("res://sprites/cathedral.png"), # texture
+		preload("res://sprites/buildings/cathedral.png"), # texture
 		[ # cells
 			[0, 1, 0, 0],
 			[1, 1, 1, 1],
@@ -269,7 +269,7 @@ var BUILDINGS := {
 		-80, # gp
 		20, # vp
 		Vector2i(9, 8), # area
-		preload("res://sprites/keep.png"), # sprite
+		preload("res://sprites/buildings/keep.png"), # sprite
 		[ # cells
 			[1, 1, 1],
 			[1, 1, 1],
@@ -293,7 +293,7 @@ var BUILDINGS := {
 		-20, # gp
 		0, # vp
 		Vector2i(5, 5), # area
-		preload("res://sprites/tower.png"), # texture
+		preload("res://sprites/buildings/tower.png"), # texture
 		[ # cells
 			[1],
 			[1],
@@ -314,7 +314,7 @@ var BUILDINGS := {
 		-150, # gp
 		50, # vp
 		Vector2i(16, 12), # area
-		preload("res://sprites/pyramid.png"), # texture
+		preload("res://sprites/buildings/pyramid.png"), # texture
 		[ # cells
 			[0, 0, 0, 1, 1, 0, 0, 0],
 			[0, 0, 1, 1, 1, 1, 0, 0],

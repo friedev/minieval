@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccc68gxudyqci"
-path="res://.godot/imported/forge.png-ffd1b6d3646356b5c47ef9b6a56b35e9.ctex"
+uid="uid://wllmm7ttewxc"
+path="res://.godot/imported/barren_field.png-e46bcb689520075bb98587f763f93d17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/forge.png"
-dest_files=["res://.godot/imported/forge.png-ffd1b6d3646356b5c47ef9b6a56b35e9.ctex"]
+source_file="res://sprites/buildings/barren_field.png"
+dest_files=["res://.godot/imported/barren_field.png-e46bcb689520075bb98587f763f93d17.ctex"]
 
 [params]
 

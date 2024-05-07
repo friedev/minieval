@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgqefokamrx0r"
-path="res://.godot/imported/mansion.png-bdd4afa65d072d7e70566922d415155e.ctex"
+uid="uid://qwqiswhw81ag"
+path="res://.godot/imported/dense_field.png-ccb9fc9efbfb85abdb75e7f66c700948.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mansion.png"
-dest_files=["res://.godot/imported/mansion.png-bdd4afa65d072d7e70566922d415155e.ctex"]
+source_file="res://sprites/buildings/dense_field.png"
+dest_files=["res://.godot/imported/dense_field.png-ccb9fc9efbfb85abdb75e7f66c700948.ctex"]
 
 [params]
 

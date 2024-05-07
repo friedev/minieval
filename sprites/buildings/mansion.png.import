@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wllmm7ttewxc"
-path="res://.godot/imported/barren_field.png-2216991e020124f164f555a9dbb53bfa.ctex"
+uid="uid://cgqefokamrx0r"
+path="res://.godot/imported/mansion.png-9bd118a34cae016f7c247758c3e2248f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/barren_field.png"
-dest_files=["res://.godot/imported/barren_field.png-2216991e020124f164f555a9dbb53bfa.ctex"]
+source_file="res://sprites/buildings/mansion.png"
+dest_files=["res://.godot/imported/mansion.png-9bd118a34cae016f7c247758c3e2248f.ctex"]
 
 [params]
 

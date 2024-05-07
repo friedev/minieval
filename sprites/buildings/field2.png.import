@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1bybj6tsytp5"
-path="res://.godot/imported/keep.png-3d82bf55c7210cb792ba9215531a47a0.ctex"
+uid="uid://dvcnpu72mh6yw"
+path="res://.godot/imported/field2.png-f7dca878f2f6c200655ff7b46b217548.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/keep.png"
-dest_files=["res://.godot/imported/keep.png-3d82bf55c7210cb792ba9215531a47a0.ctex"]
+source_file="res://sprites/buildings/field2.png"
+dest_files=["res://.godot/imported/field2.png-f7dca878f2f6c200655ff7b46b217548.ctex"]
 
 [params]
 

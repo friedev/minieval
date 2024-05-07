@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du4gg01lyegp4"
-path="res://.godot/imported/split_field.png-fc1112cb667c3e1bd3f865eb8fab0a19.ctex"
+uid="uid://dc0bv1bswvjr5"
+path="res://.godot/imported/windmill.png-8854ed4654d1b76c1e1db980c3c8ae32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/split_field.png"
-dest_files=["res://.godot/imported/split_field.png-fc1112cb667c3e1bd3f865eb8fab0a19.ctex"]
+source_file="res://sprites/buildings/windmill.png"
+dest_files=["res://.godot/imported/windmill.png-8854ed4654d1b76c1e1db980c3c8ae32.ctex"]
 
 [params]
 

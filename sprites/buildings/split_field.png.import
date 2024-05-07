@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2js66nopmip0"
-path="res://.godot/imported/house.png-692a11096cd356792c6bc12472b23812.ctex"
+uid="uid://du4gg01lyegp4"
+path="res://.godot/imported/split_field.png-86fd7402b23e74c3cf8bdd1148c0c612.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/house.png"
-dest_files=["res://.godot/imported/house.png-692a11096cd356792c6bc12472b23812.ctex"]
+source_file="res://sprites/buildings/split_field.png"
+dest_files=["res://.godot/imported/split_field.png-86fd7402b23e74c3cf8bdd1148c0c612.ctex"]
 
 [params]
 
