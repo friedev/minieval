@@ -74,7 +74,7 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(266, 36)
 theme = ExtResource("5")
-text = "v1.1.0"
+text = "v1.2.0-dev"
 horizontal_alignment = 2
 
 [node name="Authors" type="Label" parent="."]
