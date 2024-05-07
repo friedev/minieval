@@ -6,12 +6,12 @@ extends Camera2D
 
 func _process(delta: float) -> void:
 	var input_x := (
-		int(Input.is_action_pressed(&"ui_right"))
-		- int(Input.is_action_pressed(&"ui_left"))
+		int(Input.is_action_pressed(&"pan_right"))
+		- int(Input.is_action_pressed(&"pan_left"))
 	)
 	var input_y := (
-		int(Input.is_action_pressed(&"ui_down"))
-		- int(Input.is_action_pressed(&"ui_up"))
+		int(Input.is_action_pressed(&"pan_down"))
+		- int(Input.is_action_pressed(&"pan_up"))
 	)
 	var input := Vector2(input_x, input_y)
 	position = lerp(
