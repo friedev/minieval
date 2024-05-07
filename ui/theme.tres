@@ -1,32 +1,33 @@
-[gd_resource type="Theme" load_steps=27 format=3 uid="uid://bfslj868ae21m"]
+[gd_resource type="Theme" load_steps=30 format=3 uid="uid://bfslj868ae21m"]
 
 [ext_resource type="FontFile" uid="uid://cnyjnhglwlik8" path="res://ui/fonts/pixelFJ8pt1.ttf" id="1"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_button_pressed.tres" id="2"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_grabber.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_button.tres" id="4"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_panel.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://bscia1hpdeeu5" path="res://ui/sprites/check.png" id="6"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_button_disabled.tres" id="7"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_vscroll.tres" id="8"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_vscroll_grabber.tres" id="9"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_hscroll_grabber.tres" id="10"]
-[ext_resource type="StyleBox" path="res://ui/styles/stylebox_hscroll.tres" id="11"]
+[ext_resource type="StyleBox" uid="uid://b4vxiy30iijaf" path="res://ui/styles/stylebox_button_pressed.tres" id="2"]
+[ext_resource type="StyleBox" uid="uid://bbrwq8vhod2hn" path="res://ui/styles/stylebox_button_hover.tres" id="2_llj5i"]
+[ext_resource type="StyleBox" uid="uid://bkd00f67k83ly" path="res://ui/styles/stylebox_grabber.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://p6o4wre10qrn" path="res://ui/styles/stylebox_button.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://cl70y1con1qqu" path="res://ui/styles/stylebox_panel.tres" id="5"]
+[ext_resource type="Texture2D" path="res://ui/sprites/check.png" id="6"]
+[ext_resource type="StyleBox" uid="uid://ea8mgo6dtqv0" path="res://ui/styles/stylebox_button_disabled.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://ct1vsredro3o0" path="res://ui/styles/stylebox_vscroll.tres" id="8"]
+[ext_resource type="StyleBox" uid="uid://c202u3nchqhwa" path="res://ui/styles/stylebox_vscroll_grabber.tres" id="9"]
+[ext_resource type="StyleBox" uid="uid://bi76477a4i7sa" path="res://ui/styles/stylebox_hscroll_grabber.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://7gwpk4di7kj4" path="res://ui/styles/stylebox_hscroll.tres" id="11"]
 
 [sub_resource type="StyleBoxEmpty" id="19"]
 
-[sub_resource type="CompressedTexture2D" id="7"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pvl0o"]
 
-[sub_resource type="CompressedTexture2D" id="9"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x254p"]
 
-[sub_resource type="CompressedTexture2D" id="10"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6skf"]
 
-[sub_resource type="CompressedTexture2D" id="11"]
-
-[sub_resource type="CompressedTexture2D" id="12"]
-
-[sub_resource type="CompressedTexture2D" id="13"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_40gvr"]
 
 [sub_resource type="StyleBoxEmpty" id="5"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ckauc"]
+color = Color(1, 1, 1, 1)
+thickness = 4
 
 [sub_resource type="CompressedTexture2D" id="14"]
 
@@ -36,64 +37,63 @@
 
 [sub_resource type="CompressedTexture2D" id="17"]
 
-[sub_resource type="CompressedTexture2D" id="18"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kr22c"]
 
-[sub_resource type="StyleBoxFlat" id="4"]
-bg_color = Color(0, 0, 0, 1)
-corner_detail = 1
-anti_aliasing = false
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_k40f3"]
+color = Color(1, 1, 1, 1)
+thickness = 4
+vertical = true
 
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("1")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/glyphs/0/advance = Vector2(0, 0)
-cache/0/16/0/glyphs/0/offset = Vector2(0, 0)
-cache/0/16/0/glyphs/0/size = Vector2(0, 0)
-cache/0/16/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
-cache/0/16/0/glyphs/0/texture_idx = -1
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qb5mi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oslcg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vo5mc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_napqa"]
 
 [resource]
-default_font = SubResource("1")
+default_font = ExtResource("1")
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_color_disabled = Color(1, 1, 1, 1)
-Button/colors/font_color_focus = Color(1, 1, 1, 1)
-Button/colors/font_color_hover = Color(0, 0, 0, 1)
-Button/colors/font_color_pressed = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/styles/disabled = ExtResource("7")
 Button/styles/focus = SubResource("19")
-Button/styles/hover = ExtResource("2")
+Button/styles/hover = ExtResource("2_llj5i")
 Button/styles/normal = ExtResource("4")
 Button/styles/pressed = ExtResource("2")
 CheckBox/colors/font_color = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_disabled = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_focus = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_hover = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_hover_pressed = Color(1, 1, 1, 1)
-CheckBox/colors/font_color_pressed = Color(1, 1, 1, 1)
+CheckBox/colors/font_disabled_color = Color(0.533333, 0.533333, 0.533333, 1)
+CheckBox/colors/font_focus_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_hover_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
 CheckBox/icons/checked = ExtResource("6")
-CheckBox/icons/checked_disabled = SubResource("7")
+CheckBox/icons/checked_disabled = ExtResource("6")
 CheckBox/icons/radio_checked = ExtResource("6")
-CheckBox/icons/radio_checked_disabled = SubResource("9")
-CheckBox/icons/radio_unchecked = SubResource("10")
-CheckBox/icons/radio_unchecked_disabled = SubResource("11")
-CheckBox/icons/unchecked = SubResource("12")
-CheckBox/icons/unchecked_disabled = SubResource("13")
+CheckBox/icons/radio_checked_disabled = ExtResource("6")
+CheckBox/icons/radio_unchecked = SubResource("CompressedTexture2D_pvl0o")
+CheckBox/icons/radio_unchecked_disabled = SubResource("CompressedTexture2D_x254p")
+CheckBox/icons/unchecked = SubResource("CompressedTexture2D_m6skf")
+CheckBox/icons/unchecked_disabled = SubResource("CompressedTexture2D_40gvr")
 CheckBox/styles/disabled = ExtResource("7")
 CheckBox/styles/focus = SubResource("5")
-CheckBox/styles/hover = ExtResource("4")
-CheckBox/styles/hover_pressed = ExtResource("4")
+CheckBox/styles/hover = ExtResource("2_llj5i")
+CheckBox/styles/hover_pressed = ExtResource("2_llj5i")
 CheckBox/styles/normal = ExtResource("4")
 CheckBox/styles/pressed = ExtResource("4")
+HBoxContainer/constants/separation = 8
+HFlowContainer/constants/h_separation = 8
+HFlowContainer/constants/v_separation = 8
 HScrollBar/styles/grabber = ExtResource("10")
 HScrollBar/styles/grabber_highlight = ExtResource("10")
 HScrollBar/styles/grabber_pressed = ExtResource("10")
 HScrollBar/styles/scroll = ExtResource("11")
 HScrollBar/styles/scroll_focus = ExtResource("11")
+HSeparator/styles/separator = SubResource("StyleBoxLine_ckauc")
 HSlider/icons/grabber = SubResource("14")
 HSlider/icons/grabber_disabled = SubResource("15")
 HSlider/icons/grabber_highlight = SubResource("16")
@@ -101,14 +101,16 @@ HSlider/icons/tick = SubResource("17")
 HSlider/styles/grabber_area = ExtResource("3")
 HSlider/styles/grabber_area_highlight = ExtResource("3")
 HSlider/styles/slider = ExtResource("4")
+LineEdit/colors/caret_color = Color(1, 1, 1, 1)
 LineEdit/colors/clear_button_color = Color(1, 1, 1, 1)
 LineEdit/colors/clear_button_color_pressed = Color(1, 1, 1, 1)
 LineEdit/colors/cursor_color = Color(1, 1, 1, 1)
 LineEdit/colors/font_color = Color(1, 1, 1, 1)
-LineEdit/colors/font_color_selected = Color(0, 0, 0, 1)
-LineEdit/colors/font_color_uneditable = Color(0.533333, 0.533333, 0.533333, 1)
-LineEdit/colors/selection_color = Color(0.533333, 0.533333, 0.533333, 1)
-LineEdit/icons/clear = SubResource("18")
+LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.533333, 0.533333, 0.533333, 1)
+LineEdit/colors/selection_color = Color(0.266667, 0.266667, 0.266667, 1)
+LineEdit/constants/caret_width = 2
+LineEdit/icons/clear = SubResource("CompressedTexture2D_kr22c")
 LineEdit/styles/focus = ExtResource("4")
 LineEdit/styles/normal = ExtResource("4")
 LineEdit/styles/read_only = ExtResource("4")
@@ -122,13 +124,36 @@ Popup/styles/panel = null
 PopupMenu/styles/panel = null
 PopupPanel/styles/panel = ExtResource("5")
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
-ProgressBar/styles/bg = SubResource("4")
-ProgressBar/styles/fg = ExtResource("3")
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/constants/outline_size = 4
+ProgressBar/styles/background = ExtResource("4")
+ProgressBar/styles/fill = ExtResource("3")
+TextEdit/colors/background_color = Color(0, 0, 0, 1)
+TextEdit/colors/caret_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_readonly_color = Color(0.533333, 0.533333, 0.533333, 1)
+TextEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+TextEdit/colors/selection_color = Color(0.266667, 0.266667, 0.266667, 1)
+TextEdit/constants/caret_width = 2
+TextEdit/styles/focus = ExtResource("4")
+TextEdit/styles/normal = ExtResource("4")
+TextEdit/styles/read_only = ExtResource("7")
 TooltipLabel/colors/font_color = Color(1, 1, 1, 1)
 TooltipLabel/colors/font_color_shadow = Color(0, 0, 0, 0)
 TooltipPanel/styles/panel = ExtResource("4")
+VBoxContainer/constants/separation = 8
+VFlowContainer/constants/h_separation = 8
+VFlowContainer/constants/v_separation = 8
 VScrollBar/styles/grabber = ExtResource("9")
 VScrollBar/styles/grabber_highlight = ExtResource("9")
 VScrollBar/styles/grabber_pressed = ExtResource("9")
 VScrollBar/styles/scroll = ExtResource("8")
 VScrollBar/styles/scroll_focus = ExtResource("8")
+VSeparator/styles/separator = SubResource("StyleBoxLine_k40f3")
+VSlider/icons/grabber = SubResource("CompressedTexture2D_qb5mi")
+VSlider/icons/grabber_disabled = SubResource("CompressedTexture2D_oslcg")
+VSlider/icons/grabber_highlight = SubResource("CompressedTexture2D_vo5mc")
+VSlider/icons/tick = SubResource("CompressedTexture2D_napqa")
+VSlider/styles/grabber_area = ExtResource("3")
+VSlider/styles/grabber_area_highlight = ExtResource("3")
+VSlider/styles/slider = ExtResource("4")
