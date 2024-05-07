@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="4_hyuoe"]
 [ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="5_msfla"]
 [ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="6_5hfa5"]
-[ext_resource type="Script" path="res://scenes/camera_movement.gd" id="7_wdqlp"]
+[ext_resource type="Script" path="res://scenes/camera.gd" id="7_wdqlp"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="8_kommm"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
