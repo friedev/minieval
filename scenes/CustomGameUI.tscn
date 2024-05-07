@@ -33,7 +33,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme = ExtResource("1")
 theme_override_fonts/font = ExtResource("3_cxnbl")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
 text = "Custom Game"
 horizontal_alignment = 1
 
