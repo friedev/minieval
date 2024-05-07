@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b14c1y35bjrym"]
+[gd_scene load_steps=19 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="Script" path="res://scripts/TileMap.gd" id="1"]
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="2"]
@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="6"]
 [ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="7"]
 [ext_resource type="Script" path="res://scripts/CameraMovement.gd" id="8"]
-[ext_resource type="FontFile" uid="uid://cnyjnhglwlik8" path="res://ui/fonts/pixelFJ8pt1.ttf" id="9"]
 [ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="10"]
 [ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/Recap.tscn" id="12"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="13"]
@@ -38,33 +37,6 @@ scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("3")
 color = Color(0.8, 0.8, 0.8, 1)
-
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("9")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/8/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/32/0 = Vector2(0, 0)
-cache/0/8/0/ascent = 0.0
-cache/0/8/0/descent = 0.0
-cache/0/8/0/underline_position = 0.0
-cache/0/8/0/underline_thickness = 0.0
-cache/0/8/0/scale = 1.0
-cache/0/8/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/8/0/kerning_overrides/8/0 = Vector2(0, 0)
-cache/0/8/0/kerning_overrides/32/0 = Vector2(0, 0)
-cache/0/32/0/ascent = 0.0
-cache/0/32/0/descent = 0.0
-cache/0/32/0/underline_position = 0.0
-cache/0/32/0/underline_thickness = 0.0
-cache/0/32/0/scale = 1.0
-cache/0/32/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/32/0/kerning_overrides/8/0 = Vector2(0, 0)
-cache/0/32/0/kerning_overrides/32/0 = Vector2(0, 0)
 
 [node name="Main" type="Node"]
 
@@ -143,7 +115,8 @@ offset_left = -308.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 91.0
-theme_override_fonts/font = SubResource("1")
+theme = ExtResource("13")
+theme_override_font_sizes/font_size = 32
 text = "Turns Left"
 horizontal_alignment = 2
 
@@ -156,13 +129,15 @@ offset_top = 16.0
 offset_right = 206.0
 offset_bottom = 91.0
 grow_horizontal = 2
-theme_override_fonts/font = SubResource("1")
+theme = ExtResource("13")
+theme_override_font_sizes/font_size = 32
 text = "(Press Z/U to Undo)"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 84.0
 offset_bottom = 96.0
+theme = ExtResource("13")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 0
@@ -182,7 +157,6 @@ expand_mode = 2
 
 [node name="GPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 32
 text = "0"
 
@@ -194,13 +168,13 @@ expand_mode = 2
 
 [node name="VPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="PreviewNode" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("13")
 
 [node name="PreviewLabel" type="Label" parent="CanvasLayer/PreviewNode"]
 layout_mode = 0
