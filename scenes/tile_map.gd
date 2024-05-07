@@ -515,9 +515,9 @@ func _unhandled_input(event: InputEvent):
 		else:
 			if event is InputEventMouseButton:
 				$BuildingPlaceErrorSound.play()
-	elif event.is_action_pressed("undo"):
+	elif event.is_action_pressed(&"undo"):
 		self.undo()
-	elif event.is_action_pressed("redo"):
+	elif event.is_action_pressed(&"redo"):
 		self.redo()
 
 

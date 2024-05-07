@@ -17,7 +17,7 @@ func _ready() -> void:
 
 # Make pause menu appear when user presses pause (Escape)
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") && recap.visible == false:
+	if event.is_action_pressed(&"pause") && recap.visible == false:
 		self.visible = not self.visible
 
 
