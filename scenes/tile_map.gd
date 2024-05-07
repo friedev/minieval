@@ -83,7 +83,6 @@ class Building:
 			for x in range(0, len(self.cells[y])):
 				if self.cells[y][x]:
 					cells.append(Vector2i(x, y) + cellv)
-					# TODO prevent placing buildings partially out of bounds
 		return cells
 
 	func get_area_cells(cellv := Vector2i(0, 0)) -> Array:
