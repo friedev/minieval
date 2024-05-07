@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://iv13x14ih3mw"]
+[gd_scene load_steps=8 format=3 uid="uid://iv13x14ih3mw"]
 
 [ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/title_ui.tscn" id="2"]
@@ -7,35 +7,6 @@
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6"]
 [ext_resource type="Script" path="res://scenes/title_music.gd" id="7_65lam"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ooxdy"]
-texture = ExtResource("1")
-texture_region_size = Vector2i(480, 352)
-0:0/next_alternative_id = 8
-0:0/0 = 0
-0:0/1 = 1
-0:0/1/flip_h = true
-0:0/2 = 2
-0:0/2/flip_v = true
-0:0/3 = 3
-0:0/3/flip_h = true
-0:0/3/flip_v = true
-0:0/4 = 4
-0:0/4/transpose = true
-0:0/5 = 5
-0:0/5/flip_h = true
-0:0/5/transpose = true
-0:0/6 = 6
-0:0/6/flip_v = true
-0:0/6/transpose = true
-0:0/7 = 7
-0:0/7/flip_h = true
-0:0/7/flip_v = true
-0:0/7/transpose = true
-
-[sub_resource type="TileSet" id="1"]
-tile_size = Vector2i(480, 352)
-sources/0 = SubResource("TileSetAtlasSource_ooxdy")
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -46,11 +17,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("1")
-rendering_quadrant_size = 64
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0)
+[node name="MenuBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1")
+stretch_mode = 1
 
 [node name="BlackOverlay" type="ColorRect" parent="."]
 layout_mode = 0
