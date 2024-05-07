@@ -479,7 +479,10 @@ func _ready():
 
 func _process(delta: float):
 	if not self.in_menu:
-		self._update_preview()
+		# Update the preview if the mouse has moved to a different cell
+		self._update_mouse_cellv()
+		if mouse_cellv != preview_cellv:
+			self._update_preview()
 	else:
 		self._clear_preview()
 
@@ -681,7 +684,6 @@ func _select_building(id: int) -> void:
 	self.selected_building = id
 	if not building.is_tile:
 		$PreviewBuilding.texture = building.texture
-	_clear_preview()
 	_update_preview()
 
 
@@ -793,11 +795,6 @@ func modulate_building(building: Building, id: int, road_connection) -> void:
 
 
 func _update_preview() -> void:
-	# Only update the preview if the mouse has moved to a different cell
-	self._update_mouse_cellv()
-	if mouse_cellv == preview_cellv:
-		return
-
 	self._clear_preview()
 	preview_node.visible = true
 	preview_cellv = mouse_cellv
