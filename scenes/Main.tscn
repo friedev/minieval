@@ -29,7 +29,13 @@ emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(0, 1, 0)
 spread = 180.0
+initial_velocity_min = 32.0
+initial_velocity_max = 32.0
 gravity = Vector3(0, 0, 0)
+damping_min = 16.0
+damping_max = 16.0
+scale_min = 3.0
+scale_max = 4.0
 scale_curve = SubResource("3")
 color = Color(0.8, 0.8, 0.8, 1)
 
