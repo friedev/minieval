@@ -381,6 +381,10 @@ const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
 
+const MOUSE_SPEED := 1000.0
+const MOUSE_SPEED_MIN := 0.25
+const MOUSE_ACCELERATION := 0.8
+
 const building_scene := preload("res://scenes/building.tscn")
 
 const turn_format := "%d Turns Left"
@@ -418,6 +422,7 @@ var mouse_cellv = null
 var preview_cellv = null
 var modulated_buildings := []
 var in_menu := false
+var mouse_direction := Vector2.ZERO
 
 @onready var main := self.get_node("/root/Main")
 
@@ -478,6 +483,19 @@ func _ready():
 
 
 func _process(delta: float):
+	var mouse_input_direction := Vector2(
+		Input.get_axis(&"mouse_left", &"mouse_right"),
+		Input.get_axis(&"mouse_up", &"mouse_down")
+	)
+	if mouse_input_direction.is_zero_approx():
+		mouse_direction = Vector2.ZERO
+	elif mouse_direction.is_zero_approx() or mouse_direction.angle_to(mouse_input_direction) > PI / 2:
+		mouse_direction = mouse_input_direction * MOUSE_SPEED_MIN
+	else:
+		mouse_direction = mouse_direction.lerp(mouse_input_direction, MOUSE_ACCELERATION * delta)
+	var mouse_velocity := mouse_direction * MOUSE_SPEED * delta
+	get_viewport().warp_mouse(get_viewport().get_mouse_position() + mouse_velocity)
+
 	if not self.in_menu:
 		# Update the preview if the mouse has moved to a different cell
 		self._update_mouse_cellv()
@@ -487,14 +505,15 @@ func _process(delta: float):
 		self._clear_preview()
 
 
+func select_cell(cellv: Vector2i) -> void:
+	get_viewport().warp_mouse(cellv_to_screen_position(cellv))
+
+
 func _unhandled_input(event: InputEvent):
 	if self.in_menu:
 		return
 
-	if (
-		event is InputEventMouseButton
-		or event is InputEventMouseMotion
-	) and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if event.is_action_pressed(&"place_building"):
 		self._clear_preview()
 
 		var building: Building = BUILDINGS[self.selected_building]
@@ -519,6 +538,14 @@ func _unhandled_input(event: InputEvent):
 		self.undo()
 	elif event.is_action_pressed(&"redo"):
 		self.redo()
+	elif event.is_action_pressed(&"select_cell_left"):
+		select_cell(mouse_cellv + Vector2i.LEFT)
+	elif event.is_action_pressed(&"select_cell_right"):
+		select_cell(mouse_cellv + Vector2i.RIGHT)
+	elif event.is_action_pressed(&"select_cell_up"):
+		select_cell(mouse_cellv + Vector2i.UP)
+	elif event.is_action_pressed(&"select_cell_down"):
+		select_cell(mouse_cellv + Vector2i.DOWN)
 
 
 func undo() -> void:
