@@ -1,4 +1,4 @@
-extends Container
+class_name Tutorial extends Container
 
 
 @onready var main := self.get_node("/root/Main")

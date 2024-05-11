@@ -1,4 +1,4 @@
-extends Container
+class_name Options extends Container
 
 signal menu_closed
 

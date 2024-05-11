@@ -1,4 +1,4 @@
-extends TileMap
+class_name CityMap extends TileMap
 
 
 class Building:

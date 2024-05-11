@@ -1,4 +1,4 @@
-extends Camera2D
+class_name Camera extends Camera2D
 
 @onready var default_zoom := self.zoom
 

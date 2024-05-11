@@ -1,4 +1,4 @@
-extends AudioStreamPlayer
+class_name TitleMusic extends AudioStreamPlayer
 
 
 func _ready() -> void:

@@ -1,4 +1,4 @@
-extends TileMap
+class_name Palette extends TileMap
 
 signal palette_selection(id)
 

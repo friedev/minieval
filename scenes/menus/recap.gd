@@ -1,4 +1,4 @@
-extends Control
+class_name Recap extends Control
 
 const title_scene := "res://scenes/title.tscn"
 
