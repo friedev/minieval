@@ -9,13 +9,6 @@ class_name PauseMenu extends Control
 @export var tutorial: TutorialMenu
 @export var black_overlay: ColorRect
 
-@export_group("Internal Nodes")
-@export var exit_game_button: Button
-
-
-func _ready() -> void:
-	self.exit_game_button.visible = OS.get_name() != "HTML5"
-
 
 # Make pause menu appear when user presses pause (Escape)
 func _input(event: InputEvent) -> void:
@@ -25,10 +18,6 @@ func _input(event: InputEvent) -> void:
 
 func _on_ResumeButton_pressed() -> void:
 	self.hide()
-
-
-func _on_ExitGameButton_pressed() -> void:
-	self.get_tree().quit()
 
 
 func _on_ReturnToTitleButton_pressed() -> void:

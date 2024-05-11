@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_vkchd"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
-[node name="PauseMenu" type="CenterContainer" node_paths=PackedStringArray("exit_game_button")]
+[node name="PauseMenu" type="CenterContainer"]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,6 @@ anchor_bottom = 1.0
 theme = ExtResource("7")
 script = ExtResource("2")
 title_scene = "res://scenes/title_screen.tscn"
-exit_game_button = NodePath("Menu/MarginContainer/VBoxContainer/VBoxContainer/ExitGameButton")
 
 [node name="Menu" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -59,14 +58,8 @@ layout_mode = 2
 theme = ExtResource("7")
 text = "Title Screen"
 
-[node name="ExitGameButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("7")
-text = "Exit Game"
-
 [connection signal="visibility_changed" from="." to="." method="_on_Pause_visibility_changed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TitleButton" to="." method="_on_ReturnToTitleButton_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]
