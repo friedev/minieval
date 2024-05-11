@@ -112,7 +112,7 @@ class Building:
 		return adjacent_cells
 
 
-enum {
+enum BuildingType {
 	EMPTY = 0,
 	SELECTION = 1,
 	ROAD = 2,
@@ -129,8 +129,8 @@ enum {
 
 
 var BUILDINGS := {
-	EMPTY: null,
-	ROAD: Building.new(
+	BuildingType.EMPTY: null,
+	BuildingType.ROAD: Building.new(
 		"Road", # name
 		true, # is_tile
 		true, # groupable
@@ -144,7 +144,7 @@ var BUILDINGS := {
 		{}, # gp_interactions
 		{} # vp_interactions
 	),
-	HOUSE: Building.new(
+	BuildingType.HOUSE: Building.new(
 		"House", # name
 		false, # is_tile
 		false, # groupable
@@ -156,13 +156,13 @@ var BUILDINGS := {
 			[1],
 		],
 		{ # gp_interactions
-			SHOP: 2,
+			BuildingType.SHOP: 2,
 		},
 		{ # vp_interactions
-			STATUE: 2,
+			BuildingType.STATUE: 2,
 		}
 	),
-	SHOP: Building.new(
+	BuildingType.SHOP: Building.new(
 		"Shop", # name
 		false, # is_tile
 		false, # groupable
@@ -174,16 +174,16 @@ var BUILDINGS := {
 			[1, 1],
 		],
 		{ # gp_interactions
-			HOUSE: 1,
-			SHOP: -5,
-			MANSION: 2,
-			FORGE: 3,
+			BuildingType.HOUSE: 1,
+			BuildingType.SHOP: -5,
+			BuildingType.MANSION: 2,
+			BuildingType.FORGE: 3,
 		},
 		{ # vp_interactions
-			CATHEDRAL: -5,
+			BuildingType.CATHEDRAL: -5,
 		}
 	),
-	MANSION: Building.new(
+	BuildingType.MANSION: Building.new(
 		"Mansion", # name
 		false, # is_tile
 		false, # groupable
@@ -195,13 +195,13 @@ var BUILDINGS := {
 			[1, 1],
 			[1, 0],
 		], {
-			SHOP: 4,
-			MANSION: -2,
+			BuildingType.SHOP: 4,
+			BuildingType.MANSION: -2,
 		}, {
-			STATUE: 4,
+			BuildingType.STATUE: 4,
 		}
 	),
-	FORGE: Building.new(
+	BuildingType.FORGE: Building.new(
 		"Forge", # name
 		false, # is_tile
 		false, # groupable
@@ -214,15 +214,15 @@ var BUILDINGS := {
 			[1, 1],
 		],
 		{ # gp_interactions
-			SHOP: 3,
-			FORGE: -5,
+			BuildingType.SHOP: 3,
+			BuildingType.FORGE: -5,
 		},
 		{ # vp_interactions
-			CATHEDRAL: -5,
-			KEEP: 5,
+			BuildingType.CATHEDRAL: -5,
+			BuildingType.KEEP: 5,
 		}
 	),
-	STATUE: Building.new(
+	BuildingType.STATUE: Building.new(
 		"Statue", # name
 		false, # is_tile
 		false, # groupable
@@ -236,13 +236,13 @@ var BUILDINGS := {
 		],
 		{}, # gp_interactions
 		{ # vp_interactions
-			HOUSE: 1,
-			MANSION: 2,
-			STATUE: -5,
-			CATHEDRAL: 5,
+			BuildingType.HOUSE: 1,
+			BuildingType.MANSION: 2,
+			BuildingType.STATUE: -5,
+			BuildingType.CATHEDRAL: 5,
 		}
 	),
-	CATHEDRAL: Building.new(
+	BuildingType.CATHEDRAL: Building.new(
 		"Cathedral", # name
 		false, # is_tile
 		false, # groupable
@@ -256,17 +256,17 @@ var BUILDINGS := {
 			[0, 1, 0, 0],
 		],
 		{ # gp_interactions
-			FORGE: 10,  # Forge
-			CATHEDRAL: -20, # Cathedral
+			BuildingType.FORGE: 10,  # Forge
+			BuildingType.CATHEDRAL: -20, # Cathedral
 		},
 		{ # vp_interactions
-			SHOP: -10,
-			FORGE: -10,
-			STATUE: 10,
-			CATHEDRAL: -20,
+			BuildingType.SHOP: -10,
+			BuildingType.FORGE: -10,
+			BuildingType.STATUE: 10,
+			BuildingType.CATHEDRAL: -20,
 		}
 	),
-	KEEP: Building.new(
+	BuildingType.KEEP: Building.new(
 		"Keep", # name
 		false, # is_tile
 		false, # groupable
@@ -281,16 +281,16 @@ var BUILDINGS := {
 			[1, 1, 1],
 		],
 		{ # gp_interactions
-			FORGE: 10,
-			KEEP: -40,
+			BuildingType.FORGE: 10,
+			BuildingType.KEEP: -40,
 		},
 		{ # vp_interactions
-			FORGE: 10,
-			KEEP: -20,
-			TOWER: 20,
+			BuildingType.FORGE: 10,
+			BuildingType.KEEP: -20,
+			BuildingType.TOWER: 20,
 		}
 	),
-	TOWER: Building.new(
+	BuildingType.TOWER: Building.new(
 		"Tower", # name
 		false, # is_tile
 		false, # groupable
@@ -304,14 +304,14 @@ var BUILDINGS := {
 			[1],
 		],
 		{ # gp_interactions
-			FORGE: 5,
+			BuildingType.FORGE: 5,
 		},
 		{ # vp_interactions
-			KEEP: 20,
-			TOWER: -10,
+			BuildingType.KEEP: 20,
+			BuildingType.TOWER: -10,
 		}
 	),
-	PYRAMID: Building.new(
+	BuildingType.PYRAMID: Building.new(
 		"Pyramid", # name
 		false, # is_tile
 		false, # groupable
@@ -326,26 +326,26 @@ var BUILDINGS := {
 			[1, 1, 1, 1, 1, 1, 1, 1],
 		],
 		{ # gp_interactions
-			HOUSE: -5,
-			SHOP: -5,
-			MANSION: -5,
-			FORGE: -5,
-			STATUE: -5,
-			CATHEDRAL: -5,
-			KEEP: -5,
-			TOWER: -5,
-			PYRAMID: -5,
+			BuildingType.HOUSE: -5,
+			BuildingType.SHOP: -5,
+			BuildingType.MANSION: -5,
+			BuildingType.FORGE: -5,
+			BuildingType.STATUE: -5,
+			BuildingType.CATHEDRAL: -5,
+			BuildingType.KEEP: -5,
+			BuildingType.TOWER: -5,
+			BuildingType.PYRAMID: -5,
 		},
 		{ # vp_interactions
-			HOUSE: 5,
-			SHOP: 5,
-			MANSION: 5,
-			FORGE: 5,
-			STATUE: 5,
-			CATHEDRAL: 5,
-			KEEP: 5,
-			TOWER: 5,
-			PYRAMID: 5,
+			BuildingType.HOUSE: 5,
+			BuildingType.SHOP: 5,
+			BuildingType.MANSION: 5,
+			BuildingType.FORGE: 5,
+			BuildingType.STATUE: 5,
+			BuildingType.CATHEDRAL: 5,
+			BuildingType.KEEP: 5,
+			BuildingType.TOWER: 5,
+			BuildingType.PYRAMID: 5,
 		}
 	),
 }
@@ -632,7 +632,7 @@ func set_building(coords: Vector2i, tile: int) -> void:
 	var terrain_cells: Array[Vector2i] = []
 	super.set_cell(0, coords, tile, Vector2i.ZERO)
 	for orthogonal in self.get_orthogonal(coords):
-		if self.get_type(self.get_building(orthogonal)) == self.ROAD:
+		if self.get_type(self.get_building(orthogonal)) == BuildingType.ROAD:
 			# Delete and recreate surrounding roads to force them to refresh
 			# Only calling set_cells_terrain_connect is insufficient
 			super.set_cell(0, orthogonal, tile, Vector2i.ZERO)
@@ -861,7 +861,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for coords in building.get_area_cells(building_coords):
-		self.preview_area.set_cell(0, coords, self.SELECTION, Vector2i.ZERO)
+		self.preview_area.set_cell(0, coords, BuildingType.SELECTION, Vector2i.ZERO)
 		var id := self.get_building(coords)
 		self.modulate_building(building, id, false)
 

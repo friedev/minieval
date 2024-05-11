@@ -31,7 +31,7 @@ var last_tooltip_id := -1
 
 
 func _ready():
-	self.building_ids.remove_at(self.city_map.EMPTY) # or erase()?
+	self.building_ids.remove_at(CityMap.BuildingType.EMPTY) # or erase()?
 	self.building_ids.sort()
 
 
@@ -80,13 +80,13 @@ func push_interaction(building_str: String, gp: int, vp: int) -> String:
 # Returns array of plaintext strings
 func push_all_interactions(id: int) -> Array:
 	var building = self.buildings[id]
-	if id == self.city_map.PYRAMID:
+	if id == CityMap.BuildingType.PYRAMID:
 		# Hack to avoid printing a line for every pyramid interaction
 		return [
 			self.push_interaction(
 				"ANY",
-				building.gp_interactions[self.city_map.HOUSE],
-				building.vp_interactions[self.city_map.HOUSE]
+				building.gp_interactions[CityMap.BuildingType.HOUSE],
+				building.vp_interactions[CityMap.BuildingType.HOUSE]
 			)
 		]
 
@@ -158,7 +158,7 @@ func _input(event: InputEvent):
 
 	# Hack to map nice road icon (21) to actual road ID (2)
 	if id == 21:
-		id = self.city_map.ROAD
+		id = CityMap.BuildingType.ROAD
 
 	if hover:
 		tooltip.show()
@@ -183,5 +183,5 @@ func _input(event: InputEvent):
 			)
 	else:
 		self.selection.clear()
-		self.selection.set_cell(0, coords, self.city_map.SELECTION)
+		self.selection.set_cell(0, coords, CityMap.BuildingType.SELECTION)
 		self.building_selected.emit(id)
