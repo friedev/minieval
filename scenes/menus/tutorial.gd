@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func open_tutorial() -> void:
 	self.pause.set_process_input(false)
-	self.call_deferred("show")
+	self.show.call_deferred()
 
 
 func close_tutorial() -> void:

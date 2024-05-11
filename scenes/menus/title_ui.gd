@@ -10,7 +10,7 @@ const main_scene := "res://scenes/main.tscn"
 
 func _ready() -> void:
 	self.exit_game_button.visible = OS.get_name() != "HTML5"
-	self.call_deferred("show")
+	self.show.call_deferred()
 
 
 func _on_play_button_pressed() -> void:

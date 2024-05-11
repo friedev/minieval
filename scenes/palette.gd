@@ -174,4 +174,4 @@ func _input(event: InputEvent):
 	else:
 		self.selection.clear()
 		self.selection.set_cell(0, cellv, self.tile_map.SELECTION)
-		self.emit_signal("palette_selection", id)
+		self.palette_selection.emit(id)
