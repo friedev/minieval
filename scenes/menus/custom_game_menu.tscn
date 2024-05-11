@@ -16,6 +16,7 @@ offset_right = 220.5
 offset_bottom = 162.5
 theme = ExtResource("1")
 script = ExtResource("7")
+main_scene = "res://scenes/main.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

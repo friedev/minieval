@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("7")
 script = ExtResource("2")
+title_scene = "res://scenes/title_screen.tscn"
 exit_game_button = NodePath("Menu/MarginContainer/VBoxContainer/VBoxContainer/ExitGameButton")
 
 [node name="Menu" type="PanelContainer" parent="."]

@@ -2,7 +2,7 @@ class_name CustomGameMenu extends Control
 
 signal menu_closed
 
-const main_scene := "res://scenes/main.tscn"
+@export_file("*.tscn") var main_scene: String
 
 @onready var turn_limit := %TurnLimitLineEdit
 @onready var game_size := %MapSizeLineEdit

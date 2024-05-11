@@ -1,6 +1,6 @@
 class_name RecapMenu extends Control
 
-@export var title_scene: PackedScene
+@export_file("*.tscn") var title_scene: String
 
 @export_group("External Nodes")
 @export var city_map: CityMap
@@ -43,4 +43,4 @@ func _on_UndoButton_pressed() -> void:
 
 
 func _on_TitleScreenButton_pressed() -> void:
-	self.get_tree().change_scene_to_packed(self.title_scene)
+	self.get_tree().change_scene_to_file(self.title_scene)

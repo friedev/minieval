@@ -3,7 +3,7 @@ class_name MainMenu extends Control
 signal custom_game_menu_opened
 signal options_menu_opened
 
-const main_scene := "res://scenes/main.tscn"
+@export_file("*.tscn") var main_scene: String
 
 @onready var exit_game_button := %ExitGameButton
 

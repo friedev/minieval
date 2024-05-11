@@ -1,5 +1,7 @@
 class_name PauseMenu extends Control
 
+@export_file("*.tscn") var title_scene: String
+
 @export_group("External Nodes")
 @export var city_map: CityMap
 @export var recap: RecapMenu
@@ -9,8 +11,6 @@ class_name PauseMenu extends Control
 
 @export_group("Internal Nodes")
 @export var exit_game_button: Button
-
-const title_scene := "res://scenes/title_screen.tscn"
 
 
 func _ready() -> void:
