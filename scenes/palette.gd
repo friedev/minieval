@@ -11,23 +11,23 @@ const VP_COLOR := Color(0.0, 0.75, 1.0)
 const POSITIVE_COLOR := Color(0.0, 1.0, 0.0)
 const NEGATIVE_COLOR := Color(1.0, 0.0, 0.0)
 
-@onready var tooltip := get_node("../Tooltip")
-@onready var name_label := tooltip.get_node("VBoxContainer/NameLabel")
-@onready var gp_label := tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
-@onready var vp_label := tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
-@onready var interactions_label: RichTextLabel = tooltip.get_node("VBoxContainer/InteractionsLabel")
-@onready var selection := get_node("../Selection")
-@onready var tile_map := get_node("/root/Main/TileMap")
-@onready var buildings: Dictionary = tile_map.BUILDINGS
-@onready var building_ids: Array = tile_map.BUILDINGS.keys()
+@onready var tooltip := self.get_node("../Tooltip")
+@onready var name_label := self.tooltip.get_node("VBoxContainer/NameLabel")
+@onready var gp_label := self.tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
+@onready var vp_label := self.tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
+@onready var interactions_label: RichTextLabel = self.tooltip.get_node("VBoxContainer/InteractionsLabel")
+@onready var selection := self.get_node("../Selection")
+@onready var tile_map := self.get_node("/root/Main/TileMap")
+@onready var buildings: Dictionary = self.tile_map.BUILDINGS
+@onready var building_ids: Array = self.tile_map.BUILDINGS.keys()
 
-@onready var tooltip_position: Vector2 = tooltip.position
+@onready var tooltip_position: Vector2 = self.tooltip.position
 var last_tooltip_id := -1
 
 
 func _ready():
-	building_ids.remove_at(tile_map.EMPTY) # or erase()?
-	building_ids.sort()
+	self.building_ids.remove_at(self.tile_map.EMPTY) # or erase()?
+	self.building_ids.sort()
 
 
 # Returns plaintext string
@@ -35,21 +35,21 @@ func push_interaction_value(value: int, type: String, type_color: Color) -> Stri
 	var length := 0
 	var string: String
 	if value > 0:
-		interactions_label.push_color(POSITIVE_COLOR)
+		self.interactions_label.push_color(self.POSITIVE_COLOR)
 		string = "+%d" % value
 	else:
-		interactions_label.push_color(NEGATIVE_COLOR)
+		self.interactions_label.push_color(self.NEGATIVE_COLOR)
 		string = "%d" % value
-	interactions_label.add_text(string)
-	interactions_label.pop()
+	self.interactions_label.add_text(string)
+	self.interactions_label.pop()
 
-	interactions_label.add_text(" ")
+	self.interactions_label.add_text(" ")
 	string += " "
 
-	interactions_label.push_color(type_color)
-	interactions_label.add_text(type)
+	self.interactions_label.push_color(type_color)
+	self.interactions_label.add_text(type)
 	string += type
-	interactions_label.pop()
+	self.interactions_label.pop()
 
 	return string
 
@@ -57,37 +57,37 @@ func push_interaction_value(value: int, type: String, type_color: Color) -> Stri
 # Returns plaintext string
 func push_interaction(building_str: String, gp: int, vp: int) -> String:
 	var string: String = "%s: " % building_str
-	interactions_label.add_text(string)
+	self.interactions_label.add_text(string)
 
 	if gp != 0:
-		string += push_interaction_value(gp, GP_STR, GP_COLOR)
+		string += self.push_interaction_value(gp, self.GP_STR, self.GP_COLOR)
 
 	if vp != 0:
 		if gp != 0:
-			interactions_label.add_text(", ")
+			self.interactions_label.add_text(", ")
 			string += ", "
 
-		string += push_interaction_value(vp, VP_STR, VP_COLOR)
+		string += self.push_interaction_value(vp, self.VP_STR, self.VP_COLOR)
 
 	return string
 
 
 # Returns array of plaintext strings
 func push_all_interactions(id: int) -> Array:
-	var building = buildings[id]
-	if id == tile_map.PYRAMID:
+	var building = self.buildings[id]
+	if id == self.tile_map.PYRAMID:
 		# Hack to avoid printing a line for every pyramid interaction
 		return [
-			push_interaction(
+			self.push_interaction(
 				"ANY",
-				building.gp_interactions[tile_map.HOUSE],
-				building.vp_interactions[tile_map.HOUSE]
+				building.gp_interactions[self.tile_map.HOUSE],
+				building.vp_interactions[self.tile_map.HOUSE]
 			)
 		]
 
 	var first := true
 	var lines := []
-	for other_id in building_ids:
+	for other_id in self.building_ids:
 		var gp: int = building.gp_interactions.get(other_id, 0)
 		var vp: int = building.vp_interactions.get(other_id, 0)
 		if gp == 0 and vp == 0:
@@ -96,36 +96,36 @@ func push_all_interactions(id: int) -> Array:
 		if first:
 			first = false
 		else:
-			interactions_label.newline()
+			self.interactions_label.newline()
 
-		lines.append(push_interaction(buildings[other_id].name, gp, vp))
+		lines.append(self.push_interaction(self.buildings[other_id].name, gp, vp))
 	return lines
 
 
 func max_line_width(lines: Array) -> float:
 	var max_width := 0.0
 	for line in lines:
-		var width: float = interactions_label.get_theme_font("normal_font").get_string_size(line).x
+		var width: float = self.interactions_label.get_theme_font("normal_font").get_string_size(line).x
 		if width > max_width:
 			max_width = width
 	return max_width
 
 
 func update_tooltip(id: int) -> void:
-	var building = buildings[id]
-	name_label.text = building.name
-	gp_label.text = str(-building.gp)
-	vp_label.text = str(building.vp)
-	interactions_label.clear()
-	var lines := push_all_interactions(id)
+	var building = self.buildings[id]
+	self.name_label.text = building.name
+	self.gp_label.text = str(-building.gp)
+	self.vp_label.text = str(building.vp)
+	self.interactions_label.clear()
+	var lines := self.push_all_interactions(id)
 	if len(lines) > 0:
-		interactions_label.show()
+		self.interactions_label.show()
 		# Dynamically resize interactions_label
 		# RichTextLabel does not have fit_content_width or get_content_width()
 		# Instead, determine the length of the string (in plain text) in the chosen font
-		interactions_label.custom_minimum_size.x = max_line_width(lines)
+		self.interactions_label.custom_minimum_size.x = self.max_line_width(lines)
 	else:
-		interactions_label.hide()
+		self.interactions_label.hide()
 
 
 func _input(event: InputEvent):
@@ -145,33 +145,33 @@ func _input(event: InputEvent):
 		return
 
 	var id := self.get_cell_source_id(0, cellv)
-	if id == INVALID_CELL:
-		tooltip.visible = false
+	if id == self.INVALID_CELL:
+		self.tooltip.visible = false
 		return
 
 	# Hack to map nice road icon (21) to actual road ID (2)
 	if id == 21:
-		id = tile_map.ROAD
+		id = self.tile_map.ROAD
 
 	if hover:
 		tooltip.show()
-		if id == last_tooltip_id:
+		if id == self.last_tooltip_id:
 			return
-		last_tooltip_id = id
-		update_tooltip(id)
+		self.last_tooltip_id = id
+		self.update_tooltip(id)
 
 		# Do this refresh twice because Godot doesn't wanna refresh it I guess
 		for _i in range(2):
 			# Hide and re-show the tooltip to force a layout refresh
 			# Shrink tooltip to size 0 to force fit-to-content
-			tooltip.hide()
-			tooltip.size = Vector2(0, 0)
-			tooltip.show()
+			self.tooltip.hide()
+			self.tooltip.size = Vector2(0, 0)
+			self.tooltip.show()
 
 			# Add the horizonal offset corresponding to the hovered tile
 			# Move the tooltip strictly above the palette
-			tooltip.position = tooltip_position + Vector2(cellv.x * 64, -tooltip.size.y + 32)
+			self.tooltip.position = self.tooltip_position + Vector2(cellv.x * 64, -self.tooltip.size.y + 32)
 	else:
-		selection.clear()
-		selection.set_cell(0, cellv, tile_map.SELECTION)
-		emit_signal("palette_selection", id)
+		self.selection.clear()
+		self.selection.set_cell(0, cellv, self.tile_map.SELECTION)
+		self.emit_signal("palette_selection", id)

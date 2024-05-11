@@ -40,4 +40,4 @@ func _on_UndoButton_pressed() -> void:
 
 
 func _on_TitleScreenButton_pressed() -> void:
-	self.get_tree().change_scene_to_file(title_scene)
+	self.get_tree().change_scene_to_file(self.title_scene)

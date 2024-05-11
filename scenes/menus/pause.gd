@@ -17,7 +17,7 @@ func _ready() -> void:
 
 # Make pause menu appear when user presses pause (Escape)
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"pause") && recap.visible == false:
+	if event.is_action_pressed(&"pause") && self.recap.visible == false:
 		self.visible = not self.visible
 
 
@@ -30,7 +30,7 @@ func _on_ExitGameButton_pressed() -> void:
 
 
 func _on_ReturnToTitleButton_pressed() -> void:
-	self.get_tree().change_scene_to_file(title_scene)
+	self.get_tree().change_scene_to_file(self.title_scene)
 
 
 func _on_OptionsButton_pressed() -> void:

@@ -10,16 +10,16 @@ const MUSIC_VOLUME := 5
 const SOUND_VOLUME := 5
 
 var endless := false
-var num_turns := NUM_TURNS
-var game_size := GAME_SIZE
+var num_turns := Global.NUM_TURNS
+var game_size := Global.GAME_SIZE
 var tutorial_seen := false
 
 # Options
-var speed := SPEED
-var music_volume := MUSIC_VOLUME
-var sound_volume := SOUND_VOLUME
+var speed := Global.SPEED
+var music_volume := Global.MUSIC_VOLUME
+var sound_volume := Global.SOUND_VOLUME
 
 
 func reset_game_parameters() -> void:
-	num_turns = NUM_TURNS
-	game_size = GAME_SIZE
+	Global.num_turns = Global.NUM_TURNS
+	Global.game_size = Global.GAME_SIZE

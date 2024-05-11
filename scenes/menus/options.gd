@@ -38,12 +38,12 @@ func _on_camera_speed_slider_value_changed(value: float) -> void:
 
 func _on_sound_volume_slider_value_changed(value: float) -> void:
 	Global.sound_volume = value
-	AudioServer.set_bus_volume_db(sound_bus, VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.sound_bus, self.VOLUME_VALUES[value])
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	Global.music_volume = value
-	AudioServer.set_bus_volume_db(music_bus, VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.music_bus, self.VOLUME_VALUES[value])
 
 
 func _on_fullscreen_check_box_toggled(button_pressed: bool) -> void:
