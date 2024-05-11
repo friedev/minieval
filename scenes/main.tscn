@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
-[ext_resource type="Script" path="res://scenes/tile_map.gd" id="2_2brww"]
+[ext_resource type="Script" path="res://scenes/city_map.gd" id="2_2brww"]
 [ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="3_dpoud"]
 [ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="4_hyuoe"]
 [ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="5_msfla"]
