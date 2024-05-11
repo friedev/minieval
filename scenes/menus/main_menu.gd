@@ -5,11 +5,12 @@ signal options_menu_opened
 
 @export_file("*.tscn") var main_scene: String
 
-@onready var exit_game_button := %ExitGameButton
+@export_group("Internal Nodes")
+@export var quit_button: Button
 
 
 func _ready() -> void:
-	self.exit_game_button.visible = OS.get_name() != "HTML5"
+	self.quit_button.visible = OS.get_name() != "HTML5"
 	self.show.call_deferred()
 
 
@@ -28,13 +29,13 @@ func _on_options_button_pressed() -> void:
 	self.options_menu_opened.emit()
 
 
-func _on_exit_game_button_pressed() -> void:
-	self.get_tree().quit()
-
-
 func _on_options_menu_closed() -> void:
 	self.show()
 
 
 func _on_custom_game_ui_menu_closed() -> void:
 	self.show()
+
+
+func _on_quit_button_pressed() -> void:
+	self.get_tree().quit()
