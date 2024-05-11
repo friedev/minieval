@@ -211,8 +211,7 @@ texture = ExtResource("9_4q2tn")
 position = Vector2(-11, -10.5)
 texture = ExtResource("10_a8lsb")
 
-[node name="Palette" parent="CanvasLayer" node_paths=PackedStringArray("city_map") instance=ExtResource("11_g2fyb")]
-city_map = NodePath("../../CityMap")
+[node name="Palette" parent="CanvasLayer" instance=ExtResource("11_g2fyb")]
 
 [node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3

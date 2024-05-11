@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://dixijkmqsq77x"]
+
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="1_5t248"]
+[ext_resource type="StyleBox" uid="uid://p6o4wre10qrn" path="res://ui/styles/stylebox_button.tres" id="2_2n6g0"]
+[ext_resource type="Script" path="res://scenes/building_tooltip.gd" id="3_p74uw"]
+[ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="4_rb56t"]
+[ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="5_vvoko"]
+
+[node name="BuildingTooltip" type="PanelContainer" node_paths=PackedStringArray("name_label", "gp_label", "vp_label", "interactions_label")]
+offset_right = 104.0
+offset_bottom = 100.0
+grow_vertical = 0
+theme = ExtResource("1_5t248")
+theme_override_styles/panel = ExtResource("2_2n6g0")
+script = ExtResource("3_p74uw")
+gp_str = "GP"
+gp_color = Color(1, 0.75, 0, 1)
+vp_str = "VP"
+vp_color = Color(0, 0.75, 1, 1)
+positive_color = Color(0, 1, 0, 1)
+negative_color = Color(1, 0, 0, 1)
+name_label = NodePath("VBoxContainer/NameLabel")
+gp_label = NodePath("VBoxContainer/GPContainer/GPLabel")
+vp_label = NodePath("VBoxContainer/VPContainer/VPLabel")
+interactions_label = NodePath("VBoxContainer/InteractionsLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_5t248")
+text = "<name>"
+
+[node name="GPContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GPIcon" type="TextureRect" parent="VBoxContainer/GPContainer"]
+layout_mode = 2
+texture = ExtResource("4_rb56t")
+
+[node name="GPLabel" type="Label" parent="VBoxContainer/GPContainer"]
+layout_mode = 2
+theme = ExtResource("1_5t248")
+text = "<gp>"
+
+[node name="VPContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VPIcon" type="TextureRect" parent="VBoxContainer/VPContainer"]
+layout_mode = 2
+texture = ExtResource("5_vvoko")
+
+[node name="VPLabel" type="Label" parent="VBoxContainer/VPContainer"]
+layout_mode = 2
+theme = ExtResource("1_5t248")
+text = "<vp>"
+
+[node name="InteractionsLabel" type="RichTextLabel" parent="VBoxContainer"]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+theme = ExtResource("1_5t248")
+fit_content = true
