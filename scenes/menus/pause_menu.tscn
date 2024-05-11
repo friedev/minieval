@@ -53,13 +53,13 @@ layout_mode = 2
 theme = ExtResource("7")
 text = "Tutorial"
 
-[node name="TitleButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("7")
-text = "Title Screen"
+text = "Main Menu"
 
 [connection signal="visibility_changed" from="." to="." method="_on_Pause_visibility_changed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TitleButton" to="." method="_on_ReturnToTitleButton_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

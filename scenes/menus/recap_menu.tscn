@@ -60,7 +60,7 @@ offset_bottom = 651.0
 theme = ExtResource("5")
 text = "Freeplay"
 
-[node name="TitleScreenButton" type="Button" parent="."]
+[node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
@@ -69,11 +69,11 @@ offset_top = 625.0
 offset_right = 216.0
 offset_bottom = 651.0
 theme = ExtResource("5")
-text = "Title Screen"
+text = "Main Menu"
 
 [node name="EndGameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7")
 
 [connection signal="pressed" from="UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="FreeplayButton" to="." method="_on_FreeplayButton_pressed"]
-[connection signal="pressed" from="TitleScreenButton" to="." method="_on_TitleScreenButton_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

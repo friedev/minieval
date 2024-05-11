@@ -42,5 +42,5 @@ func _on_UndoButton_pressed() -> void:
 	self.city_map.in_menu = false
 
 
-func _on_TitleScreenButton_pressed() -> void:
+func _on_MainMenuButton_pressed() -> void:
 	self.get_tree().change_scene_to_file(self.title_scene)

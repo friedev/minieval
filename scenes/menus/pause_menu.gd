@@ -20,7 +20,7 @@ func _on_ResumeButton_pressed() -> void:
 	self.hide()
 
 
-func _on_ReturnToTitleButton_pressed() -> void:
+func _on_MainMenuButton_pressed() -> void:
 	self.get_tree().change_scene_to_file(self.title_scene)
 
 
