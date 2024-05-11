@@ -1,32 +1,37 @@
-class_name Palette extends TileMap
+class_name Palette extends Control
 
 signal palette_selection(id)
 
 const INVALID_BUILDING := -1
 
-const GP_STR := "GP"
-const GP_COLOR := Color(1.0, 0.75, 0.0)
-const VP_STR := "VP"
-const VP_COLOR := Color(0.0, 0.75, 1.0)
-const POSITIVE_COLOR := Color(0.0, 1.0, 0.0)
-const NEGATIVE_COLOR := Color(1.0, 0.0, 0.0)
+@export var gp_str: String
+@export var gp_color: Color
+@export var vp_str: String
+@export var vp_color: Color
+@export var positive_color: Color
+@export var negative_color: Color
 
-@onready var tooltip := self.get_node("../Tooltip")
-@onready var name_label := self.tooltip.get_node("VBoxContainer/NameLabel")
-@onready var gp_label := self.tooltip.get_node("VBoxContainer/GPContainer/GPLabel")
-@onready var vp_label := self.tooltip.get_node("VBoxContainer/VPContainer/VPLabel")
-@onready var interactions_label: RichTextLabel = self.tooltip.get_node("VBoxContainer/InteractionsLabel")
-@onready var selection := self.get_node("../Selection")
-@onready var tile_map := self.get_node("/root/Main/TileMap")
-@onready var buildings: Dictionary = self.tile_map.BUILDINGS
-@onready var building_ids: Array = self.tile_map.BUILDINGS.keys()
+@export_group("External Nodes")
+@export var city_map: CityMap
+
+@export_group("Internal Nodes")
+@export var tile_map: TileMap
+@export var tooltip: Control
+@export var name_label: Label
+@export var gp_label: Label
+@export var vp_label: Label
+@export var interactions_label: RichTextLabel
+@export var selection: TileMap
+
+@onready var buildings: Dictionary = self.city_map.BUILDINGS
+@onready var building_ids: Array = self.city_map.BUILDINGS.keys()
 
 @onready var tooltip_position: Vector2 = self.tooltip.position
 var last_tooltip_id := -1
 
 
 func _ready():
-	self.building_ids.remove_at(self.tile_map.EMPTY) # or erase()?
+	self.building_ids.remove_at(self.city_map.EMPTY) # or erase()?
 	self.building_ids.sort()
 
 
@@ -35,10 +40,10 @@ func push_interaction_value(value: int, type: String, type_color: Color) -> Stri
 	var length := 0
 	var string: String
 	if value > 0:
-		self.interactions_label.push_color(self.POSITIVE_COLOR)
+		self.interactions_label.push_color(self.positive_color)
 		string = "+%d" % value
 	else:
-		self.interactions_label.push_color(self.NEGATIVE_COLOR)
+		self.interactions_label.push_color(self.negative_color)
 		string = "%d" % value
 	self.interactions_label.add_text(string)
 	self.interactions_label.pop()
@@ -60,14 +65,14 @@ func push_interaction(building_str: String, gp: int, vp: int) -> String:
 	self.interactions_label.add_text(string)
 
 	if gp != 0:
-		string += self.push_interaction_value(gp, self.GP_STR, self.GP_COLOR)
+		string += self.push_interaction_value(gp, self.gp_str, self.gp_color)
 
 	if vp != 0:
 		if gp != 0:
 			self.interactions_label.add_text(", ")
 			string += ", "
 
-		string += self.push_interaction_value(vp, self.VP_STR, self.VP_COLOR)
+		string += self.push_interaction_value(vp, self.vp_str, self.vp_color)
 
 	return string
 
@@ -75,13 +80,13 @@ func push_interaction(building_str: String, gp: int, vp: int) -> String:
 # Returns array of plaintext strings
 func push_all_interactions(id: int) -> Array:
 	var building = self.buildings[id]
-	if id == self.tile_map.PYRAMID:
+	if id == self.city_map.PYRAMID:
 		# Hack to avoid printing a line for every pyramid interaction
 		return [
 			self.push_interaction(
 				"ANY",
-				building.gp_interactions[self.tile_map.HOUSE],
-				building.vp_interactions[self.tile_map.HOUSE]
+				building.gp_interactions[self.city_map.HOUSE],
+				building.vp_interactions[self.city_map.HOUSE]
 			)
 		]
 
@@ -144,14 +149,14 @@ func _input(event: InputEvent):
 	else:
 		return
 
-	var id := self.get_cell_source_id(0, coords)
+	var id := self.tile_map.get_cell_source_id(0, coords)
 	if id == self.INVALID_BUILDING:
 		self.tooltip.visible = false
 		return
 
 	# Hack to map nice road icon (21) to actual road ID (2)
 	if id == 21:
-		id = self.tile_map.ROAD
+		id = self.city_map.ROAD
 
 	if hover:
 		tooltip.show()
@@ -173,5 +178,5 @@ func _input(event: InputEvent):
 			self.tooltip.position = self.tooltip_position + Vector2(coords.x * 64, -self.tooltip.size.y + 32)
 	else:
 		self.selection.clear()
-		self.selection.set_cell(0, coords, self.tile_map.SELECTION)
+		self.selection.set_cell(0, coords, self.city_map.SELECTION)
 		self.palette_selection.emit(id)

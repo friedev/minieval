@@ -1,10 +1,9 @@
 class_name Tutorial extends Control
 
-
-@onready var main := self.get_node("/root/Main")
-@onready var tilemap := self.main.find_child("TileMap")
-@onready var pause := self.main.find_child("Pause")
-@onready var black_overlay := self.main.find_child("BlackOverlay")
+@export_group("External Nodes")
+@export var city_map: CityMap
+@export var pause: Pause
+@export var black_overlay: ColorRect
 
 
 func _ready() -> void:
@@ -33,8 +32,8 @@ func _input(event: InputEvent) -> void:
 func _on_Tutorial_visibility_changed() -> void:
 	if self.black_overlay != null:
 		self.black_overlay.visible = self.visible
-	if self.tilemap != null:
-		self.tilemap.in_menu = self.visible
+	if self.city_map != null:
+		self.city_map.in_menu = self.visible
 
 
 func _on_play_button_pressed() -> void:

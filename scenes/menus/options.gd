@@ -2,14 +2,20 @@ class_name Options extends Control
 
 signal menu_closed
 
-@onready var main := self.get_node("/root/Main")
+@export var music_bus_name: StringName
+@export var sound_bus_name: StringName
 
-@onready var camera_speed := %CameraSpeedSlider
-@onready var music_volume := %MusicVolumeSlider
-@onready var sound_volume := %SoundVolumeSlider
+@export_group("External Nodes")
+@export var city_map: CityMap
+@export var black_overlay: ColorRect
 
-@onready var music_bus := AudioServer.get_bus_index(&"Music")
-@onready var sound_bus := AudioServer.get_bus_index(&"Sound")
+@export_group("Internal Nodes")
+@export var camera_speed_slider: Slider
+@export var music_volume_slider: Slider
+@export var sound_volume_slider: Slider
+
+@onready var music_bus_index := AudioServer.get_bus_index(self.music_bus_name)
+@onready var sound_bus_index := AudioServer.get_bus_index(self.sound_bus_name)
 
 
 # TODO use linear_to_db
@@ -17,9 +23,9 @@ const VOLUME_VALUES := [-80, -40, -20, -10, -5, 0, 2, 4, 6, 8, 9]
 
 
 func _ready() -> void:
-	self.camera_speed.value = Global.speed
-	self.sound_volume.value = Global.sound_volume
-	self.music_volume.value = Global.music_volume
+	self.camera_speed_slider.value = Global.speed
+	self.sound_volume_slider.value = Global.sound_volume
+	self.music_volume_slider.value = Global.music_volume
 
 
 func _input(event: InputEvent) -> void:
@@ -38,12 +44,12 @@ func _on_camera_speed_slider_value_changed(value: float) -> void:
 
 func _on_sound_volume_slider_value_changed(value: float) -> void:
 	Global.sound_volume = value
-	AudioServer.set_bus_volume_db(self.sound_bus, self.VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.sound_bus_index, self.VOLUME_VALUES[value])
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	Global.music_volume = value
-	AudioServer.set_bus_volume_db(self.music_bus, self.VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.music_bus_index, self.VOLUME_VALUES[value])
 
 
 func _on_fullscreen_check_box_toggled(button_pressed: bool) -> void:
@@ -56,8 +62,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_visibility_changed() -> void:
-	if self.main != null:
-		var tilemap := self.main.find_child("TileMap")
-		var black_overlay := self.main.find_child("BlackOverlay")
-		tilemap.in_menu = self.visible
-		black_overlay.visible = self.visible
+	if self.city_map != null:
+		self.city_map.in_menu = self.visible
+	if self.black_overlay != null:
+		self.black_overlay.visible = self.visible

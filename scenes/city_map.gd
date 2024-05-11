@@ -376,24 +376,47 @@ const INVALID_BUILDING := -1
 const INVALID_COORDS := Vector2i(-1, -1)
 const INVALID_GROUP := -1
 
-const PREVIEW_COLOR := Color.WHITE
-const PREVIEW_COLOR_INVALID := Color(1, 0.25, 0.25, 0.5)
-const PREVIEW_COLOR_GOOD := Color(0.25, 1, 0.25, 1)
-const PREVIEW_COLOR_MIXED := Color(1, 1, 0.25, 1)
-const PREVIEW_COLOR_BAD := Color(1, 0.25, 0.25, 1)
-
 const TILE_SIZE := 8 # TODO determine from node properties
 const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
 
-const MOUSE_SPEED := 1000.0
-const MOUSE_SPEED_MIN := 0.25
-const MOUSE_ACCELERATION := 0.8
-
 const building_scene := preload("res://scenes/building.tscn")
 
 const turn_format := "%d Turns Left"
+
+@export_group("Preview Colors")
+@export var default_color: Color
+@export var invalid_color: Color
+@export var good_color: Color
+@export var mixed_color: Color
+@export var bad_color: Color
+
+@export_group("Mouse Input")
+@export var mouse_speed: float
+@export var mouse_speed_min: float
+@export var mouse_acceleration: float
+
+@export_group("External Nodes")
+@export var gp_label: Label
+@export var vp_label: Label
+@export var turn_label: Label
+@export var undo_label: Label
+@export var palette: Palette
+@export var recap: Recap
+@export var camera: Camera
+@export var preview_label: Label
+@export var preview_node: Control
+
+@export_group("Internal Nodes")
+@export var building_place_error_sound: AudioStreamPlayer
+@export var building_place_sound: AudioStreamPlayer
+@export var building_destroy_sound: AudioStreamPlayer
+@export var buildings_node: Node2D
+@export var preview_area: TileMap
+@export var preview_tile: TileMap
+@export var preview_building: Sprite2D
+@export var building_particles: GPUParticles2D
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
 var world_map: Array[Array] = []
@@ -430,25 +453,6 @@ var modulated_buildings: Array[int] = []
 var in_menu := false
 var mouse_direction := Vector2.ZERO
 
-@onready var main := self.get_node("/root/Main")
-
-@onready var ui_text_layer: CanvasLayer = self.main.find_child("UITextLayer")
-@onready var gp_label: Label = self.main.find_child("GPLabel")
-@onready var vp_label: Label = self.main.find_child("VPLabel")
-@onready var turn_label: Label = self.main.find_child("TurnLabel")
-@onready var undo_label: Label = self.main.find_child("UndoLabel")
-
-@onready var palette := self.main.find_child("Palette")
-@onready var palette_tilemap := self.palette.find_child("TileMap")
-
-@onready var recap := self.main.find_child("Recap")
-
-@onready var camera: Camera2D = self.main.find_child("Camera2D")
-@onready var preview_label: Label = self.main.find_child("PreviewLabel")
-@onready var preview_node: Control = self.main.find_child("PreviewNode")
-@onready var preview_building: Sprite2D = self.main.find_child("PreviewBuilding")
-
-@onready var building_particles: GPUParticles2D = $BuildingParticles
 @onready var particles_material: ParticleProcessMaterial = self.building_particles.process_material
 @onready var particles_amount := self.building_particles.amount
 @onready var particles_scale := self.particles_material.scale_min
@@ -460,7 +464,7 @@ func _ready() -> void:
 	self.turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
-	self.palette_tilemap.palette_selection.connect(self._select_building)
+	self.palette.palette_selection.connect(self._select_building)
 
 	self._update_mouse_coords()
 	self._update_labels()
@@ -500,13 +504,13 @@ func _process(delta: float) -> void:
 		self.mouse_direction.is_zero_approx()
 		or self.mouse_direction.angle_to(mouse_input_direction) > PI / 2
 	):
-		self.mouse_direction = mouse_input_direction * self.MOUSE_SPEED_MIN
+		self.mouse_direction = mouse_input_direction * self.mouse_speed_min
 	else:
 		self.mouse_direction = self.mouse_direction.lerp(
 			mouse_input_direction,
-			self.MOUSE_ACCELERATION * delta
+			self.mouse_acceleration * delta
 		)
-	var mouse_velocity := self.mouse_direction * self.MOUSE_SPEED * delta
+	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
 	self.get_viewport().warp_mouse(get_viewport().get_mouse_position() + mouse_velocity)
 
 	if not self.in_menu:
@@ -546,7 +550,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				self.recap.end_game()
 		else:
 			if event is InputEventMouseButton:
-				$BuildingPlaceErrorSound.play()
+				self.building_place_error_sound.play()
 	elif event.is_action_pressed(&"undo"):
 		self.undo()
 	elif event.is_action_pressed(&"redo"):
@@ -722,7 +726,7 @@ func _select_building(id: int) -> void:
 		return
 	self.selected_building = id
 	if not building.is_tile:
-		$PreviewBuilding.texture = building.texture
+		self.preview_building.texture = building.texture
 	self._update_preview()
 
 
@@ -746,7 +750,7 @@ func coords_to_screen_position(coords: Vector2i) -> Vector2:
 
 
 func get_building_sprite(id: int) -> Sprite2D:
-	return self.get_node(NodePath("Buildings/building_%d" % id)) as Sprite2D
+	return self.buildings_node.get_node("building_%d" % id) as Sprite2D
 
 
 # Returns the buildings connected by road to the given building
@@ -784,9 +788,9 @@ func _clear_preview() -> void:
 	if self.preview_coords != self.INVALID_COORDS:
 		#self.set_building(self.preview_coords, 0)
 		self.preview_coords = self.INVALID_COORDS
-		$Preview.clear()
-		$PreviewTile.clear()
-		$PreviewBuilding.visible = false
+		self.preview_area.clear()
+		self.preview_tile.clear()
+		self.preview_building.visible = false
 		self.preview_label.text = ""
 		self.preview_node.visible = false
 		for modulated_building in self.modulated_buildings:
@@ -816,20 +820,19 @@ func modulate_building(building: Building, id: int, road_connection: bool) -> vo
 		(gp_interaction > 0 and vp_interaction >= 0)
 		or (gp_interaction >= 0 and vp_interaction > 0)
 	):
-		modulation = self.PREVIEW_COLOR_GOOD
+		modulation = self.good_color
 	elif (
 		(gp_interaction < 0 and vp_interaction <= 0)
 		or (gp_interaction <= 0 and vp_interaction < 0)
 	):
-		modulation = self.PREVIEW_COLOR_BAD
+		modulation = self.bad_color
 	elif (
 		(gp_interaction < 0 and vp_interaction > 0)
 		or (gp_interaction > 0 and vp_interaction < 0)
 	):
-		modulation = self.PREVIEW_COLOR_MIXED
+		modulation = self.mixed_color
 	else:
-		# Don't apply modulation
-		return
+		modulation = self.default_color
 
 	self.get_building_sprite(id).modulate = modulation
 	self.modulated_buildings.append(id)
@@ -843,27 +846,27 @@ func _update_preview() -> void:
 	var building_coords: Vector2i = self.preview_coords - building.get_cell_offset()
 
 	# Move the building preview
-	$PreviewBuilding.position = self.map_to_local(building_coords)
+	self.preview_building.position = self.map_to_local(building_coords)
 	if building.is_tile:
-		$PreviewTile.set_cells_terrain_connect(0, [building_coords], 0, 0)
+		self.preview_tile.set_cells_terrain_connect(0, [building_coords], 0, 0)
 	else:
-		$PreviewBuilding.visible = true
+		self.preview_building.visible = true
 
 	# Shade preview building in red if the placement is blocked
 	if building.is_tile:
-		$PreviewTile.modulate = self.PREVIEW_COLOR
+		self.preview_tile.modulate = self.default_color
 		if self.get_building(building_coords) != 0:
-			$PreviewTile.modulate = self.PREVIEW_COLOR_INVALID
+			self.preview_tile.modulate = self.invalid_color
 	else:
-		$PreviewBuilding.modulate = self.PREVIEW_COLOR
+		self.preview_building.modulate = self.default_color
 		for coords in building.get_cells(building_coords):
 			if self.get_building(coords) != 0:
-				$PreviewBuilding.modulate = self.PREVIEW_COLOR_INVALID
+				self.preview_building.modulate = self.invalid_color
 				break
 
 	# Show area of current building with a 50% opacity white square
 	for coords in building.get_area_cells(building_coords):
-		$Preview.set_cell(0, coords, self.SELECTION, Vector2i.ZERO)
+		self.preview_area.set_cell(0, coords, self.SELECTION, Vector2i.ZERO)
 		var id := self.get_building(coords)
 		self.modulate_building(building, id, false)
 
@@ -888,9 +891,9 @@ func _update_preview() -> void:
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + self.gp < 0:
 		if building.is_tile:
-			$PreviewTile.modulate = self.PREVIEW_COLOR_INVALID
+			self.preview_tile.modulate = self.invalid_color
 		else:
-			$PreviewBuilding.modulate = self.PREVIEW_COLOR_INVALID
+			self.preview_building.modulate = self.invalid_color
 
 
 # Gets the total value that would result from placing the building with the
@@ -946,7 +949,7 @@ func format_value(value: Array[int]) -> Array[String]:
 
 
 func reset_particles() -> void:
-	$BuildingParticles.amount = self.particles_amount
+	self.building_particles.amount = self.particles_amount
 	self.particles_material.scale_min = self.particles_scale
 	self.particles_material.scale_max = self.particles_scale
 	self.particles_material.initial_velocity_min = self.particles_velocity
@@ -964,16 +967,16 @@ func emit_particles(coords: Vector2i, building: Building) -> void:
 	# TODO make particles a child of building scene and customize there instead
 	var size := Vector2i(len(building.cells[0]), len(building.cells))
 	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
-	$BuildingParticles.position = self.map_to_local(coords + size / 2)
+	self.building_particles.position = self.map_to_local(coords + size / 2)
 	self.particles_material.emission_sphere_radius = size.length() / 2
-	$BuildingParticles.amount *= multiplier
+	self.building_particles.amount *= multiplier
 	self.particles_material.scale_min *= multiplier
 	self.particles_material.scale_max *= multiplier
 	self.particles_material.initial_velocity_min *= multiplier
 	self.particles_material.initial_velocity_max *= multiplier
 	self.particles_material.linear_accel_min *= multiplier
 	self.particles_material.linear_accel_max *= multiplier
-	$BuildingParticles.restart()
+	self.building_particles.restart()
 
 
 func place_building(coords: Vector2i, id: int, force := false) -> Placement:
@@ -997,7 +1000,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 	if self.gp + gp_change < 0 and not force:
 		return null
 
-	$BuildingPlaceSound.play()
+	self.building_place_sound.play()
 	self.emit_particles(coords, building)
 
 	var neighbor_groups: Array[int] = []
@@ -1041,7 +1044,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 		instance.position = self.map_to_local(coords)
 		instance.texture = building.texture
 		instance.set_name("building_%d" % self.building_index)
-		$Buildings.add_child(instance)
+		self.buildings_node.add_child(instance)
 
 	self.set_building(coords, id)
 	return Placement.new(id, coords, gp_change, vp_change, neighbor_groups)
@@ -1071,7 +1074,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 		type = self.building_types[id]
 	var building: Building = self.BUILDINGS[type]
 
-	$BuildingDestroySound.play()
+	self.building_destroy_sound.play()
 	self.emit_particles(coords - building.get_cell_offset(), building)
 
 	var root := coords

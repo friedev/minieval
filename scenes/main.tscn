@@ -40,11 +40,36 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Main" type="Node"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "palette", "recap", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
 format = 2
 script = ExtResource("2_2brww")
+default_color = Color(1, 1, 1, 1)
+invalid_color = Color(1, 0.25, 0.25, 0.5)
+good_color = Color(0.25, 1, 0.25, 1)
+mixed_color = Color(1, 1, 0.25, 1)
+bad_color = Color(1, 0.25, 0.25, 1)
+mouse_speed = 1000.0
+mouse_speed_min = 0.25
+mouse_acceleration = 0.8
+gp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/GPLabel")
+vp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/VPLabel")
+turn_label = NodePath("../CanvasLayer/TurnLabel")
+undo_label = NodePath("../CanvasLayer/UndoLabel")
+palette = NodePath("../CanvasLayer/Palette")
+recap = NodePath("../CanvasLayer/Recap")
+camera = NodePath("../Camera2D")
+preview_label = NodePath("../CanvasLayer/PreviewNode/PreviewLabel")
+preview_node = NodePath("../CanvasLayer/PreviewNode")
+building_place_error_sound = NodePath("BuildingPlaceErrorSound")
+building_place_sound = NodePath("BuildingPlaceSound")
+building_destroy_sound = NodePath("BuildingDestroySound")
+buildings_node = NodePath("Buildings")
+preview_area = NodePath("PreviewArea")
+preview_tile = NodePath("PreviewTile")
+preview_building = NodePath("PreviewBuilding")
+building_particles = NodePath("BuildingParticles")
 
 [node name="BuildingPlaceErrorSound" type="AudioStreamPlayer" parent="TileMap"]
 stream = ExtResource("3_dpoud")
@@ -62,7 +87,7 @@ bus = &"Sound"
 [node name="Buildings" type="Node2D" parent="TileMap"]
 z_index = 2
 
-[node name="Preview" type="TileMap" parent="TileMap"]
+[node name="PreviewArea" type="TileMap" parent="TileMap"]
 modulate = Color(1, 1, 1, 0.12549)
 z_index = 3
 tile_set = ExtResource("1_fchkj")
@@ -187,7 +212,8 @@ texture = ExtResource("9_4q2tn")
 position = Vector2(-11, -10.5)
 texture = ExtResource("10_a8lsb")
 
-[node name="Palette" parent="CanvasLayer" instance=ExtResource("11_g2fyb")]
+[node name="Palette" parent="CanvasLayer" node_paths=PackedStringArray("city_map") instance=ExtResource("11_g2fyb")]
+city_map = NodePath("../../TileMap")
 
 [node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3
@@ -198,13 +224,27 @@ anchor_bottom = 1.0
 theme = ExtResource("8_kommm")
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Recap" parent="CanvasLayer" instance=ExtResource("12_2hgrf")]
+[node name="Recap" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "palette", "turn_label", "game_music") instance=ExtResource("12_2hgrf")]
 visible = false
+city_map = NodePath("../../TileMap")
+palette = NodePath("../Palette")
+turn_label = NodePath("../TurnLabel")
+game_music = NodePath("../../BackgroundMusic")
 
-[node name="Pause" parent="CanvasLayer" instance=ExtResource("13_hwilj")]
+[node name="Pause" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "recap", "options", "tutorial", "black_overlay") instance=ExtResource("13_hwilj")]
 visible = false
+city_map = NodePath("../../TileMap")
+recap = NodePath("../Recap")
+options = NodePath("../Options")
+tutorial = NodePath("../Tutorial")
+black_overlay = NodePath("../BlackOverlay")
 
-[node name="Options" parent="CanvasLayer" instance=ExtResource("14_xpfr0")]
+[node name="Options" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "black_overlay") instance=ExtResource("14_xpfr0")]
 visible = false
+city_map = NodePath("../../TileMap")
+black_overlay = NodePath("../BlackOverlay")
 
-[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("15_0mlr1")]
+[node name="Tutorial" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "pause", "black_overlay") instance=ExtResource("15_0mlr1")]
+city_map = NodePath("../../TileMap")
+pause = NodePath("../Pause")
+black_overlay = NodePath("../BlackOverlay")

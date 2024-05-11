@@ -1,12 +1,14 @@
 class_name Pause extends Control
 
-@onready var main := self.get_node("/root/Main")
-@onready var tilemap := self.main.find_child("TileMap")
-@onready var recap := self.main.find_child("Recap")
-@onready var options := self.main.find_child("Options")
-@onready var tutorial := self.main.find_child("Tutorial")
-@onready var black_overlay := self.main.find_child("BlackOverlay")
-@onready var exit_game_button := self.find_child("ExitGameButton")
+@export_group("External Nodes")
+@export var city_map: CityMap
+@export var recap: Recap
+@export var options: Options
+@export var tutorial: Tutorial
+@export var black_overlay: ColorRect
+
+@export_group("Internal Nodes")
+@export var exit_game_button: Button
 
 const title_scene := "res://scenes/title.tscn"
 
@@ -46,5 +48,5 @@ func _on_TutorialButton_pressed() -> void:
 func _on_Pause_visibility_changed() -> void:
 	if self.black_overlay != null:
 		self.black_overlay.visible = self.visible
-	if self.tilemap != null:
-		self.tilemap.in_menu = self.visible
+	if self.city_map != null:
+		self.city_map.in_menu = self.visible
