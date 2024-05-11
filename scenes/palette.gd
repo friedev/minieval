@@ -110,7 +110,9 @@ func push_all_interactions(id: int) -> Array:
 func max_line_width(lines: Array) -> float:
 	var max_width := 0.0
 	for line in lines:
-		var width: float = self.interactions_label.get_theme_font(&"normal_font").get_string_size(line).x
+		var width: float = (
+			self.interactions_label.get_theme_font(&"normal_font").get_string_size(line).x
+		)
 		if width > max_width:
 			max_width = width
 	return max_width
@@ -175,7 +177,10 @@ func _input(event: InputEvent):
 
 			# Add the horizonal offset corresponding to the hovered tile
 			# Move the tooltip strictly above the palette
-			self.tooltip.position = self.tooltip_position + Vector2(coords.x * 64, -self.tooltip.size.y + 32)
+			self.tooltip.position = self.tooltip_position + Vector2(
+				coords.x * 64,
+				-self.tooltip.size.y + 32
+			)
 	else:
 		self.selection.clear()
 		self.selection.set_cell(0, coords, self.city_map.SELECTION)
