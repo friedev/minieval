@@ -585,30 +585,29 @@ func redo() -> void:
 		self._update_labels()
 
 
-# Overridden from TileMap
-# Returns the building ID at the given position instead of the tile ID
-func get_cell(x: int, y: int) -> int:
-	if x < 0 or x >= len(self.world_map) or y < 0 or y >= len(self.world_map[x]):
+func is_in_bounds(coords: Vector2i) -> bool:
+	return (
+		coords.x >= 0
+		and coords.x < len(self.world_map)
+		and coords.y >= 0
+		and coords.y < len(self.world_map[coords.x])
+	)
+
+
+# Return the building ID at the given coords
+func get_coords(coords: Vector2i) -> int:
+	if not self.is_in_bounds(coords):
 		return self.INVALID_BUILDING
-	return self.world_map[x][y]
-
-
-# Overridden from TileMap
-func get_coords(position: Vector2i) -> int:
-	return self.get_cell(position.x, position.y)
+	return self.world_map[coords.x][coords.y]
 
 
 # Updates world map, building types, and building roots where applicable
 # Does NOT spawn a building sprite, update groups, or fully clean up destroyed
 # buildings
-func set_building(x: int, y: int, tile: int) -> void:
-	if x < 0 or x >= len(self.world_map) or y < 0 or y >= len(self.world_map[x]):
-		push_error("Tried to set a cell out of bounds")
+func set_buildingv(coords: Vector2i, tile: int) -> void:
+	assert(self.is_in_bounds(coords))
+	assert(tile in self.BUILDINGS or tile == self.INVALID_BUILDING)
 
-	if tile < 0 and tile >= len(self.BUILDINGS) and tile != self.INVALID_BUILDING:
-		push_error("Tried to place an invalid building type")
-
-	var coords := Vector2i(x, y)
 	var building: Building = self.BUILDINGS[tile]
 	if building and not building.is_tile:
 		# TODO move to place_building or other helper method
@@ -621,28 +620,24 @@ func set_building(x: int, y: int, tile: int) -> void:
 		self.building_index += 1
 		return
 
-	self.world_map[x][y] = tile
+	self.world_map[coords.x][coords.y] = tile
 
 	# Update autotiling (assumes all tiles are roads)
 	if building != null:
-		super.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, 0)
+		super.set_cells_terrain_connect(0, [coords], 0, 0)
 		return
 
 	# We're removing this tile, so update the autotiling of all surrounding
 	# tiles, as it's not done automatically
 	var terrain_cells: Array[Vector2i] = []
-	super.set_cell(0, Vector2i(x, y), tile, Vector2i.ZERO)
-	for orthogonal in self.get_orthogonal(Vector2i(x, y)):
+	super.set_cell(0, coords, tile, Vector2i.ZERO)
+	for orthogonal in self.get_orthogonal(coords):
 		if self.get_type(self.get_coords(orthogonal)) == self.ROAD:
 			# Delete and recreate surrounding roads to force them to refresh
 			# Only calling set_cells_terrain_connect is insufficient
 			super.set_cell(0, orthogonal, tile, Vector2i.ZERO)
 			terrain_cells.append(orthogonal)
 	super.set_cells_terrain_connect(0, terrain_cells, 0, 0)
-
-
-func set_buildingv(position: Vector2i, tile: int) -> void:
-	self.set_building(position.x, position.y, tile)
 
 
 # Helper function to get a building's type (an index into the BUILDINGS array)
