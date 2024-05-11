@@ -600,10 +600,10 @@ func get_cellv(position: Vector2i) -> int:
 # buildings
 func set_building(x: int, y: int, tile: int) -> void:
 	if x < 0 or x >= len(self.world_map) or y < 0 or y >= len(self.world_map[x]):
-		push_error('Tried to set a cell out of bounds')
+		push_error("Tried to set a cell out of bounds")
 
 	if tile < 0 and tile >= len(self.BUILDINGS) and tile != self.INVALID_CELL:
-		push_error('Tried to place an invalid building type')
+		push_error("Tried to place an invalid building type")
 
 	var cellv := Vector2i(x, y)
 	var building: Building = self.BUILDINGS[tile]
@@ -785,7 +785,7 @@ func _clear_preview() -> void:
 		$Preview.clear()
 		$PreviewTile.clear()
 		$PreviewBuilding.visible = false
-		self.preview_label.text = ''
+		self.preview_label.text = ""
 		self.preview_node.visible = false
 		for modulated_building in self.modulated_buildings:
 			var sprite := self.get_building_sprite(modulated_building)
@@ -931,8 +931,8 @@ func get_building_value(cellv: Vector2i, id: int, road_connections = null) -> Ar
 
 func format_value(value: Array) -> Array:
 	return [
-		('+%d' if value[0] > 0 else '%d') % value[0],
-		('+%d' if value[1] > 0 else '%d') % value[1],
+		("+%d" if value[0] > 0 else "%d") % value[0],
+		("+%d" if value[1] > 0 else "%d") % value[1],
 	]
 
 

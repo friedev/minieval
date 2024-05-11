@@ -22,7 +22,7 @@ func _on_title_ui_custom_game_menu_opened() -> void:
 
 
 func _on_turn_limit_line_edit_text_changed(new_text: String) -> void:
-	if new_text == '':
+	if new_text == "":
 		return
 	if str(int(new_text)) != new_text or int(new_text) <= 0:
 		self.turn_limit.text = self.old_turn_limit
@@ -43,7 +43,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_play_button_pressed() -> void:
-	if self.turn_limit.text == '':
+	if self.turn_limit.text == "":
 		Global.num_turns = 0
 		Global.endless = true
 	else:
