@@ -1,4 +1,4 @@
-class_name Tutorial extends Container
+class_name Tutorial extends Control
 
 
 @onready var main := self.get_node("/root/Main")

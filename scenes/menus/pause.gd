@@ -1,4 +1,4 @@
-class_name Pause extends Container
+class_name Pause extends Control
 
 @onready var main := self.get_node("/root/Main")
 @onready var tilemap := self.main.find_child("TileMap")

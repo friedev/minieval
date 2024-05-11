@@ -1,4 +1,4 @@
-class_name Options extends Container
+class_name Options extends Control
 
 signal menu_closed
 
