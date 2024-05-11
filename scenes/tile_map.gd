@@ -595,7 +595,7 @@ func is_in_bounds(coords: Vector2i) -> bool:
 
 
 # Return the building ID at the given coords
-func get_coords(coords: Vector2i) -> int:
+func get_building(coords: Vector2i) -> int:
 	if not self.is_in_bounds(coords):
 		return self.INVALID_BUILDING
 	return self.world_map[coords.x][coords.y]
@@ -604,7 +604,7 @@ func get_coords(coords: Vector2i) -> int:
 # Updates world map, building types, and building roots where applicable
 # Does NOT spawn a building sprite, update groups, or fully clean up destroyed
 # buildings
-func set_buildingv(coords: Vector2i, tile: int) -> void:
+func set_building(coords: Vector2i, tile: int) -> void:
 	assert(self.is_in_bounds(coords))
 	assert(tile in self.BUILDINGS or tile == self.INVALID_BUILDING)
 
@@ -632,7 +632,7 @@ func set_buildingv(coords: Vector2i, tile: int) -> void:
 	var terrain_cells: Array[Vector2i] = []
 	super.set_cell(0, coords, tile, Vector2i.ZERO)
 	for orthogonal in self.get_orthogonal(coords):
-		if self.get_type(self.get_coords(orthogonal)) == self.ROAD:
+		if self.get_type(self.get_building(orthogonal)) == self.ROAD:
 			# Delete and recreate surrounding roads to force them to refresh
 			# Only calling set_cells_terrain_connect is insufficient
 			super.set_cell(0, orthogonal, tile, Vector2i.ZERO)
@@ -704,7 +704,7 @@ func get_adjacent_buildings(
 					visited
 				)
 		else:
-			var adjacent_id := self.get_coords(adjacent_coords)
+			var adjacent_id := self.get_building(adjacent_coords)
 			if adjacent_id >= self.BASE_BUILDING_INDEX:
 				var adjacent_building: Building = self.BUILDINGS[self.get_type(adjacent_id)]
 				if (
@@ -782,7 +782,7 @@ func _update_mouse_coords() -> void:
 
 func _clear_preview() -> void:
 	if self.preview_coords != self.INVALID_COORDS:
-		#self.set_buildingv(self.preview_coords, 0)
+		#self.set_building(self.preview_coords, 0)
 		self.preview_coords = self.INVALID_COORDS
 		$Preview.clear()
 		$PreviewTile.clear()
@@ -852,19 +852,19 @@ func _update_preview() -> void:
 	# Shade preview building in red if the placement is blocked
 	if building.is_tile:
 		$PreviewTile.modulate = self.PREVIEW_COLOR
-		if self.get_coords(building_coords) != 0:
+		if self.get_building(building_coords) != 0:
 			$PreviewTile.modulate = self.PREVIEW_COLOR_INVALID
 	else:
 		$PreviewBuilding.modulate = self.PREVIEW_COLOR
 		for coords in building.get_cells(building_coords):
-			if self.get_coords(coords) != 0:
+			if self.get_building(coords) != 0:
 				$PreviewBuilding.modulate = self.PREVIEW_COLOR_INVALID
 				break
 
 	# Show area of current building with a 50% opacity white square
 	for coords in building.get_area_cells(building_coords):
 		$Preview.set_cell(0, coords, self.SELECTION, Vector2i.ZERO)
-		var id := self.get_coords(coords)
+		var id := self.get_building(coords)
 		self.modulate_building(building, id, false)
 
 	var road_connections := self.get_road_connections(building_coords, self.selected_building)
@@ -914,7 +914,7 @@ func get_building_value(
 		if occupied_cells.has(area_coords):
 			continue
 
-		var neighbor_id := self.get_coords(area_coords)
+		var neighbor_id := self.get_building(area_coords)
 		if counted_ids.has(neighbor_id):
 			continue
 		counted_ids.append(neighbor_id)
@@ -981,7 +981,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 
 	# Prevent placement if building overlaps any existing buildings
 	for building_coords in building.get_cells(coords):
-		if self.get_type(self.get_coords(building_coords)) != 0:
+		if self.get_type(self.get_building(building_coords)) != 0:
 			return null
 
 	# Check if building can be built in the first place
@@ -1003,7 +1003,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 	var neighbor_groups: Array[int] = []
 	if building.groupable:
 		for neighbor in get_orthogonal(coords):
-			var neighbor_type := get_type(get_coords(neighbor))
+			var neighbor_type := get_type(get_building(neighbor))
 			if neighbor_type == id:
 				neighbor_groups.append(get_base_group(get_group(neighbor)))
 		var x := coords.x
@@ -1043,7 +1043,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 		instance.set_name("building_%d" % self.building_index)
 		$Buildings.add_child(instance)
 
-	self.set_buildingv(coords, id)
+	self.set_building(coords, id)
 	return Placement.new(id, coords, gp_change, vp_change, neighbor_groups)
 
 
@@ -1056,7 +1056,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 	# donut-shaped building)
 	if id != self.INVALID_BUILDING:
 		coords += self.BUILDINGS[self.get_type(id)].get_cell_offset()
-	id = self.get_coords(coords)
+	id = self.get_building(coords)
 	if id == self.INVALID_BUILDING:
 		return
 
@@ -1076,7 +1076,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 
 	var root := coords
 	if is_tile:
-		self.set_buildingv(coords, 0)
+		self.set_building(coords, 0)
 		self.groups[coords.x][coords.y] = 0
 
 		var adjacent_groups: Array[int] = []
@@ -1089,7 +1089,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 		# Does NOT modify the group_joins array; currently handled by the undo code
 		root = self.building_roots[id]
 		for building_coords in building.get_cells(root):
-			self.set_buildingv(building_coords, 0)
+			self.set_building(building_coords, 0)
 			self.groups[building_coords.x][building_coords.y] = 0
 
 		var adjacent_groups: Array[int] = []
