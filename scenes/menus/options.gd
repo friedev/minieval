@@ -8,8 +8,8 @@ signal menu_closed
 @onready var music_volume := %MusicVolumeSlider
 @onready var sound_volume := %SoundVolumeSlider
 
-@onready var music_bus := AudioServer.get_bus_index("Music")
-@onready var sound_bus := AudioServer.get_bus_index("Sound")
+@onready var music_bus := AudioServer.get_bus_index(&"Music")
+@onready var sound_bus := AudioServer.get_bus_index(&"Sound")
 
 
 # TODO use linear_to_db
