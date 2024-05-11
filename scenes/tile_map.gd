@@ -9,7 +9,7 @@ class Building:
 	var vp: int
 	var area: Vector2i
 	var texture: Texture2D
-	var cells: Array
+	var cells: Array[Array]
 	var gp_interactions: Dictionary
 	var vp_interactions: Dictionary
 
@@ -21,7 +21,7 @@ class Building:
 		vp: int,
 		area: Vector2i,
 		texture: Texture2D,
-		cells: Array,
+		cells: Array[Array],
 		gp_interactions: Dictionary,
 		vp_interactions: Dictionary
 	):
@@ -53,8 +53,8 @@ class Building:
 
 	# Returns a list of all cell vectors orthogonally adjacent to the given cell
 	# Duplicated from outer scope
-	static func get_orthogonal(cellv: Vector2i) -> Array:
-		var orthogonal := []
+	static func get_orthogonal(cellv: Vector2i) -> Array[Vector2i]:
+		var orthogonal: Array[Vector2i] = []
 		if cellv.x > 0:
 			orthogonal.append(Vector2i(cellv.x - 1, cellv.y))
 		if cellv.x < Global.game_size:
@@ -68,31 +68,31 @@ class Building:
 	static func get_cells_in_radius(
 		cellv: Vector2i,
 		radius: Vector2
-	) -> Array:
-		var cells := []
-		for x in range(max(0, cellv.x - floor(radius.x)),
-				min(Global.game_size, cellv.x + ceil(radius.x))):
-			for y in range(max(0, cellv.y - floor(radius.y)),
-					min(Global.game_size, cellv.y + ceil(radius.y))):
+	) -> Array[Vector2i]:
+		var cells: Array[Vector2i] = []
+		for x in range(maxi(0, cellv.x - floori(radius.x)),
+				mini(Global.game_size, cellv.x + ceili(radius.x))):
+			for y in range(maxi(0, cellv.y - floori(radius.y)),
+					mini(Global.game_size, cellv.y + ceili(radius.y))):
 						cells.append(Vector2i(x, y))
 		return cells
 
-	func get_cells(cellv := Vector2i(0, 0)) -> Array:
-		var cells := []
+	func get_cells(cellv := Vector2i(0, 0)) -> Array[Vector2i]:
+		var cells: Array[Vector2i] = []
 		for y in range(0, len(self.cells)):
 			for x in range(0, len(self.cells[y])):
 				if self.cells[y][x]:
 					cells.append(Vector2i(x, y) + cellv)
 		return cells
 
-	func get_area_cells(cellv := Vector2i(0, 0)) -> Array:
+	func get_area_cells(cellv := Vector2i(0, 0)) -> Array[Vector2i]:
 		return Building.get_cells_in_radius(
 			cellv + self.get_area_offset(),
 			Vector2(self.area) / 2
 		)
 
-	func get_adjacent_cells(cellv := Vector2i(0, 0)) -> Array:
-		var adjacent_cell_map := []
+	func get_adjacent_cells(cellv := Vector2i(0, 0)) -> Array[Vector2i]:
+		var adjacent_cell_map: Array[Array] = []
 		for y in range(0, len(self.cells) + 2):
 			adjacent_cell_map.append([])
 			for x in range(0, len(self.cells[0]) + 2):
@@ -100,11 +100,11 @@ class Building:
 		for building_cellv in self.get_cells(Vector2i(1, 1)):
 			adjacent_cell_map[building_cellv.y][building_cellv.x] = 2
 			for adjacent_cellv in self.get_orthogonal(building_cellv):
-				adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x] = max(
+				adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x] = maxi(
 					1,
 					adjacent_cell_map[adjacent_cellv.y][adjacent_cellv.x]
 				)
-		var adjacent_cells := []
+		var adjacent_cells: Array[Vector2i] = []
 		for y in range(0, len(adjacent_cell_map)):
 			for x in range(0, len(adjacent_cell_map[y])):
 				if adjacent_cell_map[y][x] == 1:
@@ -356,14 +356,14 @@ class Placement:
 	var cellv: Vector2i
 	var gp_change: int
 	var vp_change: int
-	var group_joins: Array
+	var group_joins: Array[int]
 
 	func _init(
 		id: int,
 		cellv: Vector2i,
 		gp_change: int,
 		vp_change: int,
-		group_joins: Array
+		group_joins: Array[int]
 	):
 		self.id = id
 		self.cellv = cellv
@@ -373,6 +373,8 @@ class Placement:
 
 
 const INVALID_CELL := -1
+const INVALID_CELLV := Vector2i(-1, -1)
+const INVALID_GROUP := -1
 
 const PREVIEW_COLOR := Color.WHITE
 const PREVIEW_COLOR_INVALID := Color(1, 0.25, 0.25, 0.5)
@@ -394,23 +396,23 @@ const building_scene := preload("res://scenes/building.tscn")
 const turn_format := "%d Turns Left"
 
 # 2D array of building IDs; 0 is empty, and all tile buildings share the same ID
-var world_map := []
+var world_map: Array[Array] = []
 # 1D array mapping a building ID (the index into this array) to its type (an
 # index in the BUILDINGS array)
 # Content starts at BASE_BUILDING_INDEX, everything before that is null
-var building_types := []
+var building_types: Array[int] = []
 # 1D array mapping a building ID (the index into this array) to its root
 # position (a cell vector)
-var building_roots := []
+var building_roots: Array[Vector2i] = []
 # 2D array of group IDs; 0 is no group
-var groups := []
+var groups: Array[Array] = []
 # 1D array mapping a group (the index into this array) to the group it has been
 # merged into (another group)
 # A group that has not been merged will map to its own index
 # Recursively indexing into this array will get you to the "base group"
-var group_joins := []
+var group_joins: Array[int] = []
 # 2D array mapping a group to a 1D array of building IDs adjacent to the group
-var adjacent_buildings := []
+var adjacent_buildings: Array[Array] = []
 var building_index := self.BASE_BUILDING_INDEX
 var group_index := self.BASE_GROUP_INDEX
 
@@ -418,42 +420,43 @@ var gp := 25
 var vp := 0
 var selected_building := self.DEFAULT_BUILDING
 
-var game_length: int = Global.num_turns
-var history := []
-var future := []
+var game_length := Global.num_turns
+var history: Array[Placement] = []
+var future: Array[Placement] = []
 
-var mouse_cellv = null
-var preview_cellv = null
-var modulated_buildings := []
+var mouse_cellv := INVALID_CELLV
+var preview_cellv := INVALID_CELLV
+var modulated_buildings: Array[int] = []
 var in_menu := false
 var mouse_direction := Vector2.ZERO
 
 @onready var main := self.get_node("/root/Main")
 
-@onready var ui_text_layer := self.main.find_child("UITextLayer")
-@onready var gp_label := self.main.find_child("GPLabel")
-@onready var vp_label := self.main.find_child("VPLabel")
-@onready var turn_label := self.main.find_child("TurnLabel")
-@onready var undo_label := self.main.find_child("UndoLabel")
+@onready var ui_text_layer: CanvasLayer = self.main.find_child("UITextLayer")
+@onready var gp_label: Label = self.main.find_child("GPLabel")
+@onready var vp_label: Label = self.main.find_child("VPLabel")
+@onready var turn_label: Label = self.main.find_child("TurnLabel")
+@onready var undo_label: Label = self.main.find_child("UndoLabel")
 
-@onready var palette = self.main.find_child("Palette")
-@onready var palette_tilemap = self.palette.find_child("TileMap")
+@onready var palette := self.main.find_child("Palette")
+@onready var palette_tilemap := self.palette.find_child("TileMap")
 
-@onready var recap = self.main.find_child("Recap")
+@onready var recap := self.main.find_child("Recap")
 
-@onready var camera := self.main.find_child("Camera2D")
-@onready var preview_label := self.main.find_child("PreviewLabel")
-@onready var preview_node := self.main.find_child("PreviewNode")
-@onready var preview_building := self.main.find_child("PreviewBuilding")
+@onready var camera: Camera2D = self.main.find_child("Camera2D")
+@onready var preview_label: Label = self.main.find_child("PreviewLabel")
+@onready var preview_node: Control = self.main.find_child("PreviewNode")
+@onready var preview_building: Sprite2D = self.main.find_child("PreviewBuilding")
 
-@onready var particles_material: ParticleProcessMaterial = $BuildingParticles.process_material
-@onready var particles_amount = $BuildingParticles.amount
-@onready var particles_scale = self.particles_material.scale_min
-@onready var particles_velocity = self.particles_material.initial_velocity_min
-@onready var particles_accel = self.particles_material.linear_accel_min
+@onready var building_particles: GPUParticles2D = $BuildingParticles
+@onready var particles_material: ParticleProcessMaterial = self.building_particles.process_material
+@onready var particles_amount := self.building_particles.amount
+@onready var particles_scale := self.particles_material.scale_min
+@onready var particles_velocity := self.particles_material.initial_velocity_min
+@onready var particles_accel := self.particles_material.linear_accel_min
 
 
-func _ready():
+func _ready() -> void:
 	self.turn_label.visible = not Global.endless
 
 	# Change the selected building when a building is clicked on the palette
@@ -475,18 +478,18 @@ func _ready():
 	) - self.camera.offset
 
 	for i in range(self.BASE_BUILDING_INDEX):
-		self.building_types.append(null)
-		self.building_roots.append(null)
+		self.building_types.append(self.INVALID_CELL)
+		self.building_roots.append(self.INVALID_CELLV)
 
 	for i in range(self.BASE_GROUP_INDEX):
-		self.groups.append(null)
-		self.group_joins.append(null)
-		self.adjacent_buildings.append(null)
+		self.groups.append([])
+		self.group_joins.append(self.INVALID_GROUP)
+		self.adjacent_buildings.append([])
 
 	self._select_building(self.DEFAULT_BUILDING)
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	var mouse_input_direction := Vector2(
 		Input.get_axis(&"mouse_left", &"mouse_right"),
 		Input.get_axis(&"mouse_up", &"mouse_down")
@@ -519,7 +522,7 @@ func select_cell(cellv: Vector2i) -> void:
 	self.get_viewport().warp_mouse(self.cellv_to_screen_position(cellv))
 
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event: InputEvent) -> void:
 	if self.in_menu:
 		return
 
@@ -672,8 +675,8 @@ func get_base_group(group: int) -> int:
 
 
 # Returns a list of all cell vectors orthogonally adjacent to the given cell
-func get_orthogonal(cellv: Vector2i) -> Array:
-	var orthogonal := []
+func get_orthogonal(cellv: Vector2i) -> Array[Vector2i]:
+	var orthogonal: Array[Vector2i] = []
 	if cellv.x > 0:
 		orthogonal.append(Vector2i(cellv.x - 1, cellv.y))
 	if cellv.x < Global.game_size:
@@ -687,7 +690,11 @@ func get_orthogonal(cellv: Vector2i) -> Array:
 
 # Returns a list of all building IDs adjacent to a group, starting at given tile
 # Uses a recursive depth-first search
-func get_adjacent_buildings(cellv: Vector2i, adjacent := [], visited := []) -> Array:
+func get_adjacent_buildings(
+	cellv: Vector2i,
+	adjacent: Array[int] = [],
+	visited: Array[Vector2i] = []
+) -> Array[int]:
 	var group := self.get_base_group(self.get_group(cellv))
 	if group < self.BASE_GROUP_INDEX:
 		return []
@@ -748,10 +755,10 @@ func get_building_sprite(id: int) -> Sprite2D:
 
 
 # Returns the buildings connected by road to the given building
-func get_road_connections(cellv: Vector2i, id: int) -> Array:
+func get_road_connections(cellv: Vector2i, id: int) -> Array[int]:
 	var building: Building = self.BUILDINGS[id]
-	var road_connections := []
-	var counted_groups := []
+	var road_connections: Array[int] = []
+	var counted_groups: Array[int] = []
 	for adjacent_cellv in building.get_adjacent_cells(cellv):
 		var adjacent_group := self.get_base_group(self.get_group(adjacent_cellv))
 		if (
@@ -779,9 +786,9 @@ func _update_mouse_cellv() -> void:
 
 
 func _clear_preview() -> void:
-	if self.preview_cellv != null:
+	if self.preview_cellv != self.INVALID_CELLV:
 		#self.set_buildingv(self.preview_cellv, 0)
-		self.preview_cellv = null
+		self.preview_cellv = self.INVALID_CELLV
 		$Preview.clear()
 		$PreviewTile.clear()
 		$PreviewBuilding.visible = false
@@ -797,7 +804,7 @@ func _clear_preview() -> void:
 # Modulates the building with the given id based on its interaction with the
 # given building type
 # id is the modulated building's id, building is what it's modulated relative to
-func modulate_building(building: Building, id: int, road_connection) -> void:
+func modulate_building(building: Building, id: int, road_connection: bool) -> void:
 	if id < self.BASE_BUILDING_INDEX:
 		return
 
@@ -874,6 +881,7 @@ func _update_preview() -> void:
 	var value := self.get_building_value(
 		building_cellv,
 		self.selected_building,
+		false,
 		road_connections
 	)
 	self.preview_label.text = "%s\n%s" % self.format_value(value)
@@ -893,11 +901,16 @@ func _update_preview() -> void:
 # Gets the total value that would result from placing the building with the
 # given ID at the given cellv, returned in the form [gp, vp]
 # Includes the building's flat GP and VP, as well as interactions
-func get_building_value(cellv: Vector2i, id: int, road_connections = null) -> Array:
+func get_building_value(
+	cellv: Vector2i,
+	id: int,
+	get_road_connections := true,
+	road_connections: Array[int] = []
+) -> Array[int]:
 	var building: Building = self.BUILDINGS[id]
 	var gp_value := building.gp
 	var vp_value := building.vp
-	var counted_ids := []
+	var counted_ids: Array[int] = []
 	var occupied_cells := building.get_cells(cellv)
 
 	# Account for nearby buildings
@@ -916,7 +929,8 @@ func get_building_value(cellv: Vector2i, id: int, road_connections = null) -> Ar
 		vp_value += building.vp_interactions.get(neighbor_type, 0)
 
 	# Account for buildings connected via road
-	if road_connections == null:
+	if get_road_connections:
+		assert(road_connections == [])
 		road_connections = self.get_road_connections(cellv, id)
 
 	for connected_building in road_connections:
@@ -929,7 +943,7 @@ func get_building_value(cellv: Vector2i, id: int, road_connections = null) -> Ar
 	return [floor(gp_value), floor(vp_value)]
 
 
-func format_value(value: Array) -> Array:
+func format_value(value: Array[int]) -> Array[String]:
 	return [
 		("+%d" if value[0] > 0 else "%d") % value[0],
 		("+%d" if value[1] > 0 else "%d") % value[1],
@@ -967,7 +981,7 @@ func emit_particles(cellv: Vector2i, building: Building) -> void:
 	$BuildingParticles.restart()
 
 
-func place_building(cellv: Vector2i, id: int, force := false):
+func place_building(cellv: Vector2i, id: int, force := false) -> Placement:
 	var building: Building = self.BUILDINGS[id]
 
 	# Prevent placement if building overlaps any existing buildings
@@ -991,7 +1005,7 @@ func place_building(cellv: Vector2i, id: int, force := false):
 	$BuildingPlaceSound.play()
 	self.emit_particles(cellv, building)
 
-	var neighbor_groups := []
+	var neighbor_groups: Array[int] = []
 	if building.groupable:
 		for neighbor in get_orthogonal(cellv):
 			var neighbor_type := get_type(get_cellv(neighbor))
@@ -1019,7 +1033,7 @@ func place_building(cellv: Vector2i, id: int, force := false):
 		self.adjacent_buildings[self.groups[x][y]] = self.get_adjacent_buildings(cellv)
 	else:
 		# Update all adjacency lists to include this building
-		var adjacent_groups := []
+		var adjacent_groups: Array[int] = []
 		for adjacent_cellv in building.get_adjacent_cells(cellv):
 			var group := self.get_base_group(self.get_group(adjacent_cellv))
 			if group >= self.BASE_GROUP_INDEX and not adjacent_groups.has(group):
@@ -1028,7 +1042,7 @@ func place_building(cellv: Vector2i, id: int, force := false):
 
 	# Instance a new sprite if this building is not a tile
 	if not building.is_tile:
-		var instance := self.building_scene.instantiate()
+		var instance: Sprite2D = self.building_scene.instantiate()
 		instance.position = self.map_to_local(cellv)
 		instance.texture = building.texture
 		instance.set_name("building_%d" % self.building_index)
@@ -1038,18 +1052,18 @@ func place_building(cellv: Vector2i, id: int, force := false):
 	return Placement.new(id, cellv, gp_change, vp_change, neighbor_groups)
 
 
-func destroy_building(cellv: Vector2i, id = null):
+func destroy_building(cellv: Vector2i, id := self.INVALID_CELL) -> void:
 	# If an ID is given, use it to offset the cellv, ensuring that we won't
 	# select part of the building with empty space
 	# DON'T supply an ID if the cellv is already a tile the building occupies
-	# Use it deletion where you only know the root cellv
+	# Use it for deletion where you only know the root cellv
 	# There may be an edge case for a building with an empty center (e.g. a 3x3
 	# donut-shaped building)
-	if id != null:
+	if id != self.INVALID_CELL:
 		cellv += self.BUILDINGS[self.get_type(id)].get_cell_offset()
 	id = self.get_cellv(cellv)
-	if id <= 0:
-		return null
+	if id == self.INVALID_CELL:
+		return
 
 	var is_tile: bool = id < self.BASE_BUILDING_INDEX
 
@@ -1070,7 +1084,7 @@ func destroy_building(cellv: Vector2i, id = null):
 		self.set_buildingv(cellv, 0)
 		self.groups[cellv.x][cellv.y] = 0
 
-		var adjacent_groups := []
+		var adjacent_groups: Array[int] = []
 		for adjacent_cellv in self.get_orthogonal(cellv):
 			var group := self.get_base_group(self.get_group(adjacent_cellv))
 			if group >= self.BASE_GROUP_INDEX and not adjacent_groups.has(group):
@@ -1083,7 +1097,7 @@ func destroy_building(cellv: Vector2i, id = null):
 			self.set_buildingv(building_cellv, 0)
 			self.groups[building_cellv.x][building_cellv.y] = 0
 
-		var adjacent_groups := []
+		var adjacent_groups: Array[int] = []
 		for adjacent_cellv in building.get_adjacent_cells(root):
 			var group := self.get_base_group(self.get_group(adjacent_cellv))
 			if group >= self.BASE_GROUP_INDEX and not adjacent_groups.has(group):
