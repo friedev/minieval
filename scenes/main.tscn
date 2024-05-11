@@ -97,12 +97,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(160, 90)
 zoom = Vector2(4, 4)
-drag_left_margin = 1.0
-drag_top_margin = 1.0
-drag_right_margin = 1.0
-drag_bottom_margin = 1.0
 script = ExtResource("7_wdqlp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
