@@ -128,7 +128,7 @@ enum BuildingType {
 }
 
 
-var BUILDINGS := {
+static var BUILDINGS := {
 	BuildingType.EMPTY: null,
 	BuildingType.ROAD: Building.new(
 		"Road", # name
@@ -529,7 +529,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"place_building"):
 		self._clear_preview()
 
-		var building: Building = self.BUILDINGS[self.selected_building]
+		var building: Building = CityMap.BUILDINGS[self.selected_building]
 		var placement: Placement = self.place_building(
 			self.mouse_coords - building.get_cell_offset(),
 			self.selected_building,
@@ -606,9 +606,9 @@ func get_building(coords: Vector2i) -> int:
 # buildings
 func set_building(coords: Vector2i, tile: int) -> void:
 	assert(self.is_in_bounds(coords))
-	assert(tile in self.BUILDINGS or tile == self.INVALID_BUILDING)
+	assert(tile in CityMap.BUILDINGS or tile == self.INVALID_BUILDING)
 
-	var building: Building = self.BUILDINGS[tile]
+	var building: Building = CityMap.BUILDINGS[tile]
 	if building and not building.is_tile:
 		# TODO move to place_building or other helper method
 		for building_coords in building.get_cells(coords):
@@ -706,7 +706,7 @@ func get_adjacent_buildings(
 		else:
 			var adjacent_id := self.get_building(adjacent_coords)
 			if adjacent_id >= self.BASE_BUILDING_INDEX:
-				var adjacent_building: Building = self.BUILDINGS[self.get_type(adjacent_id)]
+				var adjacent_building: Building = CityMap.BUILDINGS[self.get_type(adjacent_id)]
 				if (
 					not adjacent_building.is_tile
 					and not adjacent.has(adjacent_id)
@@ -716,7 +716,7 @@ func get_adjacent_buildings(
 
 
 func _select_building(id: int) -> void:
-	var building: Building = self.BUILDINGS[id]
+	var building: Building = CityMap.BUILDINGS[id]
 	if not building:
 		return
 	self.selected_building = id
@@ -750,7 +750,7 @@ func get_building_sprite(id: int) -> Sprite2D:
 
 # Returns the buildings connected by road to the given building
 func get_road_connections(coords: Vector2i, id: int) -> Array[int]:
-	var building: Building = self.BUILDINGS[id]
+	var building: Building = CityMap.BUILDINGS[id]
 	var road_connections: Array[int] = []
 	var counted_groups: Array[int] = []
 	for adjacent_coords in building.get_adjacent_cells(coords):
@@ -837,7 +837,7 @@ func _update_preview() -> void:
 	self._clear_preview()
 	self.preview_node.visible = true
 	self.preview_coords = self.mouse_coords
-	var building: Building = self.BUILDINGS[self.selected_building]
+	var building: Building = CityMap.BUILDINGS[self.selected_building]
 	var building_coords: Vector2i = self.preview_coords - building.get_cell_offset()
 
 	# Move the building preview
@@ -900,7 +900,7 @@ func get_building_value(
 	get_road_connections := true,
 	road_connections: Array[int] = []
 ) -> Array[int]:
-	var building: Building = self.BUILDINGS[id]
+	var building: Building = CityMap.BUILDINGS[id]
 	var gp_value := building.gp
 	var vp_value := building.vp
 	var counted_ids: Array[int] = []
@@ -975,7 +975,7 @@ func emit_particles(coords: Vector2i, building: Building) -> void:
 
 
 func place_building(coords: Vector2i, id: int, force := false) -> Placement:
-	var building: Building = self.BUILDINGS[id]
+	var building: Building = CityMap.BUILDINGS[id]
 
 	# Prevent placement if building overlaps any existing buildings
 	for building_coords in building.get_cells(coords):
@@ -1053,7 +1053,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 	# There may be an edge case for a building with an empty center (e.g. a 3x3
 	# donut-shaped building)
 	if id != self.INVALID_BUILDING:
-		coords += self.BUILDINGS[self.get_type(id)].get_cell_offset()
+		coords += CityMap.BUILDINGS[self.get_type(id)].get_cell_offset()
 	id = self.get_building(coords)
 	if id == self.INVALID_BUILDING:
 		return
@@ -1067,7 +1067,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 		if instance and not instance.is_queued_for_deletion():
 			instance.free()
 		type = self.building_types[id]
-	var building: Building = self.BUILDINGS[type]
+	var building: Building = CityMap.BUILDINGS[type]
 
 	self.building_destroy_sound.play()
 	self.emit_particles(coords - building.get_cell_offset(), building)

@@ -23,8 +23,8 @@ const INVALID_BUILDING := -1
 @export var interactions_label: RichTextLabel
 @export var selection: TileMap
 
-@onready var buildings: Dictionary = self.city_map.BUILDINGS
-@onready var building_ids: Array = self.city_map.BUILDINGS.keys()
+@onready var buildings: Dictionary = CityMap.BUILDINGS
+@onready var building_ids: Array = CityMap.BUILDINGS.keys()
 
 @onready var tooltip_position: Vector2 = self.tooltip.position
 var last_tooltip_id := -1
