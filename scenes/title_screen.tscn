@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://iv13x14ih3mw"]
 
-[ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1"]
-[ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/title_ui.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_ui.tscn" id="4"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
-[ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6"]
-[ext_resource type="Script" path="res://scenes/title_music.gd" id="7_65lam"]
+[ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1_j4gc6"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="2_1nk1m"]
+[ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/main_menu.tscn" id="3_jxs4e"]
+[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="4_yla3h"]
+[ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_menu.tscn" id="5_icgb8"]
+[ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6_0gu2f"]
+[ext_resource type="Script" path="res://scenes/title_music.gd" id="7_tttak"]
 
-[node name="Title" type="Control"]
+[node name="TitleScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,21 +17,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MenuBackground" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1")
+texture = ExtResource("1_j4gc6")
 stretch_mode = 1
 
 [node name="BlackOverlay" type="ColorRect" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("5")
+theme = ExtResource("2_1nk1m")
 color = Color(0, 0, 0, 0.501961)
 
 [node name="Version" type="Label" parent="."]
@@ -48,7 +48,7 @@ offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(266, 36)
-theme = ExtResource("5")
+theme = ExtResource("2_1nk1m")
 text = "v1.2.0-dev"
 horizontal_alignment = 2
 
@@ -63,7 +63,7 @@ offset_right = 684.0
 offset_bottom = -16.0
 grow_vertical = 0
 pivot_offset = Vector2(266, 36)
-theme = ExtResource("5")
+theme = ExtResource("2_1nk1m")
 text = "By:
 Aaron Friesen
 Kalen Wallin
@@ -86,16 +86,16 @@ offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(266, 36)
-theme = ExtResource("5")
+theme = ExtResource("2_1nk1m")
 text = "https://frie.dev/minieval"
 horizontal_alignment = 1
 
-[node name="TitleUI" parent="." instance=ExtResource("2")]
+[node name="MainMenu" parent="." instance=ExtResource("3_jxs4e")]
 layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Options" parent="." instance=ExtResource("3")]
+[node name="OptionsMenu" parent="." instance=ExtResource("4_yla3h")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -106,7 +106,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CustomGameUI" parent="." instance=ExtResource("4")]
+[node name="CustomGameMenu" parent="." instance=ExtResource("5_icgb8")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -122,10 +122,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6")
-script = ExtResource("7_65lam")
+stream = ExtResource("6_0gu2f")
+script = ExtResource("7_tttak")
 
-[connection signal="custom_game_menu_opened" from="TitleUI" to="CustomGameUI" method="_on_title_ui_custom_game_menu_opened"]
-[connection signal="options_menu_opened" from="TitleUI" to="Options" method="_on_title_ui_options_menu_opened"]
-[connection signal="menu_closed" from="Options" to="TitleUI" method="_on_options_menu_closed"]
-[connection signal="menu_closed" from="CustomGameUI" to="TitleUI" method="_on_custom_game_ui_menu_closed"]
+[connection signal="custom_game_menu_opened" from="MainMenu" to="CustomGameMenu" method="_on_title_ui_custom_game_menu_opened"]
+[connection signal="options_menu_opened" from="MainMenu" to="OptionsMenu" method="_on_title_ui_options_menu_opened"]
+[connection signal="menu_closed" from="OptionsMenu" to="MainMenu" method="_on_options_menu_closed"]
+[connection signal="menu_closed" from="CustomGameMenu" to="MainMenu" method="_on_custom_game_ui_menu_closed"]

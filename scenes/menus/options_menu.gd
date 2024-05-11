@@ -1,4 +1,4 @@
-class_name Options extends Control
+class_name OptionsMenu extends Control
 
 signal menu_closed
 

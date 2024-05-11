@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://cil6jwu6v4xku"]
 
-[ext_resource type="Script" path="res://scenes/menus/recap.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://iv13x14ih3mw" path="res://scenes/title.tscn" id="3_1tjr5"]
+[ext_resource type="Script" path="res://scenes/menus/recap_menu.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://iv13x14ih3mw" path="res://scenes/title_screen.tscn" id="3_1tjr5"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_251xe"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 [ext_resource type="AudioStream" uid="uid://t6exsd0tr5iu" path="res://music/end_music.ogg" id="7"]
 
-[node name="Recap" type="Control" node_paths=PackedStringArray("end_game_music")]
+[node name="RecapMenu" type="Control" node_paths=PackedStringArray("end_game_music")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15

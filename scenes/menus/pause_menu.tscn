@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxg5cohmko42i"]
 
-[ext_resource type="Script" path="res://scenes/menus/pause.gd" id="2"]
+[ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_vkchd"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="7"]
 
-[node name="Pause" type="CenterContainer" node_paths=PackedStringArray("exit_game_button")]
+[node name="PauseMenu" type="CenterContainer" node_paths=PackedStringArray("exit_game_button")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -402,7 +402,7 @@ const turn_format := "%d Turns Left"
 @export var vp_label: Label
 @export var turn_label: Label
 @export var undo_label: Label
-@export var recap: Recap
+@export var recap: RecapMenu
 @export var camera: Camera
 @export var preview_label: Label
 @export var preview_node: Control

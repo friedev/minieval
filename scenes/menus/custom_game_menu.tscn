@@ -2,9 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_cxnbl"]
-[ext_resource type="Script" path="res://scenes/menus/custom_game_ui.gd" id="7"]
+[ext_resource type="Script" path="res://scenes/menus/custom_game_menu.gd" id="7"]
 
-[node name="CustomGameUI" type="CenterContainer"]
+[node name="CustomGameMenu" type="CenterContainer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

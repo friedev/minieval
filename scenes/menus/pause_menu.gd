@@ -1,16 +1,16 @@
-class_name Pause extends Control
+class_name PauseMenu extends Control
 
 @export_group("External Nodes")
 @export var city_map: CityMap
-@export var recap: Recap
-@export var options: Options
-@export var tutorial: Tutorial
+@export var recap: RecapMenu
+@export var options: OptionsMenu
+@export var tutorial: TutorialMenu
 @export var black_overlay: ColorRect
 
 @export_group("Internal Nodes")
 @export var exit_game_button: Button
 
-const title_scene := "res://scenes/title.tscn"
+const title_scene := "res://scenes/title_screen.tscn"
 
 
 func _ready() -> void:

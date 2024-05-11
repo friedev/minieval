@@ -1,8 +1,8 @@
-class_name Tutorial extends Control
+class_name TutorialMenu extends Control
 
 @export_group("External Nodes")
 @export var city_map: CityMap
-@export var pause: Pause
+@export var pause: PauseMenu
 @export var black_overlay: ColorRect
 
 

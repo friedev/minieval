@@ -1,4 +1,4 @@
-class_name Recap extends Control
+class_name RecapMenu extends Control
 
 @export var title_scene: PackedScene
 

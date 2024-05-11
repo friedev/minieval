@@ -1,4 +1,4 @@
-class_name TitleUI extends Control
+class_name MainMenu extends Control
 
 signal custom_game_menu_opened
 signal options_menu_opened

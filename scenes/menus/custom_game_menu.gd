@@ -1,4 +1,4 @@
-class_name CustomGameUI extends Control
+class_name CustomGameMenu extends Control
 
 signal menu_closed
 
