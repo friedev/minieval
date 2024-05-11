@@ -416,7 +416,7 @@ var adjacent_buildings: Array[Array] = []
 var building_index := self.BASE_BUILDING_INDEX
 var group_index := self.BASE_GROUP_INDEX
 
-var gp := 25
+var gp := Global.initial_gp
 var vp := 0
 var selected_building := self.DEFAULT_BUILDING
 
