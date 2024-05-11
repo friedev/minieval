@@ -40,7 +40,7 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Main" type="Node"]
 
-[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "palette", "recap", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
+[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "recap", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
 format = 2
@@ -57,7 +57,6 @@ gp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/GPLabel")
 vp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/VPLabel")
 turn_label = NodePath("../CanvasLayer/TurnLabel")
 undo_label = NodePath("../CanvasLayer/UndoLabel")
-palette = NodePath("../CanvasLayer/Palette")
 recap = NodePath("../CanvasLayer/Recap")
 camera = NodePath("../Camera2D")
 preview_label = NodePath("../CanvasLayer/PreviewNode/PreviewLabel")
@@ -248,3 +247,5 @@ black_overlay = NodePath("../BlackOverlay")
 city_map = NodePath("../../CityMap")
 pause = NodePath("../Pause")
 black_overlay = NodePath("../BlackOverlay")
+
+[connection signal="building_selected" from="CanvasLayer/Palette" to="CityMap" method="_on_palette_building_selected"]

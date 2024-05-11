@@ -402,7 +402,6 @@ const turn_format := "%d Turns Left"
 @export var vp_label: Label
 @export var turn_label: Label
 @export var undo_label: Label
-@export var palette: Palette
 @export var recap: Recap
 @export var camera: Camera
 @export var preview_label: Label
@@ -462,9 +461,6 @@ var mouse_direction := Vector2.ZERO
 
 func _ready() -> void:
 	self.turn_label.visible = not Global.endless
-
-	# Change the selected building when a building is clicked on the palette
-	self.palette.palette_selection.connect(self._select_building)
 
 	self._update_mouse_coords()
 	self._update_labels()
@@ -719,7 +715,6 @@ func get_adjacent_buildings(
 	return adjacent
 
 
-# Event handler for palette selections
 func _select_building(id: int) -> void:
 	var building: Building = self.BUILDINGS[id]
 	if not building:
@@ -1100,3 +1095,7 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 			var group := self.get_base_group(self.get_group(adjacent_coords))
 			if group >= self.BASE_GROUP_INDEX and not adjacent_groups.has(group):
 				self.adjacent_buildings[group].erase(id)
+
+
+func _on_palette_building_selected(id: int) -> void:
+	self._select_building(id)

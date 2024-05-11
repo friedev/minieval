@@ -1,6 +1,6 @@
 class_name Palette extends Control
 
-signal palette_selection(id)
+signal building_selected(id: int)
 
 const INVALID_BUILDING := -1
 
@@ -184,4 +184,4 @@ func _input(event: InputEvent):
 	else:
 		self.selection.clear()
 		self.selection.set_cell(0, coords, self.city_map.SELECTION)
-		self.palette_selection.emit(id)
+		self.building_selected.emit(id)
