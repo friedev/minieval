@@ -964,13 +964,13 @@ func emit_particles(coords: Vector2i, building: Building) -> void:
 	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
 	self.building_particles.position = self.map_to_local(coords + size / 2)
 	self.particles_material.emission_sphere_radius = size.length() / 2
-	self.building_particles.amount *= multiplier
-	self.particles_material.scale_min *= multiplier
-	self.particles_material.scale_max *= multiplier
-	self.particles_material.initial_velocity_min *= multiplier
-	self.particles_material.initial_velocity_max *= multiplier
-	self.particles_material.linear_accel_min *= multiplier
-	self.particles_material.linear_accel_max *= multiplier
+	self.building_particles.amount = self.particles_amount * multiplier
+	self.particles_material.scale_min = self.particles_scale * multiplier
+	self.particles_material.scale_max = self.particles_scale * multiplier
+	self.particles_material.initial_velocity_min = self.particles_velocity * multiplier
+	self.particles_material.initial_velocity_max = self.particles_velocity * multiplier
+	self.particles_material.linear_accel_min = self.particles_accel * multiplier
+	self.particles_material.linear_accel_max = self.particles_accel * multiplier
 	self.building_particles.restart()
 
 
