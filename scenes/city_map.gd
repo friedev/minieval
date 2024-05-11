@@ -424,8 +424,8 @@ var game_length := Global.num_turns
 var history: Array[Placement] = []
 var future: Array[Placement] = []
 
-var mouse_coords := INVALID_COORDS
-var preview_coords := INVALID_COORDS
+var mouse_coords := self.INVALID_COORDS
+var preview_coords := self.INVALID_COORDS
 var modulated_buildings: Array[int] = []
 var in_menu := false
 var mouse_direction := Vector2.ZERO
