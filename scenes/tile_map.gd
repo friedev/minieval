@@ -937,14 +937,13 @@ func format_value(value: Array) -> Array:
 
 
 func reset_particles() -> void:
-	var material: ParticleProcessMaterial = $BuildingParticles.process_material
 	$BuildingParticles.amount = self.particles_amount
-	material.scale_min = self.particles_scale
-	material.scale_max = self.particles_scale
-	material.initial_velocity_min = self.particles_velocity
-	material.initial_velocity_max = self.particles_velocity
-	material.linear_accel_min = self.particles_accel
-	material.linear_accel_max = self.particles_accel
+	self.particles_material.scale_min = self.particles_scale
+	self.particles_material.scale_max = self.particles_scale
+	self.particles_material.initial_velocity_min = self.particles_velocity
+	self.particles_material.initial_velocity_max = self.particles_velocity
+	self.particles_material.linear_accel_min = self.particles_accel
+	self.particles_material.linear_accel_max = self.particles_accel
 
 
 func emit_particles(cellv: Vector2i, building: Building) -> void:
