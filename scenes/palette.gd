@@ -2,7 +2,7 @@ extends TileMap
 
 signal palette_selection(id)
 
-const INVALID_CELL := -1
+const INVALID_BUILDING := -1
 
 const GP_STR := "GP"
 const GP_COLOR := Color(1.0, 0.75, 0.0)
@@ -129,23 +129,23 @@ func update_tooltip(id: int) -> void:
 
 
 func _input(event: InputEvent):
-	var cellv: Vector2i
+	var coords: Vector2i
 	var hover := event is InputEventMouseMotion
 	var click: bool = event is InputEventMouseButton and event.pressed
 	var key = event is InputEventKey and event.pressed
 
 	if hover or click:
-		cellv = ((event.position - self.global_position) / 64).floor()
+		coords = ((event.position - self.global_position) / 64).floor()
 	elif key:
 		if event.keycode == KEY_0:
-			cellv = Vector2i(9, 0)
+			coords = Vector2i(9, 0)
 		else:
-			cellv = Vector2i(event.keycode - KEY_1, 0)
+			coords = Vector2i(event.keycode - KEY_1, 0)
 	else:
 		return
 
-	var id := self.get_cell_source_id(0, cellv)
-	if id == self.INVALID_CELL:
+	var id := self.get_cell_source_id(0, coords)
+	if id == self.INVALID_BUILDING:
 		self.tooltip.visible = false
 		return
 
@@ -170,8 +170,8 @@ func _input(event: InputEvent):
 
 			# Add the horizonal offset corresponding to the hovered tile
 			# Move the tooltip strictly above the palette
-			self.tooltip.position = self.tooltip_position + Vector2(cellv.x * 64, -self.tooltip.size.y + 32)
+			self.tooltip.position = self.tooltip_position + Vector2(coords.x * 64, -self.tooltip.size.y + 32)
 	else:
 		self.selection.clear()
-		self.selection.set_cell(0, cellv, self.tile_map.SELECTION)
+		self.selection.set_cell(0, coords, self.tile_map.SELECTION)
 		self.palette_selection.emit(id)
