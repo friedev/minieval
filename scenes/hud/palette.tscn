@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cbwe2w3gmnago"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1"]
-[ext_resource type="Script" path="res://scenes/palette.gd" id="2"]
+[ext_resource type="Script" path="res://scenes/hud/palette.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="4"]
-[ext_resource type="PackedScene" uid="uid://dixijkmqsq77x" path="res://scenes/building_tooltip.tscn" id="4_4ng53"]
+[ext_resource type="PackedScene" uid="uid://dixijkmqsq77x" path="res://scenes/hud/building_tooltip.tscn" id="4_4ng53"]
 
 [node name="Palette" type="Panel" node_paths=PackedStringArray("selection", "tile_map", "tooltip")]
 anchors_preset = 7
