@@ -1001,10 +1001,6 @@ func place_building(coords: Vector2i, type: BuildingType, force := false) -> Pla
 		if self.get_type(self.get_building(building_coords)) != 0:
 			return null
 
-	# Check if building can be built in the first place
-#	if self.gp + floor(building.gp) < 0:
-#		return null
-
 	# Give GP based on nearby buildings
 	var building_value := self.get_building_value(coords, type)
 	var gp_change: int = building_value[0]
