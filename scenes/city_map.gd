@@ -380,6 +380,11 @@ const INVALID_BUILDING := -1
 const INVALID_COORDS := Vector2i(-1, -1)
 const INVALID_GROUP := -1
 
+const EMPTY_COORDS := Vector2i(0, 0)
+const SELECTION_COORDS := Vector2i(1, 0)
+const ROAD_TERRAIN_SET := 0
+const ROAD_TERRAIN := 0
+
 const TILE_SIZE := 8 # TODO determine from node properties
 const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
@@ -475,7 +480,7 @@ func _ready() -> void:
 		for y in range(0, Global.game_size):
 			self.world_map[x].append(0)
 			self.groups[x].append(0)
-			super.set_cell(0, Vector2i(x, y), 0, Vector2i.ZERO)
+			super.set_cell(0, Vector2i(x, y), 0, CityMap.EMPTY_COORDS)
 
 	self.camera.position = self.map_to_local(
 		Vector2(Global.game_size / 2, Global.game_size / 2)
@@ -618,7 +623,7 @@ func set_building(coords: Vector2i, tile: int) -> void:
 		for building_coords in building.get_cells(coords):
 			self.world_map[building_coords.x][building_coords.y] = self.building_index
 			# Hide the empty tiles behind the building by setting them to invalid
-			super.set_cell(0, building_coords, 0)
+			super.set_cell(0, building_coords, -1)
 		self.building_types.append(tile)
 		self.building_roots.append(coords)
 		self.building_index += 1
@@ -628,20 +633,30 @@ func set_building(coords: Vector2i, tile: int) -> void:
 
 	# Update autotiling (assumes all tiles are roads)
 	if building != null:
-		super.set_cells_terrain_connect(0, [coords], 0, 0)
+		super.set_cells_terrain_connect(
+			0,
+			[coords],
+			CityMap.ROAD_TERRAIN_SET,
+			CityMap.ROAD_TERRAIN
+		)
 		return
 
 	# We're removing this tile, so update the autotiling of all surrounding
 	# tiles, as it's not done automatically
 	var terrain_cells: Array[Vector2i] = []
-	super.set_cell(0, coords, tile, Vector2i.ZERO)
+	super.set_cell(0, coords, tile, CityMap.EMPTY_COORDS)
 	for orthogonal in self.get_orthogonal(coords):
 		if self.get_type(self.get_building(orthogonal)) == BuildingType.ROAD:
 			# Delete and recreate surrounding roads to force them to refresh
 			# Only calling set_cells_terrain_connect is insufficient
-			super.set_cell(0, orthogonal, tile, Vector2i.ZERO)
+			super.set_cell(0, orthogonal, tile, CityMap.EMPTY_COORDS)
 			terrain_cells.append(orthogonal)
-	super.set_cells_terrain_connect(0, terrain_cells, 0, 0)
+	super.set_cells_terrain_connect(
+		0,
+		terrain_cells,
+		self.ROAD_TERRAIN_SET,
+		self.ROAD_TERRAIN
+	)
 
 
 # Helper function to get a building's type (an index into the BUILDINGS array)
@@ -843,7 +858,12 @@ func _update_preview() -> void:
 	# Move the building preview
 	self.preview_building.position = self.map_to_local(building_coords)
 	if building.is_tile:
-		self.preview_tile.set_cells_terrain_connect(0, [building_coords], 0, 0)
+		self.preview_tile.set_cells_terrain_connect(
+			0,
+			[building_coords],
+			self.ROAD_TERRAIN_SET,
+			self.ROAD_TERRAIN
+		)
 	else:
 		self.preview_building.visible = true
 
@@ -861,7 +881,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for coords in building.get_area_cells(building_coords):
-		self.preview_area.set_cell(0, coords, BuildingType.SELECTION, Vector2i.ZERO)
+		self.preview_area.set_cell(0, coords, 0, CityMap.SELECTION_COORDS)
 		var id := self.get_building(coords)
 		self.modulate_building(building, id, false)
 
