@@ -65,9 +65,9 @@ func push_interaction(building_str: String, gp: int, vp: int) -> String:
 
 
 # Returns array of plaintext strings
-func push_all_interactions(id: int) -> Array[String]:
-	var building = self.buildings[id]
-	if id == CityMap.BuildingType.PYRAMID:
+func push_all_interactions(type: CityMap.BuildingType) -> Array[String]:
+	var building = self.buildings[type]
+	if type == CityMap.BuildingType.PYRAMID:
 		# Hack to avoid printing a line for every pyramid interaction
 		return [
 			self.push_interaction(

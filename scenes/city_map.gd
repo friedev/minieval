@@ -356,20 +356,20 @@ static var BUILDINGS := {
 
 
 class Placement:
-	var id: int
+	var type: BuildingType
 	var coords: Vector2i
 	var gp_change: int
 	var vp_change: int
 	var group_joins: Array[int]
 
 	func _init(
-		id: int,
+		type: BuildingType,
 		coords: Vector2i,
 		gp_change: int,
 		vp_change: int,
 		group_joins: Array[int]
 	):
-		self.id = id
+		self.type = type
 		self.coords = coords
 		self.gp_change = gp_change
 		self.vp_change = vp_change
@@ -419,7 +419,7 @@ var world_map: Array[Array] = []
 # 1D array mapping a building ID (the index into this array) to its type (an
 # index in the BUILDINGS array)
 # Content starts at BASE_BUILDING_INDEX, everything before that is null
-var building_types: Array[int] = []
+var building_types: Array[BuildingType] = []
 # 1D array mapping a building ID (the index into this array) to its root
 # position (a cell vector)
 var building_roots: Array[Vector2i] = []
@@ -567,7 +567,7 @@ func undo() -> void:
 	self._clear_preview()
 	var prev_placement: Placement = self.history.pop_back()
 	if prev_placement:
-		self.destroy_building(prev_placement.coords, prev_placement.id)
+		self.destroy_building(prev_placement.coords, prev_placement.type)
 		self.gp -= prev_placement.gp_change
 		self.vp -= prev_placement.vp_change
 		for join in prev_placement.group_joins:
@@ -581,7 +581,7 @@ func redo() -> void:
 	self._clear_preview()
 	var next_placement: Placement = self.future.pop_back()
 	if next_placement:
-		self.place_building(next_placement.coords, next_placement.id, true)
+		self.place_building(next_placement.coords, next_placement.type, true)
 		self.gp += next_placement.gp_change
 		self.vp += next_placement.vp_change
 		self.history.append(next_placement)
@@ -646,7 +646,7 @@ func set_building(coords: Vector2i, tile: int) -> void:
 
 # Helper function to get a building's type (an index into the BUILDINGS array)
 # from its ID
-func get_type(id: int) -> int:
+func get_type(id: int) -> BuildingType:
 	if id < self.BASE_BUILDING_INDEX:
 		return id
 	return self.building_types[id]
@@ -719,11 +719,11 @@ func get_adjacent_buildings(
 	return adjacent
 
 
-func _select_building(id: int) -> void:
-	var building: Building = CityMap.BUILDINGS[id]
+func _select_building(type: BuildingType) -> void:
+	var building: Building = CityMap.BUILDINGS[type]
 	if not building:
 		return
-	self.selected_building = id
+	self.selected_building = type
 	if not building.is_tile:
 		self.preview_building.texture = building.texture
 	self._update_preview()
@@ -753,8 +753,8 @@ func get_building_sprite(id: int) -> Sprite2D:
 
 
 # Returns the buildings connected by road to the given building
-func get_road_connections(coords: Vector2i, id: int) -> Array[int]:
-	var building: Building = CityMap.BUILDINGS[id]
+func get_road_connections(coords: Vector2i, type: BuildingType) -> Array[int]:
+	var building: Building = CityMap.BUILDINGS[type]
 	var road_connections: Array[int] = []
 	var counted_groups: Array[int] = []
 	for adjacent_coords in building.get_adjacent_cells(coords):
@@ -795,9 +795,9 @@ func _clear_preview() -> void:
 		self.modulated_buildings.clear()
 
 
-# Modulates the building with the given id based on its interaction with the
+# Modulates the building with the given ID based on its interaction with the
 # given building type
-# id is the modulated building's id, building is what it's modulated relative to
+# id is the modulated building's ID, building is what it's modulated relative to
 func modulate_building(building: Building, id: int, road_connection: bool) -> void:
 	if id < self.BASE_BUILDING_INDEX:
 		return
@@ -896,11 +896,11 @@ func _update_preview() -> void:
 # Includes the building's flat GP and VP, as well as interactions
 func get_building_value(
 	coords: Vector2i,
-	id: int,
+	type: BuildingType,
 	get_road_connections := true,
 	road_connections: Array[int] = []
 ) -> Array[int]:
-	var building: Building = CityMap.BUILDINGS[id]
+	var building: Building = CityMap.BUILDINGS[type]
 	var gp_value := building.gp
 	var vp_value := building.vp
 	var counted_ids: Array[int] = []
@@ -924,7 +924,7 @@ func get_building_value(
 	# Account for buildings connected via road
 	if get_road_connections:
 		assert(road_connections == [])
-		road_connections = self.get_road_connections(coords, id)
+		road_connections = self.get_road_connections(coords, type)
 
 	for connected_building in road_connections:
 		if not counted_ids.has(connected_building):
@@ -974,8 +974,8 @@ func emit_particles(coords: Vector2i, building: Building) -> void:
 	self.building_particles.restart()
 
 
-func place_building(coords: Vector2i, id: int, force := false) -> Placement:
-	var building: Building = CityMap.BUILDINGS[id]
+func place_building(coords: Vector2i, type: BuildingType, force := false) -> Placement:
+	var building: Building = CityMap.BUILDINGS[type]
 
 	# Prevent placement if building overlaps any existing buildings
 	for building_coords in building.get_cells(coords):
@@ -987,7 +987,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 #		return null
 
 	# Give GP based on nearby buildings
-	var building_value := self.get_building_value(coords, id)
+	var building_value := self.get_building_value(coords, type)
 	var gp_change: int = building_value[0]
 	var vp_change: int = building_value[1]
 
@@ -1002,7 +1002,7 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 	if building.groupable:
 		for neighbor in get_orthogonal(coords):
 			var neighbor_type := get_type(get_building(neighbor))
-			if neighbor_type == id:
+			if neighbor_type == type:
 				neighbor_groups.append(get_base_group(get_group(neighbor)))
 		var x := coords.x
 		var y := coords.y
@@ -1041,27 +1041,28 @@ func place_building(coords: Vector2i, id: int, force := false) -> Placement:
 		instance.set_name("building_%d" % self.building_index)
 		self.buildings_node.add_child(instance)
 
-	self.set_building(coords, id)
-	return Placement.new(id, coords, gp_change, vp_change, neighbor_groups)
+	self.set_building(coords, type)
+	return Placement.new(type, coords, gp_change, vp_change, neighbor_groups)
 
 
-func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
+func destroy_building(coords: Vector2i, type: BuildingType = self.INVALID_BUILDING) -> void:
 	# If an ID is given, use it to offset the coords, ensuring that we won't
 	# select part of the building with empty space
 	# DON'T supply an ID if the coords is already a tile the building occupies
 	# Use it for deletion where you only know the root coords
 	# There may be an edge case for a building with an empty center (e.g. a 3x3
 	# donut-shaped building)
-	if id != self.INVALID_BUILDING:
-		coords += CityMap.BUILDINGS[self.get_type(id)].get_cell_offset()
-	id = self.get_building(coords)
+	if type != self.INVALID_BUILDING:
+		coords += CityMap.BUILDINGS[type].get_cell_offset()
+	var id := self.get_building(coords)
 	if id == self.INVALID_BUILDING:
 		return
 
 	var is_tile: bool = id < self.BASE_BUILDING_INDEX
 
-	var type: int = id
-	if not is_tile:
+	if is_tile:
+		type = id
+	else:
 		# If this isn't a tile building, free its sprite
 		var instance := self.get_building_sprite(id)
 		if instance and not instance.is_queued_for_deletion():
@@ -1097,5 +1098,5 @@ func destroy_building(coords: Vector2i, id := self.INVALID_BUILDING) -> void:
 				self.adjacent_buildings[group].erase(id)
 
 
-func _on_palette_building_selected(id: int) -> void:
+func _on_palette_building_selected(id: BuildingType) -> void:
 	self._select_building(id)

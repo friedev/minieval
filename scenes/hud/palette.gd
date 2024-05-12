@@ -1,6 +1,6 @@
 class_name Palette extends Control
 
-signal building_selected(id: int)
+signal building_selected(id: CityMap.BuildingType)
 
 const INVALID_BUILDING := -1
 
