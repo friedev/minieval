@@ -9,8 +9,8 @@ const INITIAL_GP := 25
 
 # Default options
 const SPEED := 10.0
-const MUSIC_VOLUME := 5
-const SOUND_VOLUME := 5
+const MUSIC_VOLUME := 1.0
+const SOUND_VOLUME := 1.0
 
 var endless := false
 var num_turns := Global.NUM_TURNS

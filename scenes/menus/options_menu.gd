@@ -12,10 +12,6 @@ class_name OptionsMenu extends Menu
 @onready var sound_bus_index := AudioServer.get_bus_index(self.sound_bus_name)
 
 
-# TODO use linear_to_db
-const VOLUME_VALUES := [-80, -40, -20, -10, -5, 0, 2, 4, 6, 8, 9]
-
-
 func _ready() -> void:
 	self.camera_speed_slider.value = Global.speed
 	self.sound_volume_slider.value = Global.sound_volume
@@ -28,12 +24,12 @@ func _on_camera_speed_slider_value_changed(value: float) -> void:
 
 func _on_sound_volume_slider_value_changed(value: float) -> void:
 	Global.sound_volume = value
-	AudioServer.set_bus_volume_db(self.sound_bus_index, self.VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.sound_bus_index, linear_to_db(Global.sound_volume))
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	Global.music_volume = value
-	AudioServer.set_bus_volume_db(self.music_bus_index, self.VOLUME_VALUES[value])
+	AudioServer.set_bus_volume_db(self.music_bus_index, linear_to_db(Global.music_volume))
 
 
 func _on_fullscreen_check_box_toggled(button_pressed: bool) -> void:

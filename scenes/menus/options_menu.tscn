@@ -55,7 +55,7 @@ size_flags_vertical = 3
 theme = ExtResource("6")
 min_value = 1.0
 max_value = 20.0
-value = 10.0
+value = 1.0
 
 [node name="SoundLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -69,8 +69,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("6")
-max_value = 10.0
-value = 5.0
+max_value = 1.0
+step = 0.1
 
 [node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -84,8 +84,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("6")
-max_value = 10.0
-value = 5.0
+max_value = 1.0
+step = 0.1
 
 [node name="FullscreenLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
