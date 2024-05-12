@@ -618,7 +618,6 @@ func set_building(coords: Vector2i, tile: int) -> void:
 
 	var building: Building = CityMap.BUILDINGS[tile]
 	if building and not building.is_tile:
-		# TODO move to place_building or other helper method
 		for building_coords in building.get_cells(coords):
 			self.world_map[building_coords.x][building_coords.y] = self.building_index
 			# Hide the empty tiles behind the building by setting them to invalid
@@ -978,7 +977,6 @@ func emit_particles(coords: Vector2i, building: Building) -> void:
 
 	self.reset_particles()
 
-	# TODO make particles a child of building scene and customize there instead
 	var size := Vector2i(len(building.cells[0]), len(building.cells))
 	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
 	self.building_particles.position = self.map_to_local(coords + size / 2)
