@@ -1,39 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbwe2w3gmnago"]
+[gd_scene load_steps=16 format=3 uid="uid://cbwe2w3gmnago"]
 
-[ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1"]
 [ext_resource type="Script" path="res://scenes/hud/palette.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://dixijkmqsq77x" path="res://scenes/hud/building_tooltip.tscn" id="4_4ng53"]
+[ext_resource type="PackedScene" uid="uid://b8a6newcjhtr6" path="res://scenes/hud/palette_icon.tscn" id="5_6ea70"]
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="5_n6ynh"]
 
-[node name="Palette" type="Panel" node_paths=PackedStringArray("selection", "tile_map", "tooltip")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[sub_resource type="AtlasTexture" id="AtlasTexture_cee8q"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu47f"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75dbj"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oxor"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxnch"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(32, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t08o4"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(56, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyo0a"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(40, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwko4"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(48, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iae6j"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(56, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnobw"]
+atlas = ExtResource("5_n6ynh")
+region = Rect2(32, 16, 8, 8)
+
+[node name="Palette" type="Control" node_paths=PackedStringArray("icon_container", "tooltip")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -328.0
-offset_top = -112.0
-offset_right = 328.0
-offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("4")
 script = ExtResource("2")
-selection = NodePath("Selection")
-tile_map = NodePath("TileMap")
+icon_container = NodePath("MarginContainer/PanelContainer/IconContainer")
 tooltip = NodePath("BuildingTooltip")
-
-[node name="Selection" type="TileMap" parent="."]
-position = Vector2(8, 8)
-scale = Vector2(8, 8)
-tile_set = ExtResource("1")
-format = 2
-layer_0/tile_data = PackedInt32Array(1, 1, 0)
-
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2(8, 8)
-scale = Vector2(8, 8)
-tile_set = ExtResource("1")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 21, 0, 1, 11, 0, 2, 13, 0, 3, 12, 0, 4, 15, 0, 5, 14, 0, 6, 16, 0, 7, 17, 0, 8, 18, 0, 9, 19, 0)
 
 [node name="BuildingTooltip" parent="." instance=ExtResource("4_4ng53")]
 visible = false
@@ -41,3 +65,132 @@ layout_mode = 0
 offset_top = -44.0
 offset_bottom = 56.0
 grow_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="IconContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PaletteIconRoad" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_cee8q")
+
+[node name="PaletteIconHouse" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 11
+initially_selected = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconHouse"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vu47f")
+
+[node name="PaletteIconMansion" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 13
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconMansion"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_75dbj")
+
+[node name="PaletteIconShop" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 12
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconShop"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_3oxor")
+
+[node name="PaletteIconStatue" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 15
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconStatue"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hxnch")
+
+[node name="PaletteIconForge" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 14
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconForge"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_t08o4")
+
+[node name="PaletteIconCathedral" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconCathedral"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hyo0a")
+
+[node name="PaletteIconKeep" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 17
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconKeep"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jwko4")
+
+[node name="PaletteIconTower" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 18
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconTower"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_iae6j")
+
+[node name="PaletteIconPyramid" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+layout_mode = 2
+building = 19
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconPyramid"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_tnobw")
+
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconHouse" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconHouse" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconHouse" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconMansion" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconMansion" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconMansion" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconShop" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconShop" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconShop" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconStatue" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconStatue" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconStatue" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconForge" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconForge" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconForge" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconCathedral" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconCathedral" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconCathedral" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconKeep" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconKeep" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconKeep" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconTower" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconTower" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconTower" to="." method="_on_palette_icon_unhovered"]
+[connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconPyramid" to="." method="_on_palette_icon_clicked"]
+[connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconPyramid" to="." method="_on_palette_icon_hovered"]
+[connection signal="unhovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconPyramid" to="." method="_on_palette_icon_unhovered"]

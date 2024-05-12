@@ -5,20 +5,19 @@ signal building_selected(id: int)
 const INVALID_BUILDING := -1
 
 @export_group("Internal Nodes")
-@export var selection: TileMap
-@export var tile_map: TileMap
+@export var icon_container: Control
 @export var tooltip: BuildingTooltip
 
-@onready var tooltip_position: Vector2 = self.tooltip.position
 var last_tooltip_id := -1
+var current_selection: PaletteIcon = null
 
 
-func update_tooltip(id: int, coords: Vector2i) -> void:
-	if id == self.last_tooltip_id:
+func update_tooltip(icon: PaletteIcon) -> void:
+	if icon.building == self.last_tooltip_id:
 		return
 
-	self.last_tooltip_id = id
-	self.tooltip.set_building(id)
+	self.last_tooltip_id = icon.building
+	self.tooltip.set_building(icon.building)
 
 	# Do this refresh twice because Godot doesn't wanna refresh it I guess
 	for _i in range(2):
@@ -28,43 +27,45 @@ func update_tooltip(id: int, coords: Vector2i) -> void:
 		self.tooltip.size = Vector2(0, 0)
 		self.tooltip.show()
 
-		# Add the horizonal offset corresponding to the hovered tile
+		# Align the tooltip with the hovered icon
+		self.tooltip.global_position = icon.global_position
+		# Center the tooltip horizontally
+		self.tooltip.position.x += icon.size.x / 2 - self.tooltip.size.x / 2
 		# Move the tooltip strictly above the palette
-		self.tooltip.position = self.tooltip_position + Vector2(
-			coords.x * 64,
-			-self.tooltip.size.y + 32
-		)
+		self.tooltip.position.y -= self.tooltip.size.y + 16
 
 
 func _input(event: InputEvent):
-	var coords: Vector2i
-	var hover := event is InputEventMouseMotion
-	var click: bool = event is InputEventMouseButton and event.pressed
-	var key = event is InputEventKey and event.pressed
-
-	if hover or click:
-		coords = ((event.position - self.global_position) / 64).floor()
-	elif key:
-		if event.keycode == KEY_0:
-			coords = Vector2i(9, 0)
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		var icon_index: int
+		if key_event.keycode == KEY_0:
+			icon_index = 9
 		else:
-			coords = Vector2i(event.keycode - KEY_1, 0)
-	else:
+			icon_index = key_event.keycode - KEY_1
+		if icon_index < self.icon_container.get_child_count():
+			var icon := self.icon_container.get_child(icon_index) as PaletteIcon
+			self.select_icon(icon)
+
+
+func select_icon(icon: PaletteIcon) -> void:
+	if self.current_selection == icon:
 		return
+	if self.current_selection != null:
+		self.current_selection.set_selected(false)
+	self.current_selection = icon
+	self.current_selection.set_selected(true)
+	self.building_selected.emit(icon.building)
 
-	var id := self.tile_map.get_cell_source_id(0, coords)
-	if id == self.INVALID_BUILDING:
-		self.tooltip.visible = false
-		return
 
-	# Hack to map nice road icon (21) to actual road ID (2)
-	if id == 21:
-		id = CityMap.BuildingType.ROAD
+func _on_palette_icon_clicked(icon: PaletteIcon) -> void:
+	self.select_icon(icon)
 
-	if hover:
-		tooltip.show()
-		self.update_tooltip(id, coords)
-	else:
-		self.selection.clear()
-		self.selection.set_cell(0, coords, CityMap.BuildingType.SELECTION)
-		self.building_selected.emit(id)
+
+func _on_palette_icon_hovered(icon: PaletteIcon) -> void:
+	self.tooltip.show()
+	self.update_tooltip(icon)
+
+
+func _on_palette_icon_unhovered(icon: PaletteIcon) -> void:
+	self.tooltip.hide()
