@@ -16,15 +16,15 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 
-func _on_MainMenuButton_pressed() -> void:
+func _on_main_menu_button_pressed() -> void:
 	Global.change_scene_to_file(self.title_scene)
 
 
-func _on_OptionsButton_pressed() -> void:
+func _on_options_button_pressed() -> void:
 	self.hide()
 	self.options_pressed.emit(self)
 
 
-func _on_TutorialButton_pressed() -> void:
+func _on_tutorial_button_pressed() -> void:
 	self.hide()
 	self.tutorial_pressed.emit(self)

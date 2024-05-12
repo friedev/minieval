@@ -34,16 +34,16 @@ func end_game() -> void:
 	self.open()
 
 
-func _on_FreeplayButton_pressed() -> void:
+func _on_freeplay_button_pressed() -> void:
 	self.close()
 	Global.endless = true
 	self.turn_label.visible = false
 
 
-func _on_UndoButton_pressed() -> void:
+func _on_undo_button_pressed() -> void:
 	self.close()
 	self.city_map.undo()
 
 
-func _on_MainMenuButton_pressed() -> void:
+func _on_main_menu_button_pressed() -> void:
 	Global.change_scene_to_file(self.title_scene)
