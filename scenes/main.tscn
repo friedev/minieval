@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b14c1y35bjrym"]
+[gd_scene load_steps=24 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
 [ext_resource type="Script" path="res://scenes/city_map.gd" id="2_2brww"]
@@ -8,12 +8,16 @@
 [ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="6_5hfa5"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="7_wdqlp"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="8_kommm"]
+[ext_resource type="Script" path="res://scenes/turn_label.gd" id="9_2hjvh"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
+[ext_resource type="Script" path="res://scenes/undo_label.gd" id="10_xuh3s"]
 [ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/palette.tscn" id="11_g2fyb"]
+[ext_resource type="Script" path="res://scenes/gp_label.gd" id="11_h0tk0"]
 [ext_resource type="Script" path="res://scenes/black_overlay.gd" id="12_0ycio"]
 [ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/game_over_menu.tscn" id="12_2hgrf"]
 [ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause_menu.tscn" id="13_hwilj"]
+[ext_resource type="Script" path="res://scenes/vp_label.gd" id="13_klxiu"]
 [ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
 [ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/tutorial_menu.tscn" id="15_0mlr1"]
 
@@ -41,7 +45,7 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Main" type="Node"]
 
-[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "game_over_menu", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
+[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
 format = 2
@@ -54,11 +58,6 @@ bad_color = Color(1, 0.25, 0.25, 1)
 mouse_speed = 1000.0
 mouse_speed_min = 0.25
 mouse_acceleration = 0.8
-gp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/GPLabel")
-vp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/VPLabel")
-turn_label = NodePath("../CanvasLayer/TurnLabel")
-undo_label = NodePath("../CanvasLayer/UndoLabel")
-game_over_menu = NodePath("../CanvasLayer/GameOverMenu")
 camera = NodePath("../Camera2D")
 preview_label = NodePath("../CanvasLayer/PreviewNode/PreviewLabel")
 preview_node = NodePath("../CanvasLayer/PreviewNode")
@@ -139,6 +138,7 @@ theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "Turns Left"
 horizontal_alignment = 2
+script = ExtResource("9_2hjvh")
 
 [node name="UndoLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -153,6 +153,7 @@ theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "(Press Z/U to Undo)"
 horizontal_alignment = 1
+script = ExtResource("10_xuh3s")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 84.0
@@ -179,6 +180,7 @@ expand_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
+script = ExtResource("11_h0tk0")
 
 [node name="VPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
 custom_minimum_size = Vector2(32, 32)
@@ -190,6 +192,7 @@ expand_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
+script = ExtResource("13_klxiu")
 
 [node name="PreviewNode" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -240,6 +243,11 @@ visible = false
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("13_hwilj")]
 visible = false
 
+[connection signal="game_over" from="CityMap" to="CanvasLayer/GameOverMenu" method="_on_city_map_game_over"]
+[connection signal="gp_changed" from="CityMap" to="CanvasLayer/UndoLabel" method="_on_city_map_gp_changed"]
+[connection signal="gp_changed" from="CityMap" to="CanvasLayer/MarginContainer/GridContainer/GPLabel" method="_on_city_map_gp_changed"]
+[connection signal="turn_changed" from="CityMap" to="CanvasLayer/TurnLabel" method="_on_city_map_turn_changed"]
+[connection signal="vp_changed" from="CityMap" to="CanvasLayer/MarginContainer/GridContainer/VPLabel" method="_on_city_map_vp_changed"]
 [connection signal="building_selected" from="CanvasLayer/Palette" to="CityMap" method="_on_palette_building_selected"]
 [connection signal="options_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/OptionsMenu" method="open"]
 [connection signal="tutorial_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/TutorialMenu" method="open"]

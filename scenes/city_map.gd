@@ -1,5 +1,9 @@
 class_name CityMap extends TileMap
 
+signal gp_changed(gp: int)
+signal vp_changed(vp: int)
+signal game_over
+signal turn_changed(turn: int)
 
 class Building:
 	var name: String
@@ -383,8 +387,6 @@ const DEFAULT_BUILDING := 11
 
 const building_scene := preload("res://scenes/building.tscn")
 
-const turn_format := "%d Turns Left"
-
 @export_group("Preview Colors")
 @export var default_color: Color
 @export var invalid_color: Color
@@ -398,11 +400,6 @@ const turn_format := "%d Turns Left"
 @export var mouse_acceleration: float
 
 @export_group("External Nodes")
-@export var gp_label: Label
-@export var vp_label: Label
-@export var turn_label: Label
-@export var undo_label: Label
-@export var game_over_menu: GameOverMenu
 @export var camera: Camera
 @export var preview_label: Label
 @export var preview_node: Control
@@ -438,11 +435,18 @@ var adjacent_buildings: Array[Array] = []
 var building_index := self.BASE_BUILDING_INDEX
 var group_index := self.BASE_GROUP_INDEX
 
-var gp := Global.initial_gp
-var vp := 0
+var gp: int:
+	set(value):
+		gp = value
+		self.gp_changed.emit(self.gp)
+
+var vp: int:
+	set(value):
+		vp = value
+		self.vp_changed.emit(self.vp)
+
 var selected_building := self.DEFAULT_BUILDING
 
-var game_length := Global.num_turns
 var history: Array[Placement] = []
 var future: Array[Placement] = []
 
@@ -459,7 +463,8 @@ var mouse_direction := Vector2.ZERO
 
 
 func _ready() -> void:
-	self.turn_label.visible = not Global.endless
+	self.gp = Global.initial_gp
+	self.vp = 0
 
 	self._update_mouse_coords()
 	self._update_labels()
@@ -537,9 +542,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			self.vp += placement.vp_change
 			self.history.append(placement)
 			self.future.clear()
+			self.turn_changed.emit(self.get_turn())
 			self._update_labels()
 			if self.is_game_over():
-				self.game_over_menu.end_game()
+				self.game_over.emit()
 		else:
 			if event is InputEventMouseButton:
 				self.building_place_error_sound.play()
@@ -567,6 +573,7 @@ func undo() -> void:
 		for join in prev_placement.group_joins:
 			self.group_joins[join] = join
 		self.future.append(prev_placement)
+		self.turn_changed.emit(self.get_turn())
 		self._update_labels()
 
 
@@ -578,6 +585,7 @@ func redo() -> void:
 		self.gp += next_placement.gp_change
 		self.vp += next_placement.vp_change
 		self.history.append(next_placement)
+		self.turn_changed.emit(self.get_turn())
 		self._update_labels()
 
 
@@ -726,7 +734,7 @@ func get_turn() -> int:
 
 
 func get_turns_remaining() -> int:
-	return self.game_length - self.get_turn()
+	return Global.num_turns - self.get_turn()
 
 
 func is_game_over() -> bool:
@@ -764,11 +772,7 @@ func get_road_connections(coords: Vector2i, id: int) -> Array[int]:
 
 # Updates the GP/VP label and turn label
 func _update_labels() -> void:
-	self.gp_label.text = str(self.gp)
-	self.vp_label.text = str(self.vp)
 	var turns_remaining := self.get_turns_remaining()
-	self.turn_label.text = self.turn_format % turns_remaining
-	self.undo_label.visible = self.gp == 0
 
 
 func _update_mouse_coords() -> void:
