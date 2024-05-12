@@ -402,7 +402,7 @@ const turn_format := "%d Turns Left"
 @export var vp_label: Label
 @export var turn_label: Label
 @export var undo_label: Label
-@export var recap: RecapMenu
+@export var game_over_menu: GameOverMenu
 @export var camera: Camera
 @export var preview_label: Label
 @export var preview_node: Control
@@ -539,7 +539,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			self.future.clear()
 			self._update_labels()
 			if self.is_game_over():
-				self.recap.end_game()
+				self.game_over_menu.end_game()
 		else:
 			if event is InputEventMouseButton:
 				self.building_place_error_sound.play()

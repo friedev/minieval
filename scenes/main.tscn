@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
 [ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/palette.tscn" id="11_g2fyb"]
 [ext_resource type="Script" path="res://scenes/black_overlay.gd" id="12_0ycio"]
-[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/recap_menu.tscn" id="12_2hgrf"]
+[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/game_over_menu.tscn" id="12_2hgrf"]
 [ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause_menu.tscn" id="13_hwilj"]
 [ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
 [ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/tutorial_menu.tscn" id="15_0mlr1"]
@@ -41,7 +41,7 @@ color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Main" type="Node"]
 
-[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "recap", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
+[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("gp_label", "vp_label", "turn_label", "undo_label", "game_over_menu", "camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
 format = 2
@@ -58,7 +58,7 @@ gp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/GPLabel")
 vp_label = NodePath("../CanvasLayer/MarginContainer/GridContainer/VPLabel")
 turn_label = NodePath("../CanvasLayer/TurnLabel")
 undo_label = NodePath("../CanvasLayer/UndoLabel")
-recap = NodePath("../CanvasLayer/RecapMenu")
+game_over_menu = NodePath("../CanvasLayer/GameOverMenu")
 camera = NodePath("../Camera2D")
 preview_label = NodePath("../CanvasLayer/PreviewNode/PreviewLabel")
 preview_node = NodePath("../CanvasLayer/PreviewNode")
@@ -224,7 +224,7 @@ theme = ExtResource("8_kommm")
 color = Color(0, 0, 0, 0.501961)
 script = ExtResource("12_0ycio")
 
-[node name="RecapMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "palette", "turn_label", "game_music") instance=ExtResource("12_2hgrf")]
+[node name="GameOverMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "palette", "turn_label", "game_music") instance=ExtResource("12_2hgrf")]
 visible = false
 city_map = NodePath("../../CityMap")
 palette = NodePath("../Palette")

@@ -1,4 +1,4 @@
-class_name RecapMenu extends Menu
+class_name GameOverMenu extends Menu
 
 @export_file("*.tscn") var title_scene: String
 
