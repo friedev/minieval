@@ -385,7 +385,6 @@ const SELECTION_COORDS := Vector2i(1, 0)
 const ROAD_TERRAIN_SET := 0
 const ROAD_TERRAIN := 0
 
-const TILE_SIZE := 8 # TODO determine from node properties
 const BASE_BUILDING_INDEX := 20 # First unused index
 const BASE_GROUP_INDEX := 1
 const DEFAULT_BUILDING := 11
@@ -901,7 +900,7 @@ func _update_preview() -> void:
 	self.preview_node.position = self.coords_to_screen_position(
 		Vector2i(self.preview_coords.x, building_coords.y)
 	)
-	self.preview_node.position.y -= self.TILE_SIZE / 2 * self.camera.zoom.y
+	self.preview_node.position.y -= self.tile_set.tile_size.y / 2 * self.camera.zoom.y
 
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + self.gp < 0:
