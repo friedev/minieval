@@ -105,9 +105,8 @@ size_flags_horizontal = 4
 theme = ExtResource("6")
 text = "Back"
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/CameraSpeedSlider" to="." method="_on_camera_speed_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/SoundVolumeSlider" to="." method="_on_sound_volume_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="close"]

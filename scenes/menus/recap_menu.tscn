@@ -21,6 +21,7 @@ theme = ExtResource("5")
 script = ExtResource("1")
 title_scene = "res://scenes/title_screen.tscn"
 end_game_music = NodePath("EndGameMusic")
+can_go_back = false
 
 [node name="MenuTitle" type="Label" parent="."]
 layout_mode = 0

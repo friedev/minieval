@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b14c1y35bjrym"]
+[gd_scene load_steps=20 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
 [ext_resource type="Script" path="res://scenes/city_map.gd" id="2_2brww"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
 [ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/palette.tscn" id="11_g2fyb"]
+[ext_resource type="Script" path="res://scenes/black_overlay.gd" id="12_0ycio"]
 [ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/recap_menu.tscn" id="12_2hgrf"]
 [ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause_menu.tscn" id="13_hwilj"]
 [ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
@@ -221,6 +222,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("8_kommm")
 color = Color(0, 0, 0, 0.501961)
+script = ExtResource("12_0ycio")
 
 [node name="RecapMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "palette", "turn_label", "game_music") instance=ExtResource("12_2hgrf")]
 visible = false
@@ -229,22 +231,15 @@ palette = NodePath("../Palette")
 turn_label = NodePath("../TurnLabel")
 game_music = NodePath("../../BackgroundMusic")
 
-[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "recap", "options", "tutorial", "black_overlay") instance=ExtResource("13_hwilj")]
+[node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource("14_xpfr0")]
 visible = false
-city_map = NodePath("../../CityMap")
-recap = NodePath("../RecapMenu")
-options = NodePath("../OptionsMenu")
-tutorial = NodePath("../TutorialMenu")
-black_overlay = NodePath("../BlackOverlay")
 
-[node name="OptionsMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "black_overlay") instance=ExtResource("14_xpfr0")]
+[node name="TutorialMenu" parent="CanvasLayer" instance=ExtResource("15_0mlr1")]
 visible = false
-city_map = NodePath("../../CityMap")
-black_overlay = NodePath("../BlackOverlay")
 
-[node name="TutorialMenu" parent="CanvasLayer" node_paths=PackedStringArray("city_map", "pause", "black_overlay") instance=ExtResource("15_0mlr1")]
-city_map = NodePath("../../CityMap")
-pause = NodePath("../PauseMenu")
-black_overlay = NodePath("../BlackOverlay")
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("13_hwilj")]
+visible = false
 
 [connection signal="building_selected" from="CanvasLayer/Palette" to="CityMap" method="_on_palette_building_selected"]
+[connection signal="options_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/OptionsMenu" method="open"]
+[connection signal="tutorial_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/TutorialMenu" method="open"]

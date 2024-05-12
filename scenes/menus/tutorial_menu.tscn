@@ -53,5 +53,4 @@ size_flags_horizontal = 4
 theme = ExtResource("7")
 text = "Play"
 
-[connection signal="visibility_changed" from="." to="." method="_on_Tutorial_visibility_changed"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/PlayButton" to="." method="close"]

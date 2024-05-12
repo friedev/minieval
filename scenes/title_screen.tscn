@@ -91,6 +91,7 @@ text = "https://frie.dev/minieval"
 horizontal_alignment = 1
 
 [node name="MainMenu" parent="." instance=ExtResource("3_jxs4e")]
+visible = false
 layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
@@ -125,7 +126,5 @@ grow_vertical = 2
 stream = ExtResource("6_0gu2f")
 script = ExtResource("7_tttak")
 
-[connection signal="custom_game_menu_opened" from="MainMenu" to="CustomGameMenu" method="_on_title_ui_custom_game_menu_opened"]
-[connection signal="options_menu_opened" from="MainMenu" to="OptionsMenu" method="_on_title_ui_options_menu_opened"]
-[connection signal="menu_closed" from="OptionsMenu" to="MainMenu" method="_on_options_menu_closed"]
-[connection signal="menu_closed" from="CustomGameMenu" to="MainMenu" method="_on_custom_game_ui_menu_closed"]
+[connection signal="custom_game_pressed" from="MainMenu" to="CustomGameMenu" method="open"]
+[connection signal="options_pressed" from="MainMenu" to="OptionsMenu" method="open"]

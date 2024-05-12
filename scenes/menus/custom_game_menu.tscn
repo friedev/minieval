@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scenes/menus/custom_game_menu.gd" id="7"]
 
 [node name="CustomGameMenu" type="CenterContainer"]
+process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -85,6 +86,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme = ExtResource("1")
 text = "Back"
@@ -96,5 +98,5 @@ text = "Play"
 
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/TurnLimitLineEdit" to="." method="_on_turn_limit_line_edit_text_changed"]
 [connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/MapSizeLineEdit" to="." method="_on_map_size_line_edit_text_changed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/BackButton" to="." method="close"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

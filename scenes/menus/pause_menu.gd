@@ -1,41 +1,30 @@
-class_name PauseMenu extends Control
+# This node needs to be placed below other menu nodes in the scene tree so that
+# it handles the pause input action before other menus handle it as ui_cancel.
+class_name PauseMenu extends Menu
+
+signal options_pressed(previous: Menu)
+signal tutorial_pressed(previous: Menu)
 
 @export_file("*.tscn") var title_scene: String
 
-@export_group("External Nodes")
-@export var city_map: CityMap
-@export var recap: RecapMenu
-@export var options: OptionsMenu
-@export var tutorial: TutorialMenu
-@export var black_overlay: ColorRect
 
-
-# Make pause menu appear when user presses pause (Escape)
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"pause") && self.recap.visible == false:
-		self.visible = not self.visible
-
-
-func _on_ResumeButton_pressed() -> void:
-	self.hide()
+	if event.is_action_pressed(&"pause"):
+		if not Global.is_menu_open:
+			self.open()
+			return
+	super._input(event)
 
 
 func _on_MainMenuButton_pressed() -> void:
-	self.get_tree().change_scene_to_file(self.title_scene)
+	Global.change_scene_to_file(self.title_scene)
 
 
 func _on_OptionsButton_pressed() -> void:
 	self.hide()
-	self.options.show()
+	self.options_pressed.emit(self)
 
 
 func _on_TutorialButton_pressed() -> void:
 	self.hide()
-	self.tutorial.open_tutorial()
-
-
-func _on_Pause_visibility_changed() -> void:
-	if self.black_overlay != null:
-		self.black_overlay.visible = self.visible
-	if self.city_map != null:
-		self.city_map.in_menu = self.visible
+	self.tutorial_pressed.emit(self)

@@ -449,7 +449,6 @@ var future: Array[Placement] = []
 var mouse_coords := self.INVALID_COORDS
 var preview_coords := self.INVALID_COORDS
 var modulated_buildings: Array[int] = []
-var in_menu := false
 var mouse_direction := Vector2.ZERO
 
 @onready var particles_material: ParticleProcessMaterial = self.building_particles.process_material
@@ -509,7 +508,7 @@ func _process(delta: float) -> void:
 	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
 	self.get_viewport().warp_mouse(get_viewport().get_mouse_position() + mouse_velocity)
 
-	if not self.in_menu:
+	if not Global.is_menu_open:
 		# Update the preview if the mouse has moved to a different cell
 		self._update_mouse_coords()
 		if self.mouse_coords != self.preview_coords:
@@ -523,9 +522,6 @@ func select_cell(coords: Vector2i) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if self.in_menu:
-		return
-
 	if event.is_action_pressed(&"place_building"):
 		self._clear_preview()
 
