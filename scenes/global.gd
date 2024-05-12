@@ -1,6 +1,7 @@
 extends Node
 
 signal is_menu_open_changed(is_menu_open: bool)
+signal endless_changed(endless: bool)
 
 # Default game parameters
 const NUM_TURNS := 150
@@ -12,11 +13,17 @@ const SPEED := 10.0
 const MUSIC_VOLUME := 1.0
 const SOUND_VOLUME := 1.0
 
-var endless := false
+var endless := false:
+	set(value):
+		if value != Global.endless:
+			endless = value
+			Global.endless_changed.emit(Global.endless)
+
 var num_turns := Global.NUM_TURNS
 var game_size := Global.GAME_SIZE
 var initial_gp := Global.INITIAL_GP
 var tutorial_seen := false
+
 var is_menu_open := false:
 	set(value):
 		if value != Global.is_menu_open:
