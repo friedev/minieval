@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://du1fxgc4n54cy"]
+
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_h133k"]
+[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_pa0o1"]
+[ext_resource type="Texture2D" uid="uid://lvr14gwte7oy" path="res://sprites/buildings/pyramid.png" id="2_0dqsd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi77d"]
+atlas = ExtResource("1_h133k")
+region = Rect2(32, 16, 8, 8)
+
+[resource]
+script = ExtResource("1_pa0o1")
+display_name = "Pyramid"
+key = &"pyramid"
+gp = -150
+vp = 50
+icon = SubResource("AtlasTexture_qi77d")
+texture = ExtResource("2_0dqsd")
+offset = Vector2i(-3, -3)
+area = Rect2i(-4, -4, 16, 12)
+cells = Array[Vector2i]([Vector2i(3, 0), Vector2i(4, 0), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3)])
+gp_interactions = {
+"cathedral": -5,
+"forge": -5,
+"house": -5,
+"keep": -5,
+"mansion": -5,
+"pyramid": -5,
+"shop": -5,
+"statue": -5,
+"tower": -5
+}
+vp_interactions = {
+"cathedral": 5,
+"forge": 5,
+"house": 5,
+"keep": 5,
+"mansion": 5,
+"pyramid": 5,
+"shop": 5,
+"statue": 5,
+"tower": 5
+}
+is_tile = false
+terrain_set = -1
+terrain = -1

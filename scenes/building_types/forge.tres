@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://dx4aroh4mgimj"]
+
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_6wy1w"]
+[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_otguy"]
+[ext_resource type="Texture2D" uid="uid://ccc68gxudyqci" path="res://sprites/buildings/forge.png" id="2_esk7g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfnfy"]
+atlas = ExtResource("1_6wy1w")
+region = Rect2(56, 0, 8, 8)
+
+[resource]
+script = ExtResource("1_otguy")
+display_name = "Forge"
+key = &"forge"
+gp = -10
+vp = 2
+icon = SubResource("AtlasTexture_vfnfy")
+texture = ExtResource("2_esk7g")
+offset = Vector2i(0, 0)
+area = Rect2i(-2, -2, 6, 6)
+cells = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1)])
+gp_interactions = {
+"forge": -5,
+"shop": 3
+}
+vp_interactions = {
+"cathedral": -5,
+"keep": 5
+}
+is_tile = false
+terrain_set = -1
+terrain = -1

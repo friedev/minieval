@@ -4,14 +4,16 @@ signal clicked(icon: PaletteIcon)
 signal hovered(icon: PaletteIcon)
 signal unhovered(icon: PaletteIcon)
 
-@export var building: CityMap.BuildingType
+@export var building_type: BuildingType
 @export var initially_selected: bool
 
 @export_group("Internal Nodes")
+@export var building_texture_rect: TextureRect
 @export var selected_texture_rect: TextureRect
 
 
 func _ready() -> void:
+	self.building_texture_rect.texture = self.building_type.icon
 	if self.initially_selected:
 		self.clicked.emit(self)
 

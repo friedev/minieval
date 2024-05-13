@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://ceuqxqgc3d6uf"]
+
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_jrb0t"]
+[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_jvu0e"]
+[ext_resource type="Texture2D" uid="uid://bh3qglhs5rmfx" path="res://sprites/buildings/statue.png" id="2_2e8yk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jo60"]
+atlas = ExtResource("1_jrb0t")
+region = Rect2(32, 8, 8, 8)
+
+[resource]
+script = ExtResource("1_jvu0e")
+display_name = "Statue"
+key = &"statue"
+gp = -5
+vp = 5
+icon = SubResource("AtlasTexture_2jo60")
+texture = ExtResource("2_2e8yk")
+offset = Vector2i(0, -1)
+area = Rect2i(-2, -2, 5, 6)
+cells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
+gp_interactions = {}
+vp_interactions = {
+"cathedral": 5,
+"house": 1,
+"mansion": 2,
+"statue": -5
+}
+is_tile = false
+terrain_set = -1
+terrain = -1

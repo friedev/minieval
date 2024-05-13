@@ -36,6 +36,18 @@ var speed := self.SPEED
 var music_volume := self.MUSIC_VOLUME
 var sound_volume := self.SOUND_VOLUME
 
+static var building_types := {
+	&"road": preload("res://scenes/building_types/road.tres"),
+	&"house": preload("res://scenes/building_types/house.tres"),
+	&"mansion": preload("res://scenes/building_types/mansion.tres"),
+	&"shop": preload("res://scenes/building_types/shop.tres"),
+	&"statue": preload("res://scenes/building_types/statue.tres"),
+	&"forge": preload("res://scenes/building_types/forge.tres"),
+	&"cathedral": preload("res://scenes/building_types/cathedral.tres"),
+	&"keep": preload("res://scenes/building_types/keep.tres"),
+	&"tower": preload("res://scenes/building_types/tower.tres"),
+	&"pyramid": preload("res://scenes/building_types/pyramid.tres"),
+}
 
 func reset_game_parameters() -> void:
 	self.num_turns = self.NUM_TURNS

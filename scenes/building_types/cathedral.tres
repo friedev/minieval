@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://b34ii16pb5p4o"]
+
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_684aw"]
+[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_sbnk6"]
+[ext_resource type="Texture2D" uid="uid://cdnrkxrdsfg47" path="res://sprites/buildings/cathedral.png" id="2_kft4u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7184"]
+atlas = ExtResource("1_684aw")
+region = Rect2(40, 8, 8, 8)
+
+[resource]
+script = ExtResource("1_sbnk6")
+display_name = "Cathedral"
+key = &"cathedral"
+gp = -40
+vp = 20
+icon = SubResource("AtlasTexture_m7184")
+texture = ExtResource("2_kft4u")
+offset = Vector2i(-1, -1)
+area = Rect2i(-2, -2, 8, 7)
+cells = Array[Vector2i]([Vector2i(1, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(1, 2)])
+gp_interactions = {
+"cathedral": -20,
+"forge": 10
+}
+vp_interactions = {
+"cathedral": -20,
+"forge": -10,
+"shop": -10,
+"statue": 10
+}
+is_tile = false
+terrain_set = -1
+terrain = -1

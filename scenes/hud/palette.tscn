@@ -1,50 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://cbwe2w3gmnago"]
+[gd_scene load_steps=15 format=3 uid="uid://cbwe2w3gmnago"]
 
 [ext_resource type="Script" path="res://scenes/hud/palette.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://dixijkmqsq77x" path="res://scenes/hud/building_tooltip.tscn" id="4_4ng53"]
 [ext_resource type="PackedScene" uid="uid://b8a6newcjhtr6" path="res://scenes/hud/palette_icon.tscn" id="5_6ea70"]
-[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="5_n6ynh"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cee8q"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(16, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vu47f"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(32, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_75dbj"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(48, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3oxor"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(40, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxnch"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(32, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t08o4"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(56, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hyo0a"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(40, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jwko4"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(48, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iae6j"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(56, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tnobw"]
-atlas = ExtResource("5_n6ynh")
-region = Rect2(32, 16, 8, 8)
+[ext_resource type="Resource" uid="uid://cjmcsuwnak7o5" path="res://scenes/building_types/house.tres" id="5_oddwj"]
+[ext_resource type="Resource" uid="uid://bap0o31cy1ogw" path="res://scenes/building_types/road.tres" id="5_v1btn"]
+[ext_resource type="Resource" uid="uid://c5o3ydfw0fuk0" path="res://scenes/building_types/mansion.tres" id="6_3i4jq"]
+[ext_resource type="Resource" uid="uid://bsbif4hbrybxx" path="res://scenes/building_types/shop.tres" id="7_ledxm"]
+[ext_resource type="Resource" uid="uid://ceuqxqgc3d6uf" path="res://scenes/building_types/statue.tres" id="8_wl6lk"]
+[ext_resource type="Resource" uid="uid://dx4aroh4mgimj" path="res://scenes/building_types/forge.tres" id="9_47ggy"]
+[ext_resource type="Resource" uid="uid://b34ii16pb5p4o" path="res://scenes/building_types/cathedral.tres" id="10_tju2q"]
+[ext_resource type="Resource" uid="uid://d3eugwagddc7i" path="res://scenes/building_types/keep.tres" id="11_wft01"]
+[ext_resource type="Resource" uid="uid://b58u37gpre1au" path="res://scenes/building_types/tower.tres" id="12_bfhau"]
+[ext_resource type="Resource" uid="uid://du1fxgc4n54cy" path="res://scenes/building_types/pyramid.tres" id="13_bfwdp"]
 
 [node name="Palette" type="Control" node_paths=PackedStringArray("icon_container", "tooltip")]
 layout_mode = 3
@@ -85,84 +54,44 @@ theme_override_constants/separation = 0
 
 [node name="PaletteIconRoad" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_cee8q")
+building_type = ExtResource("5_v1btn")
 
 [node name="PaletteIconHouse" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 11
+building_type = ExtResource("5_oddwj")
 initially_selected = true
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconHouse"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_vu47f")
 
 [node name="PaletteIconMansion" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 13
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconMansion"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_75dbj")
+building_type = ExtResource("6_3i4jq")
 
 [node name="PaletteIconShop" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 12
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconShop"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_3oxor")
+building_type = ExtResource("7_ledxm")
 
 [node name="PaletteIconStatue" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 15
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconStatue"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_hxnch")
+building_type = ExtResource("8_wl6lk")
 
 [node name="PaletteIconForge" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 14
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconForge"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_t08o4")
+building_type = ExtResource("9_47ggy")
 
 [node name="PaletteIconCathedral" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 16
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconCathedral"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_hyo0a")
+building_type = ExtResource("10_tju2q")
 
 [node name="PaletteIconKeep" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 17
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconKeep"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_jwko4")
+building_type = ExtResource("11_wft01")
 
 [node name="PaletteIconTower" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 18
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconTower"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_iae6j")
+building_type = ExtResource("12_bfhau")
 
 [node name="PaletteIconPyramid" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
 layout_mode = 2
-building = 19
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/IconContainer/PaletteIconPyramid"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_tnobw")
+building_type = ExtResource("13_bfwdp")
 
 [connection signal="clicked" from="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad" to="." method="_on_palette_icon_clicked"]
 [connection signal="hovered" from="MarginContainer/PanelContainer/IconContainer/PaletteIconRoad" to="." method="_on_palette_icon_hovered"]

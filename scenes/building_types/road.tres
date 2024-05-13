@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BuildingType" load_steps=4 format=3 uid="uid://bap0o31cy1ogw"]
+
+[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_vaehb"]
+[ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="2_8eswp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ymv0"]
+atlas = ExtResource("2_8eswp")
+region = Rect2(16, 8, 8, 8)
+
+[resource]
+script = ExtResource("1_vaehb")
+display_name = "Road"
+key = &"road"
+gp = -1
+vp = 0
+icon = SubResource("AtlasTexture_6ymv0")
+offset = Vector2i(0, 0)
+area = Rect2i(0, 0, 0, 0)
+cells = Array[Vector2i]([Vector2i(0, 0)])
+gp_interactions = {}
+vp_interactions = {}
+is_tile = true
+terrain_set = 0
+terrain = 0

@@ -13,14 +13,6 @@ class_name BuildingTooltip extends Control
 @export var vp_label: Label
 @export var interactions_label: RichTextLabel
 
-@onready var buildings: Dictionary = CityMap.BUILDINGS
-@onready var building_ids: Array = self.buildings.keys()
-
-
-func _ready():
-	self.building_ids.remove_at(CityMap.BuildingType.EMPTY) # or erase()?
-	self.building_ids.sort()
-
 
 # Returns plaintext string
 func push_interaction_value(value: int, type: String, type_color: Color) -> String:
@@ -65,23 +57,23 @@ func push_interaction(building_str: String, gp: int, vp: int) -> String:
 
 
 # Returns array of plaintext strings
-func push_all_interactions(type: CityMap.BuildingType) -> Array[String]:
-	var building = self.buildings[type]
-	if type == CityMap.BuildingType.PYRAMID:
+func push_all_interactions(building_type: BuildingType) -> Array[String]:
+	if building_type.key == &"pyramid":
 		# Hack to avoid printing a line for every pyramid interaction
 		return [
 			self.push_interaction(
 				"ANY",
-				building.gp_interactions[CityMap.BuildingType.HOUSE],
-				building.vp_interactions[CityMap.BuildingType.HOUSE]
+				building_type.gp_interactions[&"pyramid"],
+				building_type.vp_interactions[&"pyramid"]
 			)
 		]
 
 	var first := true
 	var lines: Array[String] = []
-	for other_id in self.building_ids:
-		var gp: int = building.gp_interactions.get(other_id, 0)
-		var vp: int = building.vp_interactions.get(other_id, 0)
+	for other_building_type_key in Global.building_types:
+		var other_building_type: BuildingType = Global.building_types[other_building_type_key]
+		var gp: int = building_type.gp_interactions.get(other_building_type_key, 0)
+		var vp: int = building_type.vp_interactions.get(other_building_type_key, 0)
 		if gp == 0 and vp == 0:
 			continue
 
@@ -90,7 +82,7 @@ func push_all_interactions(type: CityMap.BuildingType) -> Array[String]:
 		else:
 			self.interactions_label.newline()
 
-		lines.append(self.push_interaction(self.buildings[other_id].name, gp, vp))
+		lines.append(self.push_interaction(other_building_type.display_name, gp, vp))
 	return lines
 
 
@@ -105,13 +97,12 @@ func max_line_width(lines: Array) -> float:
 	return max_width
 
 
-func set_building(id: int) -> void:
-	var building = self.buildings[id]
-	self.name_label.text = building.name
-	self.gp_label.text = str(-building.gp)
-	self.vp_label.text = str(building.vp)
+func set_building_type(building_type: BuildingType) -> void:
+	self.name_label.text = building_type.display_name
+	self.gp_label.text = str(-building_type.gp)
+	self.vp_label.text = str(building_type.vp)
 	self.interactions_label.clear()
-	var lines := self.push_all_interactions(id)
+	var lines := self.push_all_interactions(building_type)
 	if len(lines) > 0:
 		self.interactions_label.show()
 		# Dynamically resize interactions_label

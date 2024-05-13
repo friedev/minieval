@@ -1,23 +1,21 @@
 class_name Palette extends Control
 
-signal building_selected(id: CityMap.BuildingType)
-
-const INVALID_BUILDING := -1
+signal building_selected(building_type: BuildingType)
 
 @export_group("Internal Nodes")
 @export var icon_container: Control
 @export var tooltip: BuildingTooltip
 
-var last_tooltip_id := -1
+var last_tooltip_building_type: BuildingType = null
 var current_selection: PaletteIcon = null
 
 
 func update_tooltip(icon: PaletteIcon) -> void:
-	if icon.building == self.last_tooltip_id:
+	if icon.building_type == self.last_tooltip_building_type:
 		return
 
-	self.last_tooltip_id = icon.building
-	self.tooltip.set_building(icon.building)
+	self.last_tooltip_building_type = icon.building_type
+	self.tooltip.set_building_type(icon.building_type)
 
 	# Do this refresh twice because Godot doesn't wanna refresh it I guess
 	for _i in range(2):
@@ -55,7 +53,7 @@ func select_icon(icon: PaletteIcon) -> void:
 		self.current_selection.set_selected(false)
 	self.current_selection = icon
 	self.current_selection.set_selected(true)
-	self.building_selected.emit(icon.building)
+	self.building_selected.emit(icon.building_type)
 
 
 func _on_palette_icon_clicked(icon: PaletteIcon) -> void:
