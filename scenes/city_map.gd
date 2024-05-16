@@ -124,42 +124,57 @@ func _process(delta: float) -> void:
 			self.mouse_acceleration * delta
 		)
 	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
-	self.get_viewport().warp_mouse(self.get_viewport().get_mouse_position() + mouse_velocity)
+	self.move_mouse(self.get_viewport().get_mouse_position() + mouse_velocity)
 
 	if not Global.is_menu_open:
-		# Update the preview if the mouse has moved to a different cell
-		self._update_mouse_coords()
-		if self.mouse_coords != self.preview_coords:
-			self._update_preview()
+		self.update_mouse()
 	else:
 		self._clear_preview()
 
 
+func update_mouse() -> void:
+	self._update_mouse_coords()
+	# Update the preview if the mouse has moved to a different cell
+	if self.mouse_coords != self.preview_coords:
+		if Input.is_action_pressed(&"place_building"):
+			self.handle_place_building_input(false)
+		self._update_preview()
+
+
+func move_mouse(mouse_position: Vector2) -> void:
+	self.get_viewport().warp_mouse(mouse_position)
+	self.update_mouse()
+
+
 func select_cell(coords: Vector2i) -> void:
-	self.get_viewport().warp_mouse(self.coords_to_screen_position(coords))
+	self.move_mouse(self.coords_to_screen_position(coords))
+
+
+func handle_place_building_input(error_sound := true) -> void:
+	self._clear_preview()
+
+	var placement: Placement = self.place_building(
+		self.mouse_coords + self.selected_building_type.offset,
+		self.selected_building_type,
+	)
+
+	if placement != null:
+		self.gp += placement.gp_change
+		self.vp += placement.vp_change
+		self.history.append(placement)
+		self.future.clear()
+		self.turn_changed.emit(self.get_turn())
+		self._update_labels()
+		if self.is_game_over():
+			self.game_over.emit()
+	else:
+		if error_sound:
+			self.building_place_error_sound.play()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"place_building"):
-		self._clear_preview()
-
-		var placement: Placement = self.place_building(
-			self.mouse_coords + self.selected_building_type.offset,
-			self.selected_building_type,
-		)
-
-		if placement != null:
-			self.gp += placement.gp_change
-			self.vp += placement.vp_change
-			self.history.append(placement)
-			self.future.clear()
-			self.turn_changed.emit(self.get_turn())
-			self._update_labels()
-			if self.is_game_over():
-				self.game_over.emit()
-		else:
-			if event is InputEventMouseButton:
-				self.building_place_error_sound.play()
+		self.handle_place_building_input()
 	elif event.is_action_pressed(&"undo"):
 		self.undo()
 	elif event.is_action_pressed(&"redo"):
