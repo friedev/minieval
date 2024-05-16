@@ -41,7 +41,7 @@ func _input(event: InputEvent):
 			icon_index = 9
 		else:
 			icon_index = key_event.keycode - KEY_1
-		if icon_index < self.icon_container.get_child_count():
+		if icon_index >= 0 and icon_index < self.icon_container.get_child_count():
 			var icon := self.icon_container.get_child(icon_index) as PaletteIcon
 			self.select_icon(icon)
 
