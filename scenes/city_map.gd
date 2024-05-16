@@ -21,6 +21,15 @@ const FIRST_GROUP := 1
 
 const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 
+@export_group("Action Repeat")
+## Initial action repeat wait time.
+@export var initial_wait_time: float
+## Final action repeat wait time, after a certain number of action repeats.
+@export var final_wait_time: float
+## The number of actions it will take for the wait time to go from the initial
+## to the final wait time, changing linearly along the way.
+@export var actions_until_final_wait_time: int
+
 @export_group("Preview Colors")
 @export var default_color: Color
 @export var invalid_color: Color
@@ -47,6 +56,7 @@ const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 @export var preview_tile: TileMap
 @export var preview_building: Sprite2D
 @export var building_particles: GPUParticles2D
+@export var input_repeat_timer: Timer
 
 # Maps a cell to the building occupying that cell
 var building_map := {} # Dictionary[Vector2i, Building]
@@ -73,6 +83,8 @@ var selected_building_type: BuildingType
 
 var history: Array[Placement] = []
 var future: Array[Placement] = []
+
+var action_to_repeat: StringName
 
 var mouse_coords := self.INVALID_COORDS
 var preview_coords := self.INVALID_COORDS
@@ -146,11 +158,14 @@ func move_mouse(mouse_position: Vector2) -> void:
 	self.update_mouse()
 
 
-func select_cell(coords: Vector2i) -> void:
-	self.move_mouse(self.coords_to_screen_position(coords))
+func select_cell(coords: Vector2i) -> bool:
+	if self.is_in_bounds(coords):
+		self.move_mouse(self.coords_to_screen_position(coords))
+		return true
+	return false
 
 
-func handle_place_building_input(error_sound := true) -> void:
+func handle_place_building_input(error_sound := true) -> bool:
 	self._clear_preview()
 
 	var placement: Placement = self.place_building(
@@ -167,57 +182,89 @@ func handle_place_building_input(error_sound := true) -> void:
 		self._update_labels()
 		if self.is_game_over():
 			self.game_over.emit()
+		return true
 	else:
 		if error_sound:
 			self.building_place_error_sound.play()
+		return false
+
+
+# Returns true if the action should be repeated
+# This usually means the action was successful
+func handle_action(action: StringName) -> bool:
+	match action:
+		&"place_building":
+			# Don't try to repeat placing a building, since it will never work
+			self.handle_place_building_input()
+			return false
+		&"undo":
+			return self.undo()
+		&"redo":
+			return self.redo()
+		&"select_cell_left":
+			return self.select_cell(self.mouse_coords + Vector2i.LEFT)
+		&"select_cell_right":
+			return self.select_cell(self.mouse_coords + Vector2i.RIGHT)
+		&"select_cell_up":
+			return self.select_cell(self.mouse_coords + Vector2i.UP)
+		&"select_cell_down":
+			return self.select_cell(self.mouse_coords + Vector2i.DOWN)
+		_:
+			push_error("Unknown action %s" % action)
+			return false
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"place_building"):
-		self.handle_place_building_input()
-	elif event.is_action_pressed(&"undo"):
-		self.undo()
-	elif event.is_action_pressed(&"redo"):
-		self.redo()
-	elif event.is_action_pressed(&"select_cell_left"):
-		self.select_cell(self.mouse_coords + Vector2i.LEFT)
-	elif event.is_action_pressed(&"select_cell_right"):
-		self.select_cell(self.mouse_coords + Vector2i.RIGHT)
-	elif event.is_action_pressed(&"select_cell_up"):
-		self.select_cell(self.mouse_coords + Vector2i.UP)
-	elif event.is_action_pressed(&"select_cell_down"):
-		self.select_cell(self.mouse_coords + Vector2i.DOWN)
+	for action in [
+		&"place_building",
+		&"undo",
+		&"redo",
+		&"select_cell_left",
+		&"select_cell_right",
+		&"select_cell_up",
+		&"select_cell_down",
+	]:
+		if event.is_action_pressed(action):
+			if self.handle_action(action):
+				self.action_to_repeat = action
+				self.input_repeat_timer.start(self.initial_wait_time)
 
 
-func undo() -> void:
+func undo() -> bool:
 	self._clear_preview()
 	var prev_placement: Placement = self.history.pop_back()
-	if prev_placement:
-		self.destroy_building(prev_placement.building)
-		self.gp -= prev_placement.gp_change
-		self.vp -= prev_placement.vp_change
-		for join in prev_placement.group_joins:
-			self.group_joins[join] = join
-		self.future.append(prev_placement)
-		self.turn_changed.emit(self.get_turn())
-		self._update_labels()
+	if not prev_placement:
+		return false
+
+	self.destroy_building(prev_placement.building)
+	self.gp -= prev_placement.gp_change
+	self.vp -= prev_placement.vp_change
+	for join in prev_placement.group_joins:
+		self.group_joins[join] = join
+	self.future.append(prev_placement)
+	self.turn_changed.emit(self.get_turn())
+	self._update_labels()
+	return true
 
 
-func redo() -> void:
+func redo() -> bool:
 	self._clear_preview()
 	var next_placement: Placement = self.future.pop_back()
-	if next_placement:
-		# Can't reuse next_placement, since its Building object will have a
-		# reference to a freed sprite
-		var new_placement := self.place_building(
-			next_placement.building.coords,
-			next_placement.building.type
-		)
-		self.gp += next_placement.gp_change
-		self.vp += next_placement.vp_change
-		self.history.append(new_placement)
-		self.turn_changed.emit(self.get_turn())
-		self._update_labels()
+	if not next_placement:
+		return false
+
+	# Can't reuse next_placement, since its Building object will have a
+	# reference to a freed sprite
+	var new_placement := self.place_building(
+		next_placement.building.coords,
+		next_placement.building.type
+	)
+	self.gp += next_placement.gp_change
+	self.vp += next_placement.vp_change
+	self.history.append(new_placement)
+	self.turn_changed.emit(self.get_turn())
+	self._update_labels()
+	return true
 
 
 func is_in_bounds(coords: Vector2i) -> bool:
@@ -684,3 +731,20 @@ func destroy_building(building: Building) -> void:
 
 func _on_palette_building_selected(building_type: BuildingType) -> void:
 	self.select_building_type(building_type)
+
+
+func _on_input_repeat_timer_timeout() -> void:
+	if (
+		Input.is_action_pressed(self.action_to_repeat)
+		and self.handle_action(self.action_to_repeat)
+	):
+		var wait_time_delta := absf(
+			(self.final_wait_time - self.initial_wait_time)
+			/ self.actions_until_final_wait_time
+		)
+		var new_wait_time := move_toward(
+			self.input_repeat_timer.wait_time,
+			self.final_wait_time,
+			wait_time_delta
+		)
+		self.input_repeat_timer.start(new_wait_time)
