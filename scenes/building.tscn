@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dj45ldohrt2hf"]
-
-[node name="Building" type="Sprite2D"]
-centered = false
-offset = Vector2(-4, -4)
