@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://iv13x14ih3mw"]
+[gd_scene load_steps=9 format=3 uid="uid://iv13x14ih3mw"]
 
+[ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_2j8oj"]
 [ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1_j4gc6"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="2_1nk1m"]
 [ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/main_menu.tscn" id="3_jxs4e"]
-[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="4_yla3h"]
+[ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/menus/options_menu.tscn" id="4_yla3h"]
 [ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_menu.tscn" id="5_icgb8"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6_0gu2f"]
 [ext_resource type="Script" path="res://scenes/title_music.gd" id="7_tttak"]
@@ -16,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_2j8oj")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -99,13 +101,6 @@ grow_vertical = 2
 [node name="OptionsMenu" parent="." instance=ExtResource("4_yla3h")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="CustomGameMenu" parent="." instance=ExtResource("5_icgb8")]
 visible = false

@@ -8,11 +8,6 @@ const NUM_TURNS := 150
 const GAME_SIZE := 64
 const INITIAL_GP := 25
 
-# Default options
-const SPEED := 10.0
-const MUSIC_VOLUME := 1.0
-const SOUND_VOLUME := 1.0
-
 var endless := false:
 	set(value):
 		if value != self.endless:
@@ -31,11 +26,6 @@ var is_menu_open := false:
 			self.get_tree().paused = self.is_menu_open
 			self.is_menu_open_changed.emit(self.is_menu_open)
 
-# Options
-var speed := self.SPEED
-var music_volume := self.MUSIC_VOLUME
-var sound_volume := self.SOUND_VOLUME
-
 static var building_types := {
 	&"road": preload("res://scenes/building_types/road.tres"),
 	&"house": preload("res://scenes/building_types/house.tres"),
@@ -48,6 +38,7 @@ static var building_types := {
 	&"tower": preload("res://scenes/building_types/tower.tres"),
 	&"pyramid": preload("res://scenes/building_types/pyramid.tres"),
 }
+
 
 func reset_game_parameters() -> void:
 	self.num_turns = self.NUM_TURNS

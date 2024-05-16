@@ -1,5 +1,8 @@
 class_name Camera extends Camera2D
 
+@export var min_speed: float
+@export var max_speed: float
+
 @onready var default_zoom := self.zoom
 
 
@@ -8,9 +11,14 @@ func _process(delta: float) -> void:
 		Input.get_axis(&"pan_left", &"pan_right"),
 		Input.get_axis(&"pan_up", &"pan_down")
 	)
+	var speed: float = (
+		self.min_speed
+		+ (self.max_speed - self.min_speed)
+		* Options.options.get("camera_speed", 0.5)
+	)
 	self.position = self.position.lerp(
-		self.position + input * Global.speed,
-		Global.speed * delta
+		self.position + input * speed,
+		speed * delta
 	)
 
 

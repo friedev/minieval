@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/game_over_menu.tscn" id="12_2hgrf"]
 [ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause_menu.tscn" id="13_hwilj"]
 [ext_resource type="Script" path="res://scenes/hud/vp_label.gd" id="13_klxiu"]
-[ext_resource type="PackedScene" uid="uid://btmju8hejufk5" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
+[ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
 [ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/tutorial_menu.tscn" id="15_0mlr1"]
 
 [sub_resource type="Curve" id="2"]
@@ -130,6 +130,8 @@ bus = &"Music"
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 script = ExtResource("7_wdqlp")
+min_speed = 5.0
+max_speed = 25.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

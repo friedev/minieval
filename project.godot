@@ -20,6 +20,7 @@ config/icon="res://sprites/logo.png"
 [autoload]
 
 Global="*res://scenes/global.gd"
+Options="*res://scenes/options.gd"
 
 [display]
 

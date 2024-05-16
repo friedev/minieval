@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://rasjftexmjht"]
+
+[ext_resource type="PackedScene" uid="uid://cgnmle83oa3at" path="res://scenes/options/check_box_option.tscn" id="1_u1qee"]
+[ext_resource type="Script" path="res://scenes/options/fullscreen_option.gd" id="2_o8rfo"]
+
+[node name="FullscreenOption" instance=ExtResource("1_u1qee")]
+script = ExtResource("2_o8rfo")
+
+[node name="CheckBox" parent="." index="0"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
