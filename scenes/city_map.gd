@@ -748,3 +748,10 @@ func _on_input_repeat_timer_timeout() -> void:
 			wait_time_delta
 		)
 		self.input_repeat_timer.start(new_wait_time)
+
+
+func _on_camera_zoom_changed() -> void:
+	# Updating the preview here is necessary because the preview text position
+	# will need to change even if the mouse coords don't change
+	# Defer preview update until viewport has been updated to reflect the zoom
+	self._update_preview.call_deferred()

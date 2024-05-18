@@ -1,5 +1,7 @@
 class_name Camera extends Camera2D
 
+signal zoom_changed
+
 @export var min_speed: float
 @export var max_speed: float
 @export var min_zoom: Vector2
@@ -22,15 +24,20 @@ func _process(delta: float) -> void:
 
 
 func reset_zoom() -> void:
-	self.zoom = self.default_zoom
+	if self.zoom != self.default_zoom:
+		self.zoom = self.default_zoom
+		self.zoom_changed.emit()
 
 
 func zoom_by(zoom_factor: Vector2) -> void:
+	var old_zoom := self.zoom
 	var old_mouse_position := self.get_global_mouse_position()
 	# Round to ensure that integral, pixel-perfect zooming
 	self.zoom = (self.zoom + zoom_factor).round().clamp(self.min_zoom, self.max_zoom)
-	var new_mouse_position := self.get_global_mouse_position()
-	self.position += old_mouse_position - new_mouse_position
+	if self.zoom != old_zoom:
+		var new_mouse_position := self.get_global_mouse_position()
+		self.position += old_mouse_position - new_mouse_position
+		self.zoom_changed.emit()
 
 
 func _input(event: InputEvent) -> void:

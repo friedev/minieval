@@ -258,6 +258,7 @@ visible = false
 [connection signal="turn_changed" from="CityMap" to="CanvasLayer/TurnLabel" method="_on_city_map_turn_changed"]
 [connection signal="vp_changed" from="CityMap" to="CanvasLayer/MarginContainer/GridContainer/VPLabel" method="_on_city_map_vp_changed"]
 [connection signal="timeout" from="CityMap/InputRepeatTimer" to="CityMap" method="_on_input_repeat_timer_timeout"]
+[connection signal="zoom_changed" from="Camera2D" to="CityMap" method="_on_camera_zoom_changed"]
 [connection signal="building_selected" from="CanvasLayer/Palette" to="CityMap" method="_on_palette_building_selected"]
 [connection signal="last_move_undone" from="CanvasLayer/GameOverMenu" to="CityMap" method="undo"]
 [connection signal="options_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/OptionsMenu" method="open"]
