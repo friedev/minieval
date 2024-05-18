@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnsw3qf1cvuy3"]
+
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="1_27mun"]
+[ext_resource type="Script" path="res://scenes/menus/menu.gd" id="2_2gd20"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_q4mja"]
+[ext_resource type="Script" path="res://scenes/linked_label.gd" id="4_p8d0l"]
+
+[node name="CreditsMenu" type="CenterContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1_27mun")
+script = ExtResource("2_2gd20")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_27mun")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_27mun")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_27mun")
+theme_override_constants/separation = 16
+
+[node name="CreditsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_27mun")
+theme_override_fonts/font = ExtResource("3_q4mja")
+theme_override_font_sizes/font_size = 64
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(732, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "Minieval 1.0.0 was created in one semester by members of the [url=https://unl-game-dev-club.github.io]UNL Game Development Club[/url]:
+
+[ul]
+Programming: [url=https://frie.dev]Aaron Friesen[/url], [url=https://www.kalenwallin.com]Kalen Wallin[/url], Evan Mielak, Viet Ninh
+Art: [url=https://frie.dev]Aaron Friesen[/url]
+Music: Jackson Herman, [url=https://frie.dev]Aaron Friesen[/url]
+Sound Effects: Evan Mielak
+Moral Support: Ethan Fox
+[/ul]
+
+Subsequent updates developed by [url=https://frie.dev]Aaron Friesen[/url].
+
+Software used: [url=https://godotengine.org]Godot Engine[/url], [url=https://gimp.org]GIMP[/url], [url=https://lmms.io/]LMMS[/url], [url=https://jfxr.frozenfractal.com]jfxr[/url]
+
+Third-party assets:
+
+[ul]
+[url=https://www.1001fonts.com/bitmgothic-font.html]BitmGothic[/url] by [url=http://www.thenomi.org]Nomi[/url], licensed under the [url=https://www.1001fonts.com/licenses/ffc.html]1001Fonts FFC License[/url]
+[url=https://www.1001fonts.com/pixelfj8pt1-font.html]pixelFJ8pt[/url] by [url=https://www.1001fonts.com/users/flashjunior/]MBommeli[/url], licensed under the [url=https://www.1001fonts.com/licenses/ffc.html]1001Fonts FFC License[/url]
+[url=https://musescore.org/en/handbook/3/soundfonts-and-sfz-files]MuseScore General SoundFont[/url] by [url=https://musescore.org/user/62809]S. Christian Collins[/url], licensed under the [url=https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General_License.md]MIT License[/url]
+[url=http://sso.mattiaswestlund.net]Sonatina Symphonic Orchestra[/url] by [url=https://mattiaswestlund.net]Mattias Westlund[/url], licensed under the [url=https://creativecommons.org/licenses/sampling+/1.0]Creative Commons Sampling Plus 1.0 License[/url] (using the [url=https://bigcatinstruments.blogspot.com/2016/10/sound-modules.html]VST plugin[/url] by [url=https://bigcatinstruments.blogspot.com]bigcat Instruments[/url])
+[/ul]
+
+Licenses:
+
+[ul]
+Source Code: [url=https://www.gnu.org/licenses/agpl-3.0.en.html]GNU Affero General Public License v3[/url]
+Original Assets: [url=https://creativecommons.org/licenses/by-sa/4.0/]Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)[/url]
+[/ul]"
+fit_content = true
+script = ExtResource("4_p8d0l")
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="close"]

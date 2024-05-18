@@ -1,6 +1,6 @@
 # Minieval
 
-A tiny medieval city builder, inspired by [Islanders](https://store.steampowered.com/app/1046030/ISLANDERS).
+A tiny medieval city builder.
 
 ## How to Play
 
@@ -29,27 +29,20 @@ Buildings can't be destroyed, but you can always undo your last move.
 
 ## Credits
 
-- [Aaron Friesen](https://frie.dev): Team Lead, Programming, UI Design, Art, Title Screen Music, Balancing
-- [Kalen Wallin](https://www.kalenwallin.com): UI Design, Programming
-- [Evan Mielak](https://github.com/EvanJMielak): Sound Effects, Programming, Balancing
-- [Viet Ninh](https://github.com/viet-ninh): UI Design, Programming
-- [Jackson Herman](https://github.com/jack-herman): In-Game Music, Balancing
-- [Ethan Fox](https://github.com/EthanFox01): Balancing
+Minieval 1.0.0 was created in one semester by members of the [UNL Game Development Club](https://unl-game-dev-club.github.io):
 
-## Assets and Tools
+- Programming: [Aaron Friesen](https://frie.dev), [Kalen Wallin](https://www.kalenwallin.com), Evan Mielak, Viet Ninh
+- Art: [Aaron Friesen](https://frie.dev)
+- Music: Jackson Herman, [Aaron Friesen](https://frie.dev)
+- Moral Support: Ethan Fox
 
-### Fonts
+Subsequent updates developed by [Aaron Friesen](https://frie.dev).
 
-- Title Font: [BitmGothic](https://www.1001fonts.com/bitmgothic-font.html) by [Nomi](http://www.thenomi.org), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
-- Normal Font: [pixelFJ8pt](https://www.1001fonts.com/pixelfj8pt1-font.html) by [MBommeli](https://www.1001fonts.com/users/flashjunior/), licensed under the [1001Fonts FFC License](https://www.1001fonts.com/licenses/ffc.html)
+Software used: [Godot Engine](https://godotengine.org), [GIMP](https://gimp.org), [LMMS](https://lmms.io/), [jfxr](https://jfxr.frozenfractal.com)
 
-### Audio
-
-- Title Screen Music: [MuseScore General SoundFont](https://musescore.org/en/handbook/3/soundfonts-and-sfz-files) by [S. Christian Collins](https://musescore.org/user/62809), licensed under the [MIT License](https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General_License.md)
-- In-Game Music: [Sonatina Symphonic Orchestra](http://sso.mattiaswestlund.net) by [Mattias Westlund](https://mattiaswestlund.net), licensed under the [Creative Commons Sampling Plus 1.0 License](https://creativecommons.org/licenses/sampling+/1.0) (using the [VST plugin](https://bigcatinstruments.blogspot.com/2016/10/sound-modules.html) by [bigcat Instruments](https://bigcatinstruments.blogspot.com))
-- Sound Effects: [jfxr](https://jfxr.frozenfractal.com) by [Thomas ten Cate](https://frozenfractal.com)
+See [THIRD-PARTY_ASSETS.md](THIRD-PARTY_ASSETS.md) for the list of third-party assets used and their licenses.
 
 ## License
 
-- The source code is available under the [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.en.html).
-- The assets (art, music, and sound effects) are available under the [Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
+- Source Code: [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.en.html) (see [LICENSE.txt](LICENSE.txt))
+- Original Assets: [Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/) (see [ASSET_LICENSE.txt](ASSET_LICENSE.txt))

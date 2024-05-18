@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://iv13x14ih3mw"]
+[gd_scene load_steps=10 format=3 uid="uid://iv13x14ih3mw"]
 
 [ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_2j8oj"]
 [ext_resource type="Texture2D" uid="uid://b3s8b3yesnhw" path="res://sprites/menu_background.png" id="1_j4gc6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/menus/options_menu.tscn" id="4_yla3h"]
 [ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_menu.tscn" id="5_icgb8"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6_0gu2f"]
+[ext_resource type="PackedScene" uid="uid://bnsw3qf1cvuy3" path="res://scenes/menus/credits_menu.tscn" id="7_iv848"]
 [ext_resource type="Script" path="res://scenes/title_music.gd" id="7_tttak"]
 
 [node name="TitleScreen" type="Control"]
@@ -36,62 +37,6 @@ anchor_bottom = 1.0
 theme = ExtResource("2_1nk1m")
 color = Color(0, 0, 0, 0.501961)
 
-[node name="Version" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -124.0
-offset_top = -37.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset = Vector2(266, 36)
-theme = ExtResource("2_1nk1m")
-text = "v1.2.0-dev"
-horizontal_alignment = 2
-
-[node name="Authors" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -163.0
-offset_right = 684.0
-offset_bottom = -16.0
-grow_vertical = 0
-pivot_offset = Vector2(266, 36)
-theme = ExtResource("2_1nk1m")
-text = "By:
-Aaron Friesen
-Kalen Wallin
-Evan Mielak
-Viet Ninh
-Jackson Herman
-Ethan Fox"
-
-[node name="Links" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -180.0
-offset_top = -34.0
-offset_right = 180.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(266, 36)
-theme = ExtResource("2_1nk1m")
-text = "https://frie.dev/minieval"
-horizontal_alignment = 1
-
 [node name="MainMenu" parent="." instance=ExtResource("3_jxs4e")]
 visible = false
 layout_mode = 1
@@ -117,10 +62,17 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CreditsMenu" parent="." instance=ExtResource("7_iv848")]
+visible = false
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_0gu2f")
 bus = &"Music"
 script = ExtResource("7_tttak")
 
+[connection signal="credits_pressed" from="MainMenu" to="CreditsMenu" method="open"]
 [connection signal="custom_game_pressed" from="MainMenu" to="CustomGameMenu" method="open"]
 [connection signal="options_pressed" from="MainMenu" to="OptionsMenu" method="open"]

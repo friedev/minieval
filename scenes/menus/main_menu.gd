@@ -2,6 +2,7 @@ class_name MainMenu extends Menu
 
 signal custom_game_pressed(previous: Menu)
 signal options_pressed(previous: Menu)
+signal credits_pressed(previous: Menu)
 
 @export_file("*.tscn") var main_scene: String
 
@@ -27,6 +28,11 @@ func _on_custom_game_button_pressed() -> void:
 func _on_options_button_pressed() -> void:
 	self.hide()
 	self.options_pressed.emit(self)
+
+
+func _on_credits_button_pressed() -> void:
+	self.hide()
+	self.credits_pressed.emit(self)
 
 
 func _on_quit_button_pressed() -> void:
