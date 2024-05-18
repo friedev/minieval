@@ -27,10 +27,13 @@ func reset_zoom() -> void:
 
 
 func zoom_by(zoomfactor: float) -> void:
+	var old_mouse_position := self.get_global_mouse_position()
 	var new_zoom_level := (self.zoom * zoomfactor).x
 #	if new_zoom_level > 1 or new_zoom_level < 0.0625:
 #		return
 	self.zoom *= zoomfactor
+	var new_mouse_position := self.get_global_mouse_position()
+	self.position += old_mouse_position - new_mouse_position
 
 
 func _input(event: InputEvent) -> void:
