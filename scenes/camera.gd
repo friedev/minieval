@@ -1,6 +1,7 @@
 class_name Camera extends Camera2D
 
 signal zoom_changed
+signal position_changed
 
 @export var min_speed: float
 @export var max_speed: float
@@ -20,7 +21,10 @@ func _process(delta: float) -> void:
 		+ (self.max_speed - self.min_speed)
 		* Options.options.get("camera_speed", 0.5)
 	)
-	self.position += input * speed * delta / self.zoom
+	var delta_position := input * speed * delta / self.zoom
+	if delta_position != Vector2.ZERO:
+		self.position += delta_position
+		self.position_changed.emit()
 
 
 func reset_zoom() -> void:
@@ -47,3 +51,8 @@ func _input(event: InputEvent) -> void:
 		self.zoom_by(-Vector2.ONE)
 	if event.is_action_pressed(&"zoom_reset"):
 		self.reset_zoom()
+	if event is InputEventMouseMotion and Input.is_action_pressed(&"drag_camera"):
+		var relative := (event as InputEventMouseMotion).relative
+		if relative != Vector2.ZERO:
+			self.position -= relative / self.zoom
+			self.position_changed.emit()

@@ -138,11 +138,6 @@ func _process(delta: float) -> void:
 	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
 	self.move_mouse(self.get_viewport().get_mouse_position() + mouse_velocity)
 
-	if not Global.is_menu_open:
-		self.update_mouse()
-	else:
-		self._clear_preview()
-
 
 func update_mouse() -> void:
 	self._update_mouse_coords()
@@ -225,6 +220,9 @@ func handle_action(action: StringName) -> bool:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		self.update_mouse()
+
 	for action in [
 		&"place_building",
 		&"undo",
@@ -764,4 +762,9 @@ func _on_camera_zoom_changed() -> void:
 	# Updating the preview here is necessary because the preview text position
 	# will need to change even if the mouse coords don't change
 	# Defer preview update until viewport has been updated to reflect the zoom
+	self._update_preview.call_deferred()
+
+
+func _on_camera_2d_position_changed() -> void:
+	# Defer preview update until viewport has been updated to reflect the motion
 	self._update_preview.call_deferred()
