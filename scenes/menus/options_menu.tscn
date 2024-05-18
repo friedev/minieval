@@ -91,6 +91,11 @@ layout_mode = 2
 default = 0.25
 key = "camera_speed"
 
+[node name="RestoreDefaultsButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Restore Defaults"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
@@ -106,5 +111,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Cancel"
 
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

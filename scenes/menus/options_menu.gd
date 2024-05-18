@@ -13,3 +13,7 @@ func _on_save_button_pressed() -> void:
 func _on_cancel_button_pressed() -> void:
 	Options.load_config()
 	self.close()
+
+
+func _on_restore_defaults_button_pressed() -> void:
+	Options.apply_defaults()
