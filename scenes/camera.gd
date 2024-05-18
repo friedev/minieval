@@ -2,6 +2,8 @@ class_name Camera extends Camera2D
 
 @export var min_speed: float
 @export var max_speed: float
+@export var min_zoom: Vector2
+@export var max_zoom: Vector2
 
 @onready var default_zoom := self.zoom
 
@@ -26,12 +28,10 @@ func reset_zoom() -> void:
 	self.zoom = self.default_zoom
 
 
-func zoom_by(zoomfactor: float) -> void:
+func zoom_by(zoom_factor: float) -> void:
 	var old_mouse_position := self.get_global_mouse_position()
-	var new_zoom_level := (self.zoom * zoomfactor).x
-#	if new_zoom_level > 1 or new_zoom_level < 0.0625:
-#		return
-	self.zoom *= zoomfactor
+	self.zoom *= zoom_factor
+	self.zoom = self.zoom.clamp(self.min_zoom, self.max_zoom)
 	var new_mouse_position := self.get_global_mouse_position()
 	self.position += old_mouse_position - new_mouse_position
 

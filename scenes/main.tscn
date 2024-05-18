@@ -132,6 +132,8 @@ zoom = Vector2(4, 4)
 script = ExtResource("7_wdqlp")
 min_speed = 5.0
 max_speed = 25.0
+min_zoom = Vector2(1, 1)
+max_zoom = Vector2(8, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
