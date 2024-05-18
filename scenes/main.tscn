@@ -130,8 +130,8 @@ bus = &"Music"
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 script = ExtResource("7_wdqlp")
-min_speed = 50.0
-max_speed = 250.0
+min_speed = 200.0
+max_speed = 1000.0
 min_zoom = Vector2(1, 1)
 max_zoom = Vector2(8, 8)
 
