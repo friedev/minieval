@@ -17,7 +17,6 @@ var endless := false:
 var num_turns := self.NUM_TURNS
 var game_size := self.GAME_SIZE
 var initial_gp := self.INITIAL_GP
-var tutorial_seen := false
 
 var is_menu_open := false:
 	set(value):

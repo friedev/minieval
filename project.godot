@@ -21,6 +21,7 @@ config/icon="res://sprites/logo.png"
 
 Global="*res://scenes/global.gd"
 Options="*res://scenes/options.gd"
+Save="*res://scenes/save.gd"
 
 [display]
 
