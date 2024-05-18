@@ -158,11 +158,21 @@ func move_mouse(mouse_position: Vector2) -> void:
 	self.update_mouse()
 
 
+func clamp_mouse_to_map() -> void:
+	var coords := self.mouse_coords.clamp(Vector2.ZERO, Vector2.ONE * Global.game_size)
+	self.move_mouse(self.coords_to_screen_position(coords))
+
+
 func select_cell(coords: Vector2i) -> bool:
 	if self.is_in_bounds(coords):
 		self.move_mouse(self.coords_to_screen_position(coords))
 		return true
 	return false
+
+
+func move_mouse_by_cell(delta: Vector2i) -> bool:
+	self.clamp_mouse_to_map()
+	return self.select_cell(self.mouse_coords + delta)
 
 
 func handle_place_building_input(error_sound := true) -> bool:
@@ -202,13 +212,13 @@ func handle_action(action: StringName) -> bool:
 		&"redo":
 			return self.redo()
 		&"select_cell_left":
-			return self.select_cell(self.mouse_coords + Vector2i.LEFT)
+			return self.move_mouse_by_cell(Vector2i.LEFT)
 		&"select_cell_right":
-			return self.select_cell(self.mouse_coords + Vector2i.RIGHT)
+			return self.move_mouse_by_cell(Vector2i.RIGHT)
 		&"select_cell_up":
-			return self.select_cell(self.mouse_coords + Vector2i.UP)
+			return self.move_mouse_by_cell(Vector2i.UP)
 		&"select_cell_down":
-			return self.select_cell(self.mouse_coords + Vector2i.DOWN)
+			return self.move_mouse_by_cell(Vector2i.DOWN)
 		_:
 			push_error("Unknown action %s" % action)
 			return false
