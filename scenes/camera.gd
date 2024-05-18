@@ -18,10 +18,7 @@ func _process(delta: float) -> void:
 		+ (self.max_speed - self.min_speed)
 		* Options.options.get("camera_speed", 0.5)
 	)
-	self.position = self.position.lerp(
-		self.position + input * speed,
-		speed * delta
-	)
+	self.position += input * speed * delta
 
 
 func reset_zoom() -> void:
