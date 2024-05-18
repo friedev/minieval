@@ -25,18 +25,18 @@ func reset_zoom() -> void:
 	self.zoom = self.default_zoom
 
 
-func zoom_by(zoom_factor: float) -> void:
+func zoom_by(zoom_factor: Vector2) -> void:
 	var old_mouse_position := self.get_global_mouse_position()
-	self.zoom *= zoom_factor
-	self.zoom = self.zoom.clamp(self.min_zoom, self.max_zoom)
+	# Round to ensure that integral, pixel-perfect zooming
+	self.zoom = (self.zoom + zoom_factor).round().clamp(self.min_zoom, self.max_zoom)
 	var new_mouse_position := self.get_global_mouse_position()
 	self.position += old_mouse_position - new_mouse_position
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"zoom_in"):
-		self.zoom_by(2.0)
+		self.zoom_by(Vector2.ONE)
 	if event.is_action_pressed(&"zoom_out"):
-		self.zoom_by(0.5)
+		self.zoom_by(-Vector2.ONE)
 	if event.is_action_pressed(&"zoom_reset"):
 		self.reset_zoom()
