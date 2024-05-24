@@ -34,7 +34,11 @@ func update_tooltip(icon: PaletteIcon) -> void:
 
 
 func _input(event: InputEvent):
-	if event is InputEventKey:
+	if event.is_action_pressed(&"select_next_building_type"):
+		self.select_icon_by_relative_index(+1)
+	elif event.is_action_pressed(&"select_previous_building_type"):
+		self.select_icon_by_relative_index(-1)
+	elif event is InputEventKey:
 		var key_event := event as InputEventKey
 		var icon_index: int
 		if key_event.keycode == KEY_0:
@@ -42,8 +46,22 @@ func _input(event: InputEvent):
 		else:
 			icon_index = key_event.keycode - KEY_1
 		if icon_index >= 0 and icon_index < self.icon_container.get_child_count():
-			var icon := self.icon_container.get_child(icon_index) as PaletteIcon
-			self.select_icon(icon)
+			self.select_icon_by_index(icon_index)
+
+
+func select_icon_by_relative_index(relative_index: int) -> void:
+	var current_index := self.current_selection.get_index()
+	var absolute_index := wrapi(
+		current_index + relative_index,
+		0,
+		self.icon_container.get_child_count()
+	)
+	self.select_icon_by_index(absolute_index)
+
+
+func select_icon_by_index(index: int) -> void:
+	var icon := self.icon_container.get_child(index) as PaletteIcon
+	self.select_icon(icon)
 
 
 func select_icon(icon: PaletteIcon) -> void:
