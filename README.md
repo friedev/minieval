@@ -19,13 +19,36 @@ Buildings can't be destroyed, but you can always undo your last move.
 
 ### Controls
 
-- Left-click: place a building, select building from palette
-- WASD/arrows: pan
-- Scroll/QE: zoom
-- Z/U: undo
-- Y/R: redo
-- 0-9: select building from palette
-- Escape: menu
+Mouse:
+
+- Place building: left click
+- Pan camera: right click and drag
+- Zoom: scroll
+- Reset zoom: middle click
+- Undo: back thumb button
+- Redo: forward thumb button
+
+Keyboard:
+
+- Select cell: number pad, vi keys
+- Select building: 0-9
+- Place building: space
+- Pan camera: arrows, WASD
+- Zoom: Q/E
+- Undo: Ctrl+Z
+- Redo: Ctrl+Y
+- Menu: escape
+
+Controller:
+
+- Select cell: right stick, D-pad
+- Select building: bumpers
+- Place building: A, right trigger
+- Pan camera: left stick
+- Menu: start/menu
+- Undo: B
+- Redo: Y
+- Zoom: press left/right stick
 
 ## Credits
 
