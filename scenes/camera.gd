@@ -15,19 +15,33 @@ var velocity := Vector2.ZERO
 
 
 func _process(delta: float) -> void:
-	var input := Vector2(
-		Input.get_axis(&"pan_left", &"pan_right"),
-		Input.get_axis(&"pan_up", &"pan_down")
+	var digital_input := Vector2(
+		Input.get_axis(&"digital_pan_left", &"digital_pan_right"),
+		Input.get_axis(&"digital_pan_up", &"digital_pan_down")
 	).normalized()
-	var target_velocity := Vector2.ZERO
-	if input != Vector2.ZERO:
-		var top_speed: float = (
-			self.min_speed
-			+ (self.max_speed - self.min_speed)
-			* Options.options.get("camera_speed", 0.5)
-		)
-		target_velocity = input * top_speed / self.zoom
-	self.velocity = self.velocity.lerp(target_velocity, delta / self.acceleration_time)
+	var analog_input := Vector2(
+		Input.get_axis(&"analog_pan_left", &"analog_pan_right"),
+		Input.get_axis(&"analog_pan_up", &"analog_pan_down")
+	).normalized()
+	var input: Vector2
+	if not analog_input.is_zero_approx():
+		input = analog_input
+	else:
+		input = digital_input
+
+	var top_speed: float = (
+		self.min_speed
+		+ (self.max_speed - self.min_speed)
+		* Options.options.get("camera_speed", 0.5)
+	)
+	var target_velocity := input * top_speed / self.zoom
+
+	var smooth := analog_input == Vector2.ZERO
+	if smooth:
+		self.velocity = self.velocity.lerp(target_velocity, delta / self.acceleration_time)
+	else:
+		self.velocity = target_velocity
+
 	if not self.velocity.is_zero_approx():
 		self.position += self.velocity * delta
 		self.position_changed.emit()
