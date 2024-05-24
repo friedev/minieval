@@ -84,7 +84,7 @@ text = "Camera Speed"
 
 [node name="CameraSpeedOption" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("4_wgx5l")]
 layout_mode = 2
-default = 0.25
+default = 0.5
 key = "camera_speed"
 
 [node name="RestoreDefaultsButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
