@@ -223,7 +223,7 @@ func handle_action(action: StringName) -> bool:
 		&"select_cell_right_down":
 			return self.move_mouse_by_cell(Vector2i(+1, +1))
 		_:
-			push_error("Unknown action %s" % action)
+			assert(false, "Unknown action %s" % action)
 			return false
 
 
