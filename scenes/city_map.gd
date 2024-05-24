@@ -214,6 +214,14 @@ func handle_action(action: StringName) -> bool:
 			return self.move_mouse_by_cell(Vector2i.UP)
 		&"select_cell_down":
 			return self.move_mouse_by_cell(Vector2i.DOWN)
+		&"select_cell_left_up":
+			return self.move_mouse_by_cell(Vector2i(-1, -1))
+		&"select_cell_left_down":
+			return self.move_mouse_by_cell(Vector2i(-1, +1))
+		&"select_cell_right_up":
+			return self.move_mouse_by_cell(Vector2i(+1, -1))
+		&"select_cell_right_down":
+			return self.move_mouse_by_cell(Vector2i(+1, +1))
 		_:
 			push_error("Unknown action %s" % action)
 			return false
@@ -231,11 +239,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		&"select_cell_right",
 		&"select_cell_up",
 		&"select_cell_down",
+		&"select_cell_left_up",
+		&"select_cell_left_down",
+		&"select_cell_right_up",
+		&"select_cell_right_down",
 	]:
 		if event.is_action_pressed(action):
 			if self.handle_action(action):
 				self.action_to_repeat = action
 				self.input_repeat_timer.start(self.initial_wait_time)
+				break
 
 
 func undo() -> bool:
