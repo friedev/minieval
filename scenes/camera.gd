@@ -7,23 +7,29 @@ signal position_changed
 @export var max_speed: float
 @export var min_zoom: Vector2
 @export var max_zoom: Vector2
+@export var acceleration_time: float
 
 @onready var default_zoom := self.zoom
+
+var velocity := Vector2.ZERO
 
 
 func _process(delta: float) -> void:
 	var input := Vector2(
 		Input.get_axis(&"pan_left", &"pan_right"),
 		Input.get_axis(&"pan_up", &"pan_down")
-	)
-	var speed: float = (
-		self.min_speed
-		+ (self.max_speed - self.min_speed)
-		* Options.options.get("camera_speed", 0.5)
-	)
-	var delta_position := input * speed * delta / self.zoom
-	if delta_position != Vector2.ZERO:
-		self.position += delta_position
+	).normalized()
+	var target_velocity := Vector2.ZERO
+	if input != Vector2.ZERO:
+		var top_speed: float = (
+			self.min_speed
+			+ (self.max_speed - self.min_speed)
+			* Options.options.get("camera_speed", 0.5)
+		)
+		target_velocity = input * top_speed / self.zoom
+	self.velocity = self.velocity.lerp(target_velocity, delta / self.acceleration_time)
+	if not self.velocity.is_zero_approx():
+		self.position += self.velocity * delta
 		self.position_changed.emit()
 
 

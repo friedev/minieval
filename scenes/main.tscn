@@ -134,6 +134,7 @@ min_speed = 200.0
 max_speed = 1000.0
 min_zoom = Vector2(1, 1)
 max_zoom = Vector2(8, 8)
+acceleration_time = 0.125
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
