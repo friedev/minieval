@@ -163,7 +163,7 @@ offset_bottom = 91.0
 grow_horizontal = 2
 theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
-text = "(Press Z/U to Undo)"
+text = "(Press Ctrl+Z to Undo)"
 horizontal_alignment = 1
 script = ExtResource("10_xuh3s")
 
