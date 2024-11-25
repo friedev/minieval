@@ -1,5 +1,22 @@
 # Changelog
 
+### 1.2.0 (2024-11-24)
+
+- Update to Godot 4
+- Improve controls
+	- Add controller support
+	- Add keyboard support for placing buildings
+	- Repeat inputs by holding down buttons
+	- Drag the camera with the right mouse button
+	- Undo and redo with the mouse thumb buttons
+	- Zoom in and out centered on the cursor
+	- Add camera acceleration
+- Add persistent options
+- Add a button to restore the default options
+- Hide the tutorial after your first game
+- Add credits menu
+- Minor UI tweaks and aesthetic changes
+
 ### 1.1.0 (2022-11-23)
 
 - Add tooltips when hovering over buildings in the toolbar
