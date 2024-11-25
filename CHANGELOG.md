@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.2.1 (2024-11-25)
+
+- Remix soundtrack
+- Shuffle song order
+
 ### 1.2.0 (2024-11-24)
 
 - Update to Godot 4
