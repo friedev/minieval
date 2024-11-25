@@ -11,7 +11,7 @@ signal credits_pressed(previous: Menu)
 
 
 func _ready() -> void:
-	self.quit_button.visible = OS.get_name() != "HTML5"
+	self.quit_button.visible = OS.get_name() != "Web"
 	self.open()
 
 
