@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cil6jwu6v4xku"]
+[gd_scene load_steps=6 format=3 uid="uid://cil6jwu6v4xku"]
 
 [ext_resource type="Script" path="res://scenes/menus/game_over_menu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_251xe"]
+[ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/ode_to_a_city.ogg" id="4_1q036"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
-[ext_resource type="AudioStream" uid="uid://t6exsd0tr5iu" path="res://music/end_music.ogg" id="7"]
+[ext_resource type="Script" path="res://scenes/offset_audio.gd" id="5_avp3t"]
 
 [node name="GameOverMenu" type="Control" node_paths=PackedStringArray("end_game_music")]
 process_mode = 3
@@ -73,7 +74,10 @@ theme = ExtResource("5")
 text = "Main Menu"
 
 [node name="EndGameMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7")
+stream = ExtResource("4_1q036")
+bus = &"Music"
+script = ExtResource("5_avp3t")
+from_position = 94.1
 
 [connection signal="pressed" from="UndoButton" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="FreeplayButton" to="." method="_on_freeplay_button_pressed"]

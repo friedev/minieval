@@ -56,7 +56,7 @@ Minieval 1.0.0 was created in one semester by members of the [UNL Game Developme
 
 - Programming: [Aaron Friesen](https://frie.dev), [Kalen Wallin](https://www.kalenwallin.com), Evan Mielak, Viet Ninh
 - Art: [Aaron Friesen](https://frie.dev)
-- Music: Jackson Herman, [Aaron Friesen](https://frie.dev)
+- Music: [Aaron Friesen](https://frie.dev), Jackson Herman
 - Moral Support: Ethan Fox
 
 Subsequent updates developed by [Aaron Friesen](https://frie.dev).

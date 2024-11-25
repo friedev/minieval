@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cokm5bjuku86c" path="res://scenes/menus/main_menu.tscn" id="3_jxs4e"]
 [ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/menus/options_menu.tscn" id="4_yla3h"]
 [ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_menu.tscn" id="5_icgb8"]
-[ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/title_music.ogg" id="6_0gu2f"]
+[ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/ode_to_a_city.ogg" id="6_0gu2f"]
 [ext_resource type="PackedScene" uid="uid://bnsw3qf1cvuy3" path="res://scenes/menus/credits_menu.tscn" id="7_iv848"]
-[ext_resource type="Script" path="res://scenes/title_music.gd" id="7_tttak"]
+[ext_resource type="Script" path="res://scenes/offset_audio.gd" id="7_tttak"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -70,8 +70,10 @@ grow_vertical = 2
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_0gu2f")
+autoplay = true
 bus = &"Music"
 script = ExtResource("7_tttak")
+from_position = 56.6
 
 [connection signal="credits_pressed" from="MainMenu" to="CreditsMenu" method="open"]
 [connection signal="custom_game_pressed" from="MainMenu" to="CustomGameMenu" method="open"]

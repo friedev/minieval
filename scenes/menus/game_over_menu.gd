@@ -9,14 +9,14 @@ signal last_move_undone
 @export var game_music: AudioStreamPlayer
 
 @export_group("Internal Nodes")
-@export var end_game_music: AudioStreamPlayer
+@export var end_game_music: OffsetAudio
 
 
 func open(previous: Menu = null) -> void:
 	if self.game_music.playing:
 		self.game_music.playing = false
 	if not self.end_game_music.playing:
-		self.end_game_music.playing = true
+		self.end_game_music.play(self.end_game_music.from_position)
 	self.palette.visible = false
 	super.open(previous)
 

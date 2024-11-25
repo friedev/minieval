@@ -1,15 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://b14c1y35bjrym"]
+[gd_scene load_steps=28 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
 [ext_resource type="Script" path="res://scenes/city_map.gd" id="2_2brww"]
 [ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="3_dpoud"]
 [ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="4_hyuoe"]
 [ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="5_msfla"]
-[ext_resource type="AudioStream" uid="uid://c0k7labdud3wx" path="res://music/background_music.ogg" id="6_5hfa5"]
+[ext_resource type="AudioStream" uid="uid://ddo8d5pqkceqh" path="res://music/village_sunrise.ogg" id="6_dvxqy"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="7_wdqlp"]
+[ext_resource type="AudioStream" uid="uid://dvphu5ln3unkp" path="res://music/time_to_build.ogg" id="7_x5wfe"]
+[ext_resource type="AudioStream" uid="uid://cddfjows4mh8b" path="res://music/architects_lament.ogg" id="8_8wfel"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="8_kommm"]
 [ext_resource type="Script" path="res://scenes/hud/turn_label.gd" id="9_2hjvh"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
+[ext_resource type="AudioStream" uid="uid://cq7v3xxa42yqu" path="res://music/town_square.ogg" id="9_v7j4l"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
 [ext_resource type="Script" path="res://scenes/hud/undo_label.gd" id="10_xuh3s"]
 [ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/hud/palette.tscn" id="11_g2fyb"]
@@ -42,6 +45,14 @@ scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("3")
 color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_lm2pf"]
+shuffle = true
+stream_count = 4
+stream_0 = ExtResource("6_dvxqy")
+stream_1 = ExtResource("7_x5wfe")
+stream_2 = ExtResource("8_8wfel")
+stream_3 = ExtResource("9_v7j4l")
 
 [node name="Main" type="Node"]
 
@@ -123,7 +134,7 @@ one_shot = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("6_5hfa5")
+stream = SubResource("AudioStreamPlaylist_lm2pf")
 autoplay = true
 bus = &"Music"
 
