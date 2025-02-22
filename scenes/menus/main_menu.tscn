@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cokm5bjuku86c"]
+[gd_scene load_steps=5 format=3 uid="uid://cokm5bjuku86c"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_wpljk"]
+[ext_resource type="Script" path="res://scenes/menus/version_label.gd" id="4_4mojg"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 
 [node name="MainMenu" type="CenterContainer" node_paths=PackedStringArray("quit_button")]
@@ -84,11 +85,12 @@ size_flags_horizontal = 3
 theme = ExtResource("5")
 text = "Quit"
 
-[node name="Version" type="Label" parent="VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5")
-text = "v1.3.0-dev"
+text = "VERSION"
 horizontal_alignment = 1
+script = ExtResource("4_4mojg")
 
 [connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/CustomGameButton" to="." method="_on_custom_game_button_pressed"]
