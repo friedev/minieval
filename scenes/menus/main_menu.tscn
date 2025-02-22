@@ -87,7 +87,7 @@ text = "Quit"
 [node name="Version" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("5")
-text = "v1.2.1"
+text = "v1.3.0-dev"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
