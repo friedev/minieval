@@ -1,6 +1,10 @@
 extends Menu
 
 
+func _ready() -> void:
+	Options.setup()
+
+
 func close() -> void:
 	Options.save_config()
 	super.close()
