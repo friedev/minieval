@@ -15,7 +15,7 @@ config/description="A tiny medieval city builder"
 config/version="1.3.0-dev"
 run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.4")
-config/icon="res://sprites/logo.png"
+config/icon="uid://cbwbvjwi64y1h"
 
 [autoload]
 
