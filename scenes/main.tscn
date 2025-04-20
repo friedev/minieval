@@ -1,26 +1,26 @@
 [gd_scene load_steps=28 format=3 uid="uid://b14c1y35bjrym"]
 
 [ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://sprites/tileset.tres" id="1_fchkj"]
-[ext_resource type="Script" path="res://scenes/city_map.gd" id="2_2brww"]
+[ext_resource type="Script" uid="uid://cdxyk62avh1dv" path="res://scenes/city_map.gd" id="2_2brww"]
 [ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://sound/building_place_error.wav" id="3_dpoud"]
 [ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://sound/building_place.wav" id="4_hyuoe"]
 [ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://sound/building_destroy.wav" id="5_msfla"]
 [ext_resource type="AudioStream" uid="uid://ddo8d5pqkceqh" path="res://music/village_sunrise.ogg" id="6_dvxqy"]
-[ext_resource type="Script" path="res://scenes/camera.gd" id="7_wdqlp"]
+[ext_resource type="Script" uid="uid://c12xk55v0ha1h" path="res://scenes/camera.gd" id="7_wdqlp"]
 [ext_resource type="AudioStream" uid="uid://dvphu5ln3unkp" path="res://music/time_to_build.ogg" id="7_x5wfe"]
 [ext_resource type="AudioStream" uid="uid://cddfjows4mh8b" path="res://music/architects_lament.ogg" id="8_8wfel"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="8_kommm"]
-[ext_resource type="Script" path="res://scenes/hud/turn_label.gd" id="9_2hjvh"]
+[ext_resource type="Script" uid="uid://bxaip2e6jol5k" path="res://scenes/hud/turn_label.gd" id="9_2hjvh"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://sprites/gp_icon.png" id="9_4q2tn"]
 [ext_resource type="AudioStream" uid="uid://cq7v3xxa42yqu" path="res://music/town_square.ogg" id="9_v7j4l"]
 [ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://sprites/vp_icon.png" id="10_a8lsb"]
-[ext_resource type="Script" path="res://scenes/hud/undo_label.gd" id="10_xuh3s"]
+[ext_resource type="Script" uid="uid://btk827gtwfvyb" path="res://scenes/hud/undo_label.gd" id="10_xuh3s"]
 [ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://scenes/hud/palette.tscn" id="11_g2fyb"]
-[ext_resource type="Script" path="res://scenes/hud/gp_label.gd" id="11_h0tk0"]
-[ext_resource type="Script" path="res://scenes/hud/black_overlay.gd" id="12_0ycio"]
+[ext_resource type="Script" uid="uid://b08bpsi6jwlax" path="res://scenes/hud/gp_label.gd" id="11_h0tk0"]
+[ext_resource type="Script" uid="uid://yq7xsj7gfkgm" path="res://scenes/hud/black_overlay.gd" id="12_0ycio"]
 [ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://scenes/menus/game_over_menu.tscn" id="12_2hgrf"]
 [ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://scenes/menus/pause_menu.tscn" id="13_hwilj"]
-[ext_resource type="Script" path="res://scenes/hud/vp_label.gd" id="13_klxiu"]
+[ext_resource type="Script" uid="uid://dy8x2sq2itmsp" path="res://scenes/hud/vp_label.gd" id="13_klxiu"]
 [ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://scenes/menus/options_menu.tscn" id="14_xpfr0"]
 [ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://scenes/menus/tutorial_menu.tscn" id="15_0mlr1"]
 
@@ -123,11 +123,11 @@ offset = Vector2(-4, -4)
 [node name="BuildingParticles" type="GPUParticles2D" parent="CityMap"]
 z_index = 1
 emitting = false
-process_material = SubResource("4")
 lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 randomness = 0.25
+process_material = SubResource("4")
 
 [node name="InputRepeatTimer" type="Timer" parent="CityMap"]
 one_shot = true

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cokm5bjuku86c"]
 
-[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1"]
+[ext_resource type="Script" uid="uid://ch6u82bctslhl" path="res://scenes/menus/main_menu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_wpljk"]
-[ext_resource type="Script" path="res://scenes/menus/version_label.gd" id="4_4mojg"]
+[ext_resource type="Script" uid="uid://sb4q1mwiqj2p" path="res://scenes/menus/version_label.gd" id="4_4mojg"]
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="5"]
 
 [node name="MainMenu" type="CenterContainer" node_paths=PackedStringArray("quit_button")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm2n588heclnw"]
 
 [ext_resource type="PackedScene" uid="uid://dbbnhubut8hco" path="res://scenes/options/slider_option.tscn" id="1_2bn88"]
-[ext_resource type="Script" path="res://scenes/options/volume_option.gd" id="2_4mt8m"]
+[ext_resource type="Script" uid="uid://te04bs2q41gu" path="res://scenes/options/volume_option.gd" id="2_4mt8m"]
 
 [node name="VolumeOption" instance=ExtResource("1_2bn88")]
 script = ExtResource("2_4mt8m")

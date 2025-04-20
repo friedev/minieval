@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dj45ldohrt2hf"]
 
-[ext_resource type="Script" path="res://scenes/building_sprite.gd" id="1_erbg1"]
+[ext_resource type="Script" uid="uid://cw1uknj784j2u" path="res://scenes/building_sprite.gd" id="1_erbg1"]
 
 [node name="BuildingSprite" type="Sprite2D"]
 centered = false

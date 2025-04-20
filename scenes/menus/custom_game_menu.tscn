@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="1"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_cxnbl"]
-[ext_resource type="Script" path="res://scenes/menus/custom_game_menu.gd" id="7"]
+[ext_resource type="Script" uid="uid://bxkjfvs7u7q8c" path="res://scenes/menus/custom_game_menu.gd" id="7"]
 
 [node name="CustomGameMenu" type="CenterContainer" node_paths=PackedStringArray("turn_limit_line_edit", "game_size_line_edit")]
 process_mode = 3

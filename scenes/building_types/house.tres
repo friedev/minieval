@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://cjmcsuwnak7o5"]
 
 [ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_03a1d"]
-[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_tnyqr"]
+[ext_resource type="Script" uid="uid://xq8p5xedktuu" path="res://scenes/building_type.gd" id="1_tnyqr"]
 [ext_resource type="Texture2D" uid="uid://b2js66nopmip0" path="res://sprites/buildings/house.png" id="2_6y8j0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4o1k8"]

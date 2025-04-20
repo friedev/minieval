@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BuildingType" load_steps=5 format=3 uid="uid://d3eugwagddc7i"]
 
-[ext_resource type="Script" path="res://scenes/building_type.gd" id="1_n33es"]
+[ext_resource type="Script" uid="uid://xq8p5xedktuu" path="res://scenes/building_type.gd" id="1_n33es"]
 [ext_resource type="Texture2D" uid="uid://c27fkhnl78bgu" path="res://sprites/tilesheet.png" id="1_qj511"]
 [ext_resource type="Texture2D" uid="uid://1bybj6tsytp5" path="res://sprites/buildings/keep.png" id="2_nauan"]
 

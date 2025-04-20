@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgnmle83oa3at"]
 
-[ext_resource type="Script" path="res://scenes/options/check_box_option.gd" id="1_pm0h5"]
+[ext_resource type="Script" uid="uid://dmq8rorwoqhwn" path="res://scenes/options/check_box_option.gd" id="1_pm0h5"]
 
 [node name="CheckBoxOption" type="MarginContainer" node_paths=PackedStringArray("check_box") groups=["options"]]
 custom_minimum_size = Vector2(32, 32)

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://drwvw82ecc62q" path="res://scenes/menus/custom_game_menu.tscn" id="5_icgb8"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://music/ode_to_a_city.ogg" id="6_0gu2f"]
 [ext_resource type="PackedScene" uid="uid://bnsw3qf1cvuy3" path="res://scenes/menus/credits_menu.tscn" id="7_iv848"]
-[ext_resource type="Script" path="res://scenes/offset_audio.gd" id="7_tttak"]
+[ext_resource type="Script" uid="uid://ex8ubsljvsmj" path="res://scenes/offset_audio.gd" id="7_tttak"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3

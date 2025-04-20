@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbbnhubut8hco"]
 
-[ext_resource type="Script" path="res://scenes/options/slider_option.gd" id="1_4v8vh"]
+[ext_resource type="Script" uid="uid://ces1tu3314l3u" path="res://scenes/options/slider_option.gd" id="1_4v8vh"]
 
 [node name="SliderOption" type="MarginContainer" node_paths=PackedStringArray("slider") groups=["options"]]
 custom_minimum_size = Vector2(0, 32)

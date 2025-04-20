@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnsw3qf1cvuy3"]
 
 [ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://ui/theme.tres" id="1_27mun"]
-[ext_resource type="Script" path="res://scenes/menus/menu.gd" id="2_2gd20"]
+[ext_resource type="Script" uid="uid://ctflch8rexvh7" path="res://scenes/menus/menu.gd" id="2_2gd20"]
 [ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://ui/fonts/Bitmgothic.ttf" id="3_q4mja"]
-[ext_resource type="Script" path="res://scenes/linked_label.gd" id="4_p8d0l"]
+[ext_resource type="Script" uid="uid://crhdtscyc8mpy" path="res://scenes/linked_label.gd" id="4_p8d0l"]
 
 [node name="CreditsMenu" type="CenterContainer"]
 process_mode = 3
