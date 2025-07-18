@@ -6,7 +6,11 @@ class_name BuildingType extends Resource
 @export var vp: int
 @export var icon: Texture2D
 @export var texture: Texture2D
+## The coords by which the building preview is offset relative to the cursor
+## coords.
 @export var offset: Vector2i
+## The area in which the building interacts with other buildings. NOT the area
+## occupied by the building's cells.
 @export var area: Rect2i
 @export var cells: Array[Vector2i]
 @export var gp_interactions: Dictionary # Dictionary[StringName, int]
@@ -16,6 +20,14 @@ class_name BuildingType extends Resource
 @export var is_tile: bool
 @export var terrain_set := -1
 @export var terrain := -1
+
+## Bounding box of the building's cells.
+var bounds: Rect2i:
+	get:
+		if bounds.size == Vector2i.ZERO:
+			for coords in self.cells:
+				bounds = bounds.expand(coords)
+		return bounds
 
 
 # Returns a list of all cell vectors orthogonally adjacent to the given cell

@@ -125,7 +125,9 @@ func _process(delta: float) -> void:
 	)
 	if mouse_input_direction.is_zero_approx():
 		self.mouse_direction = Vector2.ZERO
-	elif (
+		return
+
+	if (
 		self.mouse_direction.is_zero_approx()
 		or self.mouse_direction.angle_to(mouse_input_direction) > PI / 2
 	):
@@ -145,7 +147,8 @@ func update_mouse() -> void:
 	if self.mouse_coords != self.preview_coords:
 		if Input.is_action_pressed(&"place_building"):
 			self.handle_place_building_input(false)
-		self._update_preview()
+		else:
+			self._update_preview()
 
 
 func move_mouse(mouse_position: Vector2) -> void:
@@ -490,7 +493,7 @@ func _update_preview() -> void:
 	var building_coords: Vector2i = self.preview_coords + self.selected_building_type.offset
 
 	# Move the building preview
-	self.preview_building.position = self.map_to_local(building_coords)
+	self.preview_building.position = self.get_building_center(building_coords, self.selected_building_type)
 	if self.selected_building_type.is_tile:
 		self.preview_tile.set_cells_terrain_connect(
 			0,
@@ -591,6 +594,11 @@ func format_value(value: Array[int]) -> Array[String]:
 		("+%d" if value[0] > 0 else "%d") % value[0],
 		("+%d" if value[1] > 0 else "%d") % value[1],
 	]
+	
+
+## Gets the pixel position of the center of the given building type.
+func get_building_center(coords: Vector2i, building_type: BuildingType) -> Vector2:
+	return self.map_to_local(coords) + Rect2(building_type.bounds).get_center() * Vector2(self.tile_set.tile_size)
 
 
 func reset_particles() -> void:
@@ -609,10 +617,11 @@ func emit_particles(coords: Vector2i, building_type: BuildingType) -> void:
 
 	self.reset_particles()
 
-	# TODO better building size bounding
-	var size := Vector2(building_type.area.size) / 3
-	var multiplier := sqrt((size.x + size.y) / 2.0) * 1.25
-	self.building_particles.position = self.map_to_local(Vector2i(Vector2(coords) + size / 2))
+	# Technically, the size of the bounds of a one-tile building (e.g. house) is
+	# 0, so set a minimum size for particle emission purposes
+	var size := Vector2(building_type.bounds.size).max(Vector2.ONE * 0.5)
+	var multiplier := sqrt((size.x + size.y) * 0.5) * 1.25
+	self.building_particles.position = self.get_building_center(coords, building_type)
 	self.particles_material.emission_sphere_radius = size.length() / 2
 	self.building_particles.amount = self.particles_amount * multiplier
 	self.particles_material.scale_min = self.particles_scale * multiplier
@@ -697,7 +706,7 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 	else:
 		var building_sprite: BuildingSprite = self.building_sprite_scene.instantiate()
 		building_sprite.building = building
-		building_sprite.position = self.map_to_local(coords)
+		building_sprite.position = self.get_building_center(coords, building_type)
 		self.buildings_node.add_child(building_sprite)
 		building.sprite = building_sprite
 
@@ -714,7 +723,7 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 
 func destroy_building(building: Building) -> void:
 	self.building_destroy_sound.play()
-	self.emit_particles(building.coords + building.type.offset, building.type)
+	self.emit_particles(building.coords, building.type)
 
 	# Reset all cells (in the world map and groups) occupied by this building
 	# Does NOT modify the group_joins array; currently handled by the undo code
@@ -747,7 +756,7 @@ func destroy_building(building: Building) -> void:
 				self.adjacent_buildings[group].erase(building)
 
 	if building.sprite != null:
-		building.sprite.queue_free()
+		building.sprite.destroy()
 
 
 func _on_palette_building_selected(building_type: BuildingType) -> void:
