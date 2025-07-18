@@ -56,7 +56,7 @@ stream_3 = ExtResource("9_v7j4l")
 
 [node name="Main" type="Node"]
 
-[node name="CityMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles", "input_repeat_timer")]
+[node name="CityMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("camera", "gp_preview_label", "vp_preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles", "input_repeat_timer")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
 script = ExtResource("2_2brww")
@@ -72,7 +72,8 @@ mouse_speed = 1000.0
 mouse_speed_min = 0.25
 mouse_acceleration = 0.8
 camera = NodePath("../Camera2D")
-preview_label = NodePath("../CanvasLayer/PreviewNode/PreviewLabel")
+gp_preview_label = NodePath("../CanvasLayer/PreviewNode/GPLabel")
+vp_preview_label = NodePath("../CanvasLayer/PreviewNode/VPLabel")
 preview_node = NodePath("../CanvasLayer/PreviewNode")
 building_place_error_sound = NodePath("BuildingPlaceErrorSound")
 building_place_sound = NodePath("BuildingPlaceSound")
@@ -212,26 +213,28 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 script = ExtResource("13_klxiu")
 
-[node name="PreviewNode" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-theme = ExtResource("8_kommm")
+[node name="PreviewNode" type="GridContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
 
-[node name="PreviewLabel" type="Label" parent="CanvasLayer/PreviewNode"]
-layout_mode = 0
-offset_top = -39.0
-offset_right = 113.0
-theme = ExtResource("8_kommm")
-text = "1 
--1"
-
-[node name="GPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
-position = Vector2(-11, -30.75)
+[node name="GPIcon" type="TextureRect" parent="CanvasLayer/PreviewNode"]
+layout_mode = 2
 texture = ExtResource("9_4q2tn")
 
-[node name="VPPreview" type="Sprite2D" parent="CanvasLayer/PreviewNode"]
-position = Vector2(-11, -10.5)
+[node name="GPLabel" type="Label" parent="CanvasLayer/PreviewNode"]
+layout_mode = 2
+theme = ExtResource("8_kommm")
+text = "1"
+
+[node name="VPIcon" type="TextureRect" parent="CanvasLayer/PreviewNode"]
+layout_mode = 2
 texture = ExtResource("10_a8lsb")
+
+[node name="VPLabel" type="Label" parent="CanvasLayer/PreviewNode"]
+layout_mode = 2
+theme = ExtResource("8_kommm")
+text = "-1"
 
 [node name="Palette" parent="CanvasLayer" instance=ExtResource("11_g2fyb")]
 

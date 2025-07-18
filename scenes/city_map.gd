@@ -42,8 +42,9 @@ const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 
 @export_group("External Nodes")
 @export var camera: Camera
-@export var preview_label: Label
-@export var preview_node: Control
+@export var gp_preview_label: Label
+@export var vp_preview_label: Label
+@export var preview_node: Container
 
 @export_group("Internal Nodes")
 @export var building_place_error_sound: AudioStreamPlayer
@@ -88,6 +89,8 @@ var mouse_coords := self.INVALID_COORDS
 var preview_coords := self.INVALID_COORDS
 var modulated_buildings: Array[Building] = []
 var mouse_direction := Vector2.ZERO
+## Mouse position needs updating?
+var mouse_dirty := false
 
 @onready var particles_material: ParticleProcessMaterial = self.building_particles.process_material
 @onready var particles_amount := self.building_particles.amount
@@ -118,6 +121,11 @@ func _process(delta: float) -> void:
 	)
 	if mouse_input_direction.is_zero_approx():
 		self.mouse_direction = Vector2.ZERO
+		# Update mouse position if dirty, even if it wasn't manually moved
+		if self.mouse_dirty:
+			self.update_mouse()
+			# Always update preview just to be safe (could be optimized)
+			self._update_preview()
 		return
 
 	if (
@@ -135,6 +143,7 @@ func _process(delta: float) -> void:
 
 
 func update_mouse() -> void:
+	self.mouse_dirty = false
 	self._update_mouse_coords()
 	# Update the preview if the mouse has moved to a different cell
 	if self.mouse_coords != self.preview_coords:
@@ -425,7 +434,8 @@ func _clear_preview() -> void:
 		self.preview_area.clear()
 		self.preview_tile.clear()
 		self.preview_building.visible = false
-		self.preview_label.text = ""
+		self.gp_preview_label.text = ""
+		self.vp_preview_label.text = ""
 		self.preview_node.visible = false
 		for modulated_building in self.modulated_buildings:
 			modulated_building.sprite.modulate = Color.WHITE
@@ -517,18 +527,23 @@ func _update_preview() -> void:
 		if not connected_building in self.modulated_buildings and connected_building.sprite != null:
 			self.modulate_building(self.selected_building_type, connected_building, true)
 
-	# Update preview label with expected building value
+	# Update preview labels with expected building value
 	var value := self.get_building_value(
 		building_coords,
 		self.selected_building_type,
 		false,
 		road_connections
 	)
-	self.preview_label.text = "%s\n%s" % self.format_value(value)
+	var formatted_value := self.format_value(value)
+	self.gp_preview_label.text = formatted_value[0]
+	self.vp_preview_label.text = formatted_value[1]
+	# Force fit to content
+	self.preview_node.size = Vector2.ZERO
 	self.preview_node.position = self.coords_to_screen_position(
 		Vector2i(self.preview_coords.x, building_coords.y)
 	)
-	self.preview_node.position.y -= self.tile_set.tile_size.y / 2 * self.camera.zoom.y
+	self.preview_node.position -= self.preview_node.size / 2
+	self.preview_node.position.y -= 40
 
 	# Shade preview building in red if you can't afford to place it
 	if value[0] + self.gp < 0:
@@ -768,12 +783,8 @@ func _on_input_repeat_timer_timeout() -> void:
 
 
 func _on_camera_zoom_changed() -> void:
-	# Updating the preview here is necessary because the preview text position
-	# will need to change even if the mouse coords don't change
-	# Defer preview update until viewport has been updated to reflect the zoom
-	self._update_preview.call_deferred()
+	self.mouse_dirty = true
 
 
 func _on_camera_2d_position_changed() -> void:
-	# Defer preview update until viewport has been updated to reflect the motion
-	self._update_preview.call_deferred()
+	self.mouse_dirty = true
