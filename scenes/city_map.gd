@@ -1,4 +1,4 @@
-class_name CityMap extends TileMap
+class_name CityMap extends TileMapLayer
 
 signal gp_changed(gp: int)
 signal vp_changed(vp: int)
@@ -52,8 +52,8 @@ const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 @export var building_place_sound: AudioStreamPlayer
 @export var building_destroy_sound: AudioStreamPlayer
 @export var buildings_node: Node2D
-@export var preview_area: TileMap
-@export var preview_tile: TileMap
+@export var preview_area: TileMapLayer
+@export var preview_tile: TileMapLayer
 @export var preview_building: Sprite2D
 @export var building_particles: GPUParticles2D
 @export var input_repeat_timer: Timer
@@ -107,7 +107,7 @@ func _ready() -> void:
 
 	for x in range(Global.game_size):
 		for y in range(Global.game_size):
-			super.set_cell(0, Vector2i(x, y), 0, CityMap.EMPTY_COORDS)
+			super.set_cell(Vector2i(x, y), 0, CityMap.EMPTY_COORDS)
 
 	self.camera.position = self.map_to_local(
 		Vector2(Global.game_size / 2, Global.game_size / 2)
@@ -496,7 +496,6 @@ func _update_preview() -> void:
 	self.preview_building.position = self.get_building_center(building_coords, self.selected_building_type)
 	if self.selected_building_type.is_tile:
 		self.preview_tile.set_cells_terrain_connect(
-			0,
 			[building_coords],
 			self.selected_building_type.terrain_set,
 			self.selected_building_type.terrain
@@ -518,7 +517,7 @@ func _update_preview() -> void:
 
 	# Show area of current building with a 50% opacity white square
 	for coords in self.selected_building_type.get_area_cells(building_coords):
-		self.preview_area.set_cell(0, coords, 0, CityMap.SELECTION_COORDS)
+		self.preview_area.set_cell(coords, 0, CityMap.SELECTION_COORDS)
 		var building := self.get_building(coords)
 		if building != null and building.sprite != null:
 			self.modulate_building(self.selected_building_type, building, false)
@@ -655,7 +654,7 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 	for building_coords in building_type.get_cells(coords):
 		self.building_map[building_coords] = building
 		# Hide the empty tiles behind the building by setting them to invalid
-		super.set_cell(0, building_coords, -1)
+		super.set_cell(building_coords, -1)
 
 	var neighbor_groups: Array[int] = []
 	# Assumes all tiles are groupable with tiles of the same type
@@ -697,7 +696,6 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 	# Update autotiling (assumes all tiles are terrains)
 	if building_type.is_tile:
 		super.set_cells_terrain_connect(
-			0,
 			[coords],
 			building_type.terrain_set,
 			building_type.terrain
@@ -729,7 +727,7 @@ func destroy_building(building: Building) -> void:
 	# Does NOT modify the group_joins array; currently handled by the undo code
 	for building_coords in building.type.get_cells(building.coords):
 		self.building_map.erase(building_coords)
-		super.set_cell(0, building_coords, 0, CityMap.EMPTY_COORDS)
+		super.set_cell(building_coords, 0, CityMap.EMPTY_COORDS)
 
 	# Update the autotiling of all surrounding tiles, as it's not done automatically
 	if building.type.is_tile:
@@ -738,9 +736,8 @@ func destroy_building(building: Building) -> void:
 			if orthogonal_building != null and orthogonal_building.type.is_tile:
 				# Delete and recreate surrounding terrains to force them to refresh
 				# Only calling set_cells_terrain_connect is insufficient
-				super.set_cell(0, orthogonal_coords, 0, CityMap.EMPTY_COORDS)
+				super.set_cell(orthogonal_coords, 0, CityMap.EMPTY_COORDS)
 				super.set_cells_terrain_connect(
-					0,
 					[orthogonal_coords],
 					orthogonal_building.type.terrain_set,
 					orthogonal_building.type.terrain

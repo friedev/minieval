@@ -56,10 +56,9 @@ stream_3 = ExtResource("9_v7j4l")
 
 [node name="Main" type="Node"]
 
-[node name="CityMap" type="TileMap" parent="." node_paths=PackedStringArray("camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles", "input_repeat_timer")]
+[node name="CityMap" type="TileMapLayer" parent="." node_paths=PackedStringArray("camera", "preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles", "input_repeat_timer")]
 z_index = -1
 tile_set = ExtResource("1_fchkj")
-format = 2
 script = ExtResource("2_2brww")
 initial_wait_time = 0.5
 final_wait_time = 0.05
@@ -101,19 +100,17 @@ bus = &"Sound"
 [node name="Buildings" type="Node2D" parent="CityMap"]
 z_index = 2
 
-[node name="PreviewArea" type="TileMap" parent="CityMap"]
+[node name="PreviewArea" type="TileMapLayer" parent="CityMap"]
 modulate = Color(1, 1, 1, 0.12549)
 z_index = 3
 tile_set = ExtResource("1_fchkj")
 rendering_quadrant_size = 8
-format = 2
 
-[node name="PreviewTile" type="TileMap" parent="CityMap"]
+[node name="PreviewTile" type="TileMapLayer" parent="CityMap"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 3
 tile_set = ExtResource("1_fchkj")
 rendering_quadrant_size = 8
-format = 2
 
 [node name="PreviewBuilding" type="Sprite2D" parent="CityMap"]
 z_index = 3
