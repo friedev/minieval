@@ -23,6 +23,13 @@ Global="*res://scenes/global.gd"
 Options="*res://scenes/options.gd"
 Save="*res://scenes/save.gd"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_call_argument=1
+
 [display]
 
 window/size/viewport_width=1280
