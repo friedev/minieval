@@ -16,8 +16,6 @@ const EMPTY_COORDS := Vector2i(0, 0)
 const SELECTION_COORDS := Vector2i(1, 0)
 
 const INVALID_GROUP := -1
-const NO_GROUP := -1
-const FIRST_GROUP := 1
 
 const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 
@@ -67,7 +65,7 @@ var group_joins: Array[int] = []
 # Maps a group to the list of buildings adjacent to the group
 var adjacent_buildings: Array[Array] = [] # Array[Array[Building]]
 
-var group_index := self.FIRST_GROUP
+var group_index := 0
 
 var gp: int:
 	set(value):
@@ -112,10 +110,6 @@ func _ready() -> void:
 	self.camera.position = self.map_to_local(
 		Vector2(Global.game_size / 2, Global.game_size / 2)
 	) - self.camera.offset
-
-	for i in range(self.FIRST_GROUP):
-		self.group_joins.append(self.INVALID_GROUP)
-		self.adjacent_buildings.append([])
 
 
 func _process(delta: float) -> void:
@@ -324,7 +318,7 @@ func get_group(coords: Vector2i) -> int:
 # Gets the base group of the given group by recursively indexing into the
 # group_joins list until reaching a root
 func get_root_group(group: int) -> int:
-	if group < self.FIRST_GROUP or group >= len(self.group_joins):
+	if group < 0 or group >= len(self.group_joins):
 		return self.INVALID_GROUP
 	var join: int = self.group_joins[group]
 	while join != group:
@@ -355,7 +349,7 @@ func get_adjacent_buildings(
 	visited: Array[Vector2i] = []
 ) -> Array[Building]:
 	var group := self.get_root_group(self.get_group(coords))
-	if group < self.FIRST_GROUP:
+	if group < 0:
 		return []
 	visited.append(coords)
 	for adjacent_coords in self.get_orthogonal(coords):
@@ -408,10 +402,7 @@ func get_road_connections(coords: Vector2i, building_type: BuildingType) -> Arra
 		if not self.is_in_bounds(adjacent_coords):
 			continue
 		var adjacent_group := self.get_root_group(self.get_group(adjacent_coords))
-		if (
-			adjacent_group >= self.FIRST_GROUP
-			and not adjacent_group in counted_groups
-		):
+		if adjacent_group >= 0 and not adjacent_group in counted_groups:
 			counted_groups.append(adjacent_group)
 			for adjacent_building in self.adjacent_buildings[adjacent_group]:
 				# Only add GP value
@@ -688,7 +679,7 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 			if not self.is_in_bounds(adjacent_coords):
 				continue
 			var group := self.get_root_group(self.get_group(adjacent_coords))
-			if group >= self.FIRST_GROUP and not group in adjacent_groups:
+			if group >= 0 and not group in adjacent_groups:
 				adjacent_groups.append(group)
 				self.adjacent_buildings[group].append(building)
 
@@ -745,7 +736,7 @@ func destroy_building(building: Building) -> void:
 	var adjacent_groups: Array[int] = []
 	for adjacent_coords in building.type.get_adjacent_cells(building.coords):
 		var group := self.get_root_group(self.get_group(adjacent_coords))
-		if group >= self.FIRST_GROUP and not group in adjacent_groups:
+		if group >= 0 and not group in adjacent_groups:
 			if building.type.is_tile:
 				self.adjacent_buildings[group] = self.get_adjacent_buildings(adjacent_coords)
 			else:
