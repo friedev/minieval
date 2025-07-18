@@ -15,13 +15,11 @@ var velocity := Vector2.ZERO
 
 
 func _process(delta: float) -> void:
-	var digital_input := Vector2(
-		Input.get_axis(&"digital_pan_left", &"digital_pan_right"),
-		Input.get_axis(&"digital_pan_up", &"digital_pan_down")
+	var digital_input := Input.get_vector(
+		&"digital_pan_left", &"digital_pan_right", &"digital_pan_up", &"digital_pan_down"
 	).normalized()
-	var analog_input := Vector2(
-		Input.get_axis(&"analog_pan_left", &"analog_pan_right"),
-		Input.get_axis(&"analog_pan_up", &"analog_pan_down")
+	var analog_input := Input.get_vector(
+		&"analog_pan_left", &"analog_pan_right", &"analog_pan_up", &"analog_pan_down"
 	).normalized()
 	var input: Vector2
 	if not analog_input.is_zero_approx():

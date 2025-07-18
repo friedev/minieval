@@ -119,9 +119,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var mouse_input_direction := Vector2(
-		Input.get_axis(&"mouse_left", &"mouse_right"),
-		Input.get_axis(&"mouse_up", &"mouse_down")
+	var mouse_input_direction := Input.get_vector(
+		&"mouse_left", &"mouse_right", &"mouse_up", &"mouse_down"
 	)
 	if mouse_input_direction.is_zero_approx():
 		self.mouse_direction = Vector2.ZERO
