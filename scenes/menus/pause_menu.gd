@@ -12,20 +12,20 @@ signal tutorial_pressed(previous: Menu)
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"pause"):
 		if not Global.is_menu_open:
-			self.open()
+			open()
 			return
 	super._input(event)
 
 
 func _on_main_menu_button_pressed() -> void:
-	Global.change_scene_to_file(self.title_scene)
+	Global.change_scene_to_file(title_scene)
 
 
 func _on_options_button_pressed() -> void:
-	self.hide()
-	self.options_pressed.emit(self)
+	hide()
+	options_pressed.emit(self)
 
 
 func _on_tutorial_button_pressed() -> void:
-	self.hide()
-	self.tutorial_pressed.emit(self)
+	hide()
+	tutorial_pressed.emit(self)

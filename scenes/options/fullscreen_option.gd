@@ -5,11 +5,11 @@ var previous_value: bool
 
 
 func _ready() -> void:
-	self.previous_value = self.default
+	previous_value = default
 
 
 func get_option() -> bool:
-	var window_mode := self.get_window().mode
+	var window_mode := get_window().mode
 	return (
 		window_mode == Window.MODE_FULLSCREEN
 		or window_mode == Window.MODE_EXCLUSIVE_FULLSCREEN
@@ -17,7 +17,7 @@ func get_option() -> bool:
 
 
 func set_option(value: bool, emit := true) -> void:
-	self.get_window().mode = (
+	get_window().mode = (
 		Window.MODE_EXCLUSIVE_FULLSCREEN
 		if value
 		else Window.MODE_WINDOWED
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	# - NOTIFICATION_WM_SIZE_CHANGED
 	# - Window.titlebar_changed
 	# - Viewport.size_changed
-	var current_value := self.get_option()
-	if current_value != self.previous_value:
-		self.previous_value = current_value
-		self.set_option(current_value)
+	var current_value := get_option()
+	if current_value != previous_value:
+		previous_value = current_value
+		set_option(current_value)

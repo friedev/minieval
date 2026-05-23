@@ -10,7 +10,7 @@ signal position_changed
 @export var max_zoom: Vector2
 @export var acceleration_time: float
 
-@onready var default_zoom := self.zoom
+@onready var default_zoom := zoom
 
 var velocity := Vector2.ZERO
 
@@ -35,49 +35,49 @@ func _process(delta: float) -> void:
 		input = digital_input
 
 	var top_speed: float = (
-		self.min_speed
-		+ (self.max_speed - self.min_speed)
+		min_speed
+		+ (max_speed - min_speed)
 		* Options.options.get("camera_speed", 0.5)
 	)
-	var target_velocity := input * top_speed / self.zoom
+	var target_velocity := input * top_speed / zoom
 
 	var smooth := analog_input == Vector2.ZERO
 	if smooth:
-		self.velocity = self.velocity.lerp(target_velocity, delta / self.acceleration_time)
+		velocity = velocity.lerp(target_velocity, delta / acceleration_time)
 	else:
-		self.velocity = target_velocity
+		velocity = target_velocity
 
-	if not self.velocity.is_zero_approx():
-		self.position += self.velocity * delta
-		self.position_changed.emit()
+	if not velocity.is_zero_approx():
+		position += velocity * delta
+		position_changed.emit()
 
 
 func reset_zoom() -> void:
-	if self.zoom != self.default_zoom:
-		self.zoom = self.default_zoom
-		self.zoom_changed.emit()
+	if zoom != default_zoom:
+		zoom = default_zoom
+		zoom_changed.emit()
 
 
 func zoom_by(zoom_factor: Vector2) -> void:
-	var old_zoom := self.zoom
-	var old_mouse_position := self.get_global_mouse_position()
+	var old_zoom := zoom
+	var old_mouse_position := get_global_mouse_position()
 	# Round to ensure that integral, pixel-perfect zooming
-	self.zoom = (self.zoom + zoom_factor).round().clamp(self.min_zoom, self.max_zoom)
-	if self.zoom != old_zoom:
-		var new_mouse_position := self.get_global_mouse_position()
-		self.position += old_mouse_position - new_mouse_position
-		self.zoom_changed.emit()
+	zoom = (zoom + zoom_factor).round().clamp(min_zoom, max_zoom)
+	if zoom != old_zoom:
+		var new_mouse_position := get_global_mouse_position()
+		position += old_mouse_position - new_mouse_position
+		zoom_changed.emit()
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"zoom_in"):
-		self.zoom_by(Vector2.ONE)
+		zoom_by(Vector2.ONE)
 	if event.is_action_pressed(&"zoom_out"):
-		self.zoom_by(-Vector2.ONE)
+		zoom_by(-Vector2.ONE)
 	if event.is_action_pressed(&"zoom_reset"):
-		self.reset_zoom()
+		reset_zoom()
 	if event is InputEventMouseMotion and Input.is_action_pressed(&"drag_camera"):
 		var relative := (event as InputEventMouseMotion).relative
 		if relative != Vector2.ZERO:
-			self.position -= relative / self.zoom
-			self.position_changed.emit()
+			position -= relative / zoom
+			position_changed.emit()

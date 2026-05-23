@@ -10,20 +10,20 @@ const INITIAL_GP := 25
 
 var endless := false:
 	set(value):
-		if value != self.endless:
+		if value != endless:
 			endless = value
-			self.endless_changed.emit(self.endless)
+			endless_changed.emit(endless)
 
-var num_turns := self.NUM_TURNS
-var game_size := self.GAME_SIZE
-var initial_gp := self.INITIAL_GP
+var num_turns := NUM_TURNS
+var game_size := GAME_SIZE
+var initial_gp := INITIAL_GP
 
 var is_menu_open := false:
 	set(value):
-		if value != self.is_menu_open:
+		if value != is_menu_open:
 			is_menu_open = value
-			self.get_tree().paused = self.is_menu_open
-			self.is_menu_open_changed.emit(self.is_menu_open)
+			get_tree().paused = is_menu_open
+			is_menu_open_changed.emit(is_menu_open)
 
 static var building_types := {
 	&"road": preload("res://scenes/building_types/road.tres"),
@@ -40,11 +40,11 @@ static var building_types := {
 
 
 func reset_game_parameters() -> void:
-	self.num_turns = self.NUM_TURNS
-	self.game_size = self.GAME_SIZE
+	num_turns = NUM_TURNS
+	game_size = GAME_SIZE
 
 
 func change_scene_to_file(path: String) -> void:
-	self.is_menu_open = false
-	self.get_tree().paused = false
-	self.get_tree().change_scene_to_file(path)
+	is_menu_open = false
+	get_tree().paused = false
+	get_tree().change_scene_to_file(path)

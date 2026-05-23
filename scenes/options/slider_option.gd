@@ -7,13 +7,13 @@ extends Option
 
 
 func get_option() -> float:
-	return self.slider.value
+	return slider.value
 
 
 func set_option(value: float, emit := true) -> void:
-	self.slider.set_value_no_signal(value)
+	slider.set_value_no_signal(value)
 	super.set_option(value, emit)
 
 
 func _on_slider_value_changed(value: float) -> void:
-	self.set_option(value)
+	set_option(value)

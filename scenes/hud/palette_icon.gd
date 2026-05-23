@@ -14,26 +14,26 @@ signal unhovered(icon: PaletteIcon)
 
 
 func _ready() -> void:
-	self.building_texture_rect.texture = self.building_type.icon
-	if self.initially_selected:
-		self.clicked.emit(self)
+	building_texture_rect.texture = building_type.icon
+	if initially_selected:
+		clicked.emit(self)
 
 
 func set_selected(is_selected: bool) -> void:
-	self.selected_texture_rect.visible = is_selected
+	selected_texture_rect.visible = is_selected
 
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event := event as InputEventMouseButton
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.pressed:
-			self.clicked.emit(self)
-			self.accept_event()
+			clicked.emit(self)
+			accept_event()
 
 
 func _on_mouse_entered() -> void:
-	self.hovered.emit(self)
+	hovered.emit(self)
 
 
 func _on_mouse_exited() -> void:
-	self.unhovered.emit(self)
+	unhovered.emit(self)

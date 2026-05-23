@@ -12,29 +12,29 @@ signal credits_pressed(previous: Menu)
 
 
 func _ready() -> void:
-	self.quit_button.visible = OS.get_name() != "Web"
-	self.open()
+	quit_button.visible = OS.get_name() != "Web"
+	open()
 
 
 func _on_play_button_pressed() -> void:
 	Global.reset_game_parameters()
-	Global.change_scene_to_file(self.main_scene)
+	Global.change_scene_to_file(main_scene)
 
 
 func _on_custom_game_button_pressed() -> void:
-	self.hide()
-	self.custom_game_pressed.emit(self)
+	hide()
+	custom_game_pressed.emit(self)
 
 
 func _on_options_button_pressed() -> void:
-	self.hide()
-	self.options_pressed.emit(self)
+	hide()
+	options_pressed.emit(self)
 
 
 func _on_credits_button_pressed() -> void:
-	self.hide()
-	self.credits_pressed.emit(self)
+	hide()
+	credits_pressed.emit(self)
 
 
 func _on_quit_button_pressed() -> void:
-	self.get_tree().quit()
+	get_tree().quit()

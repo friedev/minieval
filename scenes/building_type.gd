@@ -26,7 +26,7 @@ extends Resource
 var bounds: Rect2i:
 	get:
 		if bounds.size == Vector2i.ZERO:
-			for coords in self.cells:
+			for coords in cells:
 				bounds = bounds.expand(coords)
 		return bounds
 
@@ -44,23 +44,23 @@ static func get_orthogonal(coords: Vector2i) -> Array[Vector2i]:
 
 func get_cells(offset := Vector2i(0, 0)) -> Array[Vector2i]:
 	var offset_cells: Array[Vector2i] = []
-	for coords in self.cells:
+	for coords in cells:
 		offset_cells.append(coords + offset)
 	return offset_cells
 
 
 func get_area_cells(offset := Vector2i(0, 0)) -> Array[Vector2i]:
 	var area_cells: Array[Vector2i] = []
-	for x in range(self.area.size.x):
-		for y in range(self.area.size.y):
-			area_cells.append(Vector2i(x, y) + self.area.position + offset)
+	for x in range(area.size.x):
+		for y in range(area.size.y):
+			area_cells.append(Vector2i(x, y) + area.position + offset)
 	return area_cells
 
 
 func get_adjacent_cells(offset := Vector2i(0, 0)) -> Array[Vector2i]:
 	var adjacent_cells: Array[Vector2i] = []
-	for coords in self.cells:
-		for orthogonal_coords in self.get_orthogonal(coords):
-			if not orthogonal_coords in self.cells and not orthogonal_coords + offset in adjacent_cells:
+	for coords in cells:
+		for orthogonal_coords in get_orthogonal(coords):
+			if not orthogonal_coords in cells and not orthogonal_coords + offset in adjacent_cells:
 				adjacent_cells.append(orthogonal_coords + offset)
 	return adjacent_cells

@@ -5,12 +5,12 @@ const tutorial_seen_key := "tutorial_seen"
 
 
 func _ready() -> void:
-	if Save.get_data(self.tutorial_seen_key, false):
-		self.close()
+	if Save.get_data(tutorial_seen_key, false):
+		close()
 	else:
-		self.open()
+		open()
 
 
 func close() -> void:
-	Save.set_data(self.tutorial_seen_key, true)
+	Save.set_data(tutorial_seen_key, true)
 	super.close()

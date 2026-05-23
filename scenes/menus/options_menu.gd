@@ -10,12 +10,12 @@ func close() -> void:
 
 
 func _on_save_button_pressed() -> void:
-	self.close()
+	close()
 
 
 func _on_cancel_button_pressed() -> void:
 	Options.load_config()
-	self.close()
+	close()
 
 
 func _on_restore_defaults_button_pressed() -> void:

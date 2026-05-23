@@ -74,12 +74,12 @@ var group_index := 0
 var gp: int:
 	set(value):
 		gp = value
-		self.gp_changed.emit(self.gp)
+		gp_changed.emit(gp)
 
 var vp: int:
 	set(value):
 		vp = value
-		self.vp_changed.emit(self.vp)
+		vp_changed.emit(vp)
 
 var selected_building_type: BuildingType
 
@@ -88,34 +88,34 @@ var future: Array[Placement] = []
 
 var action_to_repeat: StringName
 
-var mouse_coords := self.INVALID_COORDS
-var preview_coords := self.INVALID_COORDS
+var mouse_coords := INVALID_COORDS
+var preview_coords := INVALID_COORDS
 var modulated_buildings: Array[Building] = []
 var mouse_direction := Vector2.ZERO
 ## Mouse position needs updating?
 var mouse_dirty := false
 
-@onready var particles_material: ParticleProcessMaterial = self.building_particles.process_material
-@onready var particles_amount := self.building_particles.amount
-@onready var particles_scale := self.particles_material.scale_min
-@onready var particles_velocity := self.particles_material.initial_velocity_min
-@onready var particles_accel := self.particles_material.linear_accel_min
+@onready var particles_material: ParticleProcessMaterial = building_particles.process_material
+@onready var particles_amount := building_particles.amount
+@onready var particles_scale := particles_material.scale_min
+@onready var particles_velocity := particles_material.initial_velocity_min
+@onready var particles_accel := particles_material.linear_accel_min
 
 
 func _ready() -> void:
-	self.gp = Global.initial_gp
-	self.vp = 0
+	gp = Global.initial_gp
+	vp = 0
 
-	self._update_mouse_coords()
-	self._update_labels()
+	_update_mouse_coords()
+	_update_labels()
 
 	for x in range(Global.game_size):
 		for y in range(Global.game_size):
 			super.set_cell(Vector2i(x, y), 0, CityMap.EMPTY_COORDS)
 
-	self.camera.position = self.map_to_local(
+	camera.position = map_to_local(
 		Vector2(Global.game_size / 2, Global.game_size / 2),
-	) - self.camera.offset
+	) - camera.offset
 
 
 func _process(delta: float) -> void:
@@ -126,82 +126,82 @@ func _process(delta: float) -> void:
 		&"mouse_down",
 	)
 	if mouse_input_direction.is_zero_approx():
-		self.mouse_direction = Vector2.ZERO
+		mouse_direction = Vector2.ZERO
 		# Update mouse position if dirty, even if it wasn't manually moved
-		if self.mouse_dirty:
-			self.update_mouse()
+		if mouse_dirty:
+			update_mouse()
 			# Always update preview just to be safe (could be optimized)
-			self._update_preview()
+			_update_preview()
 		return
 
 	if (
-		self.mouse_direction.is_zero_approx()
-		or self.mouse_direction.angle_to(mouse_input_direction) > PI / 2
+		mouse_direction.is_zero_approx()
+		or mouse_direction.angle_to(mouse_input_direction) > PI / 2
 	):
-		self.mouse_direction = mouse_input_direction * self.mouse_speed_min
+		mouse_direction = mouse_input_direction * mouse_speed_min
 	else:
-		self.mouse_direction = self.mouse_direction.lerp(
+		mouse_direction = mouse_direction.lerp(
 			mouse_input_direction,
-			self.mouse_acceleration * delta,
+			mouse_acceleration * delta,
 		)
-	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
-	self.move_mouse(self.get_viewport().get_mouse_position() + mouse_velocity)
+	var mouse_velocity := mouse_direction * mouse_speed * delta
+	move_mouse(get_viewport().get_mouse_position() + mouse_velocity)
 
 
 func update_mouse() -> void:
-	self.mouse_dirty = false
-	self._update_mouse_coords()
+	mouse_dirty = false
+	_update_mouse_coords()
 	# Update the preview if the mouse has moved to a different cell
-	if self.mouse_coords != self.preview_coords:
+	if mouse_coords != preview_coords:
 		if Input.is_action_pressed(&"place_building"):
-			self.handle_place_building_input(false)
+			handle_place_building_input(false)
 		else:
-			self._update_preview()
+			_update_preview()
 
 
 func move_mouse(mouse_position: Vector2) -> void:
-	self.get_viewport().warp_mouse(mouse_position)
-	self.update_mouse()
+	get_viewport().warp_mouse(mouse_position)
+	update_mouse()
 
 
 func clamp_mouse_to_map() -> void:
-	var coords := self.mouse_coords.clamp(Vector2.ZERO, Vector2.ONE * Global.game_size)
-	self.move_mouse(self.coords_to_screen_position(coords))
+	var coords := mouse_coords.clamp(Vector2.ZERO, Vector2.ONE * Global.game_size)
+	move_mouse(coords_to_screen_position(coords))
 
 
 func select_cell(coords: Vector2i) -> bool:
-	if self.is_in_bounds(coords):
-		self.move_mouse(self.coords_to_screen_position(coords))
+	if is_in_bounds(coords):
+		move_mouse(coords_to_screen_position(coords))
 		return true
 	return false
 
 
 func move_mouse_by_cell(delta: Vector2i) -> bool:
-	self.clamp_mouse_to_map()
-	return self.select_cell(self.mouse_coords + delta)
+	clamp_mouse_to_map()
+	return select_cell(mouse_coords + delta)
 
 
 func handle_place_building_input(error_sound := true) -> bool:
-	self._clear_preview()
+	_clear_preview()
 
-	var placement: Placement = self.place_building(
-		self.mouse_coords + self.selected_building_type.offset,
-		self.selected_building_type,
+	var placement: Placement = place_building(
+		mouse_coords + selected_building_type.offset,
+		selected_building_type,
 	)
 
 	if placement != null:
-		self.gp += placement.gp_change
-		self.vp += placement.vp_change
-		self.history.append(placement)
-		self.future.clear()
-		self.turn_changed.emit(self.get_turn())
-		self._update_labels()
-		if self.is_game_over():
-			self.game_over.emit()
+		gp += placement.gp_change
+		vp += placement.vp_change
+		history.append(placement)
+		future.clear()
+		turn_changed.emit(get_turn())
+		_update_labels()
+		if is_game_over():
+			game_over.emit()
 		return true
 	else:
 		if error_sound:
-			self.building_place_error_sound.play()
+			building_place_error_sound.play()
 		return false
 
 
@@ -211,28 +211,28 @@ func handle_action(action: StringName) -> bool:
 	match action:
 		&"place_building":
 			# Don't try to repeat placing a building, since it will never work
-			self.handle_place_building_input()
+			handle_place_building_input()
 			return false
 		&"undo":
-			return self.undo()
+			return undo()
 		&"redo":
-			return self.redo()
+			return redo()
 		&"select_cell_left":
-			return self.move_mouse_by_cell(Vector2i.LEFT)
+			return move_mouse_by_cell(Vector2i.LEFT)
 		&"select_cell_right":
-			return self.move_mouse_by_cell(Vector2i.RIGHT)
+			return move_mouse_by_cell(Vector2i.RIGHT)
 		&"select_cell_up":
-			return self.move_mouse_by_cell(Vector2i.UP)
+			return move_mouse_by_cell(Vector2i.UP)
 		&"select_cell_down":
-			return self.move_mouse_by_cell(Vector2i.DOWN)
+			return move_mouse_by_cell(Vector2i.DOWN)
 		&"select_cell_left_up":
-			return self.move_mouse_by_cell(Vector2i(-1, -1))
+			return move_mouse_by_cell(Vector2i(-1, -1))
 		&"select_cell_left_down":
-			return self.move_mouse_by_cell(Vector2i(-1, +1))
+			return move_mouse_by_cell(Vector2i(-1, +1))
 		&"select_cell_right_up":
-			return self.move_mouse_by_cell(Vector2i(+1, -1))
+			return move_mouse_by_cell(Vector2i(+1, -1))
 		&"select_cell_right_down":
-			return self.move_mouse_by_cell(Vector2i(+1, +1))
+			return move_mouse_by_cell(Vector2i(+1, +1))
 		_:
 			assert(false, "Unknown action %s" % action)
 			return false
@@ -240,7 +240,7 @@ func handle_action(action: StringName) -> bool:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		self.update_mouse()
+		update_mouse()
 
 	for action in [
 		&"place_building",
@@ -256,46 +256,46 @@ func _unhandled_input(event: InputEvent) -> void:
 		&"select_cell_right_down",
 	]:
 		if event.is_action_pressed(action):
-			if self.handle_action(action):
-				self.action_to_repeat = action
-				self.input_repeat_timer.start(self.initial_wait_time)
+			if handle_action(action):
+				action_to_repeat = action
+				input_repeat_timer.start(initial_wait_time)
 				break
 
 
 func undo() -> bool:
-	self._clear_preview()
-	var prev_placement: Placement = self.history.pop_back()
+	_clear_preview()
+	var prev_placement: Placement = history.pop_back()
 	if not prev_placement:
 		return false
 
-	self.destroy_building(prev_placement.building)
-	self.gp -= prev_placement.gp_change
-	self.vp -= prev_placement.vp_change
+	destroy_building(prev_placement.building)
+	gp -= prev_placement.gp_change
+	vp -= prev_placement.vp_change
 	for join in prev_placement.group_joins:
-		self.group_joins[join] = join
-	self.future.append(prev_placement)
-	self.turn_changed.emit(self.get_turn())
-	self._update_labels()
+		group_joins[join] = join
+	future.append(prev_placement)
+	turn_changed.emit(get_turn())
+	_update_labels()
 	return true
 
 
 func redo() -> bool:
-	self._clear_preview()
-	var next_placement: Placement = self.future.pop_back()
+	_clear_preview()
+	var next_placement: Placement = future.pop_back()
 	if not next_placement:
 		return false
 
 	# Can't reuse next_placement, since its Building object will have a
 	# reference to a freed sprite
-	var new_placement := self.place_building(
+	var new_placement := place_building(
 		next_placement.building.coords,
 		next_placement.building.type,
 	)
-	self.gp += next_placement.gp_change
-	self.vp += next_placement.vp_change
-	self.history.append(new_placement)
-	self.turn_changed.emit(self.get_turn())
-	self._update_labels()
+	gp += next_placement.gp_change
+	vp += next_placement.vp_change
+	history.append(new_placement)
+	turn_changed.emit(get_turn())
+	_update_labels()
 	return true
 
 
@@ -310,35 +310,35 @@ func is_in_bounds(coords: Vector2i) -> bool:
 
 # Wrapper for building_map.get to provide static typing
 func get_building(coords: Vector2i) -> Building:
-	return self.building_map.get(coords)
+	return building_map.get(coords)
 
 
 # Is the cell occupied by a building (tile or non-tile)?
 func is_occupied(coords: Vector2i) -> bool:
-	return coords in self.building_map
+	return coords in building_map
 
 
 # Is the cell open for a building to be placed in?
 func is_open(coords: Vector2i) -> bool:
-	return self.is_in_bounds(coords) and not self.is_occupied(coords)
+	return is_in_bounds(coords) and not is_occupied(coords)
 
 
 func get_group(coords: Vector2i) -> int:
-	var building := self.get_building(coords)
+	var building := get_building(coords)
 	if building == null:
-		return self.INVALID_GROUP
+		return INVALID_GROUP
 	return building.group
 
 
 # Gets the base group of the given group by recursively indexing into the
 # group_joins list until reaching a root
 func get_root_group(group: int) -> int:
-	if group < 0 or group >= len(self.group_joins):
-		return self.INVALID_GROUP
-	var join: int = self.group_joins[group]
+	if group < 0 or group >= len(group_joins):
+		return INVALID_GROUP
+	var join: int = group_joins[group]
 	while join != group:
 		group = join
-		join = self.group_joins[group]
+		join = group_joins[group]
 	return group
 
 
@@ -363,49 +363,49 @@ func get_adjacent_buildings(
 		adjacent_buildings: Array[Building] = [],
 		visited: Array[Vector2i] = [],
 ) -> Array[Building]:
-	var group := self.get_root_group(self.get_group(coords))
+	var group := get_root_group(get_group(coords))
 	if group < 0:
 		return []
 	visited.append(coords)
-	for adjacent_coords in self.get_orthogonal(coords):
-		var adjacent_group := self.get_root_group(self.get_group(adjacent_coords))
+	for adjacent_coords in get_orthogonal(coords):
+		var adjacent_group := get_root_group(get_group(adjacent_coords))
 		if adjacent_group == group:
 			if not adjacent_coords in visited:
-				adjacent_buildings = self.get_adjacent_buildings(
+				adjacent_buildings = get_adjacent_buildings(
 					adjacent_coords,
 					adjacent_buildings,
 					visited,
 				)
 		else:
-			var adjacent_building := self.get_building(adjacent_coords)
+			var adjacent_building := get_building(adjacent_coords)
 			if adjacent_building != null and not adjacent_building in adjacent_buildings:
 				adjacent_buildings.append(adjacent_building)
 	return adjacent_buildings
 
 
 func select_building_type(building_type: BuildingType) -> void:
-	self.selected_building_type = building_type
+	selected_building_type = building_type
 	if not building_type.is_tile:
-		self.preview_building.texture = building_type.texture
-	self._update_preview()
+		preview_building.texture = building_type.texture
+	_update_preview()
 
 
 func get_turn() -> int:
-	return len(self.history)
+	return len(history)
 
 
 func get_turns_remaining() -> int:
-	return Global.num_turns - self.get_turn()
+	return Global.num_turns - get_turn()
 
 
 func is_game_over() -> bool:
-	return not Global.endless and self.get_turns_remaining() == 0
+	return not Global.endless and get_turns_remaining() == 0
 
 
 func coords_to_screen_position(coords: Vector2i) -> Vector2:
 	return (
-		(self.map_to_local(coords) - self.camera.get_screen_center_position()) * self.camera.zoom
-		+ self.get_viewport_rect().size / 2
+		(map_to_local(coords) - camera.get_screen_center_position()) * camera.zoom
+		+ get_viewport_rect().size / 2
 	)
 
 
@@ -414,12 +414,12 @@ func get_road_connections(coords: Vector2i, building_type: BuildingType) -> Arra
 	var road_connections: Array[Building] = []
 	var counted_groups: Array[int] = []
 	for adjacent_coords in building_type.get_adjacent_cells(coords):
-		if not self.is_in_bounds(adjacent_coords):
+		if not is_in_bounds(adjacent_coords):
 			continue
-		var adjacent_group := self.get_root_group(self.get_group(adjacent_coords))
+		var adjacent_group := get_root_group(get_group(adjacent_coords))
 		if adjacent_group >= 0 and not adjacent_group in counted_groups:
 			counted_groups.append(adjacent_group)
-			for adjacent_building in self.adjacent_buildings[adjacent_group]:
+			for adjacent_building in adjacent_buildings[adjacent_group]:
 				# Only add GP value
 				road_connections.append(adjacent_building)
 	return road_connections
@@ -427,25 +427,25 @@ func get_road_connections(coords: Vector2i, building_type: BuildingType) -> Arra
 
 # Updates the GP/VP label and turn label
 func _update_labels() -> void:
-	var turns_remaining := self.get_turns_remaining()
+	var turns_remaining := get_turns_remaining()
 
 
 func _update_mouse_coords() -> void:
-	self.mouse_coords = self.local_to_map(self.get_local_mouse_position())
+	mouse_coords = local_to_map(get_local_mouse_position())
 
 
 func _clear_preview() -> void:
-	if self.preview_coords != self.INVALID_COORDS:
-		self.preview_coords = self.INVALID_COORDS
-		self.preview_area.clear()
-		self.preview_tile.clear()
-		self.preview_building.visible = false
-		self.gp_preview_label.text = ""
-		self.vp_preview_label.text = ""
-		self.preview_node.visible = false
-		for modulated_building in self.modulated_buildings:
+	if preview_coords != INVALID_COORDS:
+		preview_coords = INVALID_COORDS
+		preview_area.clear()
+		preview_tile.clear()
+		preview_building.visible = false
+		gp_preview_label.text = ""
+		vp_preview_label.text = ""
+		preview_node.visible = false
+		for modulated_building in modulated_buildings:
 			modulated_building.sprite.modulate = Color.WHITE
-		self.modulated_buildings.clear()
+		modulated_buildings.clear()
 
 
 # Modulate the "to" building based on the interaction the "from" building has
@@ -472,91 +472,91 @@ func modulate_building(
 		(gp_interaction > 0 and vp_interaction >= 0)
 		or (gp_interaction >= 0 and vp_interaction > 0)
 	):
-		modulation = self.good_color
+		modulation = good_color
 	elif (
 		(gp_interaction < 0 and vp_interaction <= 0)
 		or (gp_interaction <= 0 and vp_interaction < 0)
 	):
-		modulation = self.bad_color
+		modulation = bad_color
 	elif (
 		(gp_interaction < 0 and vp_interaction > 0)
 		or (gp_interaction > 0 and vp_interaction < 0)
 	):
-		modulation = self.mixed_color
+		modulation = mixed_color
 	else:
-		modulation = self.default_color
+		modulation = default_color
 
 	to_building.sprite.modulate = modulation
-	self.modulated_buildings.append(to_building)
+	modulated_buildings.append(to_building)
 
 
 func _update_preview() -> void:
-	self._clear_preview()
-	if self.selected_building_type == null:
+	_clear_preview()
+	if selected_building_type == null:
 		return
-	self.preview_node.visible = true
-	self.preview_coords = self.mouse_coords
-	var building_coords: Vector2i = self.preview_coords + self.selected_building_type.offset
+	preview_node.visible = true
+	preview_coords = mouse_coords
+	var building_coords: Vector2i = preview_coords + selected_building_type.offset
 
 	# Move the building preview
-	self.preview_building.position = self.get_building_center(building_coords, self.selected_building_type)
-	if self.selected_building_type.is_tile:
-		self.preview_tile.set_cells_terrain_connect(
+	preview_building.position = get_building_center(building_coords, selected_building_type)
+	if selected_building_type.is_tile:
+		preview_tile.set_cells_terrain_connect(
 			[building_coords],
-			self.selected_building_type.terrain_set,
-			self.selected_building_type.terrain,
+			selected_building_type.terrain_set,
+			selected_building_type.terrain,
 		)
 	else:
-		self.preview_building.visible = true
+		preview_building.visible = true
 
 	# Shade preview building in red if the placement is blocked
 	var blocked := false
-	for coords in self.selected_building_type.get_cells(building_coords):
-		if not self.is_open(coords):
+	for coords in selected_building_type.get_cells(building_coords):
+		if not is_open(coords):
 			blocked = true
 			break
-	var modulate_color := self.invalid_color if blocked else self.default_color
-	if self.selected_building_type.is_tile:
-		self.preview_tile.modulate = modulate_color
+	var modulate_color := invalid_color if blocked else default_color
+	if selected_building_type.is_tile:
+		preview_tile.modulate = modulate_color
 	else:
-		self.preview_building.modulate = modulate_color
+		preview_building.modulate = modulate_color
 
 	# Show area of current building with a 50% opacity white square
-	for coords in self.selected_building_type.get_area_cells(building_coords):
-		self.preview_area.set_cell(coords, 0, CityMap.SELECTION_COORDS)
-		var building := self.get_building(coords)
+	for coords in selected_building_type.get_area_cells(building_coords):
+		preview_area.set_cell(coords, 0, CityMap.SELECTION_COORDS)
+		var building := get_building(coords)
 		if building != null and building.sprite != null:
-			self.modulate_building(self.selected_building_type, building, false)
+			modulate_building(selected_building_type, building, false)
 
-	var road_connections := self.get_road_connections(building_coords, self.selected_building_type)
+	var road_connections := get_road_connections(building_coords, selected_building_type)
 	for connected_building in road_connections:
-		if not connected_building in self.modulated_buildings and connected_building.sprite != null:
-			self.modulate_building(self.selected_building_type, connected_building, true)
+		if not connected_building in modulated_buildings and connected_building.sprite != null:
+			modulate_building(selected_building_type, connected_building, true)
 
 	# Update preview labels with expected building value
-	var value := self.get_building_value(
+	var value := get_building_value(
 		building_coords,
-		self.selected_building_type,
+		selected_building_type,
 		false,
 		road_connections,
 	)
-	var formatted_value := self.format_value(value)
-	self.gp_preview_label.text = formatted_value[0]
-	self.vp_preview_label.text = formatted_value[1]
+	var formatted_value := format_value(value)
+	gp_preview_label.text = formatted_value[0]
+	vp_preview_label.text = formatted_value[1]
 	# Force fit to content
-	self.preview_node.size = Vector2.ZERO
-	self.preview_node.position = self.coords_to_screen_position(
-		Vector2i(self.preview_coords.x, building_coords.y),
+	preview_node.size = Vector2.ZERO
+	preview_node.position = coords_to_screen_position(
+		Vector2i(preview_coords.x, building_coords.y),
 	)
-	self.preview_node.position -= self.preview_node.size / 2
-	self.preview_node.position.y -= 40
+	preview_node.position -= preview_node.size / 2
+	preview_node.position.y -= 40
 
 	# Shade preview building in red if you can't afford to place it
-	if value[0] + self.gp < 0:
-		if self.selected_building_type.is_tile:
-			self.preview_tile.modulate = self.invalid_color
+	if value[0] + gp < 0:
+		if selected_building_type.is_tile:
+			preview_tile.modulate = invalid_color
 		else:
-			self.preview_building.modulate = self.invalid_color
+			preview_building.modulate = invalid_color
 
 
 # Gets the total value that would result from placing the building with the
@@ -579,7 +579,7 @@ func get_building_value(
 		if area_coords in occupied_cells:
 			continue
 
-		var neighbor_building := self.get_building(area_coords)
+		var neighbor_building := get_building(area_coords)
 		if neighbor_building != null and not neighbor_building in counted_buildings:
 			counted_buildings.append(neighbor_building)
 			gp_value += building_type.gp_interactions.get(neighbor_building.type.key, 0)
@@ -588,7 +588,7 @@ func get_building_value(
 	# Account for buildings connected via road
 	if get_road_connections:
 		assert(road_connections == [])
-		road_connections = self.get_road_connections(coords, building_type)
+		road_connections = get_road_connections(coords, building_type)
 
 	for connected_building in road_connections:
 		if not connected_building in counted_buildings:
@@ -608,54 +608,54 @@ func format_value(value: Array[int]) -> Array[String]:
 
 ## Gets the pixel position of the center of the given building type.
 func get_building_center(coords: Vector2i, building_type: BuildingType) -> Vector2:
-	return self.map_to_local(coords) + Rect2(building_type.bounds).get_center() * Vector2(self.tile_set.tile_size)
+	return map_to_local(coords) + Rect2(building_type.bounds).get_center() * Vector2(tile_set.tile_size)
 
 
 func reset_particles() -> void:
-	self.building_particles.amount = self.particles_amount
-	self.particles_material.scale_min = self.particles_scale
-	self.particles_material.scale_max = self.particles_scale
-	self.particles_material.initial_velocity_min = self.particles_velocity
-	self.particles_material.initial_velocity_max = self.particles_velocity
-	self.particles_material.linear_accel_min = self.particles_accel
-	self.particles_material.linear_accel_max = self.particles_accel
+	building_particles.amount = particles_amount
+	particles_material.scale_min = particles_scale
+	particles_material.scale_max = particles_scale
+	particles_material.initial_velocity_min = particles_velocity
+	particles_material.initial_velocity_max = particles_velocity
+	particles_material.linear_accel_min = particles_accel
+	particles_material.linear_accel_max = particles_accel
 
 
 func emit_particles(coords: Vector2i, building_type: BuildingType) -> void:
 	if building_type.is_tile:
 		return
 
-	self.reset_particles()
+	reset_particles()
 
 	# Technically, the size of the bounds of a one-tile building (e.g. house) is
 	# 0, so set a minimum size for particle emission purposes
 	var size := Vector2(building_type.bounds.size).max(Vector2.ONE * 0.5)
 	var multiplier := sqrt((size.x + size.y) * 0.5) * 1.25
-	self.building_particles.position = self.get_building_center(coords, building_type)
-	self.particles_material.emission_sphere_radius = size.length() / 2
-	self.building_particles.amount = self.particles_amount * multiplier
-	self.particles_material.scale_min = self.particles_scale * multiplier
-	self.particles_material.scale_max = self.particles_scale * multiplier
-	self.particles_material.initial_velocity_min = self.particles_velocity * multiplier
-	self.particles_material.initial_velocity_max = self.particles_velocity * multiplier
-	self.particles_material.linear_accel_min = self.particles_accel * multiplier
-	self.particles_material.linear_accel_max = self.particles_accel * multiplier
-	self.building_particles.restart()
+	building_particles.position = get_building_center(coords, building_type)
+	particles_material.emission_sphere_radius = size.length() / 2
+	building_particles.amount = particles_amount * multiplier
+	particles_material.scale_min = particles_scale * multiplier
+	particles_material.scale_max = particles_scale * multiplier
+	particles_material.initial_velocity_min = particles_velocity * multiplier
+	particles_material.initial_velocity_max = particles_velocity * multiplier
+	particles_material.linear_accel_min = particles_accel * multiplier
+	particles_material.linear_accel_max = particles_accel * multiplier
+	building_particles.restart()
 
 
 func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 	# Prevent placement if building overlaps any existing buildings
 	for building_coords in building_type.get_cells(coords):
-		if not self.is_open(building_coords):
+		if not is_open(building_coords):
 			return null
 
 	# Give GP based on nearby buildings
-	var building_value := self.get_building_value(coords, building_type)
+	var building_value := get_building_value(coords, building_type)
 	var gp_change: int = building_value[0]
 	var vp_change: int = building_value[1]
 
 	# Check if the additional GP from interactions would lead to negative GP
-	if self.gp + gp_change < 0:
+	if gp + gp_change < 0:
 		return null
 
 	var building := Building.new()
@@ -663,23 +663,23 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 	building.coords = coords
 
 	for building_coords in building_type.get_cells(coords):
-		self.building_map[building_coords] = building
+		building_map[building_coords] = building
 		# Hide the empty tiles behind the building by setting them to invalid
 		super.set_cell(building_coords, -1)
 
 	var neighbor_groups: Array[int] = []
 	# Assumes all tiles are groupable with tiles of the same type
 	if building_type.is_tile:
-		for neighbor_coords in self.get_orthogonal(coords):
-			var neighbor_building := self.get_building(neighbor_coords)
+		for neighbor_coords in get_orthogonal(coords):
+			var neighbor_building := get_building(neighbor_coords)
 			if neighbor_building != null and neighbor_building.type == building_type:
-				neighbor_groups.append(self.get_root_group(self.get_group(neighbor_coords)))
+				neighbor_groups.append(get_root_group(get_group(neighbor_coords)))
 		# If no neighboring groups exist, make a new group
 		if len(neighbor_groups) == 0:
-			building.group = self.group_index
-			self.group_joins.append(self.group_index)
-			self.adjacent_buildings.append([])
-			self.group_index += 1
+			building.group = group_index
+			group_joins.append(group_index)
+			adjacent_buildings.append([])
+			group_index += 1
 		# If there's exactly one neighboring group, use that
 		elif len(neighbor_groups) == 1:
 			building.group = neighbor_groups[0]
@@ -687,22 +687,22 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 		else:
 			var joined_group: int = neighbor_groups.min()
 			for group in neighbor_groups:
-				self.group_joins[group] = joined_group
+				group_joins[group] = joined_group
 			building.group = joined_group
 
 		# Update the list of buildings adjacent to the group
-		self.adjacent_buildings[building.group] = self.get_adjacent_buildings(coords)
+		adjacent_buildings[building.group] = get_adjacent_buildings(coords)
 	else:
 		# Update all adjacency lists to include this building
-		building.group = self.INVALID_GROUP
+		building.group = INVALID_GROUP
 		var adjacent_groups: Array[int] = []
 		for adjacent_coords in building_type.get_adjacent_cells(coords):
-			if not self.is_in_bounds(adjacent_coords):
+			if not is_in_bounds(adjacent_coords):
 				continue
-			var group := self.get_root_group(self.get_group(adjacent_coords))
+			var group := get_root_group(get_group(adjacent_coords))
 			if group >= 0 and not group in adjacent_groups:
 				adjacent_groups.append(group)
-				self.adjacent_buildings[group].append(building)
+				adjacent_buildings[group].append(building)
 
 	# Update autotiling (assumes all tiles are terrains)
 	if building_type.is_tile:
@@ -713,14 +713,14 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 		)
 	# Instance a new Building scene
 	else:
-		var building_sprite: BuildingSprite = self.building_sprite_scene.instantiate()
+		var building_sprite: BuildingSprite = building_sprite_scene.instantiate()
 		building_sprite.building = building
-		building_sprite.position = self.get_building_center(coords, building_type)
-		self.buildings_node.add_child(building_sprite)
+		building_sprite.position = get_building_center(coords, building_type)
+		buildings_node.add_child(building_sprite)
 		building.sprite = building_sprite
 
-	self.building_place_sound.play()
-	self.emit_particles(coords, building_type)
+	building_place_sound.play()
+	emit_particles(coords, building_type)
 
 	var placement := Placement.new()
 	placement.building = building
@@ -731,19 +731,19 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 
 
 func destroy_building(building: Building) -> void:
-	self.building_destroy_sound.play()
-	self.emit_particles(building.coords, building.type)
+	building_destroy_sound.play()
+	emit_particles(building.coords, building.type)
 
 	# Reset all cells (in the world map and groups) occupied by this building
 	# Does NOT modify the group_joins array; currently handled by the undo code
 	for building_coords in building.type.get_cells(building.coords):
-		self.building_map.erase(building_coords)
+		building_map.erase(building_coords)
 		super.set_cell(building_coords, 0, CityMap.EMPTY_COORDS)
 
 	# Update the autotiling of all surrounding tiles, as it's not done automatically
 	if building.type.is_tile:
-		for orthogonal_coords in self.get_orthogonal(building.coords):
-			var orthogonal_building := self.get_building(orthogonal_coords)
+		for orthogonal_coords in get_orthogonal(building.coords):
+			var orthogonal_building := get_building(orthogonal_coords)
 			if orthogonal_building != null and orthogonal_building.type.is_tile:
 				# Delete and recreate surrounding terrains to force them to refresh
 				# Only calling set_cells_terrain_connect is insufficient
@@ -756,41 +756,41 @@ func destroy_building(building: Building) -> void:
 
 	var adjacent_groups: Array[int] = []
 	for adjacent_coords in building.type.get_adjacent_cells(building.coords):
-		var group := self.get_root_group(self.get_group(adjacent_coords))
+		var group := get_root_group(get_group(adjacent_coords))
 		if group >= 0 and not group in adjacent_groups:
 			if building.type.is_tile:
-				self.adjacent_buildings[group] = self.get_adjacent_buildings(adjacent_coords)
+				adjacent_buildings[group] = get_adjacent_buildings(adjacent_coords)
 			else:
-				self.adjacent_buildings[group].erase(building)
+				adjacent_buildings[group].erase(building)
 
 	if building.sprite != null:
 		building.sprite.destroy()
 
 
 func _on_palette_building_selected(building_type: BuildingType) -> void:
-	self.select_building_type(building_type)
+	select_building_type(building_type)
 
 
 func _on_input_repeat_timer_timeout() -> void:
 	if (
-		Input.is_action_pressed(self.action_to_repeat)
-		and self.handle_action(self.action_to_repeat)
+		Input.is_action_pressed(action_to_repeat)
+		and handle_action(action_to_repeat)
 	):
 		var wait_time_delta := absf(
-			(self.final_wait_time - self.initial_wait_time)
-			/ self.actions_until_final_wait_time,
+			(final_wait_time - initial_wait_time)
+			/ actions_until_final_wait_time,
 		)
 		var new_wait_time := move_toward(
-			self.input_repeat_timer.wait_time,
-			self.final_wait_time,
+			input_repeat_timer.wait_time,
+			final_wait_time,
 			wait_time_delta,
 		)
-		self.input_repeat_timer.start(new_wait_time)
+		input_repeat_timer.start(new_wait_time)
 
 
 func _on_camera_zoom_changed() -> void:
-	self.mouse_dirty = true
+	mouse_dirty = true
 
 
 func _on_camera_2d_position_changed() -> void:
-	self.mouse_dirty = true
+	mouse_dirty = true

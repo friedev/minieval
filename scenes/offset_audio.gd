@@ -5,5 +5,5 @@ extends AudioStreamPlayer
 
 
 func _ready() -> void:
-	if self.autoplay:
-		self.play(self.from_position)
+	if autoplay:
+		play(from_position)

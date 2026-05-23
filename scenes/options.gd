@@ -14,14 +14,14 @@ var options := { }
 ## Set each option to its value read from the config file.
 func load_config() -> bool:
 	var config := ConfigFile.new()
-	var err := config.load(self.CONFIG_PATH)
+	var err := config.load(CONFIG_PATH)
 	if err != OK:
 		return false
-	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
+	for option_node in get_tree().get_nodes_in_group(OPTIONS_GROUP):
 		var option := option_node as Option
-		if config.has_section_key(self.OPTIONS_SECTION, option.key):
+		if config.has_section_key(OPTIONS_SECTION, option.key):
 			option.set_option(
-				config.get_value(self.OPTIONS_SECTION, option.key),
+				config.get_value(OPTIONS_SECTION, option.key),
 				false,
 			)
 	return true
@@ -30,25 +30,25 @@ func load_config() -> bool:
 ## Save the currently loaded options to the config file.
 func save_config() -> bool:
 	var config := ConfigFile.new()
-	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
+	for option_node in get_tree().get_nodes_in_group(OPTIONS_GROUP):
 		var option := option_node as Option
-		config.set_value(self.OPTIONS_SECTION, option.key, option.get_option())
-	return config.save(self.CONFIG_PATH) == OK
+		config.set_value(OPTIONS_SECTION, option.key, option.get_option())
+	return config.save(CONFIG_PATH) == OK
 
 
 ## Set each option to its default value.
 func apply_defaults() -> void:
-	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
+	for option_node in get_tree().get_nodes_in_group(OPTIONS_GROUP):
 		var option := option_node as Option
 		option.set_option(option.default, false)
 
 
 ## Set the options to their currently loaded values.
 func apply_options() -> void:
-	for option_node in self.get_tree().get_nodes_in_group(self.OPTIONS_GROUP):
+	for option_node in get_tree().get_nodes_in_group(OPTIONS_GROUP):
 		var option := option_node as Option
-		if option.key in self.options:
-			option.set_option(self.options[option.key], false)
+		if option.key in options:
+			option.set_option(options[option.key], false)
 
 
 ## Perform initial options setup on game start. To be called by the root node of
