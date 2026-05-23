@@ -61,7 +61,7 @@ const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 @export var input_repeat_timer: Timer
 
 # Maps a cell to the building occupying that cell
-var building_map := { } # Dictionary[Vector2i, Building]
+var building_map: Dictionary[Vector2i, Building] = { }
 # Maps a group to the group it has been merged into (another group)
 # A root group will map to its own index
 # Recursively indexing into this array will get you to a root

@@ -14,8 +14,8 @@ extends Resource
 ## occupied by the building's cells.
 @export var area: Rect2i
 @export var cells: Array[Vector2i]
-@export var gp_interactions: Dictionary # Dictionary[StringName, int]
-@export var vp_interactions: Dictionary # Dictionary[StringName, int]
+@export var gp_interactions: Dictionary[StringName, int]
+@export var vp_interactions: Dictionary[StringName, int]
 
 @export_group("Tile Settings")
 @export var is_tile: bool
