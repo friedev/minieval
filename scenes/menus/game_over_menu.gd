@@ -1,4 +1,5 @@
-class_name GameOverMenu extends Menu
+class_name GameOverMenu
+extends Menu
 
 signal last_move_undone
 

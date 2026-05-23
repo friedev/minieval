@@ -1,6 +1,5 @@
 extends Control
 
-
 func _ready() -> void:
 	Global.is_menu_open_changed.connect(self._on_global_is_menu_open_changed)
 

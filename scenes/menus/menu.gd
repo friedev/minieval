@@ -1,4 +1,5 @@
-class_name Menu extends Control
+class_name Menu
+extends Control
 
 signal opened
 signal closed

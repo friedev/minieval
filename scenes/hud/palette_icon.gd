@@ -1,4 +1,5 @@
-class_name PaletteIcon extends Control
+class_name PaletteIcon
+extends Control
 
 signal clicked(icon: PaletteIcon)
 signal hovered(icon: PaletteIcon)

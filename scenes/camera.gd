@@ -1,4 +1,5 @@
-class_name Camera extends Camera2D
+class_name Camera
+extends Camera2D
 
 signal zoom_changed
 signal position_changed
@@ -16,10 +17,16 @@ var velocity := Vector2.ZERO
 
 func _process(delta: float) -> void:
 	var digital_input := Input.get_vector(
-		&"digital_pan_left", &"digital_pan_right", &"digital_pan_up", &"digital_pan_down"
+		&"digital_pan_left",
+		&"digital_pan_right",
+		&"digital_pan_up",
+		&"digital_pan_down",
 	).normalized()
 	var analog_input := Input.get_vector(
-		&"analog_pan_left", &"analog_pan_right", &"analog_pan_up", &"analog_pan_down"
+		&"analog_pan_left",
+		&"analog_pan_right",
+		&"analog_pan_up",
+		&"analog_pan_down",
 	).normalized()
 	var input: Vector2
 	if not analog_input.is_zero_approx():

@@ -1,4 +1,5 @@
-class_name FullscreenOption extends CheckBoxOption
+class_name FullscreenOption
+extends CheckBoxOption
 
 var previous_value: bool
 

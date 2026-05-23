@@ -1,5 +1,5 @@
-class_name OffsetAudio extends AudioStreamPlayer
-
+class_name OffsetAudio
+extends AudioStreamPlayer
 
 @export var from_position: float
 

@@ -1,4 +1,5 @@
-class_name TutorialMenu extends Menu
+class_name TutorialMenu
+extends Menu
 
 const tutorial_seen_key := "tutorial_seen"
 

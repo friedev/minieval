@@ -1,4 +1,5 @@
-class_name BuildingSprite extends Sprite2D
+class_name BuildingSprite
+extends Sprite2D
 
 var building: Building
 

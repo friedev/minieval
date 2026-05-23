@@ -1,4 +1,5 @@
-class_name BuildingType extends Resource
+class_name BuildingType
+extends Resource
 
 @export var display_name: String
 @export var key: StringName

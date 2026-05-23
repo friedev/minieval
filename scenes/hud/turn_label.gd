@@ -1,6 +1,5 @@
 extends Label
 
-
 func _ready() -> void:
 	self.update_visibility(Global.endless)
 	self.update_text(Global.num_turns)

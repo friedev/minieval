@@ -1,4 +1,5 @@
-class_name BuildingTooltip extends Control
+class_name BuildingTooltip
+extends Control
 
 @export var gp_str: String
 @export var gp_color: Color
@@ -64,8 +65,8 @@ func push_all_interactions(building_type: BuildingType) -> Array[String]:
 			self.push_interaction(
 				"ANY",
 				building_type.gp_interactions[&"pyramid"],
-				building_type.vp_interactions[&"pyramid"]
-			)
+				building_type.vp_interactions[&"pyramid"],
+			),
 		]
 
 	var first := true

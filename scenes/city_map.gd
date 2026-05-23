@@ -1,15 +1,18 @@
-class_name CityMap extends TileMapLayer
+class_name CityMap
+extends TileMapLayer
 
 signal gp_changed(gp: int)
 signal vp_changed(vp: int)
 signal game_over
 signal turn_changed(turn: int)
 
+
 class Placement:
 	var building: Building
 	var gp_change: int
 	var vp_change: int
 	var group_joins: Array[int]
+
 
 const INVALID_COORDS := Vector2i(-1, -1)
 const EMPTY_COORDS := Vector2i(0, 0)
@@ -58,7 +61,7 @@ const building_sprite_scene := preload("res://scenes/building_sprite.tscn")
 @export var input_repeat_timer: Timer
 
 # Maps a cell to the building occupying that cell
-var building_map := {} # Dictionary[Vector2i, Building]
+var building_map := { } # Dictionary[Vector2i, Building]
 # Maps a group to the group it has been merged into (another group)
 # A root group will map to its own index
 # Recursively indexing into this array will get you to a root
@@ -111,13 +114,16 @@ func _ready() -> void:
 			super.set_cell(Vector2i(x, y), 0, CityMap.EMPTY_COORDS)
 
 	self.camera.position = self.map_to_local(
-		Vector2(Global.game_size / 2, Global.game_size / 2)
+		Vector2(Global.game_size / 2, Global.game_size / 2),
 	) - self.camera.offset
 
 
 func _process(delta: float) -> void:
 	var mouse_input_direction := Input.get_vector(
-		&"mouse_left", &"mouse_right", &"mouse_up", &"mouse_down"
+		&"mouse_left",
+		&"mouse_right",
+		&"mouse_up",
+		&"mouse_down",
 	)
 	if mouse_input_direction.is_zero_approx():
 		self.mouse_direction = Vector2.ZERO
@@ -136,7 +142,7 @@ func _process(delta: float) -> void:
 	else:
 		self.mouse_direction = self.mouse_direction.lerp(
 			mouse_input_direction,
-			self.mouse_acceleration * delta
+			self.mouse_acceleration * delta,
 		)
 	var mouse_velocity := self.mouse_direction * self.mouse_speed * delta
 	self.move_mouse(self.get_viewport().get_mouse_position() + mouse_velocity)
@@ -283,7 +289,7 @@ func redo() -> bool:
 	# reference to a freed sprite
 	var new_placement := self.place_building(
 		next_placement.building.coords,
-		next_placement.building.type
+		next_placement.building.type,
 	)
 	self.gp += next_placement.gp_change
 	self.vp += next_placement.vp_change
@@ -353,9 +359,9 @@ func get_orthogonal(coords: Vector2i) -> Array[Vector2i]:
 # Returns a list of all buildings adjacent to a group, starting at given tile
 # Uses a recursive depth-first search
 func get_adjacent_buildings(
-	coords: Vector2i,
-	adjacent_buildings: Array[Building] = [],
-	visited: Array[Vector2i] = []
+		coords: Vector2i,
+		adjacent_buildings: Array[Building] = [],
+		visited: Array[Vector2i] = [],
 ) -> Array[Building]:
 	var group := self.get_root_group(self.get_group(coords))
 	if group < 0:
@@ -368,7 +374,7 @@ func get_adjacent_buildings(
 				adjacent_buildings = self.get_adjacent_buildings(
 					adjacent_coords,
 					adjacent_buildings,
-					visited
+					visited,
 				)
 		else:
 			var adjacent_building := self.get_building(adjacent_coords)
@@ -447,9 +453,9 @@ func _clear_preview() -> void:
 # The "from" building is being placed and we want to highlight the "to" building
 # to show whether it's good or bad that's it next to the "from" building
 func modulate_building(
-	from_building_type: BuildingType,
-	to_building: Building,
-	road_connection: bool
+		from_building_type: BuildingType,
+		to_building: Building,
+		road_connection: bool,
 ) -> void:
 	assert(to_building != null)
 	assert(to_building.sprite != null)
@@ -498,7 +504,7 @@ func _update_preview() -> void:
 		self.preview_tile.set_cells_terrain_connect(
 			[building_coords],
 			self.selected_building_type.terrain_set,
-			self.selected_building_type.terrain
+			self.selected_building_type.terrain,
 		)
 	else:
 		self.preview_building.visible = true
@@ -532,7 +538,7 @@ func _update_preview() -> void:
 		building_coords,
 		self.selected_building_type,
 		false,
-		road_connections
+		road_connections,
 	)
 	var formatted_value := self.format_value(value)
 	self.gp_preview_label.text = formatted_value[0]
@@ -540,7 +546,7 @@ func _update_preview() -> void:
 	# Force fit to content
 	self.preview_node.size = Vector2.ZERO
 	self.preview_node.position = self.coords_to_screen_position(
-		Vector2i(self.preview_coords.x, building_coords.y)
+		Vector2i(self.preview_coords.x, building_coords.y),
 	)
 	self.preview_node.position -= self.preview_node.size / 2
 	self.preview_node.position.y -= 40
@@ -557,10 +563,10 @@ func _update_preview() -> void:
 # given ID at the given coords, returned in the form [gp, vp]
 # Includes the building's flat GP and VP, as well as interactions
 func get_building_value(
-	coords: Vector2i,
-	building_type: BuildingType,
-	get_road_connections := true,
-	road_connections: Array[Building] = []
+		coords: Vector2i,
+		building_type: BuildingType,
+		get_road_connections := true,
+		road_connections: Array[Building] = [],
 ) -> Array[int]:
 	var gp_value := building_type.gp
 	var vp_value := building_type.vp
@@ -598,7 +604,7 @@ func format_value(value: Array[int]) -> Array[String]:
 		("+%d" if value[0] > 0 else "%d") % value[0],
 		("+%d" if value[1] > 0 else "%d") % value[1],
 	]
-	
+
 
 ## Gets the pixel position of the center of the given building type.
 func get_building_center(coords: Vector2i, building_type: BuildingType) -> Vector2:
@@ -703,7 +709,7 @@ func place_building(coords: Vector2i, building_type: BuildingType) -> Placement:
 		super.set_cells_terrain_connect(
 			[coords],
 			building_type.terrain_set,
-			building_type.terrain
+			building_type.terrain,
 		)
 	# Instance a new Building scene
 	else:
@@ -745,7 +751,7 @@ func destroy_building(building: Building) -> void:
 				super.set_cells_terrain_connect(
 					[orthogonal_coords],
 					orthogonal_building.type.terrain_set,
-					orthogonal_building.type.terrain
+					orthogonal_building.type.terrain,
 				)
 
 	var adjacent_groups: Array[int] = []
@@ -772,12 +778,12 @@ func _on_input_repeat_timer_timeout() -> void:
 	):
 		var wait_time_delta := absf(
 			(self.final_wait_time - self.initial_wait_time)
-			/ self.actions_until_final_wait_time
+			/ self.actions_until_final_wait_time,
 		)
 		var new_wait_time := move_toward(
 			self.input_repeat_timer.wait_time,
 			self.final_wait_time,
-			wait_time_delta
+			wait_time_delta,
 		)
 		self.input_repeat_timer.start(new_wait_time)
 

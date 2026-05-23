@@ -1,6 +1,7 @@
 # This node needs to be placed below other menu nodes in the scene tree so that
 # it handles the pause input action before other menus handle it as ui_cancel.
-class_name PauseMenu extends Menu
+class_name PauseMenu
+extends Menu
 
 signal options_pressed(previous: Menu)
 signal tutorial_pressed(previous: Menu)

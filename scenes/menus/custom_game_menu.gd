@@ -1,4 +1,5 @@
-class_name CustomGameMenu extends Menu
+class_name CustomGameMenu
+extends Menu
 
 @export_file("*.tscn") var main_scene: String
 

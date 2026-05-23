@@ -1,6 +1,5 @@
 extends Menu
 
-
 func _ready() -> void:
 	Options.setup()
 

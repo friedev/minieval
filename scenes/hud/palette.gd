@@ -1,4 +1,5 @@
-class_name Palette extends Control
+class_name Palette
+extends Control
 
 signal building_selected(building_type: BuildingType)
 
@@ -54,7 +55,7 @@ func select_icon_by_relative_index(relative_index: int) -> void:
 	var absolute_index := wrapi(
 		current_index + relative_index,
 		0,
-		self.icon_container.get_child_count()
+		self.icon_container.get_child_count(),
 	)
 	self.select_icon_by_index(absolute_index)
 

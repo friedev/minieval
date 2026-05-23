@@ -1,4 +1,5 @@
-class_name MainMenu extends Menu
+class_name MainMenu
+extends Menu
 
 signal custom_game_pressed(previous: Menu)
 signal options_pressed(previous: Menu)

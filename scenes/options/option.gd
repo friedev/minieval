@@ -1,4 +1,5 @@
-class_name Option extends Control
+class_name Option
+extends Control
 
 signal changed(value)
 
