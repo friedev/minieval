@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cxg5cohmko42i"]
+
+[ext_resource type="Script" uid="uid://mk8e57ltlf5x" path="res://src/menus/pause_menu.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_vkchd"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="7"]
+
+[node name="PauseMenu" type="CenterContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("7")
+script = ExtResource("2")
+title_scene = "res://src/title_screen.tscn"
+
+[node name="Menu" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_fonts/font = ExtResource("3_vkchd")
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+text = "Options"
+
+[node name="TutorialButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+text = "Tutorial"
+
+[node name="MainMenuButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+text = "Main Menu"
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="close"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

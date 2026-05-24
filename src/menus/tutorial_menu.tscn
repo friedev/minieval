@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c82d8rm7yseq0"]
+
+[ext_resource type="Script" uid="uid://ba3ghspx0l724" path="res://src/menus/tutorial_menu.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_x0pkj"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="7"]
+
+[node name="TutorialMenu" type="CenterContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("7")
+script = ExtResource("2")
+
+[node name="Menu" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_fonts/font = ExtResource("3_x0pkj")
+theme_override_font_sizes/font_size = 64
+text = "Tutorial"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+bbcode_enabled = true
+text = "Welcome to Minieval! Your goal is to earn as many [color=#00ccff]victory points (VP)[/color] as you can in a limited number of turns. You can earn [color=#00ccff]VP[/color] by placing [color=#884400]buildings[/color], but [color=#884400]buildings[/color] cost [color=#ffcc00]gold (GP)[/color] to build. You can see your current [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] on the top left.
+ 
+The [color=#ffcc00]GP[/color] and [color=#00ccff]VP[/color] you earn from a [color=#884400]building[/color] are affected by the [color=#884400]buildings[/color] next to it. For example, placing a [color=#884400]house[/color] next to a [color=#884400]shop[/color] will earn you more [color=#ffcc00]GP[/color], but placing 2 [color=#884400]shops[/color] next to each other will cost you more [color=#ffcc00]GP[/color] due to competition.
+ 
+[color=#cc8800]Roads[/color] can be used to connect [color=#884400]buildings[/color] that are otherwise out of range. Any [color=#884400]buildings[/color] connected by a [color=#cc8800]road[/color] will interact with ALL [color=#884400]buildings[/color] on that same [color=#cc8800]road[/color] network. These interactions only affect the [color=#ffcc00]GP[/color] you gain from the [color=#884400]building[/color], and [color=#ff0000]NOT[/color] the [color=#00ccff]VP[/color].
+ 
+[color=#884400]Buildings[/color] can't be destroyed, but you can always press [color=#ff00ff]Z[/color] or [color=#ff00ff]U[/color] to undo your last move. You can also press [color=#ff00ff]Y[/color] or [color=#ff00ff]R[/color] to redo.
+ 
+[center]Good luck, and thanks for playing Minieval![/center]"
+fit_content = true
+
+[node name="PlayButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7")
+text = "Play"
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/PlayButton" to="." method="close"]

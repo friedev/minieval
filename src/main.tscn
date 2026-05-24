@@ -1,0 +1,276 @@
+[gd_scene format=3 uid="uid://b14c1y35bjrym"]
+
+[ext_resource type="TileSet" uid="uid://byewmw6j0ko4v" path="res://assets/images/tileset.tres" id="1_fchkj"]
+[ext_resource type="Script" uid="uid://cdxyk62avh1dv" path="res://src/city_map.gd" id="2_2brww"]
+[ext_resource type="AudioStream" uid="uid://cgpxtc4qse0wi" path="res://assets/sound/building_place_error.wav" id="3_dpoud"]
+[ext_resource type="AudioStream" uid="uid://vrl0b1nt8ccp" path="res://assets/sound/building_place.wav" id="4_hyuoe"]
+[ext_resource type="AudioStream" uid="uid://2rehq7k6rynb" path="res://assets/sound/building_destroy.wav" id="5_msfla"]
+[ext_resource type="AudioStream" uid="uid://ddo8d5pqkceqh" path="res://assets/music/village_sunrise.ogg" id="6_dvxqy"]
+[ext_resource type="Script" uid="uid://c12xk55v0ha1h" path="res://src/camera.gd" id="7_wdqlp"]
+[ext_resource type="AudioStream" uid="uid://dvphu5ln3unkp" path="res://assets/music/time_to_build.ogg" id="7_x5wfe"]
+[ext_resource type="AudioStream" uid="uid://cddfjows4mh8b" path="res://assets/music/architects_lament.ogg" id="8_8wfel"]
+[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="8_kommm"]
+[ext_resource type="Script" uid="uid://bxaip2e6jol5k" path="res://src/hud/turn_label.gd" id="9_2hjvh"]
+[ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://assets/images/gp_icon.png" id="9_4q2tn"]
+[ext_resource type="AudioStream" uid="uid://cq7v3xxa42yqu" path="res://assets/music/town_square.ogg" id="9_v7j4l"]
+[ext_resource type="Texture2D" uid="uid://daqsd2aj3tss3" path="res://assets/images/vp_icon.png" id="10_a8lsb"]
+[ext_resource type="Script" uid="uid://btk827gtwfvyb" path="res://src/hud/undo_label.gd" id="10_xuh3s"]
+[ext_resource type="PackedScene" uid="uid://cbwe2w3gmnago" path="res://src/hud/palette.tscn" id="11_g2fyb"]
+[ext_resource type="Script" uid="uid://b08bpsi6jwlax" path="res://src/hud/gp_label.gd" id="11_h0tk0"]
+[ext_resource type="Script" uid="uid://yq7xsj7gfkgm" path="res://src/hud/black_overlay.gd" id="12_0ycio"]
+[ext_resource type="PackedScene" uid="uid://cil6jwu6v4xku" path="res://src/menus/game_over_menu.tscn" id="12_2hgrf"]
+[ext_resource type="PackedScene" uid="uid://cxg5cohmko42i" path="res://src/menus/pause_menu.tscn" id="13_hwilj"]
+[ext_resource type="Script" uid="uid://dy8x2sq2itmsp" path="res://src/hud/vp_label.gd" id="13_klxiu"]
+[ext_resource type="PackedScene" uid="uid://cy5hipx70t1no" path="res://src/menus/options_menu.tscn" id="14_xpfr0"]
+[ext_resource type="PackedScene" uid="uid://c82d8rm7yseq0" path="res://src/menus/tutorial_menu.tscn" id="15_0mlr1"]
+
+[sub_resource type="Curve" id="2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="3"]
+curve = SubResource("2")
+
+[sub_resource type="ParticleProcessMaterial" id="4"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 32.0
+initial_velocity_max = 32.0
+gravity = Vector3(0, 0, 0)
+damping_min = 16.0
+damping_max = 16.0
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("3")
+color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_lm2pf"]
+shuffle = true
+stream_count = 4
+stream_0 = ExtResource("6_dvxqy")
+stream_1 = ExtResource("7_x5wfe")
+stream_2 = ExtResource("8_8wfel")
+stream_3 = ExtResource("9_v7j4l")
+
+[node name="Main" type="Node" unique_id=1314823481]
+
+[node name="CityMap" type="TileMapLayer" parent="." unique_id=1354501956 node_paths=PackedStringArray("camera", "gp_preview_label", "vp_preview_label", "preview_node", "building_place_error_sound", "building_place_sound", "building_destroy_sound", "buildings_node", "preview_area", "preview_tile", "preview_building", "building_particles", "input_repeat_timer")]
+z_index = -1
+tile_set = ExtResource("1_fchkj")
+script = ExtResource("2_2brww")
+initial_wait_time = 0.5
+final_wait_time = 0.05
+actions_until_final_wait_time = 1
+default_color = Color(1, 1, 1, 1)
+invalid_color = Color(1, 0.25, 0.25, 0.5)
+good_color = Color(0.25, 1, 0.25, 1)
+mixed_color = Color(1, 1, 0.25, 1)
+bad_color = Color(1, 0.25, 0.25, 1)
+mouse_speed = 1000.0
+mouse_speed_min = 0.25
+mouse_acceleration = 0.8
+camera = NodePath("../Camera2D")
+gp_preview_label = NodePath("../CanvasLayer/PreviewNode/GPLabel")
+vp_preview_label = NodePath("../CanvasLayer/PreviewNode/VPLabel")
+preview_node = NodePath("../CanvasLayer/PreviewNode")
+building_place_error_sound = NodePath("BuildingPlaceErrorSound")
+building_place_sound = NodePath("BuildingPlaceSound")
+building_destroy_sound = NodePath("BuildingDestroySound")
+buildings_node = NodePath("Buildings")
+preview_area = NodePath("PreviewArea")
+preview_tile = NodePath("PreviewTile")
+preview_building = NodePath("PreviewBuilding")
+building_particles = NodePath("BuildingParticles")
+input_repeat_timer = NodePath("InputRepeatTimer")
+
+[node name="BuildingPlaceErrorSound" type="AudioStreamPlayer" parent="CityMap" unique_id=1160370560]
+stream = ExtResource("3_dpoud")
+volume_db = -6.0
+bus = &"Sound"
+
+[node name="BuildingPlaceSound" type="AudioStreamPlayer" parent="CityMap" unique_id=44849169]
+stream = ExtResource("4_hyuoe")
+bus = &"Sound"
+
+[node name="BuildingDestroySound" type="AudioStreamPlayer" parent="CityMap" unique_id=688176606]
+stream = ExtResource("5_msfla")
+bus = &"Sound"
+
+[node name="Buildings" type="Node2D" parent="CityMap" unique_id=398648443]
+z_index = 2
+
+[node name="PreviewArea" type="TileMapLayer" parent="CityMap" unique_id=347424417]
+modulate = Color(1, 1, 1, 0.12549)
+z_index = 3
+tile_set = ExtResource("1_fchkj")
+rendering_quadrant_size = 8
+
+[node name="PreviewTile" type="TileMapLayer" parent="CityMap" unique_id=521947486]
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 3
+tile_set = ExtResource("1_fchkj")
+rendering_quadrant_size = 8
+
+[node name="PreviewBuilding" type="Sprite2D" parent="CityMap" unique_id=673386072]
+z_index = 3
+
+[node name="BuildingParticles" type="GPUParticles2D" parent="CityMap" unique_id=1087601463]
+z_index = 1
+emitting = false
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+process_material = SubResource("4")
+
+[node name="InputRepeatTimer" type="Timer" parent="CityMap" unique_id=1703534110]
+one_shot = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1123310889]
+process_mode = 3
+stream = SubResource("AudioStreamPlaylist_lm2pf")
+autoplay = true
+bus = &"Music"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=681674935]
+zoom = Vector2(4, 4)
+script = ExtResource("7_wdqlp")
+min_speed = 200.0
+max_speed = 1000.0
+min_zoom = Vector2(1, 1)
+max_zoom = Vector2(8, 8)
+acceleration_time = 0.125
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1457265782]
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer" unique_id=1340396224]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -308.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 91.0
+theme = ExtResource("8_kommm")
+theme_override_font_sizes/font_size = 32
+text = "Turns Left"
+horizontal_alignment = 2
+script = ExtResource("9_2hjvh")
+
+[node name="UndoLabel" type="Label" parent="CanvasLayer" unique_id=1185844362]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -206.0
+offset_top = 16.0
+offset_right = 206.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme = ExtResource("8_kommm")
+theme_override_font_sizes/font_size = 32
+text = "(Press Ctrl+Z to Undo)"
+horizontal_alignment = 1
+script = ExtResource("10_xuh3s")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=280981552]
+offset_right = 84.0
+offset_bottom = 96.0
+theme = ExtResource("8_kommm")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer" unique_id=202835512]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="GPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer" unique_id=1233261108]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("9_4q2tn")
+expand_mode = 2
+
+[node name="GPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer" unique_id=396782130]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+script = ExtResource("11_h0tk0")
+
+[node name="VPIcon" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer" unique_id=1856995746]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("10_a8lsb")
+expand_mode = 2
+
+[node name="VPLabel" type="Label" parent="CanvasLayer/MarginContainer/GridContainer" unique_id=674186660]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+script = ExtResource("13_klxiu")
+
+[node name="PreviewNode" type="GridContainer" parent="CanvasLayer" unique_id=1251496813]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="GPIcon" type="TextureRect" parent="CanvasLayer/PreviewNode" unique_id=1844562945]
+layout_mode = 2
+texture = ExtResource("9_4q2tn")
+
+[node name="GPLabel" type="Label" parent="CanvasLayer/PreviewNode" unique_id=1081536383]
+layout_mode = 2
+theme = ExtResource("8_kommm")
+text = "1"
+
+[node name="VPIcon" type="TextureRect" parent="CanvasLayer/PreviewNode" unique_id=718990172]
+layout_mode = 2
+texture = ExtResource("10_a8lsb")
+
+[node name="VPLabel" type="Label" parent="CanvasLayer/PreviewNode" unique_id=557500536]
+layout_mode = 2
+theme = ExtResource("8_kommm")
+text = "-1"
+
+[node name="Palette" parent="CanvasLayer" unique_id=907413691 instance=ExtResource("11_g2fyb")]
+
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1693054503]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("8_kommm")
+color = Color(0, 0, 0, 0.501961)
+script = ExtResource("12_0ycio")
+
+[node name="GameOverMenu" parent="CanvasLayer" unique_id=1294776726 node_paths=PackedStringArray("palette", "game_music") instance=ExtResource("12_2hgrf")]
+visible = false
+palette = NodePath("../Palette")
+game_music = NodePath("../../BackgroundMusic")
+
+[node name="OptionsMenu" parent="CanvasLayer" unique_id=843137064 instance=ExtResource("14_xpfr0")]
+visible = false
+
+[node name="TutorialMenu" parent="CanvasLayer" unique_id=937991581 instance=ExtResource("15_0mlr1")]
+visible = false
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1942313238 instance=ExtResource("13_hwilj")]
+visible = false
+
+[connection signal="game_over" from="CityMap" to="CanvasLayer/GameOverMenu" method="_on_city_map_game_over"]
+[connection signal="gp_changed" from="CityMap" to="CanvasLayer/UndoLabel" method="_on_city_map_gp_changed"]
+[connection signal="gp_changed" from="CityMap" to="CanvasLayer/MarginContainer/GridContainer/GPLabel" method="_on_city_map_gp_changed"]
+[connection signal="turn_changed" from="CityMap" to="CanvasLayer/TurnLabel" method="_on_city_map_turn_changed"]
+[connection signal="vp_changed" from="CityMap" to="CanvasLayer/MarginContainer/GridContainer/VPLabel" method="_on_city_map_vp_changed"]
+[connection signal="timeout" from="CityMap/InputRepeatTimer" to="CityMap" method="_on_input_repeat_timer_timeout"]
+[connection signal="position_changed" from="Camera2D" to="CityMap" method="_on_camera_2d_position_changed"]
+[connection signal="zoom_changed" from="Camera2D" to="CityMap" method="_on_camera_zoom_changed"]
+[connection signal="building_selected" from="CanvasLayer/Palette" to="CityMap" method="_on_palette_building_selected"]
+[connection signal="last_move_undone" from="CanvasLayer/GameOverMenu" to="CityMap" method="undo"]
+[connection signal="options_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/OptionsMenu" method="open"]
+[connection signal="tutorial_pressed" from="CanvasLayer/PauseMenu" to="CanvasLayer/TutorialMenu" method="open"]
