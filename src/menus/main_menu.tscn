@@ -1,16 +1,13 @@
 [gd_scene format=3 uid="uid://cokm5bjuku86c"]
 
 [ext_resource type="Script" uid="uid://ch6u82bctslhl" path="res://src/menus/main_menu.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_wpljk"]
 [ext_resource type="Script" uid="uid://sb4q1mwiqj2p" path="res://src/menus/version_label.gd" id="4_4mojg"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="5"]
 
 [node name="MainMenu" type="CenterContainer" unique_id=1286251278 node_paths=PackedStringArray("quit_button")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("5")
 script = ExtResource("1")
 main_scene = "res://src/main.tscn"
 quit_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/QuitButton")
@@ -24,27 +21,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
-theme = ExtResource("5")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=2049269577]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1333523934]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("5")
 theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1380077901]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
-theme_override_fonts/font = ExtResource("3_wpljk")
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"HeaderLarge"
 text = "Minieval"
 horizontal_alignment = 1
 
@@ -52,42 +44,35 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("5")
 theme_override_constants/separation = 16
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1278843155]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
 text = "Play"
 
 [node name="CustomGameButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=587519089]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
 text = "Custom Game"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1676363312]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
 text = "Options"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=816396874]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2050876720]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5")
 text = "Quit"
 
 [node name="VersionLabel" type="Label" parent="VBoxContainer" unique_id=1696611554]
 layout_mode = 2
-theme = ExtResource("5")
 text = "VERSION"
 horizontal_alignment = 1
 script = ExtResource("4_4mojg")

@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://c12xk55v0ha1h" path="res://src/camera.gd" id="7_wdqlp"]
 [ext_resource type="AudioStream" uid="uid://dvphu5ln3unkp" path="res://assets/music/time_to_build.ogg" id="7_x5wfe"]
 [ext_resource type="AudioStream" uid="uid://cddfjows4mh8b" path="res://assets/music/architects_lament.ogg" id="8_8wfel"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="8_kommm"]
 [ext_resource type="Script" uid="uid://bxaip2e6jol5k" path="res://src/hud/turn_label.gd" id="9_2hjvh"]
 [ext_resource type="Texture2D" uid="uid://4c16yufijt3r" path="res://assets/images/gp_icon.png" id="9_4q2tn"]
 [ext_resource type="AudioStream" uid="uid://cq7v3xxa42yqu" path="res://assets/music/town_square.ogg" id="9_v7j4l"]
@@ -153,7 +152,6 @@ offset_left = -308.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 91.0
-theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "Turns Left"
 horizontal_alignment = 2
@@ -168,7 +166,6 @@ offset_top = 16.0
 offset_right = 206.0
 offset_bottom = 91.0
 grow_horizontal = 2
-theme = ExtResource("8_kommm")
 theme_override_font_sizes/font_size = 32
 text = "(Press Ctrl+Z to Undo)"
 horizontal_alignment = 1
@@ -177,7 +174,6 @@ script = ExtResource("10_xuh3s")
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=280981552]
 offset_right = 84.0
 offset_bottom = 96.0
-theme = ExtResource("8_kommm")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 0
@@ -224,7 +220,6 @@ texture = ExtResource("9_4q2tn")
 
 [node name="GPLabel" type="Label" parent="CanvasLayer/PreviewNode" unique_id=1081536383]
 layout_mode = 2
-theme = ExtResource("8_kommm")
 text = "1"
 
 [node name="VPIcon" type="TextureRect" parent="CanvasLayer/PreviewNode" unique_id=718990172]
@@ -233,7 +228,6 @@ texture = ExtResource("10_a8lsb")
 
 [node name="VPLabel" type="Label" parent="CanvasLayer/PreviewNode" unique_id=557500536]
 layout_mode = 2
-theme = ExtResource("8_kommm")
 text = "-1"
 
 [node name="Palette" parent="CanvasLayer" unique_id=907413691 instance=ExtResource("11_g2fyb")]
@@ -244,7 +238,6 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("8_kommm")
 color = Color(0, 0, 0, 0.501961)
 script = ExtResource("12_0ycio")
 

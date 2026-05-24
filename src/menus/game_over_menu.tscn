@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://cil6jwu6v4xku"]
 
 [ext_resource type="Script" uid="uid://dy1b3miuudnkv" path="res://src/menus/game_over_menu.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_251xe"]
 [ext_resource type="AudioStream" uid="uid://c76jq88aco5ps" path="res://assets/music/ode_to_a_city.ogg" id="4_1q036"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="5"]
 [ext_resource type="Script" uid="uid://ex8ubsljvsmj" path="res://src/offset_audio.gd" id="5_avp3t"]
 
 [node name="GameOverMenu" type="Control" unique_id=932271542 node_paths=PackedStringArray("end_game_music")]
@@ -18,7 +16,6 @@ offset_right = -0.943848
 offset_bottom = -0.943848
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("5")
 script = ExtResource("1")
 title_scene = "res://src/title_screen.tscn"
 end_game_music = NodePath("EndGameMusic")
@@ -33,9 +30,7 @@ offset_top = 69.0
 offset_right = 152.0
 offset_bottom = 133.0
 grow_horizontal = 2
-theme = ExtResource("5")
-theme_override_fonts/font = ExtResource("3_251xe")
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"HeaderLarge"
 text = "Game Over"
 horizontal_alignment = 1
 
@@ -48,7 +43,6 @@ offset_top = 625.0
 offset_right = -88.056
 offset_bottom = 651.0
 grow_horizontal = 2
-theme = ExtResource("5")
 text = "Undo Last Move"
 
 [node name="FreeplayButton" type="Button" parent="." unique_id=1861907192]
@@ -59,7 +53,6 @@ offset_left = -60.0
 offset_top = 625.0
 offset_right = 60.0
 offset_bottom = 651.0
-theme = ExtResource("5")
 text = "Freeplay"
 
 [node name="MainMenuButton" type="Button" parent="." unique_id=1298409546]
@@ -70,7 +63,6 @@ offset_left = 88.0
 offset_top = 625.0
 offset_right = 216.0
 offset_bottom = 651.0
-theme = ExtResource("5")
 text = "Main Menu"
 
 [node name="EndGameMusic" type="AudioStreamPlayer" parent="." unique_id=1311368440]

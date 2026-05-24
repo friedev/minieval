@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bnsw3qf1cvuy3"]
 
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="1_27mun"]
 [ext_resource type="Script" uid="uid://ctflch8rexvh7" path="res://src/menus/menu.gd" id="2_2gd20"]
-[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_q4mja"]
 [ext_resource type="Script" uid="uid://crhdtscyc8mpy" path="res://src/linked_label.gd" id="4_p8d0l"]
 
 [node name="CreditsMenu" type="CenterContainer" unique_id=680755213]
@@ -10,7 +8,6 @@ process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("1_27mun")
 script = ExtResource("2_2gd20")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1941370355]
@@ -18,27 +15,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
-theme = ExtResource("1_27mun")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1858314735]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_27mun")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=408734580]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_27mun")
 theme_override_constants/separation = 16
 
 [node name="CreditsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1769713580]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("1_27mun")
-theme_override_fonts/font = ExtResource("3_q4mja")
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"HeaderLarge"
 text = "Credits"
 horizontal_alignment = 1
 

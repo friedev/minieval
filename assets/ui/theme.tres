@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://ea8mgo6dtqv0" path="res://assets/ui/styles/stylebox_button_disabled.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://ct1vsredro3o0" path="res://assets/ui/styles/stylebox_vscroll.tres" id="8"]
 [ext_resource type="StyleBox" uid="uid://c202u3nchqhwa" path="res://assets/ui/styles/stylebox_vscroll_grabber.tres" id="9"]
+[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="9_thv0v"]
 [ext_resource type="StyleBox" uid="uid://bi76477a4i7sa" path="res://assets/ui/styles/stylebox_hscroll_grabber.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://7gwpk4di7kj4" path="res://assets/ui/styles/stylebox_hscroll.tres" id="11"]
 
@@ -101,6 +102,8 @@ HSlider/icons/tick = SubResource("17")
 HSlider/styles/grabber_area = ExtResource("3")
 HSlider/styles/grabber_area_highlight = ExtResource("3")
 HSlider/styles/slider = ExtResource("4")
+HeaderLarge/font_sizes/font_size = 64
+HeaderLarge/fonts/font = ExtResource("9_thv0v")
 LineEdit/colors/caret_color = Color(1, 1, 1, 1)
 LineEdit/colors/clear_button_color = Color(1, 1, 1, 1)
 LineEdit/colors/clear_button_color_pressed = Color(1, 1, 1, 1)

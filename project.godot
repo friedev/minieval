@@ -41,6 +41,11 @@ window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="uid://bfslj868ae21m"
+theme/custom_font="uid://cnyjnhglwlik8"
+
 [input]
 
 pause={

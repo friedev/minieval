@@ -1,61 +1,51 @@
 [gd_scene format=3 uid="uid://cxg5cohmko42i"]
 
 [ext_resource type="Script" uid="uid://mk8e57ltlf5x" path="res://src/menus/pause_menu.gd" id="2"]
-[ext_resource type="FontFile" uid="uid://cl4p3jkjhorjv" path="res://assets/ui/fonts/Bitmgothic.ttf" id="3_vkchd"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="7"]
 
-[node name="PauseMenu" type="CenterContainer"]
+[node name="PauseMenu" type="CenterContainer" unique_id=585135184]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("7")
 script = ExtResource("2")
 title_scene = "res://src/title_screen.tscn"
 
-[node name="Menu" type="PanelContainer" parent="."]
-layout_mode = 2
-theme = ExtResource("7")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+[node name="Menu" type="PanelContainer" parent="." unique_id=1486554351]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu" unique_id=2066996357]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer" unique_id=6365863]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="MenuTitle" type="Label" parent="Menu/MarginContainer/VBoxContainer" unique_id=763675102]
 layout_mode = 2
-theme = ExtResource("7")
-theme_override_fonts/font = ExtResource("3_vkchd")
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"HeaderLarge"
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer" unique_id=1073730047]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 16
 
-[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=825311067]
 layout_mode = 2
-theme = ExtResource("7")
 text = "Resume"
 
-[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=611990623]
 layout_mode = 2
-theme = ExtResource("7")
 text = "Options"
 
-[node name="TutorialButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="TutorialButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=331920967]
 layout_mode = 2
-theme = ExtResource("7")
 text = "Tutorial"
 
-[node name="MainMenuButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" unique_id=345285232]
 layout_mode = 2
-theme = ExtResource("7")
 text = "Main Menu"
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/VBoxContainer/ResumeButton" to="." method="close"]

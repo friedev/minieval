@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cbwe2w3gmnago"]
 
 [ext_resource type="Script" uid="uid://bswttf5n1xp1o" path="res://src/hud/palette.gd" id="2"]
-[ext_resource type="Theme" uid="uid://bfslj868ae21m" path="res://assets/ui/theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://dixijkmqsq77x" path="res://src/hud/building_tooltip.tscn" id="4_4ng53"]
 [ext_resource type="PackedScene" uid="uid://b8a6newcjhtr6" path="res://src/hud/palette_icon.tscn" id="5_6ea70"]
 [ext_resource type="Resource" uid="uid://cjmcsuwnak7o5" path="res://src/building_types/house.tres" id="5_oddwj"]
@@ -15,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://b58u37gpre1au" path="res://src/building_types/tower.tres" id="12_bfhau"]
 [ext_resource type="Resource" uid="uid://du1fxgc4n54cy" path="res://src/building_types/pyramid.tres" id="13_bfwdp"]
 
-[node name="Palette" type="Control" node_paths=PackedStringArray("icon_container", "tooltip")]
+[node name="Palette" type="Control" unique_id=731265779 node_paths=PackedStringArray("icon_container", "tooltip")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,19 +22,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("4")
 script = ExtResource("2")
 icon_container = NodePath("MarginContainer/PanelContainer/IconContainer")
 tooltip = NodePath("BuildingTooltip")
 
-[node name="BuildingTooltip" parent="." instance=ExtResource("4_4ng53")]
+[node name="BuildingTooltip" parent="." unique_id=864778086 instance=ExtResource("4_4ng53")]
 visible = false
 layout_mode = 0
 offset_top = -44.0
 offset_bottom = 56.0
 grow_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=776853368]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,53 +41,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1315081460]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="IconContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+[node name="IconContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer" unique_id=1191923596]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PaletteIconRoad" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconRoad" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1322013517 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("5_v1btn")
 
-[node name="PaletteIconHouse" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconHouse" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1396956444 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("5_oddwj")
 initially_selected = true
 
-[node name="PaletteIconMansion" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconMansion" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1893417583 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("6_3i4jq")
 
-[node name="PaletteIconShop" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconShop" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1513630942 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("7_ledxm")
 
-[node name="PaletteIconStatue" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconStatue" parent="MarginContainer/PanelContainer/IconContainer" unique_id=971360662 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("8_wl6lk")
 
-[node name="PaletteIconForge" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconForge" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1525221212 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("9_47ggy")
 
-[node name="PaletteIconCathedral" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconCathedral" parent="MarginContainer/PanelContainer/IconContainer" unique_id=1166864309 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("10_tju2q")
 
-[node name="PaletteIconKeep" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconKeep" parent="MarginContainer/PanelContainer/IconContainer" unique_id=815170233 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("11_wft01")
 
-[node name="PaletteIconTower" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconTower" parent="MarginContainer/PanelContainer/IconContainer" unique_id=2139901580 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("12_bfhau")
 
-[node name="PaletteIconPyramid" parent="MarginContainer/PanelContainer/IconContainer" instance=ExtResource("5_6ea70")]
+[node name="PaletteIconPyramid" parent="MarginContainer/PanelContainer/IconContainer" unique_id=2050205986 instance=ExtResource("5_6ea70")]
 layout_mode = 2
 building_type = ExtResource("13_bfwdp")
 
