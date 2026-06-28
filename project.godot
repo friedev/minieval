@@ -20,6 +20,7 @@ config/version="1.3.0-dev"
 run/main_scene="res://src/title_screen.tscn"
 config/features=PackedStringArray("4.7")
 config/icon="uid://cbwbvjwi64y1h"
+config/tags=PackedStringArray("2d", "published", "singleplayer", "turn_based")
 
 [autoload]
 
